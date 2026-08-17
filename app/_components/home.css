@@ -1,0 +1,174 @@
+/* Creators Touch home — keyframes, hover states & responsive rules.
+   Pairs with CreatorsTouchHome.jsx (inline styles carry everything else). */
+@keyframes ct-marquee{from{transform:translateX(0)}to{transform:translateX(-50%)}}
+@keyframes ct-pulse{0%,100%{transform:scale(1);opacity:1}50%{transform:scale(0.88);opacity:0.6}}
+@keyframes ct-grain{0%,100%{transform:translate(0,0)}10%{transform:translate(-2%,1%)}20%{transform:translate(1%,-3%)}30%{transform:translate(-1%,2%)}40%{transform:translate(2%,-1%)}50%{transform:translate(-1%,3%)}60%{transform:translate(2%,1%)}70%{transform:translate(-2%,-2%)}80%{transform:translate(1%,2%)}90%{transform:translate(-1%,-1%)}}
+.ct-grain{position:fixed;inset:-15%;z-index:9997;pointer-events:none;width:130%;height:130%;opacity:0.04;mix-blend-mode:overlay;animation:ct-grain .2s steps(1) infinite;will-change:transform;background-image:url("data:image/svg+xml,%3Csvg viewBox='0 0 512 512' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.75' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)'/%3E%3C/svg%3E");background-size:256px 256px}
+
+.ct-root{-webkit-font-smoothing:antialiased;background:#08090A}
+.ct-root a{color:#F4F3F1;text-decoration:none}
+.ct-root ::selection{background:#cc0066;color:#fff}
+
+/* hover states */
+.ct-hov-cta:hover{background:#F4F3F1 !important;color:#08090A !important;border-color:#F4F3F1 !important}
+.ct-hov-pink:hover{background:#FF3D8F !important;color:#08090A !important}
+.ct-hov-row:hover{background:rgba(244,243,241,0.045) !important}
+.ct-hov-tile:hover{background:#14151A !important}
+.ct-hov-tile:hover img{transform:scale(1.08)}
+
+/* hamburger — hidden on desktop */
+.ct-hamburger{display:none;background:none;border:none;color:#F4F3F1;cursor:pointer;padding:6px;align-items:center;justify-content:center}
+
+/* project cards */
+.ct-proj-card{transform-style:preserve-3d}
+.ct-proj-card:hover img{transform:scale(1.06)}
+.ct-proj-card:hover{box-shadow:0 28px 72px rgba(0,0,0,0.55)}
+/* mobile label — hidden on desktop */
+.ct-proj-mob-label{display:none}
+
+/* social icon links */
+.ct-social-link:hover{color:#F4F3F1 !important;border-color:rgba(244,243,241,0.4) !important}
+
+/* contact form inputs */
+.ct-input{transition:border-color .2s ease}
+.ct-input:focus{border-color:rgba(244,243,241,0.38) !important}
+.ct-input::placeholder{color:rgba(244,243,241,0.22)}
+
+/* submit button */
+.ct-submit-btn:disabled{opacity:.5;cursor:not-allowed}
+
+/* ── Sticky mobile CTA ── */
+.ct-mob-cta{
+  display:none;
+  position:fixed;bottom:0;left:0;right:0;z-index:100;
+  padding:12px 16px calc(16px + env(safe-area-inset-bottom,0px));
+  background:linear-gradient(to top,rgba(8,9,10,0.98) 55%,transparent);
+  opacity:0;transform:translateY(20px);
+  transition:opacity .4s ease,transform .45s cubic-bezier(.22,1,.36,1);
+  pointer-events:none;will-change:opacity,transform;
+}
+.ct-mob-cta.ct-show{opacity:1;transform:translateY(0);pointer-events:auto}
+.ct-mob-cta-pill{
+  display:flex;align-items:center;justify-content:space-between;
+  padding:17px 24px;
+  background:linear-gradient(90deg,#FF3D8F 0%,#b44bdf 50%,#29A8DC 100%);
+  border-radius:100px;text-decoration:none;
+  box-shadow:0 14px 44px rgba(255,61,143,0.42),0 2px 0 rgba(255,255,255,0.08) inset;
+  transition:opacity .2s ease,transform .2s ease;
+}
+.ct-mob-cta-pill:active{opacity:.88;transform:scale(.97)}
+
+/* ── Mobile menu item stagger ── */
+@keyframes ct-menu-in{from{opacity:0;transform:translateY(22px)}to{opacity:1;transform:translateY(0)}}
+.ct-menu-item{animation:ct-menu-in .55s cubic-bezier(.22,1,.36,1) both}
+
+/* tablet — 4-col project grid collapses to 2 */
+@media (max-width:1024px) and (min-width:761px){
+[data-m-projects]{grid-template-columns:repeat(2,1fr) !important}
+}
+
+/* ── Mobile — ≤760px ── */
+@media (max-width:760px){
+/* show hamburger, hide desktop nav */
+.ct-hamburger{display:flex}
+[data-m-nav]{display:none !important}
+
+/* show sticky CTA */
+.ct-mob-cta{display:block}
+
+/* nav */
+[data-m-navcta]{padding:8px 12px !important}
+
+/* ── Hero ── */
+#top{min-height:90vh !important;padding:52px 20px 28px !important}
+/* Bug fix: 11.5vw at 390px = 44.85px — smaller than desktop clamp(52px,...). Use 14vw = 54.6px */
+#top h1{margin-top:28px !important;font-size:14vw !important;line-height:0.9 !important}
+[data-m-herobot]{grid-template-columns:1fr !important;gap:20px !important;margin-top:44px !important}
+[data-m-stats]{gap:20px 28px !important}
+[data-m-herop]{justify-self:start !important;font-size:15px !important;max-width:100% !important}
+
+/* ── Marquee ── */
+[data-m-marq]{font-size:22px !important;gap:22px !important;padding-right:22px !important}
+
+/* ── Studio ── */
+#studio{grid-template-columns:1fr !important;gap:28px !important;padding:72px 20px !important}
+/* 2-col info cards (2×2 grid) looks much better than 1-col stack */
+[data-m-cards]{grid-template-columns:1fr 1fr !important;gap:14px 28px !important}
+
+/* ── Services ── */
+#services,#work,#industries,#process,#contact{padding:72px 20px !important}
+[data-m-shead]{flex-direction:column !important;align-items:flex-start !important;gap:18px !important;margin-bottom:36px !important}
+[data-m-shead] p{text-align:left !important;max-width:100% !important}
+[data-srow]{grid-template-columns:36px 1fr !important;gap:6px 14px !important;padding:20px 4px !important}
+[data-srow] p{grid-column:2 !important}
+[data-m-stags]{grid-column:2 !important;justify-content:flex-start !important;margin-top:4px !important}
+
+/* ── Work / project cards ── */
+/* Single column on mobile */
+[data-m-projects]{grid-template-columns:1fr !important}
+/* Card: overflow visible so the label below the image is not clipped */
+.ct-proj-card{overflow:visible !important;border-radius:0 !important;transform:none !important;box-shadow:none !important}
+/* Move border-radius + clip to just the image container */
+.ct-proj-card > div:first-child{border-radius:16px !important;overflow:hidden !important;aspect-ratio:16/10 !important}
+/* Hide the desktop overlay entirely */
+.ct-proj-overlay{display:none !important}
+/* Show the mobile label below the image */
+.ct-proj-mob-label{
+  display:block;
+  padding:12px 4px 4px;
+  display:flex;flex-direction:column;gap:5px;
+}
+.ct-proj-mob-cat{
+  font-family:'Geist Mono',monospace;
+  font-size:9px;letter-spacing:0.16em;text-transform:uppercase;
+  color:rgba(244,243,241,0.42);
+}
+.ct-proj-mob-title{
+  margin:0;font-size:17px;font-weight:400;
+  letter-spacing:-0.03em;color:#F4F3F1;line-height:1.2;
+}
+.ct-proj-mob-badge{
+  font-family:'Geist Mono',monospace;
+  font-size:9px;letter-spacing:0.1em;text-transform:uppercase;
+  padding:5px 11px;border:1px solid rgba(255,61,143,0.4);
+  border-radius:100px;color:rgba(255,61,143,0.9);white-space:nowrap;flex-shrink:0;
+}
+/* Active state instead of hover */
+.ct-proj-card:active > div:first-child img{transform:scale(1.03)}
+
+/* ── Platforms ── */
+[data-m-platforms]{grid-template-columns:1fr !important}
+#platforms{padding:72px 20px !important}
+/* Fix over-padded platform tiles on mobile */
+.ct-hov-tile{padding:32px 24px !important}
+
+/* ── Industries ── */
+#industries{grid-template-columns:1fr !important;gap:28px !important}
+[data-irow]{grid-template-columns:32px 1fr !important;gap:14px !important}
+[data-irow] h4{font-size:20px !important}
+[data-m-itags]{display:none !important}
+
+/* ── Reviews ── */
+#reviews{padding:72px 0 !important}
+[data-m-revhead]{flex-direction:column !important;align-items:flex-start !important;gap:16px !important;padding:0 20px !important}
+[data-m-rcard]{width:85vw !important;max-width:340px !important;padding:22px !important}
+
+/* ── Process ── */
+#process{grid-template-columns:1fr !important;gap:40px !important}
+
+/* ── Contact ── */
+[data-m-cgrid]{grid-template-columns:1fr !important;gap:0 !important;margin-top:52px !important}
+/* Visual dividers between stacked contact info items */
+[data-m-cgrid] > div{padding:18px 0 !important}
+[data-m-cgrid] > div + div{border-top:1px solid rgba(244,243,241,0.10) !important}
+/* Contact form: single column */
+[data-m-cform]{grid-template-columns:1fr !important}
+
+/* ── Footer ── */
+/* Extra bottom padding so content clears the sticky CTA */
+[data-m-foot]{
+  flex-direction:column !important;align-items:flex-start !important;
+  gap:14px !important;
+  padding:24px 20px calc(env(safe-area-inset-bottom,0px) + 96px) 20px !important;
+}
+}
