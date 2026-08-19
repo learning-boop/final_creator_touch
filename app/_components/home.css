@@ -109,7 +109,7 @@
 /* Card: overflow visible so the label below the image is not clipped */
 .ct-proj-card{overflow:visible !important;border-radius:0 !important;transform:none !important;box-shadow:none !important}
 /* Move border-radius + clip to just the image container */
-.ct-proj-card > div:first-child{border-radius:16px !important;overflow:hidden !important;aspect-ratio:16/10 !important}
+.ct-proj-card > div:first-child{border-radius:16px !important;overflow:hidden !important;aspect-ratio:4/5 !important}
 /* Hide the desktop overlay entirely */
 .ct-proj-overlay{display:none !important}
 /* Show the mobile label below the image */
@@ -171,4 +171,48 @@
   gap:14px !important;
   padding:24px 20px calc(env(safe-area-inset-bottom,0px) + 96px) 20px !important;
 }
+
+/* ── Studio redesign ── */
+[data-m-studio-grid]{grid-template-columns:1fr !important;gap:40px !important}
+[data-m-studio-stats]{gap:24px 32px !important;flex-wrap:wrap !important}
+[data-m-clients] img{height:24px !important;max-width:90px !important}
+
+/* ── Services redesign ── */
+[data-m-svc-grid]{grid-template-columns:1fr !important;gap:32px !important}
+[data-m-svc-stick]{position:static !important}
+[data-m-svc-img]{display:none !important}
+
+/* ── E-commerce ── */
+#ecommerce{padding:72px 20px !important}
+[data-m-ec-grid]{grid-template-columns:1fr !important;gap:40px !important}
+[data-m-ec-grid]>div:last-child{order:-1 !important}
+
+/* ── Automation ── */
+#automation{padding:72px 20px !important}
+[data-m-auto-grid]{grid-template-columns:1fr !important;gap:40px !important}
+[data-m-auto-img]{order:2 !important}
+
+/* ── Industries redesign ── */
+#industries{padding:72px 20px !important}
+[data-m-ind-head]{flex-direction:column !important;align-items:flex-start !important;gap:16px !important}
+[data-m-ind-head] p,[data-m-ind-p]{text-align:left !important;max-width:100% !important}
+[data-m-ind-grid]{grid-template-columns:1fr 1fr !important}
+[data-m-ind-grid]>div{padding:24px 18px !important}
+
+/* ── Reviews redesign ── */
+#reviews{padding:72px 20px !important}
+[data-m-rev-grid]{grid-template-columns:1fr !important;gap:32px !important;margin-bottom:40px !important}
+#reviews [style*="margin:0 -28px"]{margin:0 !important;overflow:hidden !important}
+
+/* ── Process redesign ── */
+#process{padding:72px 20px !important}
+[data-m-proc-grid]{grid-template-columns:1fr !important}
+[data-m-proc-grid]>div{padding:28px 20px !important}
+[data-m-proc-p]{text-align:left !important;max-width:100% !important}
+
+/* ── Contact redesign ── */
+#contact{padding:72px 20px 80px !important}
+[data-m-contact-grid]{grid-template-columns:1fr !important;gap:48px !important}
+[data-m-cform-grid]{grid-template-columns:1fr !important}
+[data-m-cform-grid]>div:nth-child(3){grid-column:auto !important}
 }

@@ -329,6 +329,7 @@ export function initHomeFX(opts = {}) {
         const maxDim = Math.max(size.x, size.y, size.z);
         model.position.sub(center);
         if (maxDim > 0) model.scale.setScalar(2.2 / maxDim);
+        model.scale.y *= -1;
         model.traverse(child => {
           if (child.isMesh) {
             const mat = mkGlass();
