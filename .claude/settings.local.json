@@ -26,7 +26,18 @@
       "Bash(PROJ=\"D:/creative_touch/creatortouch/creator-structure/public/assets/images/projects\"\n\nmv \"$PROJ/anjaneya-jewellery/Screenshot 2026-08-17 192307.png\" \"$PROJ/anjaneya-jewellery/screen-1.png\" &&\nmv \"$PROJ/anjaneya-jewellery/Screenshot 2026-08-17 192441.png\" \"$PROJ/anjaneya-jewellery/screen-2.png\" &&\nmv \"$PROJ/change-ngo/Screenshot 2026-08-17 192542.png\" \"$PROJ/change-ngo/screen-1.png\" &&\nmv \"$PROJ/change-ngo/Screenshot 2026-08-17 192612.png\" \"$PROJ/change-ngo/screen-2.png\" &&\nmv \"$PROJ/change-ngo/Screenshot 2026-08-17 192752.png\" \"$PROJ/change-ngo/screen-3.png\" &&\nmv \"$PROJ/dr-matla/Screenshot 2026-08-17 192841.png\" \"$PROJ/dr-matla/screen-1.png\" &&\nmv \"$PROJ/dr-matla/Screenshot 2026-08-17 192906.png\" \"$PROJ/dr-matla/screen-2.png\" &&\nmv \"$PROJ/kensley-aesthetics/Screenshot 2026-08-17 192949.png\" \"$PROJ/kensley-aesthetics/screen-1.png\" &&\nmv \"$PROJ/kensley-aesthetics/Screenshot 2026-08-17 193030.png\" \"$PROJ/kensley-aesthetics/screen-2.png\" &&\nmv \"$PROJ/kensley-aesthetics/Screenshot 2026-08-17 193106.png\" \"$PROJ/kensley-aesthetics/screen-3.png\" &&\nmv \"$PROJ/meditron-cdc/Screenshot 2026-08-17 193414.png\" \"$PROJ/meditron-cdc/screen-1.png\" &&\nmv \"$PROJ/meditron-cdc/Screenshot 2026-08-17 193533.png\" \"$PROJ/meditron-cdc/screen-2.png\" &&\nmv \"$PROJ/meditron-cdc/Screenshot 2026-08-17 193613.png\" \"$PROJ/meditron-cdc/screen-3.png\" &&\nmv \"$PROJ/st-pauls-school-vja/Screenshot 2026-08-17 193727.png\" \"$PROJ/st-pauls-school-vja/screen-1.png\" &&\nmv \"$PROJ/st-pauls-school-vja/Screenshot 2026-08-17 193753.png\" \"$PROJ/st-pauls-school-vja/screen-2.png\" &&\nmv \"$PROJ/trust-hospital/Screenshot 2026-08-17 193909.png\" \"$PROJ/trust-hospital/screen-1.png\" &&\nmv \"$PROJ/trust-hospital/Screenshot 2026-08-17 193953.png\" \"$PROJ/trust-hospital/screen-2.png\" &&\nmv \"$PROJ/trust-hospital/Screenshot 2026-08-17 194020.png\" \"$PROJ/trust-hospital/screen-3.png\" &&\necho \"All renamed\")",
       "Bash(cd \"D:\\\\creative_touch\\\\creatortouch\\\\creator-structure\" && npm run build 2>&1 | tail -20)",
       "Bash(cd \"D:\\\\creative_touch\\\\creatortouch\\\\creator-structure\" && npm run build 2>&1 | tail -25)",
-      "Bash(cd \"D:/creative_touch/creatortouch/creator-structure\" && npm run build 2>&1 | tail -30)"
+      "Bash(cd \"D:/creative_touch/creatortouch/creator-structure\" && npm run build 2>&1 | tail -30)",
+      "WebFetch(domain:cybertron.in)",
+      "mcp__ide__getDiagnostics",
+      "Bash(cd \"D:\\\\creative_touch\\\\creatortouch\\\\creator-structure\" && npm run build 2>&1 | tail -40)",
+      "Bash(cd \"D:\\\\creative_touch\\\\creatortouch\\\\creator-structure\" && npm run build 2>&1 | tail -15)",
+      "Bash(cd \"D:\\\\creative_touch\\\\creatortouch\\\\creator-structure\" && npm install gsap)",
+      "Bash(cd \"D:\\\\creative_touch\\\\creatortouch\\\\creator-structure\" && npm run dev)",
+      "Bash(curl -s -o /dev/null -w \"%{http_code}\" http://localhost:3000/services-preview)",
+      "Bash(curl -s http://localhost:3000/services-preview > /dev/null && sleep 3 && tail -5 \"D:\\\\creative_touch\\\\creatortouch\\\\creator-structure\\\\.next\\\\dev\\\\logs\\\\next-development.log\")",
+      "Bash(taskkill /PID 11100 /F && sleep 2 && cd \"D:\\\\creative_touch\\\\creatortouch\\\\creator-structure\" && npm run dev)",
+      "Bash(taskkill //PID 11100 //F)",
+      "WebFetch(domain:localhost)"
     ]
   }
 }

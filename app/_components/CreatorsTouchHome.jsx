@@ -3,6 +3,7 @@
 import { useEffect, useState, useRef } from "react";
 import "./home.css";
 import { initHomeFX } from "./home-fx";
+import ServicesSection from "./services/ServicesSection";
 
 const _sc = {};
 function S(css) {
@@ -138,6 +139,15 @@ const SERVICE_GROUPS = [
 
 const MARQ = ["Brand strategy", "Websites", "Performance marketing", "AI workflows", "Content studio"];
 
+const INSIGHTS = [
+  { cat: "Branding", title: "Why Your Business Needs a Brand, Not Just a Logo", excerpt: "A logo is a mark. A brand is the feeling people get when they hear your name. Here's why the difference matters for your bottom line.", date: "Aug 2026", read: "4 min", color: "#FF3D8F" },
+  { cat: "Digital", title: "5 Signs Your Website Is Costing You Customers", excerpt: "Most business owners don't realise their website is quietly turning people away. Here are the five most common culprits — and how to fix them.", date: "Jul 2026", read: "5 min", color: "#29A8DC" },
+  { cat: "Automation", title: "WhatsApp Automation: The Secret Weapon for Local Businesses", excerpt: "Customers who message you expect a fast reply. Automated responses can follow up, qualify and convert leads while you sleep.", date: "Jul 2026", read: "3 min", color: "#25D366" },
+  { cat: "Marketing", title: "SEO vs. Paid Ads: What's Right for Your Business?", excerpt: "Both work. But they work differently. Understanding the tradeoff is the first step to spending your marketing budget wisely.", date: "Jun 2026", read: "6 min", color: "#cc0066" },
+  { cat: "Analytics", title: "How to Measure If Your Digital Marketing Is Working", excerpt: "Likes and visits don't pay the bills. Here's what to actually track to know if your marketing spend is earning its keep.", date: "Jun 2026", read: "5 min", color: "#c9a227" },
+  { cat: "Design", title: "The Real Cost of a Badly Designed Website", excerpt: "Bad design isn't just ugly — it actively costs you customers, rankings and credibility. Here's what to look for and how to fix it.", date: "May 2026", read: "4 min", color: "#96BF48" },
+];
+
 // Social links — update hrefs with real profile URLs before launch
 const SOCIALS = [
   {
@@ -222,6 +232,84 @@ function MarqueeRow() {
         </span>
       ))}
     </div>
+  );
+}
+
+const SVC_IMGS = [
+  "/assets/images/ChatGPT Image Aug 19, 2026, 04_54_11 PM (2).png",
+  "/assets/images/ChatGPT Image Aug 19, 2026, 04_54_11 PM (1).png",
+  "/assets/images/ChatGPT Image Aug 19, 2026, 04_54_11 PM (3).png",
+  "/assets/images/ChatGPT Image Aug 19, 2026, 04_54_16 PM (9).png",
+  "/assets/images/ChatGPT Image Aug 19, 2026, 04_54_15 PM (8).png",
+];
+const SVC_COLORS = ["#FF3D8F", "#29A8DC", "#cc0066", "#96BF48", "#25D366"];
+// Images mapped to SERVICE_GROUPS order: get customers, better website, stronger brand, sell online, automation
+const SVC_GROUP_IMGS = [
+  "/assets/images/ChatGPT Image Aug 19, 2026, 04_54_11 PM (3).png",
+  "/assets/images/ChatGPT Image Aug 19, 2026, 04_54_16 PM (9).png",
+  "/assets/images/ChatGPT Image Aug 19, 2026, 04_54_11 PM (1).png",
+  "/assets/images/ChatGPT Image Aug 19, 2026, 04_54_12 PM (4).png",
+  "/assets/images/ChatGPT Image Aug 19, 2026, 04_54_13 PM (5).png",
+];
+
+function WhatWeDo() {
+  return (
+    <section id="whatwedo" style={S("position:relative;z-index:1;padding:112px 28px;border-bottom:1px solid rgba(244,243,241,0.10)")}>
+      <div style={S("display:flex;flex-direction:column;gap:52px")}>
+        <div style={S("display:flex;justify-content:space-between;align-items:flex-end;gap:32px;flex-wrap:wrap")}>
+          <div style={S("display:flex;flex-direction:column;gap:18px")}>
+            <p data-reveal="1" style={S(EYEBROW)}>What We Do</p>
+            <h2 data-reveal="1" style={S("margin:0;font-size:clamp(36px,5vw,72px);font-weight:500;line-height:0.96;letter-spacing:-0.05em")}>
+              Five disciplines.<br /><em style={S(SERIF + "color:#FF3D8F")}>One team.</em>
+            </h2>
+          </div>
+          <p data-reveal="1" style={S("margin:0;font-size:15px;line-height:1.65;color:rgba(244,243,241,0.5);max-width:280px;text-align:right")}>
+            Scroll through each discipline to see exactly how we approach it.
+          </p>
+        </div>
+
+        {/* Scroll-driven: sticky left panel updates as you scroll the right list */}
+        <div style={S("display:grid;grid-template-columns:1fr 1.1fr;gap:80px;align-items:start")} data-m-svc-grid="1" data-sp-wrap="1">
+
+          {/* LEFT — sticky image panel */}
+          <div style={S("position:sticky;top:100px")} data-m-svc-stick="1">
+            <div style={S("position:relative;border-radius:20px;overflow:hidden;aspect-ratio:4/3;background:#0E0F12")} data-m-svc-img="1">
+              {SERVICES.map((s, i) => (
+                <div key={s.number} data-sp-slide={i} className={"ct-sp-slide" + (i === 0 ? " ct-sp-active" : "")}>
+                  <img src={SVC_IMGS[i]} alt={s.title} loading="lazy"
+                    style={S("width:100%;height:100%;object-fit:cover;display:block")} />
+                  <div style={S("position:absolute;inset:0;background:linear-gradient(to top,rgba(8,9,10,0.94) 0%,rgba(8,9,10,0.18) 60%,transparent 100%)")} />
+                  <div style={S("position:absolute;bottom:0;left:0;right:0;padding:24px 28px")}>
+                    <span style={{ ...S(MONO + "font-size:9px;letter-spacing:0.16em;text-transform:uppercase;padding:4px 12px;border-radius:100px;border:1px solid;display:inline-block;margin-bottom:10px"), color: SVC_COLORS[i], borderColor: SVC_COLORS[i] + "55", background: SVC_COLORS[i] + "14" }}>{s.number}</span>
+                    <h3 style={S("margin:0 0 8px;font-size:22px;font-weight:400;letter-spacing:-0.03em")}>{s.title}</h3>
+                    <p style={S("margin:0 0 12px;font-size:13px;line-height:1.5;color:rgba(244,243,241,0.65)")}>{s.description}</p>
+                    <div style={S("display:flex;flex-wrap:wrap;gap:6px")}>
+                      {s.bullets.map(b => (
+                        <span key={b} style={{ ...S(MONO + "font-size:9px;letter-spacing:0.1em;text-transform:uppercase;padding:4px 10px;border-radius:100px;border:1px solid"), borderColor: SVC_COLORS[i] + "50", color: SVC_COLORS[i] }}>{b}</span>
+                      ))}
+                    </div>
+                  </div>
+                </div>
+              ))}
+            </div>
+          </div>
+
+          {/* RIGHT — scroll trigger rows */}
+          <div style={S("display:flex;flex-direction:column;border-top:" + HAIR14)}>
+            {SERVICES.map((s, i) => (
+              <div key={s.number} data-sp-row={i} className={"ct-hov-row ct-sp-row" + (i === 0 ? " ct-sp-row-active" : "")}
+                style={S("padding:36px 12px;border-bottom:" + HAIR14 + ";transition:background .25s ease;cursor:default")}>
+                <div style={S("display:flex;align-items:baseline;gap:20px;margin-bottom:12px")}>
+                  <span data-sp-num="1" style={S(MONO + "font-size:10px;letter-spacing:0.14em;color:rgba(244,243,241,0.28)")}>{s.number}</span>
+                  <h3 data-sp-title="1" style={S("margin:0;font-size:clamp(20px,2.4vw,32px);font-weight:400;letter-spacing:-0.03em;color:rgba(244,243,241,0.42)")}>{s.title}</h3>
+                </div>
+                <p style={S("margin:0;font-size:14px;line-height:1.65;color:rgba(244,243,241,0.38);padding-left:38px;max-width:480px")}>{s.description}</p>
+              </div>
+            ))}
+          </div>
+        </div>
+      </div>
+    </section>
   );
 }
 
@@ -362,7 +450,7 @@ export default function CreatorsTouchHome() {
   }, []);
 
   return (
-    <div className="ct-root" style={S("background:#08090A;color:#F4F3F1;font-family:Geist,Arial,sans-serif;font-weight:400;letter-spacing:-0.02em;overflow-x:hidden;cursor:default")}>
+    <div className="ct-root" style={S("background:#08090A;color:#F4F3F1;font-family:Geist,Arial,sans-serif;font-weight:400;letter-spacing:-0.02em;overflow-x:clip;cursor:default")}>
       {/* Film grain overlay — subtle texture for depth */}
       <div aria-hidden="true" className="ct-grain" />
 
@@ -414,7 +502,7 @@ export default function CreatorsTouchHome() {
 
       <header id="ct-header" style={S("position:sticky;top:0;z-index:50;display:flex;align-items:center;justify-content:space-between;gap:24px;padding:16px 28px;background:rgba(8,9,10,0);border-bottom:1px solid transparent;transition:background .35s ease,border-color .35s ease,backdrop-filter .35s ease")}>
         <a href="#top" style={S("display:flex;align-items:center;gap:10px")}>
-          <img src="/assets/images/creator_touch.png" alt="Creators Touch" style={S("width:48px;height:48px;display:block")} />
+          <img src="/assets/images/creator_touch.png" alt="Creators Touch" style={S("width:64px;height:64px;display:block")} />
           <span style={S("display:flex;flex-direction:column;line-height:1.05")}>
             <span style={S("font-size:14px;font-weight:600;letter-spacing:-0.03em")}>Creators Touch</span>
             <span style={S(MONO + "font-size:9px;letter-spacing:0.18em;color:rgba(244,243,241,0.45)")}>GLOBAL</span>
@@ -521,40 +609,9 @@ export default function CreatorsTouchHome() {
       </section>
 
       {/* ─── 02 SERVICES ─── */}
-      <section id="services" style={S("position:relative;z-index:1;padding:112px 28px;border-bottom:" + HAIR)}>
-        <div style={S("display:grid;grid-template-columns:1fr 1.1fr;gap:80px;align-items:start")} data-m-svc-grid="1">
-          <div style={S("position:sticky;top:120px")} data-m-svc-stick="1">
-            <p data-reveal="1" style={S(EYEBROW)}>02 &mdash; How we help</p>
-            <h2 data-reveal="1" style={S("margin:18px 0 28px;font-size:clamp(32px,3.8vw,56px);font-weight:400;line-height:1.06;letter-spacing:-0.04em")}>
-              How we help your<br /><em style={S(SERIF + "color:rgba(244,243,241,0.5)")}>business grow.</em>
-            </h2>
-            <p data-reveal="1" style={S("margin:0 0 40px;font-size:16px;line-height:1.7;color:rgba(244,243,241,0.55);max-width:380px")}>
-              We don&rsquo;t talk in marketing language. We talk in business results. Tell us your problem and we&rsquo;ll tell you exactly how we would fix it.
-            </p>
-            <div data-reveal="1" style={S("border-radius:20px;overflow:hidden")} data-m-svc-img="1">
-              <img src={IMG2} alt="Creators Touch team in a strategy planning session" loading="lazy"
-                style={S("width:100%;display:block;object-fit:cover;aspect-ratio:4/3")} />
-            </div>
-          </div>
-          <div style={S("display:flex;flex-direction:column;border-top:" + HAIR14)}>
-            {SERVICE_GROUPS.map((sg, i) => (
-              <div key={sg.num} data-reveal="1" data-reveal-delay={String(i * 80)} className="ct-hov-row"
-                style={S("padding:32px 12px;border-bottom:" + HAIR14 + ";transition:background .25s ease")}>
-                <div style={S("display:flex;align-items:baseline;gap:20px;margin-bottom:14px")}>
-                  <span style={S(MONO + "font-size:10px;letter-spacing:0.14em;color:rgba(244,243,241,0.35)")}>{sg.num}</span>
-                  <h3 style={S("margin:0;font-size:clamp(20px,2.4vw,32px);font-weight:400;letter-spacing:-0.03em")}>{sg.title}</h3>
-                </div>
-                <p style={S("margin:0 0 16px;font-size:15px;line-height:1.65;color:rgba(244,243,241,0.55);padding-left:38px;max-width:480px")}>{sg.desc}</p>
-                <div style={S("display:flex;flex-wrap:wrap;gap:7px;padding-left:38px")}>
-                  {sg.items.map(it => (
-                    <span key={it} style={{ ...S(MONO + "font-size:10px;letter-spacing:0.1em;text-transform:uppercase;padding:6px 13px;border-radius:100px;border:1px solid"), borderColor: sg.color + "40", color: sg.color, opacity: 0.9 }}>{it}</span>
-                  ))}
-                </div>
-              </div>
-            ))}
-          </div>
-        </div>
-      </section>
+      <ServicesSection />
+
+      <WhatWeDo />
 
       {/* ─── 03 SELECTED WORK ─── */}
       <section id="work" style={S("position:relative;z-index:1;padding:112px 28px;border-bottom:" + HAIR)}>
@@ -729,6 +786,75 @@ export default function CreatorsTouchHome() {
         </div>
       </section>
 
+      {/* ─── GROWTH PROGRESS ─── */}
+      <section id="growth" style={S("position:relative;z-index:1;padding:112px 28px;border-bottom:1px solid rgba(244,243,241,0.10)")}>
+        <div style={S("display:flex;flex-direction:column;gap:72px")}>
+          <div style={S("display:flex;justify-content:space-between;align-items:flex-end;gap:32px;flex-wrap:wrap")}>
+            <div style={S("display:flex;flex-direction:column;gap:18px")}>
+              <p data-reveal="1" style={S(EYEBROW)}>Our Growth Progress</p>
+              <h2 data-reveal="1" style={S("margin:0;font-size:clamp(32px,4.5vw,68px);font-weight:500;line-height:0.96;letter-spacing:-0.05em")}>
+                From brief<br /><em style={S(SERIF + "color:#FF3D8F")}>to breakthrough.</em>
+              </h2>
+            </div>
+            <p data-reveal="1" style={S("margin:0;font-size:15px;line-height:1.65;color:rgba(244,243,241,0.5);max-width:280px;text-align:right")}>
+              A five-step process that takes you from first conversation to measurable, lasting growth.
+            </p>
+          </div>
+
+          {/* Steps with animated connecting line */}
+          <div data-growth-wrap="1" style={S("position:relative")}>
+            <div className="ct-growth-line-wrap" aria-hidden="true"
+              style={S("position:absolute;top:28px;left:calc(10% + 4px);right:calc(10% + 4px);height:1px;background:rgba(244,243,241,0.08);overflow:hidden")}>
+              <div className="ct-growth-line"
+                style={S("height:100%;background:linear-gradient(90deg,#FF3D8F,#29A8DC);transform-origin:left center;transform:scaleX(0);transition:transform 1.8s cubic-bezier(.22,1,.36,1)")} />
+            </div>
+            <div style={S("display:grid;grid-template-columns:repeat(5,1fr);gap:16px")} data-m-growth-grid="1">
+              {[
+                { n: "01", title: "Discover", sub: "Understand your market", desc: "We dig into your business, your competitors and your customers before touching a single pixel.", color: "#FF3D8F" },
+                { n: "02", title: "Strategise", sub: "Plan the approach", desc: "Goals, budget, channels and timeline — all agreed in writing before any creative work begins.", color: "#cc0066" },
+                { n: "03", title: "Create", sub: "Build the work", desc: "Design, content and development done by one team. No handoffs. No gaps. No intent lost between departments.", color: "#29A8DC" },
+                { n: "04", title: "Launch", sub: "Go live with confidence", desc: "Tested, refined and released. Your brand enters the market ready for real customers.", color: "#0977a8" },
+                { n: "05", title: "Grow", sub: "Optimise and scale", desc: "We track what works, improve what doesn't and keep pushing until the numbers give us a reason to go further.", color: "#96BF48" },
+              ].map((step, i) => (
+                <div key={step.n} data-growth-step="1" className="ct-growth-step"
+                  style={{ ...S("display:flex;flex-direction:column;gap:20px"), animationDelay: `${i * 160}ms` }}>
+                  <div style={S("display:flex;justify-content:center;margin-bottom:8px")}>
+                    <div style={S("position:relative;width:56px;height:56px")}>
+                      <div style={S("width:56px;height:56px;border-radius:50%;background:#0E0F12;border:1px solid rgba(244,243,241,0.14);display:flex;align-items:center;justify-content:center")}>
+                        <span style={S(MONO + "font-size:11px;letter-spacing:0.14em;color:rgba(244,243,241,0.55)")}>{step.n}</span>
+                      </div>
+                      <div className="ct-gstep-ring"
+                        style={{ position: "absolute", inset: -4, borderRadius: "50%", border: `2px solid ${step.color}`, opacity: 0, transform: "scale(0.7)", transition: "opacity .4s ease,transform .5s cubic-bezier(.22,1,.36,1)" }} />
+                    </div>
+                  </div>
+                  <div style={S("display:flex;flex-direction:column;gap:8px")}>
+                    <h3 style={{ ...S("margin:0;font-size:clamp(16px,1.8vw,22px);font-weight:400;letter-spacing:-0.03em"), color: step.color }}>{step.title}</h3>
+                    <p style={S(MONO + "margin:0;font-size:9px;letter-spacing:0.14em;text-transform:uppercase;color:rgba(244,243,241,0.35)")}>{step.sub}</p>
+                    <p style={S("margin:0;font-size:13px;line-height:1.65;color:rgba(244,243,241,0.5);margin-top:4px")}>{step.desc}</p>
+                  </div>
+                </div>
+              ))}
+            </div>
+          </div>
+
+          {/* Keyword marquee strip */}
+          <div style={S("overflow:hidden;padding:20px 0;border-top:1px solid rgba(244,243,241,0.07);border-bottom:1px solid rgba(244,243,241,0.07)")}>
+            <div style={S("display:flex;width:max-content;animation:ct-marquee 38s linear infinite")}>
+              {[1, 2].map(k => (
+                <div key={k} style={S("display:flex;align-items:center;gap:28px;padding-right:28px;" + MONO + "font-size:10px;letter-spacing:0.16em;text-transform:uppercase;color:rgba(244,243,241,0.32);white-space:nowrap")}>
+                  {["Brand strategy", "Customer insights", "Positioning", "Value proposition", "Brand identity", "Performance marketing", "Rebranding", "Omnichannel", "Social ads", "Technical SEO", "KPI tracking"].map((t, i) => (
+                    <span key={t} style={{ display: "contents" }}>
+                      <span>{t}</span>
+                      <span style={{ color: i % 2 ? "#0977a8" : "#cc0066" }}>✦</span>
+                    </span>
+                  ))}
+                </div>
+              ))}
+            </div>
+          </div>
+        </div>
+      </section>
+
       {/* ─── 07 TESTIMONIALS ─── */}
       <section id="reviews" style={S("position:relative;z-index:1;padding:112px 28px;border-bottom:" + HAIR)}>
         <div style={S("display:grid;grid-template-columns:1fr 1.2fr;gap:64px;align-items:start;margin-bottom:64px")} data-m-rev-grid="1">
@@ -805,6 +931,51 @@ export default function CreatorsTouchHome() {
                   <span style={{ color: step.color }}>&ldquo;</span>{step.emotion}<span style={{ color: step.color }}>&rdquo;</span>
                 </p>
               </div>
+            ))}
+          </div>
+        </div>
+      </section>
+
+      {/* ─── INSIGHTS & INSPIRES ─── */}
+      <section id="insights" style={S("position:relative;z-index:1;padding:112px 28px;border-bottom:1px solid rgba(244,243,241,0.10)")}>
+        <div style={S("display:flex;flex-direction:column;gap:52px")}>
+          <div style={S("display:flex;justify-content:space-between;align-items:flex-end;gap:32px;flex-wrap:wrap")}>
+            <div style={S("display:flex;flex-direction:column;gap:18px")}>
+              <p data-reveal="1" style={S(EYEBROW)}>Insights &amp; Inspires</p>
+              <h2 data-reveal="1" style={S("margin:0;font-size:clamp(32px,4.5vw,68px);font-weight:500;line-height:0.96;letter-spacing:-0.05em")}>
+                Ideas that move<br /><em style={S(SERIF + "color:#FF3D8F")}>your business.</em>
+              </h2>
+            </div>
+            <a href="/blog" data-reveal="1"
+              style={S("display:inline-flex;align-items:center;gap:8px;padding:10px 20px;border:1px solid rgba(244,243,241,0.18);border-radius:100px;" + MONO + "font-size:10px;letter-spacing:0.14em;text-transform:uppercase;color:rgba(244,243,241,0.55);align-self:flex-end")}>
+              All articles <span>→</span>
+            </a>
+          </div>
+          <div data-stagger="1" style={S("display:grid;grid-template-columns:repeat(3,1fr);gap:24px")} data-m-insights="1">
+            {INSIGHTS.map(ins => (
+              <article key={ins.title} className="ct-insight-card"
+                style={S("display:flex;flex-direction:column;border:1px solid rgba(244,243,241,0.09);border-radius:20px;overflow:hidden;background:#0E0F12;cursor:pointer")}>
+                {/* Colour-coded header panel */}
+                <div style={{ ...S("aspect-ratio:16/9;display:flex;align-items:center;justify-content:center;position:relative"), background: `linear-gradient(135deg,${ins.color}20 0%,rgba(8,9,10,0.65) 100%)` }}>
+                  <div style={S("position:absolute;inset:0;display:flex;align-items:center;justify-content:center")}>
+                    <span style={S("font-size:72px;font-weight:500;letter-spacing:-0.06em;color:rgba(244,243,241,0.04)")}>{ins.cat[0]}</span>
+                  </div>
+                  <span style={{ ...S("position:relative;font-size:11px;font-weight:500;letter-spacing:0.08em;text-transform:uppercase;padding:6px 16px;border-radius:100px;border:1px solid"), color: ins.color, borderColor: ins.color + "55", background: ins.color + "18" }}>{ins.cat}</span>
+                </div>
+                <div style={S("display:flex;flex-direction:column;gap:14px;padding:24px;flex:1")}>
+                  <div style={S("display:flex;align-items:center;gap:10px")}>
+                    <span style={S(MONO + "font-size:9px;letter-spacing:0.14em;text-transform:uppercase;color:rgba(244,243,241,0.35)")}>{ins.date}</span>
+                    <span style={S("width:2px;height:2px;border-radius:50%;background:rgba(244,243,241,0.22)")} />
+                    <span style={S(MONO + "font-size:9px;letter-spacing:0.14em;text-transform:uppercase;color:rgba(244,243,241,0.35)")}>{ins.read} read</span>
+                  </div>
+                  <h3 style={S("margin:0;font-size:clamp(15px,1.5vw,18px);font-weight:400;line-height:1.35;letter-spacing:-0.02em")}>{ins.title}</h3>
+                  <p style={S("margin:0;font-size:13px;line-height:1.65;color:rgba(244,243,241,0.5)")}>{ins.excerpt}</p>
+                  <div style={S("margin-top:auto;padding-top:16px;border-top:1px solid rgba(244,243,241,0.07);display:flex;align-items:center;gap:8px")}>
+                    <span style={{ ...S(MONO + "font-size:9px;letter-spacing:0.14em;text-transform:uppercase"), color: ins.color }}>Read article</span>
+                    <span style={{ color: ins.color }}>→</span>
+                  </div>
+                </div>
+              </article>
             ))}
           </div>
         </div>

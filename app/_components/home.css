@@ -3,7 +3,7 @@
 @keyframes ct-marquee{from{transform:translateX(0)}to{transform:translateX(-50%)}}
 @keyframes ct-pulse{0%,100%{transform:scale(1);opacity:1}50%{transform:scale(0.88);opacity:0.6}}
 @keyframes ct-grain{0%,100%{transform:translate(0,0)}10%{transform:translate(-2%,1%)}20%{transform:translate(1%,-3%)}30%{transform:translate(-1%,2%)}40%{transform:translate(2%,-1%)}50%{transform:translate(-1%,3%)}60%{transform:translate(2%,1%)}70%{transform:translate(-2%,-2%)}80%{transform:translate(1%,2%)}90%{transform:translate(-1%,-1%)}}
-.ct-grain{position:fixed;inset:-15%;z-index:9997;pointer-events:none;width:130%;height:130%;opacity:0.04;mix-blend-mode:overlay;animation:ct-grain .2s steps(1) infinite;will-change:transform;background-image:url("data:image/svg+xml,%3Csvg viewBox='0 0 512 512' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.75' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)'/%3E%3C/svg%3E");background-size:256px 256px}
+.ct-grain{position:fixed;inset:-14%;z-index:9997;pointer-events:none;width:130%;height:130%;opacity:0.04;mix-blend-mode:overlay;animation:ct-grain .2s steps(1) infinite;will-change:transform;background-image:url("data:image/svg+xml,%3Csvg viewBox='0 0 512 512' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.75' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)'/%3E%3C/svg%3E");background-size:256px 256px}
 
 .ct-root{-webkit-font-smoothing:antialiased;background:#08090A}
 .ct-root a{color:#F4F3F1;text-decoration:none}
@@ -178,7 +178,9 @@
 [data-m-clients] img{height:24px !important;max-width:90px !important}
 
 /* ── Services redesign ── */
-[data-m-svc-grid]{grid-template-columns:1fr !important;gap:32px !important}
+/* Break the fullscreen-sticky scroll effect on mobile — revert to normal flow */
+#services [data-sp-wrap]{height:auto !important}
+[data-m-svc-grid]{position:static !important;height:auto !important;grid-template-columns:1fr !important;gap:32px !important;padding:72px 20px !important;align-items:start !important}
 [data-m-svc-stick]{position:static !important}
 [data-m-svc-img]{display:none !important}
 
@@ -215,4 +217,76 @@
 [data-m-contact-grid]{grid-template-columns:1fr !important;gap:48px !important}
 [data-m-cform-grid]{grid-template-columns:1fr !important}
 [data-m-cform-grid]>div:nth-child(3){grid-column:auto !important}
+}
+
+/* ══════════════════════════════════════════════════════════
+   NEW SECTIONS: What We Do · Video · Growth Progress · Insights
+   ══════════════════════════════════════════════════════════ */
+
+/* ── Scroll-pinned panel (services + disciplines) ── */
+/* Stacked deck: upcoming cards peek below the active card so users see what's next.
+   Active card exits upward when replaced. Cards pre-position at the deepest peek slot
+   (opacity:0) so they fade in smoothly when they become ct-sp-next-3. */
+.ct-sp-slide{position:absolute;top:0;left:0;right:0;height:300px;transform:translateY(40px) scale(0.87);opacity:0;transition:transform .65s cubic-bezier(.22,1,.36,1),opacity .52s ease,filter .52s ease;pointer-events:none;will-change:transform,opacity}
+.ct-sp-slide.ct-sp-active{transform:translateY(0) scale(1);opacity:1;filter:none;pointer-events:auto}
+.ct-sp-slide.ct-sp-seen{transform:translateY(-108%) scale(0.96);opacity:0;filter:none}
+.ct-sp-slide.ct-sp-next-1{transform:translateY(14px) scale(0.96);opacity:1;filter:brightness(0.82)}
+.ct-sp-slide.ct-sp-next-2{transform:translateY(26px) scale(0.92);opacity:0.7;filter:brightness(0.65)}
+.ct-sp-slide.ct-sp-next-3{transform:translateY(36px) scale(0.88);opacity:0.35;filter:brightness(0.48)}
+.ct-sp-row [data-sp-title]{transition:color .35s ease}
+.ct-sp-row [data-sp-num]{transition:color .35s ease}
+.ct-sp-row-active [data-sp-num]{color:rgba(244,243,241,0.75) !important}
+.ct-sp-row-active [data-sp-title]{color:#F4F3F1 !important}
+
+/* ── Growth progress steps ── */
+@keyframes ct-step-in{from{opacity:0;transform:translateY(28px)}to{opacity:1;transform:translateY(0)}}
+.ct-growth-step{opacity:0}
+.ct-growth-step.ct-vis{animation:ct-step-in .7s cubic-bezier(.22,1,.36,1) both}
+
+/* ── Insight cards ── */
+.ct-insight-card{transition:transform .35s cubic-bezier(.22,1,.36,1),box-shadow .35s ease}
+.ct-insight-card:hover{transform:translateY(-8px);box-shadow:0 28px 72px rgba(0,0,0,.6)}
+
+/* ── New sections — mobile ── */
+@media (max-width:760px){
+  #whatwedo,#growth,#insights{padding:72px 20px !important}
+  [data-m-growth-grid]{grid-template-columns:1fr 1fr !important;gap:28px !important}
+  .ct-growth-line-wrap{display:none !important}
+  [data-m-insights]{grid-template-columns:1fr !important}
+}
+
+/* ══════════════════════════════════════════════════════════
+   SERVICES SECTION — GSAP stacked cards
+   ══════════════════════════════════════════════════════════ */
+.svc-section{position:relative;z-index:1;background:#08090A;padding:110px 24px 80px;border-bottom:1px solid rgba(244,243,241,0.10)}
+.svc-heading{width:min(1200px,100%);margin:0 auto 80px}
+.svc-eyebrow{display:inline-block;margin-bottom:18px;font-family:'Geist Mono',monospace;font-size:11px;letter-spacing:0.16em;text-transform:uppercase;color:rgba(244,243,241,0.42)}
+.svc-h2{margin:0;max-width:850px;font-size:clamp(48px,8vw,112px);line-height:0.88;letter-spacing:-0.06em;font-weight:400;color:#F4F3F1}
+.svc-h2-muted{font-family:'Instrument Serif',Georgia,serif;font-style:italic;font-weight:400;color:rgba(244,243,241,0.45)}
+.svc-lead{max-width:560px;margin:30px 0 0;font-size:17px;line-height:1.65;color:rgba(244,243,241,0.5)}
+.svc-cards-wrapper{position:relative;width:min(1200px,100%);margin:0 auto}
+.svc-stack-card{position:sticky;min-height:520px;overflow:hidden;display:grid;grid-template-columns:0.9fr 1.1fr;border-radius:32px;background:#0C0D10;box-shadow:0 24px 80px rgba(0,0,0,0.45);transform-origin:center top;will-change:transform,filter;border:1px solid rgba(244,243,241,0.08);margin-bottom:300px}
+.svc-stack-card:last-child{margin-bottom:0}
+.svc-card-copy{min-height:520px;padding:clamp(28px,5vw,60px);display:flex;flex-direction:column;justify-content:space-between;gap:48px}
+.svc-card-num{font-family:'Geist Mono',monospace;font-size:13px;letter-spacing:0.15em}
+.svc-card-title{margin:0 0 18px;font-size:clamp(32px,4vw,64px);line-height:0.95;letter-spacing:-0.04em;font-weight:400;color:#F4F3F1}
+.svc-card-desc{max-width:440px;margin:0;color:rgba(244,243,241,0.6);font-size:16px;line-height:1.65}
+.svc-card-tags{display:flex;flex-wrap:wrap;gap:8px}
+.svc-card-tag{font-family:'Geist Mono',monospace;font-size:9px;letter-spacing:0.12em;text-transform:uppercase;padding:6px 14px;border-radius:100px;border:1px solid;background:rgba(244,243,241,0.03)}
+.svc-card-image{position:relative;min-height:520px;overflow:hidden}
+.svc-card-image img{position:absolute;inset:0;width:100%;height:100%;object-fit:cover;display:block;transform:scale(1.03)}
+.svc-card-img-overlay{position:absolute;inset:0}
+
+@media(max-width:850px){
+  .svc-section{padding:80px 16px 120px}
+  .svc-heading{margin-bottom:54px}
+  .svc-stack-card{position:static;grid-template-columns:1fr;min-height:auto;border-radius:24px;margin-bottom:24px}
+  .svc-card-copy{min-height:320px;padding:28px;gap:36px}
+  .svc-card-image{min-height:260px}
+}
+@media(max-width:540px){
+  .svc-h2{font-size:clamp(40px,13vw,68px)}
+  .svc-card-title{font-size:34px}
+  .svc-card-desc{font-size:15px}
+  .svc-stack-card{border-radius:20px}
 }

@@ -270,6 +270,95 @@ export function initHomeFX(opts = {}) {
     on(track, "touchend", () => { setTimeout(() => { track.style.animationPlayState = "running"; }, 1800); });
   }
 
+  /* ---------- scroll-pinned panels (services + disciplines) ---------- */
+  document.querySelectorAll("[data-sp-wrap]").forEach(wrap => {
+    const slides = [...wrap.querySelectorAll("[data-sp-slide]")];
+    const rows   = [...wrap.querySelectorAll("[data-sp-row]")];
+    if (!slides.length) return;
+    let cur = -1;
+    const activate = idx => {
+      if (idx === cur) return;
+      cur = idx;
+      slides.forEach((s, i) => {
+        const ahead = i - idx;
+        s.classList.remove("ct-sp-active", "ct-sp-seen", "ct-sp-next-1", "ct-sp-next-2", "ct-sp-next-3");
+        if (i === idx) {
+          s.classList.add("ct-sp-active");
+          s.style.zIndex = slides.length + 2;
+        } else if (i < idx) {
+          s.classList.add("ct-sp-seen");
+          s.style.zIndex = 0;
+        } else if (ahead === 1) {
+          s.classList.add("ct-sp-next-1");
+          s.style.zIndex = slides.length + 1;
+        } else if (ahead === 2) {
+          s.classList.add("ct-sp-next-2");
+          s.style.zIndex = slides.length;
+        } else if (ahead >= 3) {
+          s.classList.add("ct-sp-next-3");
+          s.style.zIndex = slides.length - 1;
+        } else {
+          s.style.zIndex = 0;
+        }
+      });
+      rows.forEach((r, i) => r.classList.toggle("ct-sp-row-active", i === idx));
+    };
+    activate(0);
+
+    if (wrap.hasAttribute("data-sp-progress")) {
+      /* ── Scroll-wrapper progress mode (stacked service cards) ──
+         The wrap element itself has height:calc(100vh + 1400px), so
+         scrollable = wrap.offsetHeight - innerHeight = 1400px exactly.
+         No blank space — the sticky inner always fills the viewport. */
+      const update = () => {
+        const scrollable = wrap.offsetHeight - innerHeight;
+        if (scrollable <= 0) return;
+        const p = Math.max(0, Math.min(1, -wrap.getBoundingClientRect().top / scrollable));
+        activate(Math.min(slides.length - 1, Math.floor(p * slides.length)));
+      };
+      on(window, "scroll", update, { passive: true });
+      update();
+    } else {
+      /* ── Row-midpoint mode (WhatWeDo / disciplines section) ── */
+      if (!rows.length) return;
+      const update = () => {
+        const vMid = scrollY + innerHeight * 0.5;
+        let best = 0, bestDist = Infinity;
+        rows.forEach((r, i) => {
+          const rMid = scrollY + r.getBoundingClientRect().top + r.offsetHeight / 2;
+          const dist = Math.abs(rMid - vMid);
+          if (dist < bestDist) { bestDist = dist; best = i; }
+        });
+        activate(best);
+      };
+      on(window, "scroll", update, { passive: true });
+      update();
+    }
+  });
+
+  /* ---------- growth progress ---------- */
+  const growthWrap = document.querySelector("[data-growth-wrap]");
+  if (growthWrap) {
+    const lineFill = growthWrap.querySelector(".ct-growth-line");
+    const steps = [...growthWrap.querySelectorAll(".ct-growth-step")];
+    const gio = new IntersectionObserver(ens => {
+      ens.forEach(en => {
+        if (!en.isIntersecting) return;
+        if (lineFill) lineFill.style.transform = "scaleX(1)";
+        steps.forEach((s, i) => {
+          setTimeout(() => {
+            s.classList.add("ct-vis");
+            const ring = s.querySelector(".ct-gstep-ring");
+            if (ring) { ring.style.opacity = "1"; ring.style.transform = "scale(1)"; }
+          }, 80 + i * 220);
+        });
+        gio.disconnect();
+      });
+    }, { threshold: 0.15 });
+    gio.observe(growthWrap);
+    cleanups.push(() => gio.disconnect());
+  }
+
   /* ---------- project card 3D tilt ---------- */
   if (hoverFine) {
     document.querySelectorAll(".ct-proj-card").forEach(card => {
@@ -389,7 +478,7 @@ export function initHomeFX(opts = {}) {
       ring.lookAt(vjw.clone().multiplyScalar(2));
       globe.add(ring);
       globe.visible = false;
-      scene.add(globe);
+      // globe hidden per client request — scene.add(globe) skipped
       const globeMats = [
         { m: gPtsMat, base: 0.55 }, { m: gWireMat, base: 0.05 },
         { m: mkMat, base: 0.95 }, ...arcMats.map(m => ({ m, base: 0.6 }))
@@ -465,7 +554,7 @@ export function initHomeFX(opts = {}) {
     g.dustB.rotation.y = -tm * 0.006 + mxn * 0.03;
     g.dustB.position.y = -sy * 0.00055;
     const gop = L(a.gop, b.gop);
-    g.globe.visible = gop > 0.02;
+    g.globe.visible = false; // globe hidden per client request
     if (g.globe.visible) {
       g.globe.position.x = L(a.gx, b.gx) * halfW - mxn * 0.2;
       g.globe.position.y = -myn * 0.15;
