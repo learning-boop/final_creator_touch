@@ -61,7 +61,10 @@
       "Bash(cd \"D:/creative_touch/creatortouch/creator-structure\" && npx prisma generate 2>&1)",
       "Bash(cd \"D:/creative_touch/creatortouch/creator-structure\" && npm install @prisma/adapter-pg pg 2>&1 | tail -3)",
       "Bash(cd \"D:/creative_touch/creatortouch/creator-structure\" && npx prisma generate 2>&1 | tail -10)",
-      "Bash(cd \"D:/creative_touch/creatortouch/creator-structure\" && npm run build 2>&1 | tail -25)"
+      "Bash(cd \"D:/creative_touch/creatortouch/creator-structure\" && npm run build 2>&1 | tail -25)",
+      "Bash(cd \"D:/creative_touch/creatortouch/creator-structure\" && npm run build 2>&1 | grep -E \"error|Error|failed\" | head -10)",
+      "Bash(cd \"D:/creative_touch/creatortouch/creator-structure\" && mkdir -p _backend_staging && mv app/api/contact app/api/chat app/api/voice app/api/blog _backend_staging/ && mv lib/db.ts _backend_staging/ && mv lib/ai.ts _backend_staging/)",
+      "Bash(cd \"D:/creative_touch/creatortouch/creator-structure\" && rm -rf .next)"
     ]
   }
 }
