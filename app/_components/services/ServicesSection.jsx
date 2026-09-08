@@ -54,6 +54,7 @@ export default function ServicesSection() {
   const sectionRef = useRef(null);
 
   useEffect(() => {
+    if (matchMedia("(prefers-reduced-motion: reduce)").matches) return;
     const ctx = gsap.context(() => {
       const cards = gsap.utils.toArray(".svc-stack-card");
 

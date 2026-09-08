@@ -1,0 +1,104 @@
+generator client {
+  provider = "prisma-client-js"
+}
+
+datasource db {
+  provider = "postgresql"
+}
+
+// ─── Contact form submissions ───
+model ContactSubmission {
+  id        String   @id @default(cuid())
+  name      String
+  email     String
+  phone     String?
+  needs     String[] // e.g. ["Website", "SEO", "Branding"]
+  message   String?
+  status    String   @default("new") // new | read | replied | archived
+  createdAt DateTime @default(now())
+  updatedAt DateTime @updatedAt
+
+  @@index([status])
+  @@index([createdAt])
+  @@map("contact_submissions")
+}
+
+// ─── Blog posts (stored in DB for CMS) ───
+model BlogPost {
+  id          String   @id @default(cuid())
+  slug        String   @unique
+  title       String
+  excerpt     String
+  category    String
+  body        String   // markdown or HTML content
+  coverColor  String   @default("#FF3D8F") // accent colour for the card header
+  readTime    String   @default("4 min")
+  published   Boolean  @default(false)
+  publishedAt DateTime?
+  createdAt   DateTime @default(now())
+  updatedAt   DateTime @updatedAt
+
+  @@index([published, publishedAt])
+  @@index([slug])
+  @@map("blog_posts")
+}
+
+// ─── AI Chat conversations ───
+model ChatConversation {
+  id        String   @id @default(cuid())
+  visitorId String?  // anonymous visitor identifier (cookie/fingerprint)
+  name      String?  // visitor's name if provided
+  email     String?  // visitor's email if provided
+  status    String   @default("active") // active | closed | archived
+  createdAt DateTime @default(now())
+  updatedAt DateTime @updatedAt
+  messages  ChatMessage[]
+
+  @@index([visitorId])
+  @@index([status])
+  @@index([createdAt])
+  @@map("chat_conversations")
+}
+
+model ChatMessage {
+  id             String           @id @default(cuid())
+  conversationId String
+  conversation   ChatConversation @relation(fields: [conversationId], references: [id], onDelete: Cascade)
+  role           String           // user | assistant
+  content        String
+  createdAt      DateTime         @default(now())
+
+  @@index([conversationId, createdAt])
+  @@map("chat_messages")
+}
+
+// ─── Voice talk sessions ───
+model VoiceSession {
+  id        String   @id @default(cuid())
+  visitorId String?
+  name      String?
+  email     String?
+  status    String   @default("active") // active | ended | archived
+  duration  Int?     // total duration in seconds
+  createdAt DateTime @default(now())
+  updatedAt DateTime @updatedAt
+  entries   VoiceEntry[]
+
+  @@index([visitorId])
+  @@index([createdAt])
+  @@map("voice_sessions")
+}
+
+model VoiceEntry {
+  id        String       @id @default(cuid())
+  sessionId String
+  session   VoiceSession @relation(fields: [sessionId], references: [id], onDelete: Cascade)
+  role      String       // user | assistant
+  transcript String      // text transcript of what was said
+  audioUrl  String?      // optional link to stored audio file
+  duration  Int?         // duration in seconds
+  createdAt DateTime     @default(now())
+
+  @@index([sessionId, createdAt])
+  @@map("voice_entries")
+}

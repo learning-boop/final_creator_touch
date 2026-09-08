@@ -16,6 +16,21 @@ export async function generateMetadata({ params }: Props): Promise<Metadata> {
   return {
     title: `${cs.client} — Case Study · Creators Touch Global`,
     description: cs.summary,
+    alternates: { canonical: `https://creatorstouchglobal.com/work/${slug}` },
+    openGraph: {
+      title: `${cs.client} — Case Study`,
+      description: cs.tagline,
+      url: `https://creatorstouchglobal.com/work/${slug}`,
+      siteName: "Creators Touch Global",
+      type: "article",
+      images: [{ url: `https://creatorstouchglobal.com${cs.images.hero}`, alt: cs.client }],
+    },
+    twitter: {
+      card: "summary_large_image",
+      title: `${cs.client} — Case Study · Creators Touch Global`,
+      description: cs.tagline,
+      images: [`https://creatorstouchglobal.com${cs.images.hero}`],
+    },
   };
 }
 

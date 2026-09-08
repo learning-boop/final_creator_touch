@@ -137,7 +137,34 @@ export function initHomeFX(opts = {}) {
     }
   };
   const initPreloader = () => {
+    // Lock scroll to hero during preloader
+    window.scrollTo(0, 0);
     document.documentElement.style.overflow = "hidden";
+    document.body.style.overflow = "hidden";
+    // Block all scroll-inducing events while preloader is active
+    const blockScroll = e => { e.preventDefault(); };
+    const blockKeys = e => {
+      const k = e.key;
+      if (k === " " || k === "ArrowDown" || k === "ArrowUp" ||
+          k === "PageDown" || k === "PageUp" || k === "Home" || k === "End") {
+        e.preventDefault();
+      }
+    };
+    window.addEventListener("wheel", blockScroll, { passive: false });
+    window.addEventListener("touchmove", blockScroll, { passive: false });
+    window.addEventListener("keydown", blockKeys, { passive: false });
+    // Also pin scroll position in case anything slips through
+    const pinScroll = () => { window.scrollTo(0, 0); };
+    window.addEventListener("scroll", pinScroll);
+    const unlockScroll = () => {
+      document.documentElement.style.overflow = "";
+      document.body.style.overflow = "";
+      window.removeEventListener("wheel", blockScroll);
+      window.removeEventListener("touchmove", blockScroll);
+      window.removeEventListener("keydown", blockKeys);
+      window.removeEventListener("scroll", pinScroll);
+    };
+    cleanups.push(unlockScroll);
     pre = document.createElement("div");
     pre.setAttribute("aria-hidden", "true");
     pre.style.cssText = "position:fixed;inset:0;z-index:9999;background:#08090A;display:flex;flex-direction:column;align-items:center;justify-content:center;gap:18px;transition:transform .9s cubic-bezier(.76,0,.24,1)";
@@ -163,7 +190,7 @@ export function initHomeFX(opts = {}) {
       setTimeout(() => {
         if (!pre) return;
         pre.style.transform = "translateY(-101%)";
-        document.documentElement.style.overflow = "";
+        unlockScroll();
         afterPreloader();
         setTimeout(() => { pre && pre.remove(); pre = null; }, 950);
       }, 120);
@@ -177,7 +204,7 @@ export function initHomeFX(opts = {}) {
     };
     requestAnimationFrame(tick);
     const ft = setTimeout(finish, D + 700); // rAF stalls in background tabs
-    cleanups.push(() => { clearTimeout(ft); document.documentElement.style.overflow = ""; pre && pre.remove(); pre = null; });
+    cleanups.push(() => { clearTimeout(ft); unlockScroll(); pre && pre.remove(); pre = null; });
   };
   initPreloader();
 
@@ -492,7 +519,7 @@ export function initHomeFX(opts = {}) {
       });
     } catch (e) { gl = null; /* WebGL unavailable — glows alone remain */ }
   };
-  buildGL();
+  if (!opts.disableLogo) buildGL();
 
   /* ---------- scroll zone table: where the 3D layer sits per section ---------- */
   const ZONES = [

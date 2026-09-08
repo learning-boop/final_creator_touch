@@ -37,7 +37,31 @@
       "Bash(curl -s http://localhost:3000/services-preview > /dev/null && sleep 3 && tail -5 \"D:\\\\creative_touch\\\\creatortouch\\\\creator-structure\\\\.next\\\\dev\\\\logs\\\\next-development.log\")",
       "Bash(taskkill /PID 11100 /F && sleep 2 && cd \"D:\\\\creative_touch\\\\creatortouch\\\\creator-structure\" && npm run dev)",
       "Bash(taskkill //PID 11100 //F)",
-      "WebFetch(domain:localhost)"
+      "WebFetch(domain:localhost)",
+      "Bash(cd \"D:/creative_touch/creatortouch/creator-structure\" && npm run build 2>&1 | tail -10)",
+      "Bash(cd \"D:/creative_touch/creatortouch/creator-structure\" && npm run build 2>&1 | tail -5)",
+      "Bash(cd \"D:/creative_touch/creatortouch/creator-structure\" && npm run build 2>&1 | tail -15)",
+      "Bash(cd \"D:/creative_touch/creatortouch/creator-structure\" && npm run build 2>&1 | tail -8)",
+      "WebFetch(domain:creatorstouchglobal.com)",
+      "Bash(curl -sL -o /dev/null -w \"%{http_code}\" \"https://creatorstouchglobal.com\" 2>/dev/null)",
+      "Bash(curl -sL \"https://creatorstouchglobal.com\" 2>/dev/null | sed -n '/<head/,/<\\\\/head>/p' | head -120)",
+      "Bash(curl -sL \"https://creatorstouchglobal.com\" 2>/dev/null | grep -iE '<meta |<link |<script type=\"application/ld|\"og:|\"twitter:|\"robots\"|\"description\"|\"keywords\"|\"author\"|\"theme-color\"|favicon|apple-touch|manifest' | head -60)",
+      "Bash(curl -sL \"https://creatorstouchglobal.com\" 2>/dev/null | grep -iE '\"description\"|\"og:|\"twitter:|\"robots\"|favicon|apple-touch|manifest|\"author\"|\"theme-color\"|canonical|\"geo\\\\.|\"ICBM\"|\"DC\\\\.' | head -30)",
+      "Bash(curl -sL \"https://creatorstouchglobal.com\" 2>/dev/null | grep -iE 'property=\"og:|name=\"twitter:' | head -20)",
+      "Bash(curl -sL \"https://creatorstouchglobal.com\" 2>/dev/null | grep -iE 'rel=\"canonical\"|rel=\"icon\"|rel=\"shortcut|rel=\"apple-touch|rel=\"manifest\"|google-site-verification|facebook-domain-verification|msvalidate|p:domain_verify|script.*application/ld' | head -20)",
+      "Bash(curl -sL \"https://creatorstouchglobal.com\" 2>/dev/null | sed -n '/<script type=.application\\\\/ld+json/,/<\\\\/script>/p' | head -80)",
+      "Bash(curl -sL \"https://creatorstouchglobal.com\" 2>/dev/null | grep -iE 'google.*tag|gtag|fbq|facebook.*pixel|analytics' | head -10)",
+      "Bash(curl -sL \"https://creatorstouchglobal.com\" 2>/dev/null | grep -ioE \"GTM-[A-Z0-9]+|UA-[0-9]+-[0-9]+|G-[A-Z0-9]+|AW-[0-9]+|fbq\\\\\\('init'[^\\)]+\\\\\\)\" | sort -u)",
+      "Bash(cd \"D:/creative_touch/creatortouch/creator-structure\" && npm install prisma @prisma/client @anthropic-ai/sdk 2>&1 | tail -5)",
+      "Bash(cd \"D:/creative_touch/creatortouch/creator-structure\" && npm approve-scripts 2>&1 | tail -5)",
+      "Bash(cd \"D:/creative_touch/creatortouch/creator-structure\" && npx prisma --version 2>&1 | head -5)",
+      "Bash(cd \"D:/creative_touch/creatortouch/creator-structure\" && mkdir -p prisma && mkdir -p lib && mkdir -p app/api/contact && mkdir -p app/api/blog && mkdir -p app/api/chat && mkdir -p app/api/voice)",
+      "Bash(cd \"D:/creative_touch/creatortouch/creator-structure\" && npm run build 2>&1 | tail -20)",
+      "Bash(cd \"D:/creative_touch/creatortouch/creator-structure\" && npx prisma generate 2>&1 | tail -5)",
+      "Bash(cd \"D:/creative_touch/creatortouch/creator-structure\" && npx prisma generate 2>&1)",
+      "Bash(cd \"D:/creative_touch/creatortouch/creator-structure\" && npm install @prisma/adapter-pg pg 2>&1 | tail -3)",
+      "Bash(cd \"D:/creative_touch/creatortouch/creator-structure\" && npx prisma generate 2>&1 | tail -10)",
+      "Bash(cd \"D:/creative_touch/creatortouch/creator-structure\" && npm run build 2>&1 | tail -25)"
     ]
   }
 }

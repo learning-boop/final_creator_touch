@@ -29,9 +29,12 @@ export default function CaseStudyPage({ cs }: { cs: CaseStudy }) {
           <img src="/assets/images/creator_touch.png" alt="Creators Touch" style={S("width:32px;height:32px")} />
           <span style={S("font-size:13px;font-weight:600;letter-spacing:-0.03em")}>Creators Touch</span>
         </a>
-        <a href="/#work" style={S(`${MONO};font-size:10px;letter-spacing:0.16em;text-transform:uppercase;color:rgba(244,243,241,0.5);text-decoration:none`)}>
-          ← All work
-        </a>
+        <nav style={S(`display:flex;align-items:center;gap:20px;${MONO};font-size:10px;letter-spacing:0.14em;text-transform:uppercase`)}>
+          <a href="/" style={S("color:rgba(244,243,241,0.5);text-decoration:none")}>Home</a>
+          <a href="/work" style={S("color:rgba(244,243,241,0.5);text-decoration:none")}>All Work</a>
+          <a href="/services" style={S("color:rgba(244,243,241,0.5);text-decoration:none")}>Services</a>
+          <a href="/blog" style={S("color:rgba(244,243,241,0.5);text-decoration:none")}>Blog</a>
+        </nav>
       </header>
 
       {/* Hero */}

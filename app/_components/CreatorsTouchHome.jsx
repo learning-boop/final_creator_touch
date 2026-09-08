@@ -87,12 +87,6 @@ const PROJECTS = [
     img: "/assets/images/projects/kensley-aesthetics/screen-1.png",
     url: "https://kensleyaesthetics.com", caseStudy: "/work/kinsale"
   },
-  {
-    title: "Mark", category: "Brand · Web · Marketing", year: "2025", tag: "Full Brand Build",
-    desc: "A complete brand identity — from the first logo mark to a full digital marketing system — built for a growing business that needed to look the part before it could grow into the part.",
-    img: "https://images.unsplash.com/photo-1561070791-2526d30994b5?w=900&q=80",
-    url: "#", caseStudy: "/work/mark"
-  },
 ];
 
 const INDUSTRIES = [
@@ -252,66 +246,6 @@ const SVC_GROUP_IMGS = [
   "/assets/images/ChatGPT Image Aug 19, 2026, 04_54_13 PM (5).png",
 ];
 
-function WhatWeDo() {
-  return (
-    <section id="whatwedo" style={S("position:relative;z-index:1;padding:112px 28px;border-bottom:1px solid rgba(244,243,241,0.10)")}>
-      <div style={S("display:flex;flex-direction:column;gap:52px")}>
-        <div style={S("display:flex;justify-content:space-between;align-items:flex-end;gap:32px;flex-wrap:wrap")}>
-          <div style={S("display:flex;flex-direction:column;gap:18px")}>
-            <p data-reveal="1" style={S(EYEBROW)}>What We Do</p>
-            <h2 data-reveal="1" style={S("margin:0;font-size:clamp(36px,5vw,72px);font-weight:500;line-height:0.96;letter-spacing:-0.05em")}>
-              Five disciplines.<br /><em style={S(SERIF + "color:#FF3D8F")}>One team.</em>
-            </h2>
-          </div>
-          <p data-reveal="1" style={S("margin:0;font-size:15px;line-height:1.65;color:rgba(244,243,241,0.5);max-width:280px;text-align:right")}>
-            Scroll through each discipline to see exactly how we approach it.
-          </p>
-        </div>
-
-        {/* Scroll-driven: sticky left panel updates as you scroll the right list */}
-        <div style={S("display:grid;grid-template-columns:1fr 1.1fr;gap:80px;align-items:start")} data-m-svc-grid="1" data-sp-wrap="1">
-
-          {/* LEFT — sticky image panel */}
-          <div style={S("position:sticky;top:100px")} data-m-svc-stick="1">
-            <div style={S("position:relative;border-radius:20px;overflow:hidden;aspect-ratio:4/3;background:#0E0F12")} data-m-svc-img="1">
-              {SERVICES.map((s, i) => (
-                <div key={s.number} data-sp-slide={i} className={"ct-sp-slide" + (i === 0 ? " ct-sp-active" : "")}>
-                  <img src={SVC_IMGS[i]} alt={s.title} loading="lazy"
-                    style={S("width:100%;height:100%;object-fit:cover;display:block")} />
-                  <div style={S("position:absolute;inset:0;background:linear-gradient(to top,rgba(8,9,10,0.94) 0%,rgba(8,9,10,0.18) 60%,transparent 100%)")} />
-                  <div style={S("position:absolute;bottom:0;left:0;right:0;padding:24px 28px")}>
-                    <span style={{ ...S(MONO + "font-size:9px;letter-spacing:0.16em;text-transform:uppercase;padding:4px 12px;border-radius:100px;border:1px solid;display:inline-block;margin-bottom:10px"), color: SVC_COLORS[i], borderColor: SVC_COLORS[i] + "55", background: SVC_COLORS[i] + "14" }}>{s.number}</span>
-                    <h3 style={S("margin:0 0 8px;font-size:22px;font-weight:400;letter-spacing:-0.03em")}>{s.title}</h3>
-                    <p style={S("margin:0 0 12px;font-size:13px;line-height:1.5;color:rgba(244,243,241,0.65)")}>{s.description}</p>
-                    <div style={S("display:flex;flex-wrap:wrap;gap:6px")}>
-                      {s.bullets.map(b => (
-                        <span key={b} style={{ ...S(MONO + "font-size:9px;letter-spacing:0.1em;text-transform:uppercase;padding:4px 10px;border-radius:100px;border:1px solid"), borderColor: SVC_COLORS[i] + "50", color: SVC_COLORS[i] }}>{b}</span>
-                      ))}
-                    </div>
-                  </div>
-                </div>
-              ))}
-            </div>
-          </div>
-
-          {/* RIGHT — scroll trigger rows */}
-          <div style={S("display:flex;flex-direction:column;border-top:" + HAIR14)}>
-            {SERVICES.map((s, i) => (
-              <div key={s.number} data-sp-row={i} className={"ct-hov-row ct-sp-row" + (i === 0 ? " ct-sp-row-active" : "")}
-                style={S("padding:36px 12px;border-bottom:" + HAIR14 + ";transition:background .25s ease;cursor:default")}>
-                <div style={S("display:flex;align-items:baseline;gap:20px;margin-bottom:12px")}>
-                  <span data-sp-num="1" style={S(MONO + "font-size:10px;letter-spacing:0.14em;color:rgba(244,243,241,0.28)")}>{s.number}</span>
-                  <h3 data-sp-title="1" style={S("margin:0;font-size:clamp(20px,2.4vw,32px);font-weight:400;letter-spacing:-0.03em;color:rgba(244,243,241,0.42)")}>{s.title}</h3>
-                </div>
-                <p style={S("margin:0;font-size:14px;line-height:1.65;color:rgba(244,243,241,0.38);padding-left:38px;max-width:480px")}>{s.description}</p>
-              </div>
-            ))}
-          </div>
-        </div>
-      </div>
-    </section>
-  );
-}
 
 // Contact form — wire up Formspree: replace YOUR_FORM_ID with your real form ID from https://formspree.io
 function ContactForm() {
@@ -410,8 +344,8 @@ function ContactForm() {
   );
 }
 
-export default function CreatorsTouchHome() {
-  useEffect(() => initHomeFX({ logoSrc: "/assets/images/creator_touch.png" }), []);
+export default function CreatorsTouchHome({ visualReview = false } = {}) {
+  useEffect(() => initHomeFX({ logoSrc: "/assets/images/creator_touch.png", disableLogo: visualReview }), [visualReview]);
 
   const [menuOpen, setMenuOpen] = useState(false);
   useEffect(() => {
@@ -485,7 +419,7 @@ export default function CreatorsTouchHome() {
             </button>
           </div>
           <nav style={S("display:flex;flex-direction:column")}>
-            {[["/work","Work"],["/services","Services"],["/about","About"],["#contact","Contact"]].map(([href, label], i) => (
+            {[["/work","Work"],["/services","Services"],["/blog","Blog"],["/about","About"],["#contact","Contact"]].map(([href, label], i) => (
               <a key={label} href={href} onClick={() => setMenuOpen(false)}
                 className="ct-menu-item"
                 style={{...S("font-size:clamp(36px,9vw,60px);font-weight:400;letter-spacing:-0.04em;color:#F4F3F1;padding:12px 0;border-bottom:1px solid rgba(244,243,241,0.08);line-height:1.1;text-decoration:none"), animationDelay: `${i * 60 + 40}ms`}}>
@@ -511,6 +445,7 @@ export default function CreatorsTouchHome() {
         <nav data-m-nav="1" style={S("display:flex;align-items:center;gap:28px;" + MONO + "font-size:11px;letter-spacing:0.14em;text-transform:uppercase;color:rgba(244,243,241,0.62)")}>
           <RollLink href="/work" label="Work" />
           <RollLink href="/services" label="Services" />
+          <RollLink href="/blog" label="Blog" />
           <RollLink href="/about" label="About" />
           <a href="#contact" data-magnetic="1" data-m-navcta="1" className="ct-hov-cta" style={S("display:inline-flex;align-items:center;gap:8px;padding:9px 16px;border:1px solid rgba(244,243,241,0.22);border-radius:100px;color:#F4F3F1")}>Start a project</a>
         </nav>
@@ -523,12 +458,20 @@ export default function CreatorsTouchHome() {
 
       <section id="top" style={S("position:relative;z-index:1;min-height:92vh;display:flex;flex-direction:column;justify-content:space-between;padding:72px 28px 28px;border-bottom:" + HAIR)}>
         <div style={S("display:flex;justify-content:space-between;align-items:flex-start;gap:32px")}>
-          <p style={S(MONO + "margin:0;font-size:11px;letter-spacing:0.16em;text-transform:uppercase;color:rgba(244,243,241,0.5);max-width:220px;line-height:1.6")}>Digital studio<br />Vijayawada · India</p>
+          <p className="ct-bounce-wrap" style={S(MONO + "margin:0;font-size:11px;letter-spacing:0.16em;text-transform:uppercase;color:rgba(244,243,241,0.5);max-width:220px;line-height:1.6")}>
+            {[..."Digital studio"].map((ch, i) => (
+              <span key={i} className="ct-bounce-char" style={{ animationDelay: `${i * 22}ms` }}>{ch === " " ? "\u00A0" : ch}</span>
+            ))}
+            <br />
+            {[..."Vijayawada · India"].map((ch, i) => (
+              <span key={`b${i}`} className="ct-bounce-char" style={{ animationDelay: `${(14 + i) * 22}ms` }}>{ch === " " ? "\u00A0" : ch}</span>
+            ))}
+          </p>
           <p style={S(MONO + "margin:0;font-size:11px;letter-spacing:0.16em;text-transform:uppercase;color:rgba(244,243,241,0.5);text-align:right;line-height:1.6")}>Web · Marketing · AI<br />Est. 2008</p>
         </div>
         <h1 data-hero-title="1" style={S("margin:56px 0 0;font-size:clamp(40px,7.8vw,128px);font-weight:500;line-height:0.92;letter-spacing:-0.055em;text-wrap:balance;will-change:transform")}>
-          <span style={S("display:block;overflow:hidden")}><span data-px-hl="1" style={S("display:block")}>We create and grow</span></span>
-          <span style={S("display:block;overflow:hidden;padding-left:0.09em")}><span data-px-hl="1" style={S("display:block")}>digital brands people</span></span>
+          <span style={S("display:block;overflow:hidden")}><span data-px-hl="1" style={S("display:block")}>We create and <span className="ct-hero-pop">grow</span></span></span>
+          <span style={S("display:block;overflow:hidden;padding-left:0.09em")}><span data-px-hl="1" style={S("display:block")}><span className="ct-hero-pop">digital</span> brands people</span></span>
           <span style={S("display:block;overflow:hidden;padding-left:0.18em")}>
             <span data-px-hl="1" style={S("display:block")}>cannot <em style={S(SERIF + "letter-spacing:-0.02em;color:#FF3D8F")}>ignore.</em></span>
           </span>
@@ -550,11 +493,23 @@ export default function CreatorsTouchHome() {
         </div>
       </section>
 
-      <div style={S("position:relative;z-index:1;overflow:hidden;padding:22px 0;border-bottom:" + HAIR)}>
-        <div data-skew="1" style={S("will-change:transform")}>
-          <div style={S("display:flex;width:max-content;animation:ct-marquee 42s linear infinite")}>
-            <MarqueeRow /><MarqueeRow />
-          </div>
+      {/* ─── Disciplines icon strip ─── */}
+      <div style={S("position:relative;z-index:1;padding:40px 28px;border-bottom:" + HAIR + ";background:#08090A")}>
+        <div data-stagger="1" style={S("display:grid;grid-template-columns:repeat(4,1fr);gap:20px")} data-m-disc-grid="1">
+          {[
+            { img: "/assets/images/Codex Image Sep 8, 2026, 05_17_25 PM.png", label: "Strategy & AI", sub: "Data-led plans that find the fastest path to growth." },
+            { img: "/assets/images/Codex Image Sep 8, 2026, 05_17_59 PM.png", label: "Development", sub: "Fast, accessible code — Next.js, Shopify, WordPress." },
+            { img: "/assets/images/Codex Image Sep 8, 2026, 05_18_06 PM.png", label: "Branding & Content", sub: "Identity, copy and visuals that stop the scroll." },
+            { img: "/assets/images/Codex Image Sep 8, 2026, 05_18_12 PM.png", label: "SEO & Marketing", sub: "Show up where customers are already looking." },
+          ].map(d => (
+            <div key={d.label} className="ct-disc-card" style={S("display:flex;align-items:center;gap:18px;padding:24px 22px;border:1px solid rgba(244,243,241,0.08);border-radius:16px;background:#0E0F12;transition:border-color .3s ease,transform .3s ease")}>
+              <img src={d.img} alt={d.label} loading="lazy" style={S("width:56px;height:56px;object-fit:contain;display:block;flex-shrink:0;filter:drop-shadow(0 6px 18px rgba(0,0,0,0.4))")} />
+              <div style={S("display:flex;flex-direction:column;gap:4px;min-width:0")}>
+                <h3 style={S("margin:0;font-size:15px;font-weight:500;letter-spacing:-0.02em")}>{d.label}</h3>
+                <p style={S("margin:0;font-size:12px;line-height:1.5;color:rgba(244,243,241,0.42)")}>{d.sub}</p>
+              </div>
+            </div>
+          ))}
         </div>
       </div>
 
@@ -596,22 +551,20 @@ export default function CreatorsTouchHome() {
         </div>
         <div data-reveal="1" style={S("margin-top:80px;padding-top:40px;border-top:" + HAIR14)}>
           <p style={S(MONO + "font-size:10px;letter-spacing:0.18em;text-transform:uppercase;color:rgba(244,243,241,0.3);margin:0 0 28px")}>Trusted by</p>
-          <div style={S("display:flex;flex-wrap:wrap;gap:20px 28px;align-items:center")} data-m-clients="1">
-            {CLIENTS.map(c => (
-              <img key={c.name} src={c.logo} alt={c.name} title={c.name} loading="lazy"
-                style={S("height:30px;width:auto;max-width:110px;object-fit:contain;opacity:0.38;filter:saturate(0) brightness(1.4);transition:opacity .3s ease,filter .3s ease")}
-                onMouseEnter={e => { e.currentTarget.style.opacity = "0.85"; e.currentTarget.style.filter = "saturate(0.3) brightness(1.4)"; }}
-                onMouseLeave={e => { e.currentTarget.style.opacity = "0.38"; e.currentTarget.style.filter = "saturate(0) brightness(1.4)"; }}
-              />
-            ))}
+          <div className="ct-client-marquee" style={S("overflow:hidden;mask-image:linear-gradient(90deg,transparent,#000 8%,#000 92%,transparent);-webkit-mask-image:linear-gradient(90deg,transparent,#000 8%,#000 92%,transparent)")}>
+            <div className="ct-client-track" style={S("display:flex;align-items:center;gap:56px;width:max-content;animation:ct-marquee 28s linear infinite")}>
+              {[...CLIENTS, ...CLIENTS].map((c, i) => (
+                <img key={`${c.name}-${i}`} src={c.logo} alt={c.name} title={c.name} loading="lazy" draggable="false"
+                  style={S("height:52px;width:auto;max-width:180px;object-fit:contain;opacity:0.85;flex-shrink:0;transition:opacity .3s ease,transform .3s ease;user-select:none;-webkit-user-select:none;pointer-events:none")}
+                />
+              ))}
+            </div>
           </div>
         </div>
       </section>
 
       {/* ─── 02 SERVICES ─── */}
       <ServicesSection />
-
-      <WhatWeDo />
 
       {/* ─── 03 SELECTED WORK ─── */}
       <section id="work" style={S("position:relative;z-index:1;padding:112px 28px;border-bottom:" + HAIR)}>
@@ -1038,6 +991,7 @@ export default function CreatorsTouchHome() {
         <div style={S("display:flex;gap:24px;" + MONO + "font-size:10px;letter-spacing:0.14em;text-transform:uppercase;color:rgba(244,243,241,0.42)")}>
           <RollLink href="/work" label="Work" h={14} dim="rgba(244,243,241,0.42)" hi="#F4F3F1" />
           <RollLink href="/services" label="Services" h={14} dim="rgba(244,243,241,0.42)" hi="#F4F3F1" />
+          <RollLink href="/blog" label="Blog" h={14} dim="rgba(244,243,241,0.42)" hi="#F4F3F1" />
           <RollLink href="/about" label="About" h={14} dim="rgba(244,243,241,0.42)" hi="#F4F3F1" />
           <RollLink href="#contact" label="Contact" h={14} dim="rgba(244,243,241,0.42)" hi="#F4F3F1" />
         </div>

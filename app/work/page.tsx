@@ -5,6 +5,21 @@ export const metadata: Metadata = {
   title: "Our Work — Creators Touch Global",
   description:
     "Case studies and project details from Creators Touch Global — real results for real Indian businesses across healthcare, brand, e-commerce, and more.",
+  alternates: { canonical: "https://creatorstouchglobal.com/work" },
+  keywords: ["creators touch portfolio", "web design case studies", "vijayawada projects", "healthcare website design", "ecommerce case study india"],
+  openGraph: {
+    title: "Our Work — Creators Touch Global",
+    description: "Case studies and real results for Indian businesses across healthcare, education, retail and more.",
+    url: "https://creatorstouchglobal.com/work",
+    siteName: "Creators Touch Global",
+    type: "website",
+    images: [{ url: "https://creatorstouchglobal.com/assets/images/creator_touch.png", width: 512, height: 512, alt: "Creators Touch Global" }],
+  },
+  twitter: {
+    card: "summary",
+    title: "Our Work — Creators Touch Global",
+    description: "Case studies and real results for Indian businesses across healthcare, education, retail and more.",
+  },
 };
 
 const MONO = "font-family:'Geist Mono',monospace";
@@ -33,9 +48,12 @@ export default function WorkPage() {
           <img src="/assets/images/creator_touch.png" alt="Creators Touch" style={S("width:32px;height:32px")} />
           <span style={S("font-size:13px;font-weight:600;letter-spacing:-0.03em")}>Creators Touch</span>
         </a>
-        <a href="/" style={S(`${MONO};font-size:10px;letter-spacing:0.16em;text-transform:uppercase;color:rgba(244,243,241,0.5);text-decoration:none`)}>
-          ← Back home
-        </a>
+        <nav style={S(`display:flex;align-items:center;gap:20px;${MONO};font-size:10px;letter-spacing:0.14em;text-transform:uppercase`)}>
+          <a href="/" style={S("color:rgba(244,243,241,0.5);text-decoration:none")}>Home</a>
+          <a href="/services" style={S("color:rgba(244,243,241,0.5);text-decoration:none")}>Services</a>
+          <a href="/about" style={S("color:rgba(244,243,241,0.5);text-decoration:none")}>About</a>
+          <a href="/blog" style={S("color:rgba(244,243,241,0.5);text-decoration:none")}>Blog</a>
+        </nav>
       </header>
 
       {/* Hero */}

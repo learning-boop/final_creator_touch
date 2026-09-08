@@ -4,6 +4,21 @@ export const metadata: Metadata = {
   title: "About — Creators Touch Global",
   description:
     "17+ years of helping Indian businesses look credible, grow digitally, and compete globally. Learn who we are and why we care.",
+  alternates: { canonical: "https://creatorstouchglobal.com/about" },
+  keywords: ["about creators touch", "digital studio vijayawada", "web design agency india", "creators touch team", "M.S. Hari Krishna"],
+  openGraph: {
+    title: "About — Creators Touch Global",
+    description: "17+ years of helping Indian businesses look credible, grow digitally, and compete globally.",
+    url: "https://creatorstouchglobal.com/about",
+    siteName: "Creators Touch Global",
+    type: "website",
+    images: [{ url: "https://creatorstouchglobal.com/assets/images/creator_touch.png", width: 512, height: 512, alt: "Creators Touch Global" }],
+  },
+  twitter: {
+    card: "summary",
+    title: "About — Creators Touch Global",
+    description: "17+ years of helping Indian businesses look credible, grow digitally, and compete globally.",
+  },
 };
 
 const MONO = "font-family:'Geist Mono',monospace";
@@ -49,7 +64,7 @@ const VALUES = [
 ];
 
 const TIMELINE = [
-  { year: "2007", event: "Founded in Hyderabad as a graphic design studio serving local businesses." },
+  { year: "2007", event: "Founded in vijayawada as a graphic design studio serving local businesses." },
   { year: "2012", event: "Expanded into digital — websites, social media, and early SEO for Indian SMEs." },
   { year: "2017", event: "Launched performance marketing practice. First international client (UAE)." },
   { year: "2020", event: "Pivoted fully remote. Doubled team size. Added WhatsApp automation and e-commerce builds." },
@@ -67,9 +82,12 @@ export default function AboutPage() {
           <img src="/assets/images/creator_touch.png" alt="Creators Touch" style={S("width:32px;height:32px")} />
           <span style={S("font-size:13px;font-weight:600;letter-spacing:-0.03em")}>Creators Touch</span>
         </a>
-        <a href="/" style={S(`${MONO};font-size:10px;letter-spacing:0.16em;text-transform:uppercase;color:rgba(244,243,241,0.5);text-decoration:none`)}>
-          ← Back home
-        </a>
+        <nav style={S(`display:flex;align-items:center;gap:20px;${MONO};font-size:10px;letter-spacing:0.14em;text-transform:uppercase`)}>
+          <a href="/" style={S("color:rgba(244,243,241,0.5);text-decoration:none")}>Home</a>
+          <a href="/work" style={S("color:rgba(244,243,241,0.5);text-decoration:none")}>Work</a>
+          <a href="/services" style={S("color:rgba(244,243,241,0.5);text-decoration:none")}>Services</a>
+          <a href="/blog" style={S("color:rgba(244,243,241,0.5);text-decoration:none")}>Blog</a>
+        </nav>
       </header>
 
       {/* Hero */}
@@ -82,7 +100,7 @@ export default function AboutPage() {
             About us
           </h1>
           <p style={S(`${SERIF};font-size:clamp(20px,2.6vw,32px);line-height:1.45;color:rgba(244,243,241,0.75);max-width:680px;margin:0`)}>
-            We are a digital studio founded in Hyderabad, built for the small business owner who is serious about growth.
+            We are a digital studio founded in Vijayawada, built for the small business owner who is serious about growth.
           </p>
         </div>
       </section>

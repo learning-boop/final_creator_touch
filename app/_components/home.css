@@ -9,6 +9,40 @@
 .ct-root a{color:#F4F3F1;text-decoration:none}
 .ct-root ::selection{background:#cc0066;color:#fff}
 
+/* bouncy text hover — hero location tag */
+@keyframes ct-bounce-letter{
+  0%{transform:translateY(0)}
+  30%{transform:translateY(-38%)}
+  50%{transform:translateY(10%)}
+  70%{transform:translateY(-8%)}
+  85%{transform:translateY(3%)}
+  100%{transform:translateY(0)}
+}
+.ct-bounce-wrap{cursor:default}
+.ct-bounce-wrap .ct-bounce-char{display:inline-block;transition:color .25s ease}
+.ct-bounce-wrap:hover .ct-bounce-char{animation:ct-bounce-letter .55s cubic-bezier(.28,.84,.42,1) both;color:rgba(244,243,241,0.8)}
+
+/* bouncy word hover — hero headline accent words */
+@keyframes ct-word-pop{
+  0%{transform:translateY(0) scaleY(1) scaleX(1)}
+  12%{transform:translateY(-22%) scaleY(1.08) scaleX(0.96)}
+  28%{transform:translateY(-42%) scaleY(1.02) scaleX(0.99)}
+  44%{transform:translateY(6%) scaleY(0.94) scaleX(1.04)}
+  58%{transform:translateY(-10%) scaleY(1.02) scaleX(0.99)}
+  72%{transform:translateY(3%) scaleY(0.98) scaleX(1.01)}
+  84%{transform:translateY(-2%)}
+  100%{transform:translateY(0) scaleY(1) scaleX(1)}
+}
+.ct-hero-pop{display:inline-block;cursor:default;transform-origin:center bottom;will-change:transform}
+.ct-hero-pop:hover{animation:ct-word-pop .7s cubic-bezier(.22,1,.36,1) both}
+
+/* client logo marquee — pause on hover */
+.ct-client-marquee:hover .ct-client-track{animation-play-state:paused}
+
+/* discipline icon cards */
+.ct-disc-card:hover{border-color:rgba(244,243,241,0.22) !important;transform:translateY(-4px)}
+.ct-disc-card:hover img{transform:scale(1.08);transition:transform .35s cubic-bezier(.22,1,.36,1)}
+
 /* hover states */
 .ct-hov-cta:hover{background:#F4F3F1 !important;color:#08090A !important;border-color:#F4F3F1 !important}
 .ct-hov-pink:hover{background:#FF3D8F !important;color:#08090A !important}
@@ -73,6 +107,11 @@
 .ct-hamburger{display:flex}
 [data-m-nav]{display:none !important}
 
+/* header — compact on mobile */
+#ct-header{padding:12px 18px !important}
+#ct-header img{width:40px !important;height:40px !important}
+#ct-header>a span:first-of-type{font-size:12px !important}
+
 /* show sticky CTA */
 .ct-mob-cta{display:block}
 
@@ -80,23 +119,33 @@
 [data-m-navcta]{padding:8px 12px !important}
 
 /* ── Hero ── */
-#top{min-height:90vh !important;padding:52px 20px 28px !important}
-/* Bug fix: 11.5vw at 390px = 44.85px — smaller than desktop clamp(52px,...). Use 14vw = 54.6px */
-#top h1{margin-top:28px !important;font-size:14vw !important;line-height:0.9 !important}
-[data-m-herobot]{grid-template-columns:1fr !important;gap:20px !important;margin-top:44px !important}
-[data-m-stats]{gap:20px 28px !important}
-[data-m-herop]{justify-self:start !important;font-size:15px !important;max-width:100% !important}
+#top{min-height:auto !important;min-height:100svh !important;padding:28px 18px 22px !important;position:relative;z-index:2;gap:24px !important}
+#top>div:first-child{gap:16px !important}
+#top>div:first-child p{font-size:9px !important;letter-spacing:0.14em !important;max-width:none !important;line-height:1.5 !important}
+#top h1{margin-top:16px !important;font-size:clamp(38px,11.5vw,64px) !important;line-height:0.92 !important;font-weight:600 !important;text-shadow:0 2px 20px rgba(8,9,10,0.7),0 0 60px rgba(8,9,10,0.5)}
+[data-m-herobot]{grid-template-columns:1fr !important;gap:20px !important;margin-top:32px !important;padding-top:20px !important}
+[data-m-stats]{gap:16px 24px !important}
+[data-m-stats]>div span:first-child{font-size:22px !important}
+[data-m-stats]>div span:last-child{font-size:9px !important}
+[data-m-herop]{justify-self:start !important;font-size:14px !important;max-width:100% !important;line-height:1.55 !important}
+/* Hide scroll indicator on mobile — takes up space */
+#top>div:last-child{display:none !important}
 
-/* ── Marquee ── */
-[data-m-marq]{font-size:22px !important;gap:22px !important;padding-right:22px !important}
+/* ── Disciplines icon strip ── */
+[data-m-disc-grid]{grid-template-columns:1fr 1fr !important;gap:10px !important;padding:0 !important}
+.ct-disc-card{flex-direction:column !important;align-items:center !important;text-align:center;padding:18px 12px !important;gap:10px !important}
+.ct-disc-card img{width:44px !important;height:44px !important}
+.ct-disc-card h3{font-size:13px !important}
+.ct-disc-card p{font-size:11px !important;display:none}
 
 /* ── Studio ── */
-#studio{grid-template-columns:1fr !important;gap:28px !important;padding:72px 20px !important}
+#studio{padding:72px 18px !important}
+[data-m-studio-grid]{grid-template-columns:1fr !important;gap:32px !important}
 /* 2-col info cards (2×2 grid) looks much better than 1-col stack */
 [data-m-cards]{grid-template-columns:1fr 1fr !important;gap:14px 28px !important}
 
 /* ── Services ── */
-#services,#work,#industries,#process,#contact{padding:72px 20px !important}
+#services,#work{padding:72px 18px !important}
 [data-m-shead]{flex-direction:column !important;align-items:flex-start !important;gap:18px !important;margin-bottom:36px !important}
 [data-m-shead] p{text-align:left !important;max-width:100% !important}
 [data-srow]{grid-template-columns:36px 1fr !important;gap:6px 14px !important;padding:20px 4px !important}
@@ -169,13 +218,17 @@
 [data-m-foot]{
   flex-direction:column !important;align-items:flex-start !important;
   gap:14px !important;
-  padding:24px 20px calc(env(safe-area-inset-bottom,0px) + 96px) 20px !important;
+  padding:24px 18px calc(env(safe-area-inset-bottom,0px) + 96px) 18px !important;
 }
+[data-m-foot]>div:last-child{flex-wrap:wrap !important;gap:14px 16px !important}
 
 /* ── Studio redesign ── */
 [data-m-studio-grid]{grid-template-columns:1fr !important;gap:40px !important}
-[data-m-studio-stats]{gap:24px 32px !important;flex-wrap:wrap !important}
-[data-m-clients] img{height:24px !important;max-width:90px !important}
+[data-m-studio-stats]{gap:16px 24px !important;flex-wrap:wrap !important}
+[data-m-studio-stats] span:first-child{font-size:28px !important}
+.ct-client-marquee{margin:0 -18px !important}
+.ct-client-track{gap:32px !important}
+.ct-client-track img{height:36px !important;max-width:120px !important}
 
 /* ── Services redesign ── */
 /* Break the fullscreen-sticky scroll effect on mobile — revert to normal flow */
@@ -185,38 +238,44 @@
 [data-m-svc-img]{display:none !important}
 
 /* ── E-commerce ── */
-#ecommerce{padding:72px 20px !important}
-[data-m-ec-grid]{grid-template-columns:1fr !important;gap:40px !important}
+#ecommerce{padding:72px 18px !important}
+[data-m-ec-grid]{grid-template-columns:1fr !important;gap:32px !important}
 [data-m-ec-grid]>div:last-child{order:-1 !important}
+[data-m-ec-grid] h2{font-size:clamp(26px,7vw,42px) !important}
 
 /* ── Automation ── */
-#automation{padding:72px 20px !important}
-[data-m-auto-grid]{grid-template-columns:1fr !important;gap:40px !important}
+#automation{padding:72px 18px !important}
+[data-m-auto-grid]{grid-template-columns:1fr !important;gap:32px !important}
 [data-m-auto-img]{order:2 !important}
+[data-m-auto-grid] h2{font-size:clamp(26px,7vw,42px) !important}
 
 /* ── Industries redesign ── */
-#industries{padding:72px 20px !important}
+#industries{padding:72px 18px !important}
 [data-m-ind-head]{flex-direction:column !important;align-items:flex-start !important;gap:16px !important}
 [data-m-ind-head] p,[data-m-ind-p]{text-align:left !important;max-width:100% !important}
 [data-m-ind-grid]{grid-template-columns:1fr 1fr !important}
-[data-m-ind-grid]>div{padding:24px 18px !important}
+[data-m-ind-grid]>div{padding:20px 14px !important}
+[data-m-ind-grid]>div span:last-child{font-size:13px !important}
 
 /* ── Reviews redesign ── */
-#reviews{padding:72px 20px !important}
-[data-m-rev-grid]{grid-template-columns:1fr !important;gap:32px !important;margin-bottom:40px !important}
-#reviews [style*="margin:0 -28px"]{margin:0 !important;overflow:hidden !important}
+#reviews{padding:72px 18px !important}
+[data-m-rev-grid]{grid-template-columns:1fr !important;gap:28px !important;margin-bottom:32px !important}
+#reviews [style*="margin:0 -28px"]{margin:0 -18px !important;overflow:hidden !important}
+[data-m-rcard]{width:82vw !important;max-width:320px !important;padding:20px !important}
+[data-m-rcard] p{font-size:14px !important}
 
 /* ── Process redesign ── */
-#process{padding:72px 20px !important}
+#process{padding:72px 18px !important}
 [data-m-proc-grid]{grid-template-columns:1fr !important}
-[data-m-proc-grid]>div{padding:28px 20px !important}
+[data-m-proc-grid]>div{padding:24px 18px !important}
 [data-m-proc-p]{text-align:left !important;max-width:100% !important}
 
 /* ── Contact redesign ── */
-#contact{padding:72px 20px 80px !important}
-[data-m-contact-grid]{grid-template-columns:1fr !important;gap:48px !important}
+#contact{padding:72px 18px 80px !important}
+[data-m-contact-grid]{grid-template-columns:1fr !important;gap:40px !important}
 [data-m-cform-grid]{grid-template-columns:1fr !important}
 [data-m-cform-grid]>div:nth-child(3){grid-column:auto !important}
+.ct-submit-btn{width:100% !important;justify-content:center !important}
 }
 
 /* ══════════════════════════════════════════════════════════
@@ -249,10 +308,15 @@
 
 /* ── New sections — mobile ── */
 @media (max-width:760px){
-  #whatwedo,#growth,#insights{padding:72px 20px !important}
-  [data-m-growth-grid]{grid-template-columns:1fr 1fr !important;gap:28px !important}
+  #whatwedo,#growth,#insights{padding:72px 18px !important}
+  [data-m-growth-grid]{grid-template-columns:1fr !important;gap:24px !important}
   .ct-growth-line-wrap{display:none !important}
+  .ct-growth-step{flex-direction:row !important;align-items:flex-start !important;gap:16px !important}
+  .ct-growth-step>div:first-child{margin-bottom:0 !important;justify-content:flex-start !important}
+  .ct-growth-step>div:first-child>div{width:44px !important;height:44px !important}
+  .ct-growth-step .ct-gstep-ring{inset:-3px !important}
   [data-m-insights]{grid-template-columns:1fr !important}
+  .ct-insight-card [style*="aspect-ratio"]{aspect-ratio:3/1 !important}
 }
 
 /* ══════════════════════════════════════════════════════════

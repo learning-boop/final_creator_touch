@@ -55,44 +55,6 @@ export const CASE_STUDIES: CaseStudy[] = [
     },
     color: "#08090A",
     accentColor: "#29A8DC",
-    nextSlug: "mark",
-  },
-  {
-    slug: "mark",
-    client: "Mark",
-    url: "#",
-    year: "2025",
-    category: "Brand · Web · Marketing",
-    tagline: "From a name to a brand people remember.",
-    summary:
-      "A complete brand build — from the first logo mark to a full marketing system — delivered for a growing business that needed to look the part before it could grow into the part.",
-    challenge:
-      "Starting from zero with a name and a vision. No logo, no brand voice, no digital presence. The business was real, the ambition was there — but without a visual identity that commanded respect, every sales conversation started at a disadvantage.",
-    approach: [
-      "Brand strategy: We defined the brand's core positioning, tone of voice, and the single idea that every piece of communication would be built around.",
-      "Logo & identity design: A mark that works at 16px on a mobile screen and 3 metres wide on a hoarding. Designed with longevity, not trends, in mind.",
-      "Website design & development: A site built to convert — fast, purposeful, and built around the questions a new customer actually asks.",
-      "Marketing system: Brand templates, social media presence, email design, and a content strategy built to compound over time.",
-    ],
-    outcome:
-      "A brand that walks into the room before the person does. From nothing to a complete, professional identity that gives the business the credibility it always deserved.",
-    services: ["Brand Strategy", "Logo Design", "Identity System", "Website Development", "Digital Marketing", "Content Strategy"],
-    results: [
-      { label: "Deliverables", value: "Brand system, website, marketing kit" },
-      { label: "Timeline", value: "8 weeks" },
-      { label: "Platforms", value: "Web, social, print" },
-      { label: "Status", value: "Live" },
-    ],
-    images: {
-      hero: "/assets/images/projects/mark/hero.jpg",
-      screens: [
-        "/assets/images/projects/mark/screen-1.jpg",
-        "/assets/images/projects/mark/screen-2.jpg",
-        "/assets/images/projects/mark/screen-3.jpg",
-      ],
-    },
-    color: "#08090A",
-    accentColor: "#FF3D8F",
     nextSlug: "kinsale",
   },
   {
