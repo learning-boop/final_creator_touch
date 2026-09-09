@@ -137,7 +137,7 @@ export default function WorkPage() {
             </p>
           </div>
           <a
-            href="/#contact"
+            href="/contact"
             style={S("display:inline-flex;align-items:center;gap:12px;padding:18px 32px;background:#FF3D8F;border-radius:100px;font-size:14px;font-weight:500;letter-spacing:-0.02em;color:#08090A;text-decoration:none;flex-shrink:0")}
           >
             Start a project →

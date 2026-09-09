@@ -81,12 +81,10 @@ export default function BlogPage() {
               style={S("display:flex;flex-direction:column;border:1px solid rgba(244,243,241,0.09);border-radius:20px;overflow:hidden;background:#0E0F12;text-decoration:none;color:#F4F3F1;transition:border-color .3s ease,transform .3s ease")}
               className="blog-card"
             >
-              {/* Colour header */}
-              <div style={{ ...S("aspect-ratio:16/9;display:flex;align-items:center;justify-content:center;position:relative"), background: `linear-gradient(135deg,${post.color}20 0%,rgba(8,9,10,0.65) 100%)` }}>
-                <div style={S("position:absolute;inset:0;display:flex;align-items:center;justify-content:center")}>
-                  <span style={S("font-size:72px;font-weight:500;letter-spacing:-0.06em;color:rgba(244,243,241,0.04)")}>{post.cat[0]}</span>
-                </div>
-                <span style={{ ...S("position:relative;font-size:11px;font-weight:500;letter-spacing:0.08em;text-transform:uppercase;padding:6px 16px;border-radius:100px;border:1px solid"), color: post.color, borderColor: post.color + "55", background: post.color + "18" }}>{post.cat}</span>
+              {/* Cover image */}
+              <div style={S("aspect-ratio:16/9;position:relative;overflow:hidden")}>
+                <img src={post.cover} alt={post.title} loading="lazy" style={S("width:100%;height:100%;object-fit:cover;display:block")} />
+                <span style={{ ...S("position:absolute;top:14px;left:14px;font-size:11px;font-weight:500;letter-spacing:0.08em;text-transform:uppercase;padding:6px 16px;border-radius:100px;border:1px solid;backdrop-filter:blur(8px)"), color: post.color, borderColor: post.color + "55", background: post.color + "18" }}>{post.cat}</span>
               </div>
 
               {/* Content */}
@@ -120,7 +118,7 @@ export default function BlogPage() {
             </p>
           </div>
           <a
-            href="/#contact"
+            href="/contact"
             style={S("display:inline-flex;align-items:center;gap:12px;padding:18px 32px;background:#FF3D8F;border-radius:100px;font-size:14px;font-weight:500;letter-spacing:-0.02em;color:#08090A;text-decoration:none")}
           >
             Get in touch &rarr;

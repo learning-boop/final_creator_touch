@@ -6,6 +6,7 @@ export type BlogPost = {
   date: string;
   read: string;
   color: string;
+  cover: string;
   body: string[];
 };
 
@@ -19,6 +20,7 @@ export const BLOG_POSTS: BlogPost[] = [
     date: "Aug 2026",
     read: "4 min",
     color: "#FF3D8F",
+    cover: "/assets/images/blog-cover-images/01-brand-not-just-logo.png",
     body: [
       "Most business owners start with a logo. They pay someone to design a mark, pick a colour palette, maybe choose a font — and they call it done. But a logo is not a brand. A logo is a symbol. A brand is what people feel when they see that symbol.",
       "Think about the businesses you trust the most. You don't trust them because of their logo. You trust them because of how they made you feel — the consistency of their message, the quality of their work, the way they communicate. That is brand.",
@@ -38,6 +40,7 @@ export const BLOG_POSTS: BlogPost[] = [
     date: "Jul 2026",
     read: "5 min",
     color: "#29A8DC",
+    cover: "/assets/images/blog-cover-images/02-website-costing-customers.png",
     body: [
       "Your website is not a brochure. It is your best salesperson — working 24 hours a day, 7 days a week. But if it is poorly built, it is not selling. It is actively turning people away. Here are five signs your website is costing you customers.",
       "1. It takes more than 3 seconds to load. Research consistently shows that 53% of mobile visitors leave a page that takes longer than 3 seconds to load. Every second of delay costs you real customers. If your website is slow, you are bleeding money — and you probably don't even know it.",
@@ -57,6 +60,7 @@ export const BLOG_POSTS: BlogPost[] = [
     date: "Jul 2026",
     read: "3 min",
     color: "#25D366",
+    cover: "/assets/images/blog-cover-images/03-whatsapp-automation-local-business.png",
     body: [
       "Here is a reality most local business owners face every day: a customer sends a WhatsApp message at 9 PM. You are with your family, or you are asleep, or you are at another job. By the time you reply the next morning, they have already messaged three of your competitors — and one of them replied instantly.",
       "That is the problem WhatsApp automation solves. It is not about replacing you. It is about making sure your business responds instantly, every time, even when you are not available.",
@@ -75,6 +79,7 @@ export const BLOG_POSTS: BlogPost[] = [
     date: "Jun 2026",
     read: "6 min",
     color: "#cc0066",
+    cover: "/assets/images/blog-cover-images/04-seo-vs-paid-ads.png",
     body: [
       "Every business owner eventually asks the same question: should I invest in SEO or paid ads? The honest answer is that both work — but they work on different timelines, with different strengths, and for different situations.",
       "Paid ads (Google Ads, Meta Ads, Instagram Ads) are like turning on a tap. You pay, and traffic flows. The moment you stop paying, the traffic stops. Paid ads are ideal when you need results quickly — a product launch, a seasonal sale, a new location opening. You can target exactly who you want, control your budget down to the rupee, and see results within days.",
@@ -94,6 +99,7 @@ export const BLOG_POSTS: BlogPost[] = [
     date: "Jun 2026",
     read: "5 min",
     color: "#c9a227",
+    cover: "/assets/images/blog-cover-images/05-measure-digital-marketing.png",
     body: [
       "You are spending money on digital marketing. Your agency sends you a report every month with impressive numbers — impressions, clicks, reach, engagement rate. But here is the question nobody asks often enough: is any of this actually making you money?",
       "Vanity metrics are the biggest trap in digital marketing. Likes, follows, and impressions feel good, but they do not pay salaries. The metrics that actually matter are the ones that connect directly to revenue.",
@@ -113,6 +119,7 @@ export const BLOG_POSTS: BlogPost[] = [
     date: "May 2026",
     read: "4 min",
     color: "#96BF48",
+    cover: "/assets/images/blog-cover-images/06-cost-of-bad-website-design.png",
     body: [
       "A badly designed website is not just an aesthetic problem. It is a business problem. Every day your website is poorly designed, you are losing customers, losing search rankings, and losing credibility — and you probably have no idea how much it is costing you.",
       "Let us start with trust. Studies show that 75% of users judge a company's credibility based on its website design. Not its product. Not its service. Its website. If your website looks amateur, visitors assume your business is amateur — and they leave.",

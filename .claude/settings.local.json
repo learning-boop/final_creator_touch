@@ -64,7 +64,18 @@
       "Bash(cd \"D:/creative_touch/creatortouch/creator-structure\" && npm run build 2>&1 | tail -25)",
       "Bash(cd \"D:/creative_touch/creatortouch/creator-structure\" && npm run build 2>&1 | grep -E \"error|Error|failed\" | head -10)",
       "Bash(cd \"D:/creative_touch/creatortouch/creator-structure\" && mkdir -p _backend_staging && mv app/api/contact app/api/chat app/api/voice app/api/blog _backend_staging/ && mv lib/db.ts _backend_staging/ && mv lib/ai.ts _backend_staging/)",
-      "Bash(cd \"D:/creative_touch/creatortouch/creator-structure\" && rm -rf .next)"
+      "Bash(cd \"D:/creative_touch/creatortouch/creator-structure\" && rm -rf .next)",
+      "Bash(cd \"D:\\\\creative_touch\\\\creatortouch\\\\creator-structure\" && rm \"app/_components/ReviewContactForm.jsx\" \"app/_components/creative-search.css\")",
+      "Bash(cd \"D:\\\\creative_touch\\\\creatortouch\\\\creator-structure/app/_components\" && mkdir -p css home case-study)",
+      "Bash(cd \"D:\\\\creative_touch\\\\creatortouch\\\\creator-structure/app/_components\" && mv home.css css/home.css && mv review-layout.css css/review-layout.css)",
+      "Bash(cd \"D:\\\\creative_touch\\\\creatortouch\\\\creator-structure/app/_components\" && mv CreatorsTouchHome.jsx home/ && mv home-fx.js home/ && mv BrandLogoScene.jsx home/ && mv CreativeSearchHome.jsx home/ && mv CaseStudyPage.tsx case-study/)",
+      "Bash(cd \"D:\\\\creative_touch\\\\creatortouch\\\\creator-structure\" && powershell.exe -Command 'Add-Type -AssemblyName System.Drawing; Get-ChildItem -Path \"public\\\\assets\\\\images\\\\projects\" -Recurse -Filter \"screen-1.png\" | ForEach-Object { $img = [System.Drawing.Image]::FromFile\\($_.FullName\\); \"$\\($_.Directory.Name\\): $\\($img.Width\\)x$\\($img.Height\\)\"; $img.Dispose\\(\\) }')",
+      "Bash(cd D:/creative_touch/creatortouch/creator-structure && npx next build 2>&1 | tail -40)",
+      "Bash(cd D:/creative_touch/creatortouch/creator-structure && npx next build 2>&1 | tail -15)",
+      "Bash(cd D:/creative_touch/creatortouch/creator-structure && npx next build 2>&1 | tail -20)",
+      "Bash(cd D:/creative_touch/creatortouch/creator-structure && npx next build 2>&1 | tail -25)",
+      "Bash(cd D:/creative_touch/creatortouch/creator-structure && npx next build 2>&1 | tail -30)",
+      "Bash(cd D:/creative_touch/creatortouch/creator-structure && npx next build 2>&1 | grep -E \"error|Error|✓|✗\" | head -5)"
     ]
   }
 }

@@ -22,7 +22,7 @@ export async function generateMetadata({ params }: Props): Promise<Metadata> {
       url: `https://creatorstouchglobal.com/blog/${slug}`,
       type: "article",
       siteName: "Creators Touch Global",
-      images: [{ url: "https://creatorstouchglobal.com/assets/images/creator_touch.png", alt: post.title }],
+      images: [{ url: `https://creatorstouchglobal.com${post.cover}`, alt: post.title }],
     },
     twitter: {
       card: "summary",
@@ -113,8 +113,13 @@ export default async function BlogPostPage({ params }: Props) {
         </div>
       </section>
 
+      {/* Cover image */}
+      <div style={S("max-width:720px;margin:0 auto;padding:40px 28px 0")}>
+        <img src={post.cover} alt={post.title} style={S("width:100%;aspect-ratio:16/9;object-fit:cover;border-radius:16px;display:block")} />
+      </div>
+
       {/* Article body */}
-      <article style={S("max-width:720px;margin:0 auto;padding:64px 28px")}>
+      <article style={S("max-width:720px;margin:0 auto;padding:48px 28px")}>
         {post.body.map((para, i) => (
           <p key={i} style={S("margin:0 0 28px;font-size:17px;line-height:1.8;color:rgba(244,243,241,0.72);letter-spacing:-0.01em")}>
             {para}
@@ -161,7 +166,7 @@ export default async function BlogPostPage({ params }: Props) {
             Free consultation, honest advice, no obligation.
           </p>
           <a
-            href="/#contact"
+            href="/contact"
             style={S("display:inline-flex;align-items:center;gap:12px;padding:18px 32px;background:#FF3D8F;border-radius:100px;font-size:14px;font-weight:500;letter-spacing:-0.02em;color:#08090A;text-decoration:none")}
           >
             Get in touch &rarr;

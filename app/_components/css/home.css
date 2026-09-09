@@ -1,0 +1,51 @@
+/* Creators Touch — keyframes, animation states & JS-toggled classes.
+   All layout, spacing, color, hover, responsive → Tailwind classes in JSX. */
+
+/* ── Keyframes ── */
+@keyframes ct-marquee { from { transform: translateX(0) } to { transform: translateX(-50%) } }
+@keyframes ct-pulse { 0%, 100% { transform: scale(1); opacity: 1 } 50% { transform: scale(0.88); opacity: 0.6 } }
+@keyframes ct-grain { 0%,100%{transform:translate(0,0)}10%{transform:translate(-2%,1%)}20%{transform:translate(1%,-3%)}30%{transform:translate(-1%,2%)}40%{transform:translate(2%,-1%)}50%{transform:translate(-1%,3%)}60%{transform:translate(2%,1%)}70%{transform:translate(-2%,-2%)}80%{transform:translate(1%,2%)}90%{transform:translate(-1%,-1%)} }
+@keyframes ct-bounce-letter { 0%{transform:translateY(0)} 30%{transform:translateY(-38%)} 50%{transform:translateY(10%)} 70%{transform:translateY(-8%)} 85%{transform:translateY(3%)} 100%{transform:translateY(0)} }
+@keyframes ct-word-pop { 0%{transform:translateY(0) scaleY(1) scaleX(1)} 12%{transform:translateY(-22%) scaleY(1.08) scaleX(0.96)} 28%{transform:translateY(-42%) scaleY(1.02) scaleX(0.99)} 44%{transform:translateY(6%) scaleY(0.94) scaleX(1.04)} 58%{transform:translateY(-10%) scaleY(1.02) scaleX(0.99)} 72%{transform:translateY(3%) scaleY(0.98) scaleX(1.01)} 84%{transform:translateY(-2%)} 100%{transform:translateY(0) scaleY(1) scaleX(1)} }
+@keyframes ct-menu-in { from { opacity: 0; transform: translateY(22px) } to { opacity: 1; transform: translateY(0) } }
+@keyframes ct-step-in { from { opacity: 0; transform: translateY(28px) } to { opacity: 1; transform: translateY(0) } }
+
+/* ── Film grain overlay (SVG data-URI background) ── */
+.ct-grain { position: fixed; inset: -14%; z-index: 9997; pointer-events: none; width: 130%; height: 130%; opacity: 0.04; mix-blend-mode: overlay; animation: ct-grain .2s steps(1) infinite; will-change: transform; background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 512 512' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.75' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)'/%3E%3C/svg%3E"); background-size: 256px 256px }
+
+/* ── Root-level resets ── */
+.ct-root { -webkit-font-smoothing: antialiased }
+.ct-root a { color: #F4F3F1; text-decoration: none }
+.ct-root ::selection { background: #cc0066; color: #fff }
+
+/* ── Bounce text hover (parent triggers child animation) ── */
+.ct-bounce-wrap .ct-bounce-char { display: inline-block; transition: color .25s ease }
+.ct-bounce-wrap:hover .ct-bounce-char { animation: ct-bounce-letter .55s cubic-bezier(.28,.84,.42,1) both; color: rgba(244,243,241,0.8) }
+
+/* ── Hero word pop on hover ── */
+.ct-hero-pop { display: inline-block; cursor: default; transform-origin: center bottom; will-change: transform }
+.ct-hero-pop:hover { animation: ct-word-pop .7s cubic-bezier(.22,1,.36,1) both }
+
+/* ── Sticky mobile CTA (JS toggles .ct-show) ── */
+.ct-mob-cta { display: none; position: fixed; bottom: 0; left: 0; right: 0; z-index: 100; padding: 12px 16px calc(16px + env(safe-area-inset-bottom, 0px)); background: linear-gradient(to top, rgba(8,9,10,0.98) 55%, transparent); opacity: 0; transform: translateY(20px); transition: opacity .4s ease, transform .45s cubic-bezier(.22,1,.36,1); pointer-events: none; will-change: opacity, transform }
+.ct-mob-cta.ct-show { opacity: 1; transform: translateY(0); pointer-events: auto }
+@media (max-width: 767px) { .ct-mob-cta { display: block } }
+
+/* ── Mobile menu entrance animation ── */
+.ct-menu-item { animation: ct-menu-in .55s cubic-bezier(.22,1,.36,1) both }
+
+/* ── Growth step entrance (JS toggles .ct-vis) ── */
+.ct-growth-step { opacity: 0 }
+.ct-growth-step.ct-vis { animation: ct-step-in .7s cubic-bezier(.22,1,.36,1) both }
+
+/* ── Scroll-pinned service card states (managed by home-fx.js) ── */
+.ct-sp-slide { position: absolute; top: 0; left: 0; right: 0; height: 300px; transform: translateY(40px) scale(0.87); opacity: 0; transition: transform .65s cubic-bezier(.22,1,.36,1), opacity .52s ease, filter .52s ease; pointer-events: none; will-change: transform, opacity }
+.ct-sp-slide.ct-sp-active { transform: translateY(0) scale(1); opacity: 1; filter: none; pointer-events: auto }
+.ct-sp-slide.ct-sp-seen { transform: translateY(-108%) scale(0.96); opacity: 0; filter: none }
+.ct-sp-slide.ct-sp-next-1 { transform: translateY(14px) scale(0.96); opacity: 1; filter: brightness(0.82) }
+.ct-sp-slide.ct-sp-next-2 { transform: translateY(26px) scale(0.92); opacity: 0.7; filter: brightness(0.65) }
+.ct-sp-slide.ct-sp-next-3 { transform: translateY(36px) scale(0.88); opacity: 0.35; filter: brightness(0.48) }
+.ct-sp-row [data-sp-title] { transition: color .35s ease }
+.ct-sp-row [data-sp-num] { transition: color .35s ease }
+.ct-sp-row-active [data-sp-num] { color: rgba(244,243,241,0.75) !important }
+.ct-sp-row-active [data-sp-title] { color: #F4F3F1 !important }

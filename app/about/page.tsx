@@ -39,7 +39,7 @@ function S(css: string): React.CSSProperties {
 
 const STATS = [
   { value: "17+", label: "Years in business" },
-  { value: "500+", label: "Projects delivered" },
+  { value: "2000+", label: "Projects delivered" },
   { value: "12+", label: "Industries served" },
   { value: "3", label: "Countries active" },
 ];
@@ -197,7 +197,7 @@ export default function AboutPage() {
           </div>
           <div style={S("display:flex;gap:16px;flex-wrap:wrap")}>
             <a
-              href="/#contact"
+              href="/contact"
               style={S("display:inline-flex;align-items:center;gap:12px;padding:18px 32px;background:#FF3D8F;border-radius:100px;font-size:14px;font-weight:500;letter-spacing:-0.02em;color:#08090A;text-decoration:none")}
             >
               Get in touch →

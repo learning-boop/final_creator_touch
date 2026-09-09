@@ -1,7 +1,7 @@
 import { notFound } from "next/navigation";
 import type { Metadata } from "next";
 import { getCaseStudy, CASE_STUDIES } from "@/app/_data/case-studies";
-import CaseStudyPage from "@/app/_components/CaseStudyPage";
+import CaseStudyPage from "@/app/_components/case-study/CaseStudyPage";
 
 type Props = { params: Promise<{ slug: string }> };
 
