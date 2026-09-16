@@ -858,6 +858,70 @@ export default function CreatorsTouchHome({ visualReview = false } = {}) {
         </div>
       </section>
 
+      {/* ── 08 TECHNOLOGY STACK ── */}
+      <section id="tech-stack" className={`${SEC} border-b-ct-fg/10`}>
+        <div className="flex flex-col gap-[52px]">
+          <div className="flex flex-col items-center text-center gap-6">
+            <p data-reveal="1" className={EYE}>08 &mdash; Technology</p>
+            <h2 data-reveal="1" className="m-0 text-[clamp(36px,5vw,72px)] font-medium leading-[1] tracking-[-0.04em]">
+              Technology <em className="font-serif italic font-normal text-ct-pink">Stack</em>
+            </h2>
+            <div data-reveal="1" className="w-full max-w-[780px] rounded-[20px] px-6 py-5 md:px-10 md:py-6" style={{ background: "linear-gradient(135deg, rgba(180,230,240,0.12), rgba(120,200,220,0.08))" }}>
+              <p className="m-0 text-[15px] md:text-[17px] leading-[1.7] text-ct-fg/65">
+                Our engineers apprehend your business requirements and help you choose the right technology for your solution.
+              </p>
+            </div>
+          </div>
+
+          <div data-stagger="1" className="grid grid-cols-1 md:grid-cols-2 gap-12 md:gap-16">
+            {[
+              { cat: "Frontend", items: [
+                { name: "JavaScript (ES6+)", img: "javascript.png" },
+                { name: "TypeScript", img: "typescript.png" },
+                { name: "React.js", img: "react.png" },
+                { name: "Next.js", img: "nextjs.png" },
+                { name: "RxJS", img: "rxjs.png" },
+                { name: "Tailwind CSS", img: "tailwind.png" },
+              ]},
+              { cat: "Backend", items: [
+                { name: "Node.js", img: "nodejs.png" },
+                { name: "Express.js", img: "expressjs.png" },
+                { name: "Hapi.js", img: "hapijs.png" },
+              ]},
+              { cat: "Database & Infrastructure", items: [
+                { name: "PostgreSQL", img: "postgresql.png" },
+                { name: "Redis", img: "redis.png" },
+                { name: "Git", img: "git.png" },
+                { name: "CI/CD", img: "cicd.png" },
+                { name: "Microservices", img: "microservices.png" },
+              ]},
+              { cat: "Platforms & Design", items: [
+                { name: "Webflow", img: "webflow.png" },
+                { name: "Shopify", img: "shopify.png" },
+                { name: "Figma", img: "figma.png" },
+                { name: "Blender", img: "blender.png" },
+              ]},
+            ].map(group => (
+              <div key={group.cat} className="flex flex-col gap-5">
+                <div className="flex flex-col gap-2 border-b border-ct-fg/14 pb-3">
+                  <h3 className="m-0 text-[clamp(18px,2vw,24px)] font-medium tracking-[-0.02em]">{group.cat}</h3>
+                </div>
+                <div className="grid grid-cols-3 gap-5">
+                  {group.items.map(tech => (
+                    <div key={tech.name} className="flex flex-col items-center gap-3 group cursor-default">
+                      <div className="w-[72px] h-[72px] rounded-[16px] border border-ct-fg/10 flex items-center justify-center bg-ct-fg/[0.03] transition-[border-color,background] duration-300 group-hover:border-ct-fg/25 group-hover:bg-ct-fg/[0.06]">
+                        <img src={"/assets/images/tech/" + tech.img} alt={tech.name} className="w-9 h-9 object-contain" />
+                      </div>
+                      <span className="font-mono text-[10px] md:text-[11px] tracking-[0.04em] text-ct-fg/55 text-center leading-[1.3]">{tech.name}</span>
+                    </div>
+                  ))}
+                </div>
+              </div>
+            ))}
+          </div>
+        </div>
+      </section>
+
       {/* ── 09 CONTACT ── */}
       <section id="contact" className="relative z-[1] px-[18px] py-[72px] md:px-7 md:pt-28 md:pb-24">
         <div className="grid grid-cols-1 md:grid-cols-[1fr_1.1fr] gap-10 md:gap-20 items-start">

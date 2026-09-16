@@ -75,7 +75,9 @@
       "Bash(cd D:/creative_touch/creatortouch/creator-structure && npx next build 2>&1 | tail -20)",
       "Bash(cd D:/creative_touch/creatortouch/creator-structure && npx next build 2>&1 | tail -25)",
       "Bash(cd D:/creative_touch/creatortouch/creator-structure && npx next build 2>&1 | tail -30)",
-      "Bash(cd D:/creative_touch/creatortouch/creator-structure && npx next build 2>&1 | grep -E \"error|Error|✓|✗\" | head -5)"
+      "Bash(cd D:/creative_touch/creatortouch/creator-structure && npx next build 2>&1 | grep -E \"error|Error|✓|✗\" | head -5)",
+      "Bash(cd \"D:/creative_touch/creatortouch/creator-structure/public/assets/images/tech\" && mv \"ChatGPT Image Sep 16, 2026, 06_16_23 PM \\(1\\).png\" react.png && mv \"ChatGPT Image Sep 16, 2026, 06_16_23 PM \\(2\\).png\" typescript.png && mv \"ChatGPT Image Sep 16, 2026, 06_16_24 PM \\(3\\).png\" nextjs.png && mv \"ChatGPT Image Sep 16, 2026, 06_16_25 PM \\(4\\).png\" javascript.png && mv \"ChatGPT Image Sep 16, 2026, 06_16_26 PM \\(5\\).png\" tailwind.png && mv \"ChatGPT Image Sep 16, 2026, 06_16_27 PM \\(6\\).png\" rxjs.png && mv \"ChatGPT Image Sep 16, 2026, 06_16_28 PM \\(7\\).png\" hapijs.png && mv \"ChatGPT Image Sep 16, 2026, 06_16_29 PM \\(8\\).png\" postgresql.png && mv \"ChatGPT Image Sep 16, 2026, 06_16_29 PM \\(9\\).png\" expressjs.png && mv \"ChatGPT Image Sep 16, 2026, 06_16_30 PM \\(10\\).png\" git.png && mv \"ChatGPT Image Sep 16, 2026, 06_16_31 PM \\(11\\).png\" nodejs.png && mv \"ChatGPT Image Sep 16, 2026, 06_16_31 PM \\(12\\).png\" redis.png && mv \"ChatGPT Image Sep 16, 2026, 06_16_32 PM \\(13\\).png\" microservices.png && mv \"ChatGPT Image Sep 16, 2026, 06_16_33 PM \\(14\\).png\" webflow.png && mv \"ChatGPT Image Sep 16, 2026, 06_16_33 PM \\(15\\).png\" cicd.png && mv \"ChatGPT Image Sep 16, 2026, 06_16_34 PM \\(16\\).png\" shopify.png && mv \"ChatGPT Image Sep 16, 2026, 06_16_37 PM \\(17\\).png\" blender.png && mv \"ChatGPT Image Sep 16, 2026, 06_16_37 PM \\(18\\).png\" figma.png && ls)",
+      "Bash(cd \"D:\\\\creative_touch\\\\creatortouch\\\\creator-structure\" && npm run build 2>&1 | tail -5)"
     ]
   }
 }
