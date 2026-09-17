@@ -9,7 +9,7 @@ import ServicesSection from "../services/ServicesSection";
 const EYE = "font-mono m-0 text-[11px] tracking-[0.16em] uppercase text-ct-fg/42";
 const LABEL = "font-mono text-[10px] tracking-[0.16em] uppercase text-ct-fg/42";
 const LABEL_SM = "font-mono text-[9px] tracking-[0.16em] uppercase text-ct-fg/35";
-const SEC = "relative z-[1] px-[18px] py-[72px] md:px-7 md:py-28 border-b border-ct-fg/10";
+const SEC = "relative z-[1] px-[18px] py-[72px] md:px-7 md:py-28 border-b border-ct-fg/10 bg-[rgba(8,9,10,0.78)]";
 const BODY = "m-0 text-[17px] leading-[1.75] text-ct-fg/60";
 const H2 = "m-0 font-normal leading-[1.1] tracking-[-0.04em]";
 
@@ -78,12 +78,12 @@ const PROJECTS = [
 ];
 
 const INDUSTRIES = [
-  { num: "01", title: "E-commerce & Retail", tags: "Conversion funnels", img: "/assets/images/image-01.png" },
-  { num: "02", title: "Real Estate", tags: "Property portals", img: "/assets/images/image-06.png" },
-  { num: "03", title: "Education & EdTech", tags: "Course platforms", img: "/assets/images/image-03.png" },
-  { num: "04", title: "Healthcare", tags: "Patient portals", img: "/assets/images/image-02.png" },
-  { num: "05", title: "Food & Beverage", tags: "Online ordering", img: "/assets/images/image-05.png" },
-  { num: "06", title: "Jewellery & Luxury", tags: "Lookbooks", img: "/assets/images/image-04.png" },
+  { num: "01", title: "E-commerce & Retail", tags: "Conversion funnels", img: "/assets/images/industries/ecommerce-retail.png" },
+  { num: "02", title: "Real Estate", tags: "Property portals", img: "/assets/images/industries/real-estate.png" },
+  { num: "03", title: "Education & EdTech", tags: "Course platforms", img: "/assets/images/industries/education.png" },
+  { num: "04", title: "Healthcare", tags: "Patient portals", img: "/assets/images/industries/healthcare.png" },
+  { num: "05", title: "Food & Beverage", tags: "Online ordering", img: "/assets/images/industries/food-beverage.png" },
+  { num: "06", title: "Jewellery & Luxury", tags: "Lookbooks", img: "/assets/images/industries/jewellery-luxury.png" },
 ];
 
 const REVIEWS = [
@@ -97,15 +97,12 @@ const REVIEWS = [
   { name: "Deepa Rao", company: "Durga Ghree", initials: "DR", text: "Creative, reliable and always on brand. Creators Touch helped us modernise our identity while keeping our heritage intact." },
 ];
 
-const IMG1 = "/assets/images/ChatGPT Image Aug 19, 2026, 04_54_11 PM (1).png";
-const IMG2 = "/assets/images/ChatGPT Image Aug 19, 2026, 04_54_11 PM (2).png";
-const IMG3 = "/assets/images/ChatGPT Image Aug 19, 2026, 04_54_11 PM (3).png";
-const IMG4 = "/assets/images/ChatGPT Image Aug 19, 2026, 04_54_12 PM (4).png";
-const IMG5 = "/assets/images/ChatGPT Image Aug 19, 2026, 04_54_13 PM (5).png";
-const IMG6 = "/assets/images/ChatGPT Image Aug 19, 2026, 04_54_13 PM (6).png";
-const IMG7 = "/assets/images/ChatGPT Image Aug 19, 2026, 04_54_15 PM (7).png";
-const IMG8 = "/assets/images/ChatGPT Image Aug 19, 2026, 04_54_15 PM (8).png";
-const IMG9 = "/assets/images/ChatGPT Image Aug 19, 2026, 04_54_16 PM (9).png";
+const IMG1 = "/assets/images/sections/team-collaboration.png";
+const IMG3 = "/assets/images/sections/creative-review.png";
+const IMG4 = "/assets/images/sections/ecommerce-packaging.png";
+const IMG5 = "/assets/images/sections/whatsapp-automation.png";
+const IMG7 = "/assets/images/sections/growth-strategy.png";
+const IMG9 = "/assets/images/sections/consultation.png";
 
 const SERVICE_GROUPS = [
   { num: "01", title: "Get more customers", color: "#FF3D8F", desc: "Show up where your customers are already looking — and give them a strong reason to choose you over everyone else.", items: ["Google Search Ads", "Meta & Instagram Ads", "SEO", "Landing Pages"] },
@@ -214,19 +211,19 @@ function MarqueeRow() {
 }
 
 const SVC_IMGS = [
-  "/assets/images/ChatGPT Image Aug 19, 2026, 04_54_11 PM (2).png",
-  "/assets/images/ChatGPT Image Aug 19, 2026, 04_54_11 PM (1).png",
-  "/assets/images/ChatGPT Image Aug 19, 2026, 04_54_11 PM (3).png",
-  "/assets/images/ChatGPT Image Aug 19, 2026, 04_54_16 PM (9).png",
-  "/assets/images/ChatGPT Image Aug 19, 2026, 04_54_15 PM (8).png",
+  "/assets/images/sections/brand-strategy.png",
+  "/assets/images/sections/team-collaboration.png",
+  "/assets/images/sections/creative-review.png",
+  "/assets/images/sections/consultation.png",
+  "/assets/images/sections/client-meeting.png",
 ];
 const SVC_COLORS = ["#FF3D8F", "#29A8DC", "#cc0066", "#96BF48", "#25D366"];
 const SVC_GROUP_IMGS = [
-  "/assets/images/ChatGPT Image Aug 19, 2026, 04_54_11 PM (3).png",
-  "/assets/images/ChatGPT Image Aug 19, 2026, 04_54_16 PM (9).png",
-  "/assets/images/ChatGPT Image Aug 19, 2026, 04_54_11 PM (1).png",
-  "/assets/images/ChatGPT Image Aug 19, 2026, 04_54_12 PM (4).png",
-  "/assets/images/ChatGPT Image Aug 19, 2026, 04_54_13 PM (5).png",
+  "/assets/images/sections/creative-review.png",
+  "/assets/images/sections/consultation.png",
+  "/assets/images/sections/team-collaboration.png",
+  "/assets/images/sections/ecommerce-packaging.png",
+  "/assets/images/sections/whatsapp-automation.png",
 ];
 
 function ContactForm() {
@@ -324,7 +321,7 @@ function ContactForm() {
 }
 
 export default function CreatorsTouchHome({ visualReview = false } = {}) {
-  useEffect(() => initHomeFX({ logoSrc: "/assets/images/creator_touch.png", disableLogo: visualReview }), [visualReview]);
+  useEffect(() => initHomeFX({ logoSrc: "/assets/images/logo/creator-touch.png", disableLogo: visualReview }), [visualReview]);
 
   const [menuOpen, setMenuOpen] = useState(false);
   useEffect(() => {
@@ -385,7 +382,7 @@ export default function CreatorsTouchHome({ visualReview = false } = {}) {
         <div className="fixed inset-0 z-[200] bg-ct-bg flex flex-col px-7 pt-4 pb-8" aria-modal="true" role="dialog" aria-label="Navigation menu">
           <div className="flex items-center justify-between pb-12">
             <a href="#top" onClick={() => setMenuOpen(false)} className="flex items-center gap-2.5">
-              <img src="/assets/images/creator_touch.png" alt="Creators Touch" className="w-16 h-16 block" />
+              <img src="/assets/images/logo/creator-touch.png" alt="Creators Touch" className="w-16 h-16 block" />
               <span className="flex flex-col leading-[1.05]">
                 <span className="text-sm font-semibold tracking-[-0.03em]">Creators Touch</span>
               </span>
@@ -415,13 +412,13 @@ export default function CreatorsTouchHome({ visualReview = false } = {}) {
       {/* Header */}
       <header id="ct-header" className="sticky top-0 z-50 flex items-center justify-between gap-6 px-[18px] py-3 md:px-7 md:py-4 bg-[rgba(8,9,10,0)] border-b border-transparent transition-[background,border-color,backdrop-filter] duration-[350ms]">
         <a href="#top" className="flex items-center gap-2.5">
-          <img src="/assets/images/creator_touch.png" alt="Creators Touch" className="w-10 h-10 md:w-[90px] md:h-[90px] block" />
+          <img src="/assets/images/logo/creator-touch.png" alt="Creators Touch" className="w-10 h-10 md:w-[90px] md:h-[90px] block" />
           <span className="flex flex-col leading-[1.05]">
             <span className="text-xs md:text-sm font-semibold tracking-[-0.03em]">Creators Touch</span>
           </span>
         </a>
         <nav className="hidden md:flex items-center gap-7 font-mono text-[11px] tracking-[0.14em] uppercase text-ct-fg/62">
-          <RollLink href="/work" label="Work" />
+          <RollLink href="/work" label="Portfolio" />
           <RollLink href="/services" label="Services" />
           <RollLink href="/blog" label="Blog" />
           <RollLink href="/about" label="About" />
@@ -473,13 +470,13 @@ export default function CreatorsTouchHome({ visualReview = false } = {}) {
       </section>
 
       {/* ── Disciplines icon strip ── */}
-      <div className="relative z-[1] px-[18px] py-10 md:px-7 border-b border-ct-fg/10 bg-ct-bg">
+      <div className="relative z-[1] px-[18px] py-10 md:px-7 border-b border-ct-fg/10 bg-[rgba(8,9,10,0.78)]">
         <div data-stagger="1" className="grid grid-cols-2 md:grid-cols-4 gap-2.5 md:gap-5">
           {[
-            { img: "/assets/images/Codex Image Sep 8, 2026, 05_17_25 PM.png", label: "Strategy & AI", sub: "Data-led plans that find the fastest path to growth." },
-            { img: "/assets/images/Codex Image Sep 8, 2026, 05_17_59 PM.png", label: "Development", sub: "Fast, accessible code — Next.js, Shopify, WordPress." },
-            { img: "/assets/images/Codex Image Sep 8, 2026, 05_18_06 PM.png", label: "Branding & Content", sub: "Identity, copy and visuals that stop the scroll." },
-            { img: "/assets/images/Codex Image Sep 8, 2026, 05_18_12 PM.png", label: "SEO & Marketing", sub: "Show up where customers are already looking." },
+            { img: "/assets/images/disciplines/strategy-ai.png", label: "Strategy & AI", sub: "Data-led plans that find the fastest path to growth." },
+            { img: "/assets/images/disciplines/development.png", label: "Development", sub: "Fast, accessible code — Next.js, Shopify, WordPress." },
+            { img: "/assets/images/disciplines/branding-content.png", label: "Branding & Content", sub: "Identity, copy and visuals that stop the scroll." },
+            { img: "/assets/images/disciplines/seo-marketing.png", label: "SEO & Marketing", sub: "Show up where customers are already looking." },
           ].map(d => (
             <div key={d.label} className="group/disc flex flex-col md:flex-row items-center md:items-center gap-2.5 md:gap-[18px] p-[18px] md:p-[24px_22px] border border-ct-fg/8 rounded-2xl bg-ct-card text-center md:text-left transition-[border-color,transform] duration-300 hover:border-ct-fg/22 hover:-translate-y-1">
               <img src={d.img} alt={d.label} loading="lazy" className="w-11 h-11 md:w-14 md:h-14 object-contain block shrink-0 drop-shadow-[0_6px_18px_rgba(0,0,0,0.4)] transition-transform duration-[350ms] [transition-timing-function:cubic-bezier(.22,1,.36,1)] group-hover/disc:scale-[1.08]" />
@@ -859,7 +856,7 @@ export default function CreatorsTouchHome({ visualReview = false } = {}) {
       </section>
 
       {/* ── 08 TECHNOLOGY STACK ── */}
-      <section id="tech-stack" className={`${SEC} border-b-ct-fg/10`}>
+      <section id="tech-stack" className={`${SEC} border-b-ct-fg/10 relative`}>
         <div className="flex flex-col gap-[52px]">
           <div className="flex flex-col items-center text-center gap-6">
             <p data-reveal="1" className={EYE}>08 &mdash; Technology</p>
@@ -923,7 +920,7 @@ export default function CreatorsTouchHome({ visualReview = false } = {}) {
       </section>
 
       {/* ── 09 CONTACT ── */}
-      <section id="contact" className="relative z-[1] px-[18px] py-[72px] md:px-7 md:pt-28 md:pb-24">
+      <section id="contact" className="relative z-[1] px-[18px] py-[72px] md:px-7 md:pt-28 md:pb-24 bg-[rgba(8,9,10,0.78)]">
         <div className="grid grid-cols-1 md:grid-cols-[1fr_1.1fr] gap-10 md:gap-20 items-start">
           <div className="flex flex-col gap-10">
             <div>
@@ -962,10 +959,10 @@ export default function CreatorsTouchHome({ visualReview = false } = {}) {
       </section>
 
       {/* Footer */}
-      <footer className="relative z-[1] flex flex-col md:flex-row justify-between items-start md:items-end gap-3.5 md:gap-8 px-[18px] py-6 md:px-7 md:py-8 pb-[calc(env(safe-area-inset-bottom,0px)+96px)] md:pb-8 border-t border-ct-fg/10">
+      <footer className="relative z-[1] flex flex-col md:flex-row justify-between items-start md:items-end gap-3.5 md:gap-8 px-[18px] py-6 md:px-7 md:py-8 pb-[calc(env(safe-area-inset-bottom,0px)+96px)] md:pb-8 border-t border-ct-fg/10 bg-ct-bg">
         <div className="flex flex-col gap-4">
           <div className="flex items-center gap-3">
-            <img src="/assets/images/creator_touch.png" alt="" className="w-7 h-7 block" />
+            <img src="/assets/images/logo/creator-touch.png" alt="" className="w-7 h-7 block" />
             <span className="font-mono text-[10px] tracking-[0.14em] uppercase text-ct-fg/42">Creators Touch Global &middot; &copy; 2026</span>
           </div>
           <div className="flex gap-2.5">
@@ -978,7 +975,7 @@ export default function CreatorsTouchHome({ visualReview = false } = {}) {
           </div>
         </div>
         <div className="flex flex-wrap gap-3.5 gap-x-4 md:gap-6 font-mono text-[10px] tracking-[0.14em] uppercase text-ct-fg/42">
-          <RollLink href="/work" label="Work" h={14} dim="rgba(244,243,241,0.42)" hi="#F4F3F1" />
+          <RollLink href="/work" label="Portfolio" h={14} dim="rgba(244,243,241,0.42)" hi="#F4F3F1" />
           <RollLink href="/services" label="Services" h={14} dim="rgba(244,243,241,0.42)" hi="#F4F3F1" />
           <RollLink href="/blog" label="Blog" h={14} dim="rgba(244,243,241,0.42)" hi="#F4F3F1" />
           <RollLink href="/about" label="About" h={14} dim="rgba(244,243,241,0.42)" hi="#F4F3F1" />

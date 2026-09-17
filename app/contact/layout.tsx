@@ -12,7 +12,7 @@ export const metadata: Metadata = {
     url: "https://creatorstouchglobal.com/contact",
     siteName: "Creators Touch Global",
     type: "website",
-    images: [{ url: "https://creatorstouchglobal.com/assets/images/creator_touch.png", width: 512, height: 512, alt: "Creators Touch Global" }],
+    images: [{ url: "https://creatorstouchglobal.com/assets/images/logo/creator-touch.png", width: 512, height: 512, alt: "Creators Touch Global" }],
   },
   twitter: {
     card: "summary",

@@ -1,5 +1,7 @@
 "use client";
+import { useState, useEffect } from "react";
 import type { CaseStudy } from "@/app/_data/case-studies";
+import OtpGateModal from "@/app/_components/OtpGateModal";
 
 const MONO = "font-family:'Geist Mono',monospace";
 const SERIF = "font-family:'Instrument Serif',Georgia,serif;font-style:italic;font-weight:400";
@@ -19,6 +21,25 @@ function S(css: string): React.CSSProperties {
 
 export default function CaseStudyPage({ cs }: { cs: CaseStudy }) {
   const hasHero = cs.images.hero && !cs.images.hero.endsWith("hero.jpg") && !cs.images.hero.endsWith("hero.png");
+  const [showOtp, setShowOtp] = useState(false);
+  const [verified, setVerified] = useState(false);
+
+  useEffect(() => {
+    if (sessionStorage.getItem("otp_verified") === "true") setVerified(true);
+  }, []);
+
+  const handleLiveClick = (e: React.MouseEvent) => {
+    if (verified) return; // already verified, let the link work
+    e.preventDefault();
+    setShowOtp(true);
+  };
+
+  const handleVerified = () => {
+    setVerified(true);
+    setShowOtp(false);
+    // Open the live site after verification
+    window.open(cs.url, "_blank", "noopener,noreferrer");
+  };
 
   return (
     <div style={S("background:#08090A;color:#F4F3F1;font-family:Geist,Arial,sans-serif;min-height:100vh;overflow-x:hidden")}>
@@ -26,12 +47,12 @@ export default function CaseStudyPage({ cs }: { cs: CaseStudy }) {
       {/* Nav */}
       <header style={S("position:sticky;top:0;z-index:50;display:flex;align-items:center;justify-content:space-between;padding:16px 28px;background:rgba(8,9,10,0.88);backdrop-filter:blur(18px);border-bottom:" + HAIR)}>
         <a href="/" style={S("display:flex;align-items:center;gap:10px;text-decoration:none;color:#F4F3F1")}>
-          <img src="/assets/images/creator_touch.png" alt="Creators Touch" style={S("width:32px;height:32px")} />
+          <img src="/assets/images/logo/creator-touch.png" alt="Creators Touch" style={S("width:32px;height:32px")} />
           <span style={S("font-size:13px;font-weight:600;letter-spacing:-0.03em")}>Creators Touch</span>
         </a>
         <nav style={S(`display:flex;align-items:center;gap:20px;${MONO};font-size:10px;letter-spacing:0.14em;text-transform:uppercase`)}>
           <a href="/" style={S("color:rgba(244,243,241,0.5);text-decoration:none")}>Home</a>
-          <a href="/work" style={S("color:rgba(244,243,241,0.5);text-decoration:none")}>All Work</a>
+          <a href="/work" style={S("color:rgba(244,243,241,0.5);text-decoration:none")}>Portfolio</a>
           <a href="/services" style={S("color:rgba(244,243,241,0.5);text-decoration:none")}>Services</a>
           <a href="/blog" style={S("color:rgba(244,243,241,0.5);text-decoration:none")}>Blog</a>
         </nav>
@@ -59,10 +80,12 @@ export default function CaseStudyPage({ cs }: { cs: CaseStudy }) {
 
           {cs.url !== "#" && (
             <a href={cs.url} target="_blank" rel="noopener noreferrer"
+              onClick={handleLiveClick}
               style={S(`display:inline-flex;align-items:center;gap:10px;padding:12px 22px;border:1px solid rgba(244,243,241,0.18);border-radius:100px;font-size:13px;letter-spacing:-0.02em;color:#F4F3F1;text-decoration:none;align-self:flex-start;${MONO};font-size:10px;letter-spacing:0.14em;text-transform:uppercase`)}>
               Visit live site →
             </a>
           )}
+          {showOtp && <OtpGateModal onVerified={handleVerified} onClose={() => setShowOtp(false)} />}
         </div>
       </section>
 

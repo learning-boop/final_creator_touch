@@ -12,13 +12,13 @@ export const metadata = {
     url: "https://creatorstouchglobal.com",
     siteName: "Creators Touch Global",
     type: "website",
-    images: [{ url: "https://creatorstouchglobal.com/assets/images/creator_touch.png", width: 512, height: 512, alt: "Creators Touch Global" }],
+    images: [{ url: "https://creatorstouchglobal.com/assets/images/logo/creator-touch.png", width: 512, height: 512, alt: "Creators Touch Global" }],
   },
   twitter: {
     card: "summary",
     title: "Creators Touch Global — Digital Studio, Vijayawada",
     description: "Strategy, branding, content, web design and development under one roof since 2008.",
-    images: ["https://creatorstouchglobal.com/assets/images/creator_touch.png"],
+    images: ["https://creatorstouchglobal.com/assets/images/logo/creator-touch.png"],
   },
 };
 

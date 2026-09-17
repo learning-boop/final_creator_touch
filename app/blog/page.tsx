@@ -1,5 +1,5 @@
 import type { Metadata } from "next";
-import { BLOG_POSTS } from "@/app/_data/blog-posts";
+import { prisma } from "@/lib/prisma";
 
 export const metadata: Metadata = {
   title: "Blog — Creators Touch Global",
@@ -13,7 +13,7 @@ export const metadata: Metadata = {
     url: "https://creatorstouchglobal.com/blog",
     siteName: "Creators Touch Global",
     type: "website",
-    images: [{ url: "https://creatorstouchglobal.com/assets/images/creator_touch.png", width: 512, height: 512, alt: "Creators Touch Global" }],
+    images: [{ url: "https://creatorstouchglobal.com/assets/images/logo/creator-touch.png", width: 512, height: 512, alt: "Creators Touch Global" }],
   },
   twitter: {
     card: "summary",
@@ -38,19 +38,39 @@ function S(css: string): React.CSSProperties {
   return o as React.CSSProperties;
 }
 
-export default function BlogPage() {
+function formatDate(d: Date | null) {
+  if (!d) return "";
+  return d.toLocaleDateString("en-US", { month: "short", year: "numeric" });
+}
+
+export default async function BlogPage() {
+  const posts = await prisma.blogPost.findMany({
+    where: { published: true },
+    orderBy: { publishedAt: "desc" },
+    select: {
+      slug: true,
+      title: true,
+      excerpt: true,
+      category: true,
+      coverImage: true,
+      coverColor: true,
+      readTime: true,
+      publishedAt: true,
+    },
+  });
+
   return (
     <div style={S("background:#08090A;color:#F4F3F1;font-family:Geist,Arial,sans-serif;min-height:100vh;overflow-x:hidden")}>
 
       {/* Nav */}
       <header style={S("position:sticky;top:0;z-index:50;display:flex;align-items:center;justify-content:space-between;padding:16px 28px;background:rgba(8,9,10,0.88);backdrop-filter:blur(18px);border-bottom:" + HAIR)}>
         <a href="/" style={S("display:flex;align-items:center;gap:10px;text-decoration:none;color:#F4F3F1")}>
-          <img src="/assets/images/creator_touch.png" alt="Creators Touch" style={S("width:32px;height:32px")} />
+          <img src="/assets/images/logo/creator-touch.png" alt="Creators Touch" style={S("width:32px;height:32px")} />
           <span style={S("font-size:13px;font-weight:600;letter-spacing:-0.03em")}>Creators Touch</span>
         </a>
         <nav style={S(`display:flex;align-items:center;gap:20px;${MONO};font-size:10px;letter-spacing:0.14em;text-transform:uppercase`)}>
           <a href="/" style={S("color:rgba(244,243,241,0.5);text-decoration:none")}>Home</a>
-          <a href="/work" style={S("color:rgba(244,243,241,0.5);text-decoration:none")}>Work</a>
+          <a href="/work" style={S("color:rgba(244,243,241,0.5);text-decoration:none")}>Portfolio</a>
           <a href="/services" style={S("color:rgba(244,243,241,0.5);text-decoration:none")}>Services</a>
           <a href="/about" style={S("color:rgba(244,243,241,0.5);text-decoration:none")}>About</a>
         </nav>
@@ -74,7 +94,7 @@ export default function BlogPage() {
       {/* Post grid */}
       <div style={S("max-width:1100px;margin:0 auto;padding:72px 28px")}>
         <div style={S("display:grid;grid-template-columns:repeat(3,1fr);gap:28px")} className="blog-grid">
-          {BLOG_POSTS.map((post) => (
+          {posts.map((post) => (
             <a
               key={post.slug}
               href={`/blog/${post.slug}`}
@@ -83,22 +103,22 @@ export default function BlogPage() {
             >
               {/* Cover image */}
               <div style={S("aspect-ratio:16/9;position:relative;overflow:hidden")}>
-                <img src={post.cover} alt={post.title} loading="lazy" style={S("width:100%;height:100%;object-fit:cover;display:block")} />
-                <span style={{ ...S("position:absolute;top:14px;left:14px;font-size:11px;font-weight:500;letter-spacing:0.08em;text-transform:uppercase;padding:6px 16px;border-radius:100px;border:1px solid;backdrop-filter:blur(8px)"), color: post.color, borderColor: post.color + "55", background: post.color + "18" }}>{post.cat}</span>
+                {post.coverImage && <img src={post.coverImage} alt={post.title} loading="lazy" style={S("width:100%;height:100%;object-fit:cover;display:block")} />}
+                <span style={{ ...S("position:absolute;top:14px;left:14px;font-size:11px;font-weight:500;letter-spacing:0.08em;text-transform:uppercase;padding:6px 16px;border-radius:100px;border:1px solid;backdrop-filter:blur(8px)"), color: post.coverColor, borderColor: post.coverColor + "55", background: post.coverColor + "18" }}>{post.category}</span>
               </div>
 
               {/* Content */}
               <div style={S("display:flex;flex-direction:column;gap:14px;padding:24px;flex:1")}>
                 <div style={S("display:flex;align-items:center;gap:10px")}>
-                  <span style={S(`${MONO};font-size:9px;letter-spacing:0.14em;text-transform:uppercase;color:rgba(244,243,241,0.35)`)}>{post.date}</span>
+                  <span style={S(`${MONO};font-size:9px;letter-spacing:0.14em;text-transform:uppercase;color:rgba(244,243,241,0.35)`)}>{formatDate(post.publishedAt)}</span>
                   <span style={S("width:2px;height:2px;border-radius:50%;background:rgba(244,243,241,0.22)")} />
-                  <span style={S(`${MONO};font-size:9px;letter-spacing:0.14em;text-transform:uppercase;color:rgba(244,243,241,0.35)`)}>{post.read} read</span>
+                  <span style={S(`${MONO};font-size:9px;letter-spacing:0.14em;text-transform:uppercase;color:rgba(244,243,241,0.35)`)}>{post.readTime} read</span>
                 </div>
                 <h2 style={S("margin:0;font-size:clamp(15px,1.5vw,18px);font-weight:400;line-height:1.35;letter-spacing:-0.02em")}>{post.title}</h2>
                 <p style={S("margin:0;font-size:13px;line-height:1.65;color:rgba(244,243,241,0.5)")}>{post.excerpt}</p>
                 <div style={S("margin-top:auto;padding-top:16px;border-top:1px solid rgba(244,243,241,0.07);display:flex;align-items:center;gap:8px")}>
-                  <span style={{ ...S(`${MONO};font-size:9px;letter-spacing:0.14em;text-transform:uppercase`), color: post.color }}>Read article</span>
-                  <span style={{ color: post.color }}>&rarr;</span>
+                  <span style={{ ...S(`${MONO};font-size:9px;letter-spacing:0.14em;text-transform:uppercase`), color: post.coverColor }}>Read article</span>
+                  <span style={{ color: post.coverColor }}>&rarr;</span>
                 </div>
               </div>
             </a>

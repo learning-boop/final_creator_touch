@@ -38,7 +38,7 @@ export const metadata: Metadata = {
       "Strategy, branding, content, web design and development under one roof since 2008.  brands across retail, education, healthcare, jewellery and government.",
     images: [
       {
-        url: "https://creatorstouchglobal.com/assets/images/creator_touch.png",
+        url: "https://creatorstouchglobal.com/assets/images/logo/creator-touch.png",
         width: 512,
         height: 512,
         alt: "Creators Touch Global",
@@ -50,7 +50,7 @@ export const metadata: Metadata = {
     title: "Creators Touch Global — Digital Studio, Vijayawada",
     description:
       "Strategy, branding, content, web design and development under one roof since 2008.",
-    images: ["https://creatorstouchglobal.com/assets/images/creator_touch.png"],
+    images: ["https://creatorstouchglobal.com/assets/images/logo/creator-touch.png"],
   },
   verification: {
     google: undefined, // add Google Search Console verification code when available
@@ -74,8 +74,8 @@ export default function RootLayout({ children }: LayoutProps<"/">) {
           href="https://fonts.googleapis.com/css2?family=Geist:wght@300;400;500;600;700&family=Instrument+Serif:ital@0;1&family=Geist+Mono:wght@400&display=swap"
           rel="stylesheet"
         />
-        <link rel="icon" href="/assets/images/creator_touch.png" />
-        <link rel="apple-touch-icon" href="/assets/images/creator_touch.png" />
+        <link rel="icon" href="/assets/images/logo/creator-touch.png" />
+        <link rel="apple-touch-icon" href="/assets/images/logo/creator-touch.png" />
         <meta name="theme-color" content="#08090A" />
 
         {/* Google Tag Manager */}
@@ -123,8 +123,8 @@ export default function RootLayout({ children }: LayoutProps<"/">) {
               "@type": "ProfessionalService",
               name: "Creators Touch Global",
               url: "https://creatorstouchglobal.com",
-              logo: "https://creatorstouchglobal.com/assets/images/creator_touch.png",
-              image: "https://creatorstouchglobal.com/assets/images/creator_touch.png",
+              logo: "https://creatorstouchglobal.com/assets/images/logo/creator-touch.png",
+              image: "https://creatorstouchglobal.com/assets/images/logo/creator-touch.png",
               description:
                 "Digital studio offering web design, development, ecommerce, SEO and online marketing since 2008.",
               telephone: "+91-98859-33339",

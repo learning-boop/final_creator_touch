@@ -4,7 +4,7 @@ import * as THREE from "three";
 import { GLTFLoader } from "three/examples/jsm/loaders/GLTFLoader.js";
 
 export function initHomeFX(opts = {}) {
-  const logoSrc = opts.logoSrc || "/assets/images/creator_touch.png";
+  const logoSrc = opts.logoSrc || "/assets/images/logo/creator-touch.png";
   const cleanups = [];
   const on = (t, ev, fn, o) => { t.addEventListener(ev, fn, o); cleanups.push(() => t.removeEventListener(ev, fn, o)); };
   const reduced = matchMedia("(prefers-reduced-motion: reduce)").matches;
@@ -437,7 +437,7 @@ export function initHomeFX(opts = {}) {
       scene.add(logo);
       const handMats = [];
       const gltfLoader = new GLTFLoader();
-      gltfLoader.load("/assets/images/logo2.glb", gltf => {
+      gltfLoader.load("/assets/images/logo/creator-touch-3d.glb", gltf => {
         const model = gltf.scene;
         const box = new THREE.Box3().setFromObject(model);
         const center = box.getCenter(new THREE.Vector3());

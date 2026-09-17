@@ -12,7 +12,7 @@ export const metadata: Metadata = {
     url: "https://creatorstouchglobal.com/about",
     siteName: "Creators Touch Global",
     type: "website",
-    images: [{ url: "https://creatorstouchglobal.com/assets/images/creator_touch.png", width: 512, height: 512, alt: "Creators Touch Global" }],
+    images: [{ url: "https://creatorstouchglobal.com/assets/images/logo/creator-touch.png", width: 512, height: 512, alt: "Creators Touch Global" }],
   },
   twitter: {
     card: "summary",
@@ -79,12 +79,12 @@ export default function AboutPage() {
       {/* Nav */}
       <header style={S("position:sticky;top:0;z-index:50;display:flex;align-items:center;justify-content:space-between;padding:16px 28px;background:rgba(8,9,10,0.88);backdrop-filter:blur(18px);border-bottom:" + HAIR)}>
         <a href="/" style={S("display:flex;align-items:center;gap:10px;text-decoration:none;color:#F4F3F1")}>
-          <img src="/assets/images/creator_touch.png" alt="Creators Touch" style={S("width:32px;height:32px")} />
+          <img src="/assets/images/logo/creator-touch.png" alt="Creators Touch" style={S("width:32px;height:32px")} />
           <span style={S("font-size:13px;font-weight:600;letter-spacing:-0.03em")}>Creators Touch</span>
         </a>
         <nav style={S(`display:flex;align-items:center;gap:20px;${MONO};font-size:10px;letter-spacing:0.14em;text-transform:uppercase`)}>
           <a href="/" style={S("color:rgba(244,243,241,0.5);text-decoration:none")}>Home</a>
-          <a href="/work" style={S("color:rgba(244,243,241,0.5);text-decoration:none")}>Work</a>
+          <a href="/work" style={S("color:rgba(244,243,241,0.5);text-decoration:none")}>Portfolio</a>
           <a href="/services" style={S("color:rgba(244,243,241,0.5);text-decoration:none")}>Services</a>
           <a href="/blog" style={S("color:rgba(244,243,241,0.5);text-decoration:none")}>Blog</a>
         </nav>

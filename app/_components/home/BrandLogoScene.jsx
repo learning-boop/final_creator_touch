@@ -14,7 +14,7 @@ export default function LogoScene(){
   const blue=new THREE.DirectionalLight(0xffffff,1.5);blue.position.set(3,-1,2);scene.add(blue);
   try {renderer=new THREE.WebGLRenderer({alpha:true,antialias:true});renderer.setPixelRatio(Math.min(devicePixelRatio,1.5));container.appendChild(renderer.domElement);}catch{return;}
   const resize=()=>{renderer.setSize(innerWidth,innerHeight);camera.aspect=innerWidth/innerHeight;camera.updateProjectionMatrix();};resize();
-  Promise.all([new GLTFLoader().loadAsync("/assets/images/logo2.glb"),fetch("/assets/images/logo-regions.bin").then(r=>{if(!r.ok)throw new Error("Logo regions unavailable");return r.arrayBuffer();})]).then(([g,regionBuffer])=>{
+  Promise.all([new GLTFLoader().loadAsync("/assets/images/logo/creator-touch-3d.glb"),fetch("/assets/images/logo/creator-touch-regions.bin").then(r=>{if(!r.ok)throw new Error("Logo regions unavailable");return r.arrayBuffer();})]).then(([g,regionBuffer])=>{
    const regions=new Uint8Array(regionBuffer);
    if(disposed){g.scene.traverse(o=>{if(o.isMesh){o.geometry.dispose();const m=Array.isArray(o.material)?o.material:[o.material];m.forEach(x=>x.dispose());}});return;}
    const object=g.scene;const box=new THREE.Box3().setFromObject(object);const center=box.getCenter(new THREE.Vector3());const size=box.getSize(new THREE.Vector3());
@@ -25,5 +25,5 @@ export default function LogoScene(){
   const draw=()=>{if(disposed)return;frame=requestAnimationFrame(draw);if(document.hidden)return;const t=clock.getElapsedTime();if(model){const mobile=innerWidth<760;const progress=Math.min(scrollY/Math.max(innerHeight,1),1);if(mobile){const ms=baseScale*.5;model.scale.set(ms,-ms,ms);model.position.x=.55;model.position.y=-.25-progress*.15;material.opacity=Math.max(.2,.7-progress*1.2);}else{model.scale.set(baseScale,-baseScale,baseScale);model.position.x=1.45-progress*.45;model.position.y=0;material.opacity=1;}model.rotation.y=reduced?-.2:Math.sin(t*.22)*.22+scrollY*.00022;model.rotation.z=reduced?0:Math.sin(t*.16)*.045;}renderer.render(scene,camera);};draw();
   window.addEventListener("resize",resize);return()=>{disposed=true;cancelAnimationFrame(frame);window.removeEventListener("resize",resize);scene.traverse(o=>{if(o.isMesh)o.geometry.dispose();});material.dispose();renderer.dispose();renderer.domElement.remove();};
  },[]);
- return <div ref={host} className="cs-scene" aria-hidden="true"><img className="cs-logo-fallback" src="/assets/images/creator_touch.png" alt="" /></div>;
+ return <div ref={host} className="cs-scene" aria-hidden="true"><img className="cs-logo-fallback" src="/assets/images/logo/creator-touch.png" alt="" /></div>;
 }

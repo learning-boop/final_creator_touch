@@ -24,18 +24,62 @@ function ContactForm() {
   const [fields, setFields] = useState({ name: "", phone: "", email: "", needs: [] as string[], message: "" });
   const [status, setStatus] = useState<"idle" | "sending" | "sent" | "error">("idle");
 
+  // OTP state
+  const [otpStep, setOtpStep] = useState<"none" | "sending" | "sent" | "verifying" | "verified">("none");
+  const [otpCode, setOtpCode] = useState("");
+  const [otpError, setOtpError] = useState("");
+  const [otpCooldown, setOtpCooldown] = useState(0);
+
   const toggleNeed = (need: string) => setFields(f => ({
     ...f,
     needs: f.needs.includes(need) ? f.needs.filter(n => n !== need) : [...f.needs, need],
   }));
 
+  const requestOtp = async () => {
+    if (!fields.phone.trim()) { setOtpError("Enter your phone number first"); return; }
+    setOtpStep("sending");
+    setOtpError("");
+    try {
+      const res = await fetch("/api/otp/request", {
+        method: "POST",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify({ phone: fields.phone.trim() }),
+      });
+      const data = await res.json();
+      if (!res.ok) { setOtpError(data.error || "Failed to send OTP"); setOtpStep("none"); return; }
+      setOtpStep("sent");
+      setOtpCooldown(60);
+      const timer = setInterval(() => setOtpCooldown(c => { if (c <= 1) { clearInterval(timer); return 0; } return c - 1; }), 1000);
+    } catch { setOtpError("Network error"); setOtpStep("none"); }
+  };
+
+  const verifyOtp = async () => {
+    if (!otpCode.trim()) { setOtpError("Enter the OTP code"); return; }
+    setOtpStep("verifying");
+    setOtpError("");
+    try {
+      const res = await fetch("/api/otp/verify", {
+        method: "POST",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify({ phone: fields.phone.trim(), code: otpCode.trim() }),
+      });
+      const data = await res.json();
+      if (!res.ok) { setOtpError(data.error || "Verification failed"); setOtpStep("sent"); return; }
+      setOtpStep("verified");
+    } catch { setOtpError("Network error"); setOtpStep("sent"); }
+  };
+
   const handle = (e: React.FormEvent) => {
     e.preventDefault();
+    if (fields.phone.trim() && otpStep !== "verified") {
+      setOtpError("Please verify your phone number first");
+      return;
+    }
     setStatus("sending");
-    fetch("https://formspree.io/f/YOUR_FORM_ID", {
+    fetch("/api/contact", {
       method: "POST",
-      headers: { "Content-Type": "application/json", Accept: "application/json" },
-      body: JSON.stringify({ ...fields, needs: fields.needs.join(", ") }),
+      headers: { "Content-Type": "application/json" },
+      body: JSON.stringify(fields),
     })
       .then(r => r.ok ? setStatus("sent") : setStatus("error"))
       .catch(() => setStatus("error"));
@@ -63,9 +107,34 @@ function ContactForm() {
         </div>
         <div className="flex flex-col gap-2">
           <label htmlFor="ct-phone" className={LABEL}>Phone / WhatsApp</label>
-          <input id="ct-phone" name="phone" type="tel" className={inputCls}
-            value={fields.phone} onChange={e => setFields(f => ({ ...f, phone: e.target.value }))}
-            placeholder="+91 98859 33339" />
+          <div className="flex gap-2">
+            <input id="ct-phone" name="phone" type="tel" className={`${inputCls} flex-1`}
+              value={fields.phone} onChange={e => { setFields(f => ({ ...f, phone: e.target.value })); if (otpStep === "verified") setOtpStep("none"); }}
+              placeholder="+91 98859 33339" disabled={otpStep === "verified"} />
+            {otpStep === "verified" ? (
+              <span className="inline-flex items-center gap-1.5 px-4 py-3 rounded-[10px] bg-ct-green/12 text-ct-green text-[13px] font-medium whitespace-nowrap border border-ct-green/20">
+                &#10003; Verified
+              </span>
+            ) : (
+              <button type="button" onClick={requestOtp}
+                disabled={otpStep === "sending" || otpCooldown > 0}
+                className="px-4 py-3 rounded-[10px] bg-ct-fg/8 border border-ct-fg/14 text-ct-fg/70 text-[13px] font-medium cursor-pointer hover:bg-ct-fg/12 transition-colors disabled:opacity-40 disabled:cursor-not-allowed whitespace-nowrap">
+                {otpStep === "sending" ? "Sending\u2026" : otpCooldown > 0 ? `Resend (${otpCooldown}s)` : "Send OTP"}
+              </button>
+            )}
+          </div>
+          {otpStep === "sent" && (
+            <div className="flex gap-2 mt-1">
+              <input type="text" inputMode="numeric" maxLength={6} placeholder="Enter 6-digit OTP"
+                className={`${inputCls} flex-1`} value={otpCode}
+                onChange={e => setOtpCode(e.target.value.replace(/\D/g, "").slice(0, 6))} />
+              <button type="button" onClick={verifyOtp}
+                className="px-4 py-3 rounded-[10px] bg-ct-pink text-ct-bg text-[13px] font-medium cursor-pointer hover:bg-ct-pink/85 transition-colors disabled:opacity-50 whitespace-nowrap">
+                Verify
+              </button>
+            </div>
+          )}
+          {otpError && <span className="text-[12px] text-ct-pink mt-0.5">{otpError}</span>}
         </div>
         <div className="col-span-full flex flex-col gap-2">
           <label htmlFor="ct-email" className={LABEL}>Email</label>
@@ -119,13 +188,13 @@ export default function ContactPage() {
       {/* Nav */}
       <header className="sticky top-0 z-50 flex items-center justify-between px-7 py-4 bg-ct-bg/88 backdrop-blur-[18px] border-b border-ct-fg/10">
         <Link href="/" className="flex items-center gap-2.5 no-underline text-ct-fg">
-          <img src="/assets/images/creator_touch.png" alt="Creators Touch" className="w-8 h-8" />
+          <img src="/assets/images/logo/creator-touch.png" alt="Creators Touch" className="w-8 h-8" />
           <span className="text-[13px] font-semibold tracking-[-0.03em]">Creators Touch</span>
         </Link>
         <nav className="flex items-center gap-5 font-mono text-[10px] tracking-[0.14em] uppercase">
           <Link href="/" className="text-ct-fg/50 no-underline hover:text-ct-fg transition-colors">Home</Link>
           <Link href="/services" className="text-ct-fg/50 no-underline hover:text-ct-fg transition-colors">Services</Link>
-          <Link href="/work" className="text-ct-fg/50 no-underline hover:text-ct-fg transition-colors">Work</Link>
+          <Link href="/work" className="text-ct-fg/50 no-underline hover:text-ct-fg transition-colors">Portfolio</Link>
           <Link href="/about" className="text-ct-fg/50 no-underline hover:text-ct-fg transition-colors">About</Link>
         </nav>
       </header>
@@ -179,7 +248,7 @@ export default function ContactPage() {
 
             {/* Consultation image */}
             <div className="rounded-[20px] overflow-hidden hidden lg:block">
-              <img src="/assets/images/ChatGPT Image Aug 19, 2026, 04_54_16 PM (9).png"
+              <img src="/assets/images/sections/consultation.png"
                 alt="A friendly consultation meeting at Creators Touch" loading="lazy"
                 className="w-full block object-cover aspect-[4/3]" />
             </div>

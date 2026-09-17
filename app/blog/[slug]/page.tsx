@@ -1,17 +1,21 @@
 import { notFound } from "next/navigation";
 import type { Metadata } from "next";
-import { getBlogPost, BLOG_POSTS } from "@/app/_data/blog-posts";
+import { prisma } from "@/lib/prisma";
 
 type Props = { params: Promise<{ slug: string }> };
 
 export async function generateStaticParams() {
-  return BLOG_POSTS.map((p) => ({ slug: p.slug }));
+  const posts = await prisma.blogPost.findMany({
+    where: { published: true },
+    select: { slug: true },
+  });
+  return posts.map((p) => ({ slug: p.slug }));
 }
 
 export async function generateMetadata({ params }: Props): Promise<Metadata> {
   const { slug } = await params;
-  const post = getBlogPost(slug);
-  if (!post) return {};
+  const post = await prisma.blogPost.findUnique({ where: { slug } });
+  if (!post || !post.published) return {};
   return {
     title: `${post.title} — Creators Touch Global`,
     description: post.excerpt,
@@ -22,7 +26,7 @@ export async function generateMetadata({ params }: Props): Promise<Metadata> {
       url: `https://creatorstouchglobal.com/blog/${slug}`,
       type: "article",
       siteName: "Creators Touch Global",
-      images: [{ url: `https://creatorstouchglobal.com${post.cover}`, alt: post.title }],
+      images: post.coverImage ? [{ url: `https://creatorstouchglobal.com${post.coverImage}`, alt: post.title }] : [],
     },
     twitter: {
       card: "summary",
@@ -48,15 +52,28 @@ function S(css: string): React.CSSProperties {
   return o as React.CSSProperties;
 }
 
+function formatDate(d: Date | null) {
+  if (!d) return "";
+  return d.toLocaleDateString("en-US", { month: "short", year: "numeric" });
+}
+
 export default async function BlogPostPage({ params }: Props) {
   const { slug } = await params;
-  const post = getBlogPost(slug);
-  if (!post) notFound();
+  const post = await prisma.blogPost.findUnique({ where: { slug } });
+  if (!post || !post.published) notFound();
 
   // Find adjacent posts for navigation
-  const idx = BLOG_POSTS.findIndex((p) => p.slug === slug);
-  const prev = idx > 0 ? BLOG_POSTS[idx - 1] : null;
-  const next = idx < BLOG_POSTS.length - 1 ? BLOG_POSTS[idx + 1] : null;
+  const allPosts = await prisma.blogPost.findMany({
+    where: { published: true },
+    orderBy: { publishedAt: "desc" },
+    select: { slug: true, title: true },
+  });
+  const idx = allPosts.findIndex((p) => p.slug === slug);
+  const prev = idx > 0 ? allPosts[idx - 1] : null;
+  const next = idx < allPosts.length - 1 ? allPosts[idx + 1] : null;
+
+  // Split body into paragraphs (stored as \n\n separated)
+  const paragraphs = post.body.split("\n\n").filter(Boolean);
 
   const articleJsonLd = {
     "@context": "https://schema.org",
@@ -64,10 +81,10 @@ export default async function BlogPostPage({ params }: Props) {
     headline: post.title,
     description: post.excerpt,
     author: { "@type": "Organization", name: "Creators Touch Global", url: "https://creatorstouchglobal.com" },
-    publisher: { "@type": "Organization", name: "Creators Touch Global", logo: { "@type": "ImageObject", url: "https://creatorstouchglobal.com/assets/images/creator_touch.png" } },
+    publisher: { "@type": "Organization", name: "Creators Touch Global", logo: { "@type": "ImageObject", url: "https://creatorstouchglobal.com/assets/images/logo/creator-touch.png" } },
     url: `https://creatorstouchglobal.com/blog/${slug}`,
     mainEntityOfPage: `https://creatorstouchglobal.com/blog/${slug}`,
-    articleSection: post.cat,
+    articleSection: post.category,
     inLanguage: "en",
   };
 
@@ -78,13 +95,13 @@ export default async function BlogPostPage({ params }: Props) {
       {/* Nav */}
       <header style={S("position:sticky;top:0;z-index:50;display:flex;align-items:center;justify-content:space-between;padding:16px 28px;background:rgba(8,9,10,0.88);backdrop-filter:blur(18px);border-bottom:" + HAIR)}>
         <a href="/" style={S("display:flex;align-items:center;gap:10px;text-decoration:none;color:#F4F3F1")}>
-          <img src="/assets/images/creator_touch.png" alt="Creators Touch" style={S("width:32px;height:32px")} />
+          <img src="/assets/images/logo/creator-touch.png" alt="Creators Touch" style={S("width:32px;height:32px")} />
           <span style={S("font-size:13px;font-weight:600;letter-spacing:-0.03em")}>Creators Touch</span>
         </a>
         <nav style={S(`display:flex;align-items:center;gap:20px;${MONO};font-size:10px;letter-spacing:0.14em;text-transform:uppercase`)}>
           <a href="/" style={S("color:rgba(244,243,241,0.5);text-decoration:none")}>Home</a>
           <a href="/blog" style={S("color:rgba(244,243,241,0.5);text-decoration:none")}>All Articles</a>
-          <a href="/work" style={S("color:rgba(244,243,241,0.5);text-decoration:none")}>Work</a>
+          <a href="/work" style={S("color:rgba(244,243,241,0.5);text-decoration:none")}>Portfolio</a>
           <a href="/services" style={S("color:rgba(244,243,241,0.5);text-decoration:none")}>Services</a>
         </nav>
       </header>
@@ -93,15 +110,15 @@ export default async function BlogPostPage({ params }: Props) {
       <section style={S("padding:96px 28px 64px;border-bottom:" + HAIR)}>
         <div style={S("max-width:720px;margin:0 auto")}>
           <div style={S("display:flex;align-items:center;gap:14px;margin-bottom:32px;flex-wrap:wrap")}>
-            <span style={{ ...S(`${MONO};font-size:10px;letter-spacing:0.16em;text-transform:uppercase;padding:5px 14px;border-radius:100px;border:1px solid`), color: post.color, borderColor: post.color + "44", background: post.color + "12" }}>
-              {post.cat}
+            <span style={{ ...S(`${MONO};font-size:10px;letter-spacing:0.16em;text-transform:uppercase;padding:5px 14px;border-radius:100px;border:1px solid`), color: post.coverColor, borderColor: post.coverColor + "44", background: post.coverColor + "12" }}>
+              {post.category}
             </span>
             <span style={S(`${MONO};font-size:10px;letter-spacing:0.14em;text-transform:uppercase;color:rgba(244,243,241,0.35)`)}>
-              {post.date}
+              {formatDate(post.publishedAt)}
             </span>
             <span style={S("width:2px;height:2px;border-radius:50%;background:rgba(244,243,241,0.22)")} />
             <span style={S(`${MONO};font-size:10px;letter-spacing:0.14em;text-transform:uppercase;color:rgba(244,243,241,0.35)`)}>
-              {post.read} read
+              {post.readTime} read
             </span>
           </div>
           <h1 style={S("margin:0 0 28px;font-size:clamp(32px,5vw,56px);font-weight:500;line-height:1.08;letter-spacing:-0.04em")}>
@@ -114,13 +131,15 @@ export default async function BlogPostPage({ params }: Props) {
       </section>
 
       {/* Cover image */}
-      <div style={S("max-width:720px;margin:0 auto;padding:40px 28px 0")}>
-        <img src={post.cover} alt={post.title} style={S("width:100%;aspect-ratio:16/9;object-fit:cover;border-radius:16px;display:block")} />
-      </div>
+      {post.coverImage && (
+        <div style={S("max-width:720px;margin:0 auto;padding:40px 28px 0")}>
+          <img src={post.coverImage} alt={post.title} style={S("width:100%;aspect-ratio:16/9;object-fit:cover;border-radius:16px;display:block")} />
+        </div>
+      )}
 
       {/* Article body */}
       <article style={S("max-width:720px;margin:0 auto;padding:48px 28px")}>
-        {post.body.map((para, i) => (
+        {paragraphs.map((para, i) => (
           <p key={i} style={S("margin:0 0 28px;font-size:17px;line-height:1.8;color:rgba(244,243,241,0.72);letter-spacing:-0.01em")}>
             {para}
           </p>
@@ -128,7 +147,7 @@ export default async function BlogPostPage({ params }: Props) {
 
         {/* Author */}
         <div style={S(`margin-top:64px;padding-top:32px;border-top:${HAIR};display:flex;align-items:center;gap:16px`)}>
-          <img src="/assets/images/creator_touch.png" alt="" style={S("width:40px;height:40px;border-radius:50%;background:#0E0F12")} />
+          <img src="/assets/images/logo/creator-touch.png" alt="" style={S("width:40px;height:40px;border-radius:50%;background:#0E0F12")} />
           <div>
             <span style={S("font-size:14px;font-weight:500;letter-spacing:-0.02em;display:block")}>Creators Touch Team</span>
             <span style={S(`${MONO};font-size:9px;letter-spacing:0.16em;text-transform:uppercase;color:rgba(244,243,241,0.35)`)}>Vijayawada, India</span>

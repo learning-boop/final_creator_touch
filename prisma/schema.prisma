@@ -6,6 +6,20 @@ datasource db {
   provider = "postgresql"
 }
 
+// ─── OTP verification ───
+model Otp {
+  id        String   @id @default(cuid())
+  phone     String
+  codeHash  String   // bcrypt hash of the 6-digit code
+  expiresAt DateTime
+  verified  Boolean  @default(false)
+  attempts  Int      @default(0) // track failed attempts
+  createdAt DateTime @default(now())
+
+  @@index([phone, expiresAt])
+  @@map("otps")
+}
+
 // ─── Contact form submissions ───
 model ContactSubmission {
   id        String   @id @default(cuid())
@@ -31,6 +45,7 @@ model BlogPost {
   excerpt     String
   category    String
   body        String   // markdown or HTML content
+  coverImage  String?  // path to cover image e.g. /assets/images/blog-cover-images/...
   coverColor  String   @default("#FF3D8F") // accent colour for the card header
   readTime    String   @default("4 min")
   published   Boolean  @default(false)
