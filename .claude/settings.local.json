@@ -108,7 +108,8 @@
       "Bash(cd \"D:/creative_touch/creatortouch/creator-structure/public/assets/images/projects\" && mkdir -p threadlift rma fillers-skin prp-treatment aptos-uk botox buttock-lift && mv \"../Screenshot 2026-09-18 181155.png\" threadlift/screen-1.png && mv \"../Screenshot 2026-09-18 181227.png\" rma/screen-1.png && mv \"../Screenshot 2026-09-18 181251.png\" fillers-skin/screen-1.png && mv \"../Screenshot 2026-09-18 181318.png\" prp-treatment/screen-1.png && mv \"../Screenshot 2026-09-18 181338.png\" aptos-uk/screen-1.png && mv \"../Screenshot 2026-09-18 181414.png\" botox/screen-1.png && mv \"../Screenshot 2026-09-18 181449.png\" buttock-lift/screen-1.png)",
       "Bash(cd \"D:/creative_touch/creatortouch/creator-structure\" && npx next build 2>&1 | tail -40)",
       "Bash(cd \"D:/creative_touch/creatortouch/creator-structure\" && npx next build 2>&1 | tail -20)",
-      "Bash(cd \"D:/creative_touch/creatortouch/creator-structure\" && npx next build 2>&1 | tail -15)"
+      "Bash(cd \"D:/creative_touch/creatortouch/creator-structure\" && npx next build 2>&1 | tail -15)",
+      "Bash(cd \"D:/creative_touch/creatortouch/creator-structure\" && npx prisma generate 2>&1 | tail -5 && npx next build 2>&1 | tail -15)"
     ]
   }
 }

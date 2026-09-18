@@ -104,7 +104,7 @@ export default async function BlogPage() {
               {/* Cover image */}
               <div style={S("aspect-ratio:16/9;position:relative;overflow:hidden")}>
                 {post.coverImage && <img src={post.coverImage} alt={post.title} loading="lazy" style={S("width:100%;height:100%;object-fit:cover;display:block")} />}
-                <span style={{ ...S("position:absolute;top:14px;left:14px;font-size:11px;font-weight:500;letter-spacing:0.08em;text-transform:uppercase;padding:6px 16px;border-radius:100px;border:1px solid;backdrop-filter:blur(8px)"), color: post.coverColor, borderColor: post.coverColor + "55", background: post.coverColor + "18" }}>{post.category}</span>
+                <span style={{ ...S("position:absolute;top:14px;left:14px;font-size:11px;font-weight:500;letter-spacing:0.08em;text-transform:uppercase;padding:6px 16px;border-radius:100px;border:1px solid;backdrop-filter:blur(8px)"), color: post.coverColor ?? undefined, borderColor: (post.coverColor ?? "") + "55", background: (post.coverColor ?? "") + "18" }}>{post.category}</span>
               </div>
 
               {/* Content */}
@@ -117,8 +117,8 @@ export default async function BlogPage() {
                 <h2 style={S("margin:0;font-size:clamp(15px,1.5vw,18px);font-weight:400;line-height:1.35;letter-spacing:-0.02em")}>{post.title}</h2>
                 <p style={S("margin:0;font-size:13px;line-height:1.65;color:rgba(244,243,241,0.5)")}>{post.excerpt}</p>
                 <div style={S("margin-top:auto;padding-top:16px;border-top:1px solid rgba(244,243,241,0.07);display:flex;align-items:center;gap:8px")}>
-                  <span style={{ ...S(`${MONO};font-size:9px;letter-spacing:0.14em;text-transform:uppercase`), color: post.coverColor }}>Read article</span>
-                  <span style={{ color: post.coverColor }}>&rarr;</span>
+                  <span style={{ ...S(`${MONO};font-size:9px;letter-spacing:0.14em;text-transform:uppercase`), color: post.coverColor ?? undefined }}>Read article</span>
+                  <span style={{ color: post.coverColor ?? undefined }}>&rarr;</span>
                 </div>
               </div>
             </a>

@@ -9,7 +9,7 @@ export async function generateStaticParams() {
     where: { published: true },
     select: { slug: true },
   });
-  return posts.map((p) => ({ slug: p.slug }));
+  return posts.map((p: { slug: string }) => ({ slug: p.slug }));
 }
 
 export async function generateMetadata({ params }: Props): Promise<Metadata> {
@@ -68,7 +68,7 @@ export default async function BlogPostPage({ params }: Props) {
     orderBy: { publishedAt: "desc" },
     select: { slug: true, title: true },
   });
-  const idx = allPosts.findIndex((p) => p.slug === slug);
+  const idx = allPosts.findIndex((p: { slug: string }) => p.slug === slug);
   const prev = idx > 0 ? allPosts[idx - 1] : null;
   const next = idx < allPosts.length - 1 ? allPosts[idx + 1] : null;
 
@@ -139,7 +139,7 @@ export default async function BlogPostPage({ params }: Props) {
 
       {/* Article body */}
       <article style={S("max-width:720px;margin:0 auto;padding:48px 28px")}>
-        {paragraphs.map((para, i) => (
+        {paragraphs.map((para: string, i: number) => (
           <p key={i} style={S("margin:0 0 28px;font-size:17px;line-height:1.8;color:rgba(244,243,241,0.72);letter-spacing:-0.01em")}>
             {para}
           </p>
