@@ -103,7 +103,12 @@
       "Bash(cd \"D:\\\\creative_touch\\\\creatortouch\\\\creator-structure\" && npx tsc --noEmit 2>&1 | head -30)",
       "Bash(cd \"D:\\\\creative_touch\\\\creatortouch\\\\creator-structure\" && npx tsc --noEmit 2>&1 | head -10)",
       "Bash(cd \"D:\\\\creative_touch\\\\creatortouch\\\\creator-structure\" && DATABASE_URL=\"postgresql://neondb_owner:npg_UYqC8bVz6jJK@ep-shy-queen-b3pv9wy0-pooler.c-4.ap-southeast-1.aws.neon.tech/neondb?sslmode=require\" npx tsx lib/seed-blogs.ts 2>&1)",
-      "Bash(cd \"D:\\\\creative_touch\\\\creatortouch\\\\creator-structure\" && npx tsc --noEmit 2>&1)"
+      "Bash(cd \"D:\\\\creative_touch\\\\creatortouch\\\\creator-structure\" && npx tsc --noEmit 2>&1)",
+      "Bash(find \"D:/creative_touch/creatortouch/creator-structure/public/assets/images/\" -maxdepth 1 -type d | sort && echo \"---\" && find \"D:/creative_touch/creatortouch/creator-structure/public/assets/images/\" -iname \"*thread*\" -o -iname \"*rma*\" -o -iname \"*filler*\" -o -iname \"*prp*\" -o -iname \"*aptos*\" -o -iname \"*botox*\" -o -iname \"*buttock*\" 2>/dev/null)",
+      "Bash(cd \"D:/creative_touch/creatortouch/creator-structure/public/assets/images/projects\" && mkdir -p threadlift rma fillers-skin prp-treatment aptos-uk botox buttock-lift && mv \"../Screenshot 2026-09-18 181155.png\" threadlift/screen-1.png && mv \"../Screenshot 2026-09-18 181227.png\" rma/screen-1.png && mv \"../Screenshot 2026-09-18 181251.png\" fillers-skin/screen-1.png && mv \"../Screenshot 2026-09-18 181318.png\" prp-treatment/screen-1.png && mv \"../Screenshot 2026-09-18 181338.png\" aptos-uk/screen-1.png && mv \"../Screenshot 2026-09-18 181414.png\" botox/screen-1.png && mv \"../Screenshot 2026-09-18 181449.png\" buttock-lift/screen-1.png)",
+      "Bash(cd \"D:/creative_touch/creatortouch/creator-structure\" && npx next build 2>&1 | tail -40)",
+      "Bash(cd \"D:/creative_touch/creatortouch/creator-structure\" && npx next build 2>&1 | tail -20)",
+      "Bash(cd \"D:/creative_touch/creatortouch/creator-structure\" && npx next build 2>&1 | tail -15)"
     ]
   }
 }

@@ -34,46 +34,52 @@ const CLIENTS = [
 
 const PROJECTS = [
   {
-    title: "Trust Hospital", category: "Healthcare · Website Design", year: "2023", tag: "Web + UX",
-    desc: "A full-featured hospital website covering patient information, specialist profiles, department pages, and an appointment booking flow — built to establish trust and drive conversions.",
-    img: "/assets/images/projects/trust-hospital/screen-1.png",
-    url: "https://trusthospital.com", caseStudy: "/work/trust-hospital"
+    title: "Thread Lift", category: "Aesthetics · Thread Treatments", year: "2025", tag: "Web + Brand",
+    desc: "A premium thread lift clinic website with expert treatment guides, before/after galleries, and a seamless consultation booking flow — built to convert high-intent visitors.",
+    img: "/assets/images/projects/threadlift/screen-1.png",
+    url: "https://threadlift.uk"
   },
   {
-    title: "Anjaneya Jewellery", category: "Jewellery & Luxury · E-commerce", year: "2023", tag: "Brand + E-comm",
-    desc: "A high-end jewellery showcase with curated collection pages, custom order enquiry, a photo lookbook, and certification details — designed to reflect premium brand positioning.",
-    img: "/assets/images/projects/anjaneya-jewellery/screen-1.png",
-    url: "https://anjaneyajewellery.com", caseStudy: "/work/anjaneya-jewellery"
+    title: "Rugby Medical Aesthetics", category: "Aesthetics · Medical Clinic", year: "2025", tag: "Web + UX",
+    desc: "A medically led aesthetics clinic website delivering personalised consultations and natural-looking results — designed for trust, discretion, and easy booking.",
+    img: "/assets/images/projects/rma/screen-1.png",
+    url: "https://rugbymedicalaesthetics.co.uk"
   },
   {
-    title: "Change NGO", category: "Non-profit · Campaign Site", year: "2024", tag: "Web + Strategy",
-    desc: "An impact-driven NGO platform with donation funnels, volunteer registration, campaign microsites, and impact reporting dashboards — built to inspire action and drive giving.",
-    img: "/assets/images/projects/change-ngo/screen-1.png",
-    url: "https://change.ngo", caseStudy: "/work/change-ngo"
-  },
-  {
-    title: "Dr. Matla", category: "Healthcare · Personal Brand", year: "2024", tag: "Brand + SEO",
-    desc: "A personal medical practice website featuring doctor profile, areas of specialisation, patient testimonials, and an online consultation booking system.",
-    img: "/assets/images/projects/dr-matla/screen-1.png",
-    url: "https://drmatla.com", caseStudy: "/work/dr-matla"
-  },
-  {
-    title: "St. Paul's School VJA", category: "Education · Institution Site", year: "2024", tag: "Portal + SEO",
-    desc: "A comprehensive school website with an admissions portal, academic calendar, faculty directory, event gallery, and an online fee payment module.",
-    img: "/assets/images/projects/st-pauls-school-vja/screen-1.png",
-    url: "https://stpaulsschoolvja.com", caseStudy: "/work/st-pauls-school-vja"
-  },
-  {
-    title: "Meditron CDC", category: "Healthcare · Paediatric Therapy", year: "2025", tag: "Web + Brand",
+    title: "Meditron CDC", category: "Healthcare · Paediatric Therapy", year: "2025", tag: "Web + SEO",
     desc: "A specialist child development centre website covering speech, occupational and physiotherapy services — designed to build trust with families and drive appointment bookings.",
     img: "/assets/images/projects/meditron-cdc/screen-1.png",
     url: "https://meditroncdc.com", caseStudy: "/work/meditron-cdc"
   },
   {
-    title: "Kensley Aesthetics", category: "Aesthetics · Clinic", year: "2025", tag: "Brand + Web",
-    desc: "A premium aesthetics clinic website for a Newcastle & London practice — showcasing treatments, before/after galleries, and an online consultation booking system.",
-    img: "/assets/images/projects/kensley-aesthetics/screen-1.png",
-    url: "https://kensleyaesthetics.com", caseStudy: "/work/kensleyaesthetics"
+    title: "Fillers Skin", category: "Aesthetics · Dermal Fillers", year: "2025", tag: "Brand + Web",
+    desc: "A refined private aesthetics website for bespoke filler treatments — delivering surgical precision and absolute discretion through an editorial, luxury design.",
+    img: "/assets/images/projects/fillers-skin/screen-1.png",
+    url: "https://fillers.skin"
+  },
+  {
+    title: "PRP Treatment", category: "Aesthetics · Skin Rejuvenation", year: "2025", tag: "Web + Brand",
+    desc: "A specialist PRP facial rejuvenation website helping patients restore radiant skin — with treatment guides, results gallery, and consultation booking.",
+    img: "/assets/images/projects/prp-treatment/screen-1.png",
+    url: "https://prp.skin"
+  },
+  {
+    title: "Aptos UK", category: "Aesthetics · Thread Lifting", year: "2025", tag: "Web + UX",
+    desc: "An advanced non-surgical facial lifting website showcasing Aptos Excellence technology — built to educate, build confidence, and drive consultations.",
+    img: "/assets/images/projects/aptos-uk/screen-1.png",
+    url: "https://aptosuk.com"
+  },
+  {
+    title: "Botox Newcastle", category: "Aesthetics · Anti-wrinkle", year: "2025", tag: "Brand + Web",
+    desc: "A doctor-led Botox clinic website for Jesmond, Newcastle — refined, natural results communicated through clean design and a frictionless booking experience.",
+    img: "/assets/images/projects/botox/screen-1.png",
+    url: "https://botoxuk.com"
+  },
+  {
+    title: "Buttock Lift", category: "Aesthetics · Body Contouring", year: "2025", tag: "Web + Brand",
+    desc: "A doctor-led non-surgical buttock enhancement website — subtle, natural results with collagen-stimulating treatments, designed to build trust and drive bookings.",
+    img: "/assets/images/projects/buttock-lift/screen-1.png",
+    url: "https://buttocklift.uk"
   },
 ];
 
@@ -394,7 +400,7 @@ export default function CreatorsTouchHome({ visualReview = false } = {}) {
             </button>
           </div>
           <nav className="flex flex-col">
-            {[["/work","Work"],["/services","Services"],["/blog","Blog"],["/about","About"],["/contact","Contact"]].map(([href, label], i) => (
+            {[["/work","Portfolio"],["/services","Services"],["/blog","Blog"],["/about","About"],["/contact","Contact"]].map(([href, label], i) => (
               <a key={label} href={href} onClick={() => setMenuOpen(false)}
                 className="ct-menu-item text-[clamp(36px,9vw,60px)] font-normal tracking-[-0.04em] text-ct-fg py-3 border-b border-ct-fg/8 leading-[1.1]"
                 style={{ animationDelay: `${i * 60 + 40}ms` }}>
@@ -554,11 +560,12 @@ export default function CreatorsTouchHome({ visualReview = false } = {}) {
             Every project here solved a real problem for a real business.
           </p>
         </div>
-        <div data-reveal="1" className="relative rounded-[20px] overflow-hidden mb-12">
-          <img src={IMG3} alt="Creators Touch team reviewing work across devices" loading="lazy"
-            className="w-full h-auto block" />
-          <div className="absolute inset-0 bg-[linear-gradient(90deg,rgba(8,9,10,0.65)_0%,transparent_55%)] flex items-end p-10">
-            <p className="font-mono m-0 text-[11px] tracking-[0.18em] uppercase text-ct-fg/65">Healthcare &middot; Education &middot; Retail &middot; Jewellery &middot; Aesthetics &middot; NGO</p>
+        <div data-reveal="1" className="relative rounded-[20px] overflow-hidden mb-12 aspect-video">
+          <video src="/assets/videos/work-showreel.mp4" autoPlay loop muted playsInline
+            className="w-full h-full object-cover block" />
+          <div className="absolute inset-0 bg-[rgba(8,9,10,0.45)]" />
+          <div className="absolute inset-0 bg-[linear-gradient(0deg,rgba(8,9,10,0.75)_0%,transparent_40%)] flex items-end p-10">
+            <p className="font-mono m-0 text-[11px] tracking-[0.18em] uppercase text-ct-fg/65">Aesthetics &middot; Healthcare &middot; Thread Lifting &middot; Dermal Fillers &middot; Body Contouring &middot; Skin Rejuvenation</p>
           </div>
         </div>
         <div data-stagger="1" className="grid grid-cols-1 min-[761px]:grid-cols-2 min-[1025px]:grid-cols-3 gap-7">

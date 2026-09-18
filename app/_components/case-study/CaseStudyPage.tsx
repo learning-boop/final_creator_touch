@@ -43,14 +43,29 @@ export default function CaseStudyPage({ cs }: { cs: CaseStudy }) {
 
   return (
     <div style={S("background:#08090A;color:#F4F3F1;font-family:Geist,Arial,sans-serif;min-height:100vh;overflow-x:hidden")}>
+      <style dangerouslySetInnerHTML={{ __html: `
+        .cs-results{display:grid;grid-template-columns:repeat(2,1fr)}
+        .cs-body-row{display:flex;flex-direction:column;gap:20px;margin-bottom:56px;padding-bottom:56px}
+        .cs-body-label{padding-top:0}
+        .cs-screens{display:grid;grid-template-columns:1fr;gap:12px;margin-bottom:56px;padding-bottom:56px}
+        .cs-nav{display:flex;flex-direction:column;gap:12px}
+        @media(min-width:640px){
+          .cs-results{grid-template-columns:repeat(4,1fr)}
+          .cs-screens{grid-template-columns:1fr 1fr}
+        }
+        @media(min-width:850px){
+          .cs-body-row{display:grid;grid-template-columns:200px 1fr;gap:48px;margin-bottom:80px;padding-bottom:80px}
+          .cs-nav{flex-direction:row;gap:20px}
+        }
+      `}} />
 
       {/* Nav */}
-      <header style={S("position:sticky;top:0;z-index:50;display:flex;align-items:center;justify-content:space-between;padding:16px 28px;background:rgba(8,9,10,0.88);backdrop-filter:blur(18px);border-bottom:" + HAIR)}>
+      <header style={S("position:sticky;top:0;z-index:50;display:flex;align-items:center;justify-content:space-between;padding:16px 20px;background:rgba(8,9,10,0.88);backdrop-filter:blur(18px);border-bottom:" + HAIR + ";gap:16px;flex-wrap:wrap")}>
         <a href="/" style={S("display:flex;align-items:center;gap:10px;text-decoration:none;color:#F4F3F1")}>
           <img src="/assets/images/logo/creator-touch.png" alt="Creators Touch" style={S("width:32px;height:32px")} />
           <span style={S("font-size:13px;font-weight:600;letter-spacing:-0.03em")}>Creators Touch</span>
         </a>
-        <nav style={S(`display:flex;align-items:center;gap:20px;${MONO};font-size:10px;letter-spacing:0.14em;text-transform:uppercase`)}>
+        <nav className="cs-nav" style={S(`align-items:center;${MONO};font-size:10px;letter-spacing:0.14em;text-transform:uppercase`)}>
           <a href="/" style={S("color:rgba(244,243,241,0.5);text-decoration:none")}>Home</a>
           <a href="/work" style={S("color:rgba(244,243,241,0.5);text-decoration:none")}>Portfolio</a>
           <a href="/services" style={S("color:rgba(244,243,241,0.5);text-decoration:none")}>Services</a>
@@ -103,7 +118,7 @@ export default function CaseStudyPage({ cs }: { cs: CaseStudy }) {
       )}
 
       {/* Results strip */}
-      <div style={S(`display:grid;grid-template-columns:repeat(4,1fr);border-bottom:${HAIR}`)}>
+      <div className="cs-results" style={S(`border-bottom:${HAIR}`)}>
         {cs.results.map((r) => (
           <div key={r.label} style={S(`padding:32px 28px;border-right:${HAIR};display:flex;flex-direction:column;gap:8px`)}>
             <span style={S(`font-size:clamp(22px,2.8vw,36px);font-weight:500;letter-spacing:-0.04em;color:${cs.accentColor}`)}>{r.value}</span>
@@ -113,22 +128,22 @@ export default function CaseStudyPage({ cs }: { cs: CaseStudy }) {
       </div>
 
       {/* Body */}
-      <div style={S("max-width:900px;margin:0 auto;padding:96px 28px")}>
+      <div style={S("max-width:900px;margin:0 auto;padding:48px 20px")}>
 
         {/* Summary */}
-        <div style={S("display:grid;grid-template-columns:200px 1fr;gap:48px;margin-bottom:80px;padding-bottom:80px;border-bottom:" + HAIR)}>
+        <div className="cs-body-row" style={S("border-bottom:" + HAIR)}>
           <span style={S(`${MONO};font-size:10px;letter-spacing:0.2em;text-transform:uppercase;color:rgba(244,243,241,0.35);padding-top:6px`)}>Overview</span>
           <p style={S("margin:0;font-size:clamp(17px,1.8vw,22px);line-height:1.6;color:rgba(244,243,241,0.75)")}>{cs.summary}</p>
         </div>
 
         {/* Challenge */}
-        <div style={S("display:grid;grid-template-columns:200px 1fr;gap:48px;margin-bottom:80px;padding-bottom:80px;border-bottom:" + HAIR)}>
+        <div className="cs-body-row" style={S("border-bottom:" + HAIR)}>
           <span style={S(`${MONO};font-size:10px;letter-spacing:0.2em;text-transform:uppercase;color:rgba(244,243,241,0.35);padding-top:6px`)}>The challenge</span>
           <p style={S("margin:0;font-size:17px;line-height:1.7;color:rgba(244,243,241,0.6)")}>{cs.challenge}</p>
         </div>
 
         {/* Approach */}
-        <div style={S("display:grid;grid-template-columns:200px 1fr;gap:48px;margin-bottom:80px;padding-bottom:80px;border-bottom:" + HAIR)}>
+        <div className="cs-body-row" style={S("border-bottom:" + HAIR)}>
           <span style={S(`${MONO};font-size:10px;letter-spacing:0.2em;text-transform:uppercase;color:rgba(244,243,241,0.35);padding-top:6px`)}>What we did</span>
           <div style={S("display:flex;flex-direction:column;gap:32px")}>
             {cs.approach.map((step, i) => {
@@ -150,7 +165,7 @@ export default function CaseStudyPage({ cs }: { cs: CaseStudy }) {
 
         {/* Screens */}
         {cs.images.screens.some((s) => !s.endsWith("screen-1.jpg") && !s.endsWith("screen-2.jpg") && !s.endsWith("screen-3.jpg")) && (
-          <div style={S("display:grid;grid-template-columns:1fr 1fr;gap:12px;margin-bottom:80px;padding-bottom:80px;border-bottom:" + HAIR)}>
+          <div className="cs-screens" style={S("border-bottom:" + HAIR)}>
             {cs.images.screens.map((src, i) => (
               <div key={i} style={S("aspect-ratio:16/10;overflow:hidden;border-radius:12px;background:#0C0D10")}>
                 <img src={src} alt={`${cs.client} screen ${i + 1}`} loading="lazy" style={S("width:100%;height:100%;object-fit:cover;display:block")} />
@@ -160,13 +175,13 @@ export default function CaseStudyPage({ cs }: { cs: CaseStudy }) {
         )}
 
         {/* Outcome */}
-        <div style={S("display:grid;grid-template-columns:200px 1fr;gap:48px;margin-bottom:80px;padding-bottom:80px;border-bottom:" + HAIR)}>
+        <div className="cs-body-row" style={S("border-bottom:" + HAIR)}>
           <span style={S(`${MONO};font-size:10px;letter-spacing:0.2em;text-transform:uppercase;color:rgba(244,243,241,0.35);padding-top:6px`)}>The outcome</span>
           <p style={S(`${SERIF};font-size:clamp(18px,2vw,26px);line-height:1.5;color:rgba(244,243,241,0.75);margin:0`)}>{cs.outcome}</p>
         </div>
 
         {/* Services */}
-        <div style={S("display:grid;grid-template-columns:200px 1fr;gap:48px")}>
+        <div className="cs-body-row" style={S("border-bottom:none;margin-bottom:0;padding-bottom:0")}>
           <span style={S(`${MONO};font-size:10px;letter-spacing:0.2em;text-transform:uppercase;color:rgba(244,243,241,0.35);padding-top:6px`)}>Services</span>
           <div style={S("display:flex;flex-wrap:wrap;gap:10px")}>
             {cs.services.map((s) => (

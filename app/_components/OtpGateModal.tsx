@@ -81,10 +81,10 @@ export default function OtpGateModal({ onVerified, onClose }: Props) {
 
         <div>
           <h2 style={{ margin: "0 0 8px", fontSize: 22, fontWeight: 500, letterSpacing: "-0.03em" }}>
-            Verify to continue
+            We think you&rsquo;re interested
           </h2>
           <p style={{ margin: 0, fontSize: 14, lineHeight: 1.6, color: "rgba(244,243,241,0.5)" }}>
-            Enter your phone number to view the live project. We&rsquo;ll send a one-time verification code.
+            Can we connect over a call? Verify your number to view the live project &mdash; or close this to continue browsing.
           </p>
         </div>
 
