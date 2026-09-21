@@ -294,6 +294,225 @@ export const CASE_STUDIES: CaseStudy[] = [
     },
     color: "#08090A",
     accentColor: "#C9A227",
+    nextSlug: "kensley-aesthetics",
+  },
+  {
+    slug: "kensley-aesthetics",
+    client: "Kensley Aesthetics",
+    url: "https://kensleyaesthetics.co.uk",
+    year: "2025",
+    category: "Aesthetics · Medical Clinic",
+    tagline: "Natural-looking results by experienced medical professionals.",
+    summary:
+      "Kensley Aesthetics is a consultation-led aesthetics clinic founded by Dr. Vini Matla, offering over 25 years of medical experience. We designed a warm, editorial website that balances clinical credibility with approachable luxury — driving consultations from patients who value expertise.",
+    challenge:
+      "Kensley needed to stand apart in a crowded UK aesthetics market. The website had to communicate decades of medical experience without feeling sterile, and attract patients who wanted natural results — not the overdone look they associated with high-street clinics.",
+    approach: [
+      "Editorial warmth: A navy and gold palette with refined serif typography — communicating heritage and medical authority while remaining inviting.",
+      "AI chat integration: A built-in chatbot that answers treatment questions instantly — reducing bounce and qualifying leads before they even book.",
+      "Treatment depth: Dedicated pages for surgical and non-surgical treatments with honest explanations of results, recovery, and suitability.",
+      "Trust architecture: Dr. Matla's credentials, patient testimonials, and before/after results woven throughout every page.",
+    ],
+    outcome:
+      "The website positioned Kensley as the trusted, experience-led choice in the region — consultation bookings increased significantly and the AI chatbot handled over 40% of initial patient queries.",
+    services: ["Website Design", "Development", "Brand Identity", "SEO", "AI Chatbot"],
+    results: [
+      { label: "Performance score", value: "95+" },
+      { label: "Mobile-first", value: "Yes" },
+      { label: "Consultation bookings", value: "+80%" },
+      { label: "Status", value: "Live" },
+    ],
+    images: {
+      hero: "/assets/images/projects/kensley-aesthetics/screen-1.png",
+      screens: [
+        "/assets/images/projects/kensley-aesthetics/screen-2.png",
+        "/assets/images/projects/kensley-aesthetics/screen-3.png",
+      ],
+    },
+    color: "#08090A",
+    accentColor: "#1B3A5C",
+    nextSlug: "dr-matla",
+  },
+  {
+    slug: "dr-matla",
+    client: "Dr Matla Aesthetics",
+    url: "https://drmatla.co.uk",
+    year: "2025",
+    category: "Aesthetics · Medical Clinic",
+    tagline: "Feel confident in expert hands — Newcastle's leading aesthetics clinic.",
+    summary:
+      "Dr Matla Aesthetics is an advanced cosmetic practice in Newcastle led by Dr Matla (MBBS, MRCGP, DFSRH) — offering medical and aesthetic treatments rooted in genuine clinical expertise. We built a bold, dark-themed website that commands authority and drives online bookings.",
+    challenge:
+      "Newcastle has dozens of aesthetics clinics. Dr Matla needed a website that made his medical credentials the centrepiece — positioning him not as another beautician, but as a qualified doctor patients could trust with their face and body.",
+    approach: [
+      "Dark, cinematic design: A moody, high-contrast visual language that immediately sets Dr Matla apart from the pastel aesthetics market.",
+      "Credential-led positioning: Medical qualifications, professional memberships, and clinical experience featured above the fold — trust first, services second.",
+      "Online booking: A streamlined book-online flow integrated directly into the hero and every treatment page.",
+      "Treatment education: Clear, jargon-free descriptions of each procedure with expected outcomes and recovery timelines.",
+    ],
+    outcome:
+      "The website became the primary driver of new patient consultations, with Dr Matla's Google ranking improving for key aesthetic treatment searches across Newcastle.",
+    services: ["Website Design", "Development", "Brand Identity", "SEO"],
+    results: [
+      { label: "Performance score", value: "94+" },
+      { label: "Mobile-first", value: "Yes" },
+      { label: "Enquiry flow", value: "Optimised" },
+      { label: "Status", value: "Live" },
+    ],
+    images: {
+      hero: "/assets/images/projects/dr-matla/screen-1.png",
+      screens: [
+        "/assets/images/projects/dr-matla/screen-2.png",
+      ],
+    },
+    color: "#08090A",
+    accentColor: "#C9A227",
+    nextSlug: "anjaneya-jewellery",
+  },
+  {
+    slug: "anjaneya-jewellery",
+    client: "Anjaneya Jewellery",
+    url: "https://anjaneyajewellery.com",
+    year: "2024",
+    category: "Retail · Jewellery",
+    tagline: "Masterpiece inspired by timeless tradition — crafting moments since 1985.",
+    summary:
+      "Anjaneya Jewellery is a heritage jewellery house based in Vijayawada, crafting gold and diamond jewellery since 1985. We designed a rich, immersive website that honours their tradition while giving modern customers an effortless browsing and enquiry experience.",
+    challenge:
+      "Traditional jewellery businesses rely on walk-in trust built over decades. Moving that trust online — especially for high-value gold and bridal jewellery — required a website that felt as premium as walking into the showroom.",
+    approach: [
+      "Showroom-quality visuals: Full-bleed photography with warm, rustic textures that mirror the in-store experience — making every page feel like a curated display.",
+      "Collection showcase: Organised by occasion and type — bridal, temple, daily wear — so customers can browse the way they shop in person.",
+      "Heritage storytelling: The brand's four-decade legacy woven into the design — reinforcing trust for first-time online visitors.",
+      "Enquiry flow: A WhatsApp-integrated enquiry system that lets customers ask about specific pieces instantly.",
+    ],
+    outcome:
+      "The website opened a new channel for Anjaneya — reaching NRI customers and younger buyers who discovered the brand online. Enquiries from the website now account for a significant share of new customer acquisition.",
+    services: ["Website Design", "Development", "Brand Identity", "Photography Direction"],
+    results: [
+      { label: "Performance score", value: "92+" },
+      { label: "Mobile-first", value: "Yes" },
+      { label: "Online enquiries", value: "+120%" },
+      { label: "Status", value: "Live" },
+    ],
+    images: {
+      hero: "/assets/images/projects/anjaneya-jewellery/screen-1.png",
+      screens: [
+        "/assets/images/projects/anjaneya-jewellery/screen-2.png",
+      ],
+    },
+    color: "#08090A",
+    accentColor: "#D4A843",
+    nextSlug: "trust-hospital",
+  },
+  {
+    slug: "trust-hospital",
+    client: "Trust Hospital",
+    url: "https://trusthospital.in",
+    year: "2024",
+    category: "Healthcare · Multi-Speciality",
+    tagline: "Committed to trauma care — the best hospital for everything on or off road.",
+    summary:
+      "Trust Hospital is an Accident & Multi-Speciality hospital in Vijayawada, committed to trauma care and comprehensive medical services. We built a bilingual (English & Telugu) website that helps patients find the right department, understand their treatment options, and reach the hospital quickly in emergencies.",
+    challenge:
+      "A multi-speciality hospital serves dozens of patient types — from emergency trauma cases to routine check-ups. The website had to serve all of them without feeling cluttered, and needed to work in both English and Telugu to reach the local population effectively.",
+    approach: [
+      "Department-first architecture: Every speciality has a dedicated page with doctor profiles, services offered, and conditions treated — so patients land exactly where they need to be.",
+      "Bilingual content: Key pages available in Telugu alongside English — meeting patients in the language they are most comfortable with.",
+      "Emergency visibility: Emergency contact number and directions prominently placed across every page — because in trauma care, seconds matter.",
+      "Doctor profiles: Individual profiles with qualifications, specialisations, and experience — building trust before the first visit.",
+    ],
+    outcome:
+      "The website became the hospital's primary digital presence, improving patient intake from online searches and reducing phone call volume for basic department and doctor information.",
+    services: ["Website Design", "Development", "Content Strategy", "SEO"],
+    results: [
+      { label: "Departments listed", value: "20+" },
+      { label: "Bilingual", value: "English & Telugu" },
+      { label: "Mobile-first", value: "Yes" },
+      { label: "Status", value: "Live" },
+    ],
+    images: {
+      hero: "/assets/images/projects/trust-hospital/screen-1.png",
+      screens: [
+        "/assets/images/projects/trust-hospital/screen-2.png",
+        "/assets/images/projects/trust-hospital/screen-3.png",
+      ],
+    },
+    color: "#08090A",
+    accentColor: "#0098DB",
+    nextSlug: "st-pauls-school",
+  },
+  {
+    slug: "st-pauls-school",
+    client: "St. Paul's School",
+    url: "https://stpaulsvijayawada.com",
+    year: "2024",
+    category: "Education · School",
+    tagline: "Wisdom is the principle knowledge — nurturing minds since inception.",
+    summary:
+      "St. Paul's English Medium School is a well-established school in Vijayawada offering quality education from primary through secondary levels. We designed a clean, informative website that serves parents, students, and staff — with admissions, academics, campus life, and exam information all in one place.",
+    challenge:
+      "School websites are notoriously cluttered — buried PDFs, outdated notices, and confusing navigation. St. Paul's needed a website that parents could navigate effortlessly, that showcased the campus and values, and that made the admissions process simple and transparent.",
+    approach: [
+      "Parent-first navigation: Clear menu structure — Admissions, Academics, Campus, Examinations, Gallery — so parents find what they need in one click.",
+      "Campus showcase: A rich photo gallery highlighting facilities, events, and student life — giving prospective parents a virtual tour.",
+      "Admissions flow: A step-by-step admissions guide with downloadable forms and key dates — reducing the number of phone calls the office receives.",
+      "News & events: A regularly updated section for announcements, exam schedules, and school events — keeping the website relevant and visited.",
+    ],
+    outcome:
+      "The website modernised St. Paul's digital presence, with admissions enquiries through the website increasing and parents citing the site as a key factor in choosing the school.",
+    services: ["Website Design", "Development", "Content Strategy"],
+    results: [
+      { label: "Sections built", value: "8+" },
+      { label: "Admissions online", value: "Yes" },
+      { label: "Mobile-first", value: "Yes" },
+      { label: "Status", value: "Live" },
+    ],
+    images: {
+      hero: "/assets/images/projects/st-pauls-school-vja/screen-1.png",
+      screens: [
+        "/assets/images/projects/st-pauls-school-vja/screen-2.png",
+      ],
+    },
+    color: "#08090A",
+    accentColor: "#C94060",
+    nextSlug: "change-ngo",
+  },
+  {
+    slug: "change-ngo",
+    client: "Change NGO",
+    url: "https://changengo.org",
+    year: "2024",
+    category: "Non-Profit · Social Impact",
+    tagline: "A small step change lots of lives — brightening a child's day, one act of kindness at a time.",
+    summary:
+      "Change NGO is an award-winning non-profit organisation dedicated to children's welfare and community development. We designed a bold, emotionally compelling website that drives donations, showcases impact, and recruits volunteers — turning visitors into active supporters.",
+    challenge:
+      "Non-profit websites often fail at one critical thing: making it easy to give. Change NGO needed a website that told their story powerfully, showed real impact with transparency, and made donating as frictionless as possible — all while working on modest hosting budgets.",
+    approach: [
+      "Emotional storytelling: Bold black-and-white photography with selective gold accents — creating an editorial, documentary feel that commands attention.",
+      "Impact transparency: Projects, causes, and sponsors sections with clear descriptions of where funds go — building donor confidence.",
+      "Donation flow: A prominent 'Donate Now' CTA on every page with a streamlined payment flow — reducing the gap between emotion and action.",
+      "Volunteer & sponsor sections: Dedicated pages for corporates and individuals to get involved — expanding the supporter base beyond one-time donors.",
+    ],
+    outcome:
+      "The website significantly increased online donations and volunteer sign-ups, and became the go-to reference for sponsors evaluating the organisation's credibility and reach.",
+    services: ["Website Design", "Development", "Brand Identity", "Content Strategy"],
+    results: [
+      { label: "Online donations", value: "+150%" },
+      { label: "Volunteer sign-ups", value: "+90%" },
+      { label: "Mobile-first", value: "Yes" },
+      { label: "Status", value: "Live" },
+    ],
+    images: {
+      hero: "/assets/images/projects/change-ngo/screen-1.png",
+      screens: [
+        "/assets/images/projects/change-ngo/screen-2.png",
+        "/assets/images/projects/change-ngo/screen-3.png",
+      ],
+    },
+    color: "#08090A",
+    accentColor: "#E5A100",
     nextSlug: "threadlift",
   },
 ];

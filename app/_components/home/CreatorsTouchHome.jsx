@@ -5,6 +5,12 @@ import "../css/home.css";
 import { initHomeFX } from "./home-fx";
 import ServicesSection from "../services/ServicesSection";
 
+const HERO_HEADLINES = [
+  "We create and grow digital brands people cannot ignore.",
+  "Strategy, identity and content that demand attention.",
+  "We turn bold ideas into brands the world remembers.",
+];
+
 // Repeated Tailwind class patterns
 const EYE = "font-mono m-0 text-[11px] tracking-[0.16em] uppercase text-ct-fg/42";
 const LABEL = "font-mono text-[10px] tracking-[0.16em] uppercase text-ct-fg/42";
@@ -105,8 +111,6 @@ const REVIEWS = [
 
 const IMG1 = "/assets/images/sections/team-collaboration.png";
 const IMG3 = "/assets/images/sections/creative-review.png";
-const IMG4 = "/assets/images/sections/ecommerce-packaging.png";
-const IMG5 = "/assets/images/sections/whatsapp-automation.png";
 const IMG7 = "/assets/images/sections/growth-strategy.png";
 const IMG9 = "/assets/images/sections/consultation.png";
 
@@ -114,11 +118,22 @@ const SERVICE_GROUPS = [
   { num: "01", title: "Get more customers", color: "#FF3D8F", desc: "Show up where your customers are already looking — and give them a strong reason to choose you over everyone else.", items: ["Google Search Ads", "Meta & Instagram Ads", "SEO", "Landing Pages"] },
   { num: "02", title: "Build a better website", color: "#29A8DC", desc: "A website that works for your business around the clock — fast, clear, and built to turn visitors into real enquiries.", items: ["Website Design", "Website Development", "Mobile Optimisation", "Speed & Performance"] },
   { num: "03", title: "Build a stronger brand", color: "#cc0066", desc: "Your brand is the first impression you never get to redo. We make sure it earns the trust it deserves.", items: ["Logo & Identity", "Brand Guidelines", "Copywriting", "Social Media Visuals"] },
-  { num: "04", title: "Sell your products online", color: "#96BF48", desc: "From your first product to your thousandth order — stores built to look and feel like your brand.", items: ["Shopify Store Design", "Product Catalogues", "Secure Checkout", "Inventory Setup"] },
-  { num: "05", title: "Save time with automation", color: "#25D366", desc: "Never miss a customer again. Automated messages that follow up, confirm and convert — without any extra effort from you.", items: ["WhatsApp Automation", "Order Confirmations", "Appointment Reminders", "Lead Follow-ups"] },
 ];
 
 const MARQ = ["Brand strategy", "Websites", "Performance marketing", "AI workflows", "Content studio"];
+
+const CERTIFICATES = [
+  { src: "/assets/images/certificates/clutch-top-digital-marketing-company.png", alt: "Clutch — Top Digital Marketing Company" },
+  { src: "/assets/images/certificates/goodfirms-top-digital-agency.png", alt: "GoodFirms — Top Digital Agency" },
+  { src: "/assets/images/certificates/designrush-top-creative-digital-agency.png", alt: "DesignRush — Top Creative & Digital Agency" },
+  { src: "/assets/images/certificates/itfirms-top-web-development-company.png", alt: "ITFirms — Top Web Development Company" },
+  { src: "/assets/images/certificates/topfirms-top-digital-solutions-provider.png", alt: "TopFirms — Top Digital Solutions Provider" },
+  { src: "/assets/images/certificates/google-certified-partner.png", alt: "Google Certified Partner" },
+  { src: "/assets/images/certificates/meta-business-partner.png", alt: "Meta Business Partner" },
+  { src: "/assets/images/certificates/hubspot-solutions-partner.png", alt: "HubSpot Solutions Partner" },
+  { src: "/assets/images/certificates/aws-select-consulting-partner.png", alt: "AWS Select Consulting Partner" },
+  { src: "/assets/images/certificates/shopify-partner.png", alt: "Shopify Partner" },
+];
 
 const INSIGHTS = [
   { cat: "Branding", title: "Why Your Business Needs a Brand, Not Just a Logo", excerpt: "A logo is a mark. A brand is the feeling people get when they hear your name. Here's why the difference matters for your bottom line.", date: "Aug 2026", read: "4 min", color: "#FF3D8F", cover: "/assets/images/blog-cover-images/01-brand-not-just-logo.png" },
@@ -365,6 +380,30 @@ export default function CreatorsTouchHome({ visualReview = false } = {}) {
     return () => window.removeEventListener("scroll", onScroll);
   }, []);
 
+  // ── Typing animation for hero headlines ──
+  const [heroText, setHeroText] = useState("");
+  const [heroIdx, setHeroIdx] = useState(0);
+  const [isDeleting, setIsDeleting] = useState(false);
+  useEffect(() => {
+    const headline = HERO_HEADLINES[heroIdx];
+    let timeout;
+    if (!isDeleting) {
+      if (heroText.length < headline.length) {
+        timeout = setTimeout(() => setHeroText(headline.slice(0, heroText.length + 1)), 50);
+      } else {
+        timeout = setTimeout(() => setIsDeleting(true), 2000);
+      }
+    } else {
+      if (heroText.length > 0) {
+        timeout = setTimeout(() => setHeroText(heroText.slice(0, -1)), 30);
+      } else {
+        setIsDeleting(false);
+        setHeroIdx((heroIdx + 1) % HERO_HEADLINES.length);
+      }
+    }
+    return () => clearTimeout(timeout);
+  }, [heroText, isDeleting, heroIdx]);
+
   return (
     <div className="ct-root bg-ct-bg text-ct-fg font-sans font-normal tracking-[-0.02em] overflow-x-clip cursor-default">
       {/* Film grain overlay */}
@@ -417,17 +456,14 @@ export default function CreatorsTouchHome({ visualReview = false } = {}) {
 
       {/* Header */}
       <header id="ct-header" className="sticky top-0 z-50 flex items-center justify-between gap-6 px-[18px] py-3 md:px-7 md:py-4 bg-[rgba(8,9,10,0)] border-b border-transparent transition-[background,border-color,backdrop-filter] duration-[350ms]">
-        <a href="#top" className="flex items-center gap-2.5">
-          <img src="/assets/images/logo/creator-touch.png" alt="Creators Touch" className="w-10 h-10 md:w-[90px] md:h-[90px] block" />
-          <span className="flex flex-col leading-[1.05]">
-            <span className="text-xs md:text-sm font-semibold tracking-[-0.03em]">Creators Touch</span>
-          </span>
+        <a href="#top" className="flex items-center">
+          <img src="/assets/images/logo/creator-touch.png" alt="Creators Touch" className="h-8 md:h-10 w-auto block" />
         </a>
         <nav className="hidden md:flex items-center gap-7 font-mono text-[11px] tracking-[0.14em] uppercase text-ct-fg/62">
-          <RollLink href="/work" label="Portfolio" />
-          <RollLink href="/services" label="Services" />
-          <RollLink href="/blog" label="Blog" />
-          <RollLink href="/about" label="About" />
+          <RollLink href="/work" label="Portfolio" hi="#29A8DC" />
+          <RollLink href="/services" label="Services" hi="#29A8DC" />
+          <RollLink href="/blog" label="Blog" hi="#29A8DC" />
+          <RollLink href="/about" label="About" hi="#29A8DC" />
           <a href="/contact" data-magnetic="1" className="inline-flex items-center gap-2 px-4 py-[9px] border border-ct-fg/22 rounded-full text-ct-fg hover:bg-ct-fg hover:text-ct-bg hover:border-ct-fg transition-[background,color,border-color] duration-200">Start a project</a>
         </nav>
         <button onClick={() => setMenuOpen(true)} aria-label="Open menu" className="flex md:hidden bg-transparent border-none text-ct-fg cursor-pointer p-1.5 items-center justify-center">
@@ -451,12 +487,9 @@ export default function CreatorsTouchHome({ visualReview = false } = {}) {
           </p>
           <p className="font-mono m-0 text-[9px] md:text-[11px] tracking-[0.14em] md:tracking-[0.16em] uppercase text-ct-fg/50 text-right leading-[1.5] md:leading-[1.6]">Web · Marketing · AI<br />Est. 2008</p>
         </div>
-        <h1 data-hero-title="1" className="mt-4 md:mt-14 text-[clamp(38px,11.5vw,64px)] md:text-[clamp(40px,7.8vw,128px)] font-medium md:font-medium leading-[0.92] tracking-[-0.055em] text-balance will-change-transform [text-shadow:0_2px_20px_rgba(8,9,10,0.7),0_0_60px_rgba(8,9,10,0.5)] md:[text-shadow:none]">
-          <span className="block overflow-hidden pb-[0.15em]"><span data-px-hl="1" className="block">We create and <span className="ct-hero-pop">grow</span></span></span>
-          <span className="block overflow-hidden pb-[0.15em] pl-[0.09em]"><span data-px-hl="1" className="block"><span className="ct-hero-pop">digital</span> brands people</span></span>
-          <span className="block overflow-hidden pb-[0.15em] pl-[0.18em]">
-            <span data-px-hl="1" className="block">cannot <em className="font-serif italic font-normal tracking-[-0.02em] text-ct-pink">ignore.</em></span>
-          </span>
+        <h1 data-hero-title="1" className="mt-4 md:mt-14 text-[clamp(38px,11.5vw,64px)] md:text-[clamp(40px,7.8vw,128px)] font-medium md:font-medium leading-[1.05] tracking-[-0.055em] text-balance will-change-transform [text-shadow:0_2px_20px_rgba(8,9,10,0.7),0_0_60px_rgba(8,9,10,0.5)] md:[text-shadow:none] min-h-[3.2em]">
+          <span data-px-hl="1">{heroText}</span>
+          <span className="ct-type-cursor" aria-hidden="true">|</span>
         </h1>
         <div data-reveal="1" className="grid grid-cols-1 md:grid-cols-[1.1fr_1fr] gap-5 md:gap-10 mt-8 md:mt-[72px] pt-5 md:pt-[26px] border-t border-ct-fg/10">
           <div className="flex flex-wrap gap-4 gap-x-6 md:gap-12">
@@ -600,96 +633,29 @@ export default function CreatorsTouchHome({ visualReview = false } = {}) {
         </div>
       </section>
 
-      {/* ── 04 E-COMMERCE ── */}
-      <section id="ecommerce" className={SEC}>
-        <div className="grid grid-cols-1 md:grid-cols-2 gap-8 md:gap-20 items-center">
-          <div className="flex flex-col gap-9">
-            <p data-reveal="1" className={EYE}>04 &mdash; Shopify &amp; E-commerce</p>
-            <h2 data-reveal="1" className={`${H2} text-[clamp(26px,7vw,42px)] md:text-[clamp(30px,3.8vw,56px)]`}>
-              Turn your products into a business<br />that{" "}
-              <em className="font-serif italic font-normal text-ct-lime">sells around the clock.</em>
-            </h2>
-            <p data-reveal="1" className={`${BODY} max-w-[440px]`}>
-              You have put everything into your products. Your online store should reflect that &mdash; and work as hard as you do. Designed to turn more visitors into customers.
-            </p>
-            <div data-reveal="1" data-reveal-delay="80" className="flex flex-col">
-              {[
-                ["Better online shopping experience", "Your customers browse on their phones. We build stores that feel effortless on every device."],
-                ["Easy product management", "Add products, update prices and track orders without any technical knowledge needed."],
-                ["Professional brand experience", "Your store looks and feels like your brand — not like every other online shop."],
-                ["Designed to convert", "Every detail is built to make buying easy and natural for your customers."],
-              ].map(([t, d]) => (
-                <div key={t} className="flex gap-3.5 items-start py-4 border-t border-ct-fg/14">
-                  <span className="w-1.5 h-1.5 rounded-full bg-ct-lime shrink-0 mt-2" />
-                  <div>
-                    <p className="m-0 mb-1 text-[15px] font-medium tracking-[-0.01em]">{t}</p>
-                    <p className="m-0 text-sm leading-[1.6] text-ct-fg/50">{d}</p>
-                  </div>
-                </div>
-              ))}
-            </div>
-            <div data-reveal="1">
-              <a href="/contact" className="inline-flex items-center gap-2.5 px-[26px] py-3.5 bg-ct-lime text-ct-bg rounded-full text-[15px] font-medium tracking-[-0.01em] font-sans">
-                Start your store <span className="font-mono text-[13px]">&#8594;</span>
-              </a>
-            </div>
-          </div>
-          <div data-reveal="1" className="relative rounded-3xl overflow-hidden max-md:order-first">
-            <img src={IMG4} alt="Small business owner packing products and managing their online store" loading="lazy"
-              className="w-full block object-cover aspect-[3/4]" />
+      {/* ── Certificates marquee ── */}
+      <section className="relative z-[1] border-b border-ct-fg/10 bg-[rgba(8,9,10,0.78)] py-14 md:py-20 overflow-hidden">
+        <div className="flex flex-col items-center gap-6 mb-10 px-[18px] md:px-7">
+          <p className={EYE}>Trusted &amp; Recognised</p>
+          <h2 className="m-0 text-center text-[clamp(24px,4vw,40px)] font-medium leading-[1.1] tracking-[-0.04em]">
+            Certified by the platforms<br /><em className="font-serif italic font-normal text-ct-fg/50">that matter.</em>
+          </h2>
+        </div>
+        <div className="ct-cert-marquee">
+          <div className="ct-cert-track">
+            {[...CERTIFICATES, ...CERTIFICATES].map((c, i) => (
+              <img key={i} src={c.src} alt={c.alt} loading="lazy" className="h-[140px] md:h-[180px] w-auto shrink-0 object-contain" />
+            ))}
           </div>
         </div>
       </section>
 
-      {/* ── 05 WHATSAPP & AUTOMATION ── */}
-      <section id="automation" className={SEC}>
-        <div className="grid grid-cols-1 md:grid-cols-2 gap-8 md:gap-20 items-center">
-          <div data-reveal="1" className="relative rounded-3xl overflow-hidden max-md:order-2">
-            <img src={IMG5} alt="Business owner using WhatsApp automation to stay in touch with customers" loading="lazy"
-              className="w-full block object-cover aspect-[3/4]" />
-          </div>
-          <div className="flex flex-col gap-9">
-            <p data-reveal="1" className={EYE}>05 &mdash; WhatsApp &amp; Automation</p>
-            <h2 data-reveal="1" className={`${H2} text-[clamp(26px,7vw,42px)] md:text-[clamp(30px,3.8vw,56px)]`}>
-              Stop losing customers<br />
-              <em className="font-serif italic font-normal text-ct-green">while you&rsquo;re busy</em><br />
-              running your business.
-            </h2>
-            <p data-reveal="1" className={`${BODY} max-w-[440px]`}>
-              Your customers send a message. What happens next? We build systems that respond, follow up and close sales automatically &mdash; so no one falls through the cracks.
-            </p>
-            <div data-reveal="1" data-reveal-delay="80" className="flex flex-col p-6 bg-ct-green/5 border border-ct-green/14 rounded-2xl">
-              <p className="font-mono m-0 mb-5 text-[10px] tracking-[0.18em] uppercase text-ct-green/65">How it works</p>
-              {[
-                ["Customer sends an enquiry", "They message you on WhatsApp or fill in a form on your website"],
-                ["Instant automatic reply", "They get a response immediately — even at 2 am"],
-                ["Smart follow-up", "Reminders, appointment confirmations and quotes are sent automatically"],
-                ["More sales, less effort", "You focus on delivering. The system handles the conversation."],
-              ].map(([t, d], i, arr) => (
-                <div key={t} className={`flex gap-4 items-start ${i < arr.length - 1 ? "pb-4 mb-4 border-b border-ct-green/10" : ""}`}>
-                  <span className="w-6 h-6 rounded-full bg-ct-green/12 border border-ct-green/28 inline-flex items-center justify-center shrink-0 font-mono text-[10px] text-ct-green/80">{i + 1}</span>
-                  <div>
-                    <p className="m-0 mb-[3px] text-sm font-medium tracking-[-0.01em]">{t}</p>
-                    <p className="m-0 text-[13px] leading-[1.55] text-ct-fg/50">{d}</p>
-                  </div>
-                </div>
-              ))}
-            </div>
-            <div data-reveal="1" className="flex flex-wrap gap-2">
-              {["Order confirmation", "Appointment reminder", "Lead follow-up", "Abandoned cart", "Customer support", "Review request"].map(tag => (
-                <span key={tag} className="font-mono text-[10px] tracking-[0.1em] uppercase px-[13px] py-1.5 border border-ct-green/20 rounded-full text-ct-green/70">{tag}</span>
-              ))}
-            </div>
-          </div>
-        </div>
-      </section>
-
-      {/* ── 06 INDUSTRIES ── */}
+      {/* ── 04 INDUSTRIES ── */}
       <section id="industries" className={SEC}>
         <div className="flex flex-col gap-[52px]">
           <div className="flex flex-col md:flex-row justify-between items-start md:items-end gap-4 md:gap-8 flex-wrap">
             <div className="flex flex-col gap-[18px]">
-              <p data-reveal="1" className={EYE}>06 &mdash; Industries</p>
+              <p data-reveal="1" className={EYE}>04 &mdash; Industries</p>
               <h2 data-reveal="1" className="m-0 text-[clamp(32px,4.5vw,68px)] font-medium leading-[0.96] tracking-[-0.05em]">
                 Explore the industries<br /><em className="font-serif italic font-normal text-ct-fg/50">we understand.</em>
               </h2>
@@ -789,7 +755,7 @@ export default function CreatorsTouchHome({ visualReview = false } = {}) {
               className="w-full h-auto block" />
           </div>
           <div className="flex flex-col gap-7">
-            <p data-reveal="1" className={EYE}>07 &mdash; What clients say</p>
+            <p data-reveal="1" className={EYE}>05 &mdash; What clients say</p>
             <h2 data-reveal="1" className="m-0 text-[clamp(32px,4vw,58px)] font-medium leading-none tracking-[-0.05em]">
               People like you<br /><em className="font-serif italic font-normal text-ct-pink">trusted us.</em>
             </h2>
@@ -866,7 +832,7 @@ export default function CreatorsTouchHome({ visualReview = false } = {}) {
       <section id="tech-stack" className={`${SEC} border-b-ct-fg/10 relative`}>
         <div className="flex flex-col gap-[52px]">
           <div className="flex flex-col items-center text-center gap-6">
-            <p data-reveal="1" className={EYE}>08 &mdash; Technology</p>
+            <p data-reveal="1" className={EYE}>06 &mdash; Technology</p>
             <h2 data-reveal="1" className="m-0 text-[clamp(36px,5vw,72px)] font-medium leading-[1] tracking-[-0.04em]">
               Technology <em className="font-serif italic font-normal text-ct-pink">Stack</em>
             </h2>
@@ -931,7 +897,7 @@ export default function CreatorsTouchHome({ visualReview = false } = {}) {
         <div className="grid grid-cols-1 md:grid-cols-[1fr_1.1fr] gap-10 md:gap-20 items-start">
           <div className="flex flex-col gap-10">
             <div>
-              <p data-reveal="1" className={EYE}>09 &mdash; Let&rsquo;s talk</p>
+              <p data-reveal="1" className={EYE}>07 &mdash; Let&rsquo;s talk</p>
               <h2 data-reveal="1" className={`${H2} mt-[18px] mb-5 text-[clamp(30px,3.6vw,54px)]`}>
                 Tell us where you want<br />
                 <em className="font-serif italic font-normal text-ct-pink">your business to go.</em>

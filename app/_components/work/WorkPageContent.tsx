@@ -22,7 +22,7 @@ function S(css: string): React.CSSProperties {
 }
 
 const STATS = [
-  { value: "8+", label: "Projects delivered" },
+  { value: "14+", label: "Projects delivered" },
   { value: "5", label: "Specialisations" },
   { value: "95+", label: "Avg. mobile score" },
   { value: "100%", label: "Client retention" },

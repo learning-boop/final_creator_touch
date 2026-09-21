@@ -7,8 +7,17 @@
 @keyframes ct-grain { 0%,100%{transform:translate(0,0)}10%{transform:translate(-2%,1%)}20%{transform:translate(1%,-3%)}30%{transform:translate(-1%,2%)}40%{transform:translate(2%,-1%)}50%{transform:translate(-1%,3%)}60%{transform:translate(2%,1%)}70%{transform:translate(-2%,-2%)}80%{transform:translate(1%,2%)}90%{transform:translate(-1%,-1%)} }
 @keyframes ct-bounce-letter { 0%{transform:translateY(0)} 30%{transform:translateY(-38%)} 50%{transform:translateY(10%)} 70%{transform:translateY(-8%)} 85%{transform:translateY(3%)} 100%{transform:translateY(0)} }
 @keyframes ct-word-pop { 0%{transform:translateY(0) scaleY(1) scaleX(1)} 12%{transform:translateY(-22%) scaleY(1.08) scaleX(0.96)} 28%{transform:translateY(-42%) scaleY(1.02) scaleX(0.99)} 44%{transform:translateY(6%) scaleY(0.94) scaleX(1.04)} 58%{transform:translateY(-10%) scaleY(1.02) scaleX(0.99)} 72%{transform:translateY(3%) scaleY(0.98) scaleX(1.01)} 84%{transform:translateY(-2%)} 100%{transform:translateY(0) scaleY(1) scaleX(1)} }
+@keyframes ct-cursor-blink { 0%,100%{opacity:1} 50%{opacity:0} }
 @keyframes ct-menu-in { from { opacity: 0; transform: translateY(22px) } to { opacity: 1; transform: translateY(0) } }
 @keyframes ct-step-in { from { opacity: 0; transform: translateY(28px) } to { opacity: 1; transform: translateY(0) } }
+
+/* ── Typing cursor ── */
+.ct-type-cursor { display: inline; animation: ct-cursor-blink 0.7s step-end infinite; color: rgba(244,243,241,0.6); font-weight: 300; margin-left: 0.04em; }
+
+/* ── Certificates marquee ── */
+.ct-cert-marquee { width: 100%; overflow: hidden; mask-image: linear-gradient(90deg, transparent 0%, black 8%, black 92%, transparent 100%); -webkit-mask-image: linear-gradient(90deg, transparent 0%, black 8%, black 92%, transparent 100%); }
+.ct-cert-track { display: flex; gap: 40px; width: max-content; animation: ct-marquee 30s linear infinite; }
+.ct-cert-track:hover { animation-play-state: paused; }
 
 /* ── Film grain overlay (SVG data-URI background) ── */
 .ct-grain { position: fixed; inset: -14%; z-index: 9997; pointer-events: none; width: 130%; height: 130%; opacity: 0.04; mix-blend-mode: overlay; animation: ct-grain .2s steps(1) infinite; will-change: transform; background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 512 512' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.75' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)'/%3E%3C/svg%3E"); background-size: 256px 256px }
