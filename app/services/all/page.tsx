@@ -20,20 +20,6 @@ export const metadata: Metadata = {
 export default function AllServicesPage() {
   return (
     <div className="min-h-screen bg-ct-bg text-ct-fg font-sans overflow-x-hidden">
-      {/* Nav */}
-      <header className="sticky top-0 z-50 flex items-center justify-between px-7 py-4 bg-ct-bg/88 backdrop-blur-[18px] border-b border-ct-fg/10">
-        <Link href="/" className="flex items-center gap-2.5 no-underline text-ct-fg">
-          <img src="/assets/images/logo/creator-touch.png" alt="Creators Touch" className="w-8 h-8" />
-          <span className="text-[13px] font-semibold tracking-[-0.03em]">Creators Touch</span>
-        </Link>
-        <nav className="flex items-center gap-5 font-mono text-[10px] tracking-[0.14em] uppercase">
-          <Link href="/" className="text-ct-fg/50 no-underline hover:text-ct-fg transition-colors">Home</Link>
-          <Link href="/services" className="text-ct-fg/50 no-underline hover:text-ct-fg transition-colors">Services</Link>
-          <Link href="/work" className="text-ct-fg/50 no-underline hover:text-ct-fg transition-colors">Portfolio</Link>
-          <Link href="/about" className="text-ct-fg/50 no-underline hover:text-ct-fg transition-colors">About</Link>
-        </nav>
-      </header>
-
       {/* Hero */}
       <section className="px-7 pt-20 pb-16 border-b border-ct-fg/10">
         <div className="max-w-[1100px] mx-auto">

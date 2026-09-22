@@ -75,40 +75,53 @@ const TIMELINE = [
 export default function AboutPage() {
   return (
     <div style={S("background:#08090A;color:#F4F3F1;font-family:Geist,Arial,sans-serif;min-height:100vh;overflow-x:hidden")}>
-
-      {/* Nav */}
-      <header style={S("position:sticky;top:0;z-index:50;display:flex;align-items:center;justify-content:space-between;padding:16px 28px;background:rgba(8,9,10,0.88);backdrop-filter:blur(18px);border-bottom:" + HAIR)}>
-        <a href="/" style={S("display:flex;align-items:center;gap:10px;text-decoration:none;color:#F4F3F1")}>
-          <img src="/assets/images/logo/creator-touch.png" alt="Creators Touch" style={S("width:32px;height:32px")} />
-          <span style={S("font-size:13px;font-weight:600;letter-spacing:-0.03em")}>Creators Touch</span>
-        </a>
-        <nav style={S(`display:flex;align-items:center;gap:20px;${MONO};font-size:10px;letter-spacing:0.14em;text-transform:uppercase`)}>
-          <a href="/" style={S("color:rgba(244,243,241,0.5);text-decoration:none")}>Home</a>
-          <a href="/work" style={S("color:rgba(244,243,241,0.5);text-decoration:none")}>Portfolio</a>
-          <a href="/services" style={S("color:rgba(244,243,241,0.5);text-decoration:none")}>Services</a>
-          <a href="/blog" style={S("color:rgba(244,243,241,0.5);text-decoration:none")}>Blog</a>
-        </nav>
-      </header>
+      {/* eslint-disable-next-line @next/next/no-css-tags */}
+      <style dangerouslySetInnerHTML={{ __html: `
+        .abt-stats{display:grid;grid-template-columns:repeat(2,1fr)}
+        @media(min-width:768px){.abt-stats{grid-template-columns:repeat(4,1fr)}}
+        .abt-stat{padding:28px 20px;border-bottom:1px solid rgba(244,243,241,0.10);display:flex;flex-direction:column;gap:8px}
+        .abt-stat:nth-child(odd){border-right:1px solid rgba(244,243,241,0.10)}
+        @media(min-width:768px){.abt-stat{padding:40px 28px;border-bottom:none;border-right:1px solid rgba(244,243,241,0.10)}.abt-stat:last-child{border-right:none}.abt-stat:nth-child(odd){border-right:1px solid rgba(244,243,241,0.10)}}
+        .abt-two{display:grid;grid-template-columns:1fr;gap:24px}
+        @media(min-width:768px){.abt-two{grid-template-columns:200px 1fr;gap:48px}}
+        .abt-values-grid{display:grid;grid-template-columns:1fr;gap:2px}
+        @media(min-width:640px){.abt-values-grid{grid-template-columns:repeat(2,1fr)}}
+        @media(min-width:768px){.abt-values-grid{margin-left:248px}}
+        .abt-values-head{display:grid;grid-template-columns:1fr;gap:16px;margin-bottom:32px}
+        @media(min-width:768px){.abt-values-head{grid-template-columns:200px 1fr;gap:48px;margin-bottom:48px}}
+        .abt-cta{display:flex;flex-direction:column;gap:28px}
+        @media(min-width:768px){.abt-cta{flex-direction:row;justify-content:space-between;align-items:center;gap:40px}}
+        .abt-hero{padding:72px 20px 56px}
+        @media(min-width:768px){.abt-hero{padding:96px 28px 80px}}
+        .abt-section{padding:56px 0}
+        @media(min-width:768px){.abt-section{padding:80px 0}}
+        .abt-body{max-width:960px;margin:0 auto;padding:0 20px}
+        @media(min-width:768px){.abt-body{padding:0 28px}}
+        .abt-cta-wrap{padding:56px 20px}
+        @media(min-width:768px){.abt-cta-wrap{padding:80px 28px}}
+        .abt-footer{padding:24px 20px}
+        @media(min-width:768px){.abt-footer{padding:24px 28px}}
+      `}} />
 
       {/* Hero */}
-      <section style={S("padding:96px 28px 80px;border-bottom:" + HAIR)}>
+      <section className="abt-hero" style={S("border-bottom:" + HAIR)}>
         <div style={S("max-width:960px;margin:0 auto")}>
           <p style={S(`${MONO};font-size:10px;letter-spacing:0.22em;text-transform:uppercase;color:rgba(244,243,241,0.35);margin:0 0 28px`)}>
             Who we are
           </p>
-          <h1 style={S("margin:0 0 36px;font-size:clamp(42px,7vw,96px);font-weight:500;line-height:0.94;letter-spacing:-0.05em")}>
+          <h1 style={S("margin:0 0 36px;font-size:clamp(36px,7vw,96px);font-weight:500;line-height:0.94;letter-spacing:-0.05em")}>
             About us
           </h1>
-          <p style={S(`${SERIF};font-size:clamp(20px,2.6vw,32px);line-height:1.45;color:rgba(244,243,241,0.75);max-width:680px;margin:0`)}>
+          <p style={S(`${SERIF};font-size:clamp(18px,2.6vw,32px);line-height:1.45;color:rgba(244,243,241,0.75);max-width:680px;margin:0`)}>
             We are a digital studio founded in Vijayawada, built for the small business owner who is serious about growth.
           </p>
         </div>
       </section>
 
       {/* Stats */}
-      <div style={S(`display:grid;grid-template-columns:repeat(4,1fr);border-bottom:${HAIR}`)}>
+      <div className="abt-stats" style={S(`border-bottom:${HAIR}`)}>
         {STATS.map((s) => (
-          <div key={s.label} style={S(`padding:40px 28px;border-right:${HAIR};display:flex;flex-direction:column;gap:8px`)}>
+          <div key={s.label} className="abt-stat">
             <span style={S("font-size:clamp(28px,4vw,52px);font-weight:500;letter-spacing:-0.05em;color:#FF3D8F")}>{s.value}</span>
             <span style={S(`${MONO};font-size:10px;letter-spacing:0.14em;text-transform:uppercase;color:rgba(244,243,241,0.4)`)}>{s.label}</span>
           </div>
@@ -116,10 +129,10 @@ export default function AboutPage() {
       </div>
 
       {/* Body */}
-      <div style={S("max-width:960px;margin:0 auto;padding:0 28px")}>
+      <div className="abt-body">
 
         {/* Mission */}
-        <div style={S(`display:grid;grid-template-columns:200px 1fr;gap:48px;padding:80px 0;border-bottom:${HAIR}`)}>
+        <div className="abt-two abt-section" style={S(`border-bottom:${HAIR}`)}>
           <span style={S(`${MONO};font-size:10px;letter-spacing:0.2em;text-transform:uppercase;color:rgba(244,243,241,0.35);padding-top:6px`)}>
             Our mission
           </span>
@@ -134,8 +147,8 @@ export default function AboutPage() {
         </div>
 
         {/* Values */}
-        <div style={S(`padding:80px 0;border-bottom:${HAIR}`)}>
-          <div style={S("display:grid;grid-template-columns:200px 1fr;gap:48px;margin-bottom:48px")}>
+        <div className="abt-section" style={S(`border-bottom:${HAIR}`)}>
+          <div className="abt-values-head">
             <span style={S(`${MONO};font-size:10px;letter-spacing:0.2em;text-transform:uppercase;color:rgba(244,243,241,0.35);padding-top:6px`)}>
               How we work
             </span>
@@ -143,9 +156,9 @@ export default function AboutPage() {
               Principles we never compromise on
             </h2>
           </div>
-          <div style={S("display:grid;grid-template-columns:repeat(2,1fr);gap:2px;margin-left:248px")}>
+          <div className="abt-values-grid">
             {VALUES.map((v) => (
-              <div key={v.title} style={S("padding:32px 28px;background:#0C0D10;border-radius:4px")}>
+              <div key={v.title} style={S("padding:28px 24px;background:#0C0D10;border-radius:4px")}>
                 <h3 style={S("margin:0 0 12px;font-size:17px;font-weight:500;letter-spacing:-0.03em;color:#F4F3F1")}>{v.title}</h3>
                 <p style={S("margin:0;font-size:14px;line-height:1.65;color:rgba(244,243,241,0.5)")}>{v.desc}</p>
               </div>
@@ -154,13 +167,13 @@ export default function AboutPage() {
         </div>
 
         {/* Timeline */}
-        <div style={S(`display:grid;grid-template-columns:200px 1fr;gap:48px;padding:80px 0;border-bottom:${HAIR}`)}>
+        <div className="abt-two abt-section" style={S(`border-bottom:${HAIR}`)}>
           <span style={S(`${MONO};font-size:10px;letter-spacing:0.2em;text-transform:uppercase;color:rgba(244,243,241,0.35);padding-top:6px`)}>
             Our story
           </span>
           <div style={S("display:flex;flex-direction:column;gap:0")}>
             {TIMELINE.map((item, i) => (
-              <div key={item.year} style={S(`display:flex;gap:32px;padding:28px 0;border-bottom:${i < TIMELINE.length - 1 ? "1px solid rgba(244,243,241,0.06)" : "none"}`)}>
+              <div key={item.year} style={S(`display:flex;gap:24px;padding:24px 0;border-bottom:${i < TIMELINE.length - 1 ? "1px solid rgba(244,243,241,0.06)" : "none"}`)}>
                 <span style={S(`${MONO};font-size:11px;letter-spacing:0.1em;color:#FF3D8F;flex-shrink:0;min-width:44px;padding-top:2px`)}>
                   {item.year}
                 </span>
@@ -173,8 +186,8 @@ export default function AboutPage() {
         </div>
 
         {/* Closing statement */}
-        <div style={S("padding:80px 0")}>
-          <p style={S(`${SERIF};font-size:clamp(22px,3vw,38px);line-height:1.4;color:rgba(244,243,241,0.75);max-width:700px;margin:0`)}>
+        <div className="abt-section">
+          <p style={S(`${SERIF};font-size:clamp(20px,3vw,38px);line-height:1.4;color:rgba(244,243,241,0.75);max-width:700px;margin:0`)}>
             &ldquo;We started as designers who cared about craft. We grew into a full-service studio that cares about outcomes. The craft never left.&rdquo;
           </p>
           <p style={S(`${MONO};font-size:10px;letter-spacing:0.16em;text-transform:uppercase;color:rgba(244,243,241,0.3);margin:24px 0 0`)}>
@@ -185,8 +198,8 @@ export default function AboutPage() {
       </div>
 
       {/* CTA strip */}
-      <section style={S(`padding:80px 28px;background:#0C0D10;border-top:${HAIR}`)}>
-        <div style={S("max-width:960px;margin:0 auto;display:flex;justify-content:space-between;align-items:center;gap:40px;flex-wrap:wrap")}>
+      <section className="abt-cta-wrap" style={S(`background:#0C0D10;border-top:${HAIR}`)}>
+        <div className="abt-cta" style={S("max-width:960px;margin:0 auto")}>
           <div>
             <h2 style={S("margin:0 0 14px;font-size:clamp(24px,3.5vw,44px);font-weight:500;letter-spacing:-0.04em")}>
               Work with us
@@ -198,13 +211,13 @@ export default function AboutPage() {
           <div style={S("display:flex;gap:16px;flex-wrap:wrap")}>
             <a
               href="/contact"
-              style={S("display:inline-flex;align-items:center;gap:12px;padding:18px 32px;background:#FF3D8F;border-radius:100px;font-size:14px;font-weight:500;letter-spacing:-0.02em;color:#08090A;text-decoration:none")}
+              style={S("display:inline-flex;align-items:center;gap:12px;padding:16px 28px;background:#FF3D8F;border-radius:100px;font-size:14px;font-weight:500;letter-spacing:-0.02em;color:#08090A;text-decoration:none")}
             >
-              Get in touch →
+              Get in touch &rarr;
             </a>
             <a
               href="/services"
-              style={S(`display:inline-flex;align-items:center;gap:12px;padding:18px 32px;border:${HAIR};border-radius:100px;font-size:14px;letter-spacing:-0.02em;color:#F4F3F1;text-decoration:none`)}
+              style={S(`display:inline-flex;align-items:center;gap:12px;padding:16px 28px;border:${HAIR};border-radius:100px;font-size:14px;letter-spacing:-0.02em;color:#F4F3F1;text-decoration:none`)}
             >
               Our services
             </a>
@@ -213,9 +226,9 @@ export default function AboutPage() {
       </section>
 
       {/* Footer */}
-      <footer style={S(`padding:24px 28px;border-top:${HAIR};display:flex;justify-content:space-between;align-items:center`)}>
+      <footer className="abt-footer" style={S(`border-top:${HAIR};display:flex;justify-content:space-between;align-items:center`)}>
         <span style={S(`${MONO};font-size:10px;letter-spacing:0.14em;text-transform:uppercase;color:rgba(244,243,241,0.28)`)}>
-          Creators Touch Global &middot; © 2026
+          Creators Touch Global &middot; &copy; 2026
         </span>
         <a href="/" style={S(`${MONO};font-size:10px;letter-spacing:0.14em;text-transform:uppercase;color:rgba(244,243,241,0.35);text-decoration:none`)}>
           Back to home

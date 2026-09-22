@@ -3,12 +3,12 @@ import type { Metadata } from "next";
 export const metadata: Metadata = {
   title: "Services — Creators Touch Global",
   description:
-    "Digital marketing, website design, brand identity, e-commerce, and automation services tailored for Indian small businesses ready to grow.",
+    "Digital marketing, website design, brand identity, e-commerce, mobile apps, and automation services tailored for businesses ready to grow.",
   alternates: { canonical: "https://creatorstouchglobal.com/services" },
-  keywords: ["web design services vijayawada", "digital marketing services", "SEO services vijayawada", "ecommerce development", "shopify india", "branding agency", "whatsapp automation"],
+  keywords: ["web design services vijayawada", "digital marketing services", "SEO services vijayawada", "ecommerce development", "shopify india", "branding agency", "whatsapp automation", "mobile app development"],
   openGraph: {
     title: "Services — Creators Touch Global",
-    description: "Digital marketing, website design, brand identity, e-commerce, and automation services for Indian small businesses.",
+    description: "Digital marketing, website design, brand identity, e-commerce, and automation services for businesses.",
     url: "https://creatorstouchglobal.com/services",
     siteName: "Creators Touch Global",
     type: "website",
@@ -17,7 +17,7 @@ export const metadata: Metadata = {
   twitter: {
     card: "summary",
     title: "Services — Creators Touch Global",
-    description: "Digital marketing, website design, brand identity, e-commerce, and automation services for Indian small businesses.",
+    description: "Digital marketing, website design, brand identity, e-commerce, and automation services for businesses.",
   },
 };
 
@@ -37,65 +37,98 @@ function S(css: string): React.CSSProperties {
   return o as React.CSSProperties;
 }
 
-const SERVICES = [
+const SERVICE_CATEGORIES = [
   {
-    num: "01",
-    title: "Get More Customers",
+    title: "Web Design & Development",
     color: "#FF3D8F",
-    desc: "Stop relying on word-of-mouth alone. We run targeted ads and build your online presence so new customers find you every day.",
     items: [
-      { name: "Google Search Ads", detail: "Show up when people search for your exact service — pay only for real clicks." },
-      { name: "Meta & Instagram Ads", detail: "Reach thousands of people in your city, your niche, your price range." },
-      { name: "Search Engine Optimisation", detail: "Rank higher on Google without paying per click — long-term, compounding growth." },
-      { name: "Landing Pages", detail: "Purpose-built pages that turn ad clicks into calls, messages, and sales." },
+      "Corporate Website",
+      "E-Commerce Website",
+      "Landing Page Design",
+      "Responsive Web Design",
+      "CMS Website Design",
+      "Job Portal Website",
+      "Real Estate Website & Portal",
+      "Matrimony Website",
+      "Redesigning Website",
+      "Website Maintenance",
+      "WordPress Development",
+      "Shopify Store Design",
+      "Next.js Development",
     ],
   },
   {
-    num: "02",
-    title: "Build a Better Website",
+    title: "Design & Branding",
     color: "#29A8DC",
-    desc: "Your website is your most important salesperson — it works 24 hours a day. We build fast, beautiful, mobile-first websites that actually convert.",
     items: [
-      { name: "Website Design", detail: "Clean, premium designs that make your business look credible and trustworthy." },
-      { name: "Website Development", detail: "Rock-solid Next.js builds — fast, secure, and easy to update." },
-      { name: "Mobile Optimisation", detail: "Over 80 % of your customers are on phones. We make sure every pixel is perfect." },
-      { name: "Speed & Performance", detail: "A slow site loses sales. We optimise load times, Core Web Vitals, and uptime." },
+      "Brand Identity",
+      "Logo Design",
+      "Package Design",
+      "Graphic Design",
+      "Infographics",
+      "Brochure Design",
+      "Social Media Pack",
+      "Newsletter Design",
+      "Web Banners",
+      "Powerpoint Presentation",
+      "E-Mail Template",
+      "Brand Guidelines",
     ],
   },
   {
-    num: "03",
-    title: "Build a Stronger Brand",
+    title: "Digital Marketing",
     color: "#cc0066",
-    desc: "People buy from brands they recognise and trust. We craft a visual and verbal identity that makes you instantly memorable.",
     items: [
-      { name: "Logo & Brand Identity", detail: "A professional logo, colours, and typography system — cohesive across every touchpoint." },
-      { name: "Brand Guidelines", detail: "A clear rulebook so your team, printers, and social posts always look consistent." },
-      { name: "Copywriting", detail: "Words that speak your customer's language — headlines, taglines, website copy." },
-      { name: "Social Media Visuals", detail: "Feed-ready graphics, Reels covers, and stories templates that build brand recognition." },
+      "Local Search SEO",
+      "Search Engine Marketing",
+      "Google Adwords",
+      "Social Media Optimization",
+      "Search Engine Optimization",
+      "Social Media Marketing",
+      "Pay Per Click Management",
+      "Online Reputation Management",
+      "Conversion Rate Optimization",
+      "Marketing Automation",
+      "Display Advertising",
+      "WhatsApp Automation",
     ],
   },
   {
-    num: "04",
-    title: "Sell Products Online",
+    title: "Mobile Applications",
     color: "#96BF48",
-    desc: "From a single product to a full catalogue — we build e-commerce stores that make buying simple, fast, and trustworthy.",
     items: [
-      { name: "Shopify Store Design", detail: "Beautiful, conversion-optimised Shopify stores that look great and sell more." },
-      { name: "Product Catalogues", detail: "Organised, searchable catalogues with great photography guidelines and copy." },
-      { name: "Secure Checkout", detail: "Smooth checkout flows with trusted payment gateways — UPI, cards, COD." },
-      { name: "Inventory Management", detail: "Set up stock tracking, low-stock alerts, and order management from day one." },
+      "Android App Development",
+      "iOS App Development",
+      "Flutter App Development",
+      "React Native App Development",
+      "Hybrid App Development",
+      "Progressive Web Apps",
     ],
   },
   {
-    num: "05",
-    title: "Save Time with Automation",
+    title: "Content Writing Services",
     color: "#25D366",
-    desc: "Stop doing manually what a system can do for you. We automate follow-ups, confirmations, and reminders so you can focus on the work that matters.",
     items: [
-      { name: "WhatsApp Automation", detail: "Instant replies, lead follow-ups, and order updates — all on WhatsApp." },
-      { name: "Order Confirmations", detail: "Automatic booking and order confirmations sent the moment a customer pays." },
-      { name: "Appointment Reminders", detail: "Reduce no-shows with automated reminders via WhatsApp or SMS." },
-      { name: "Lead Follow-ups", detail: "Never let a hot lead go cold — automated sequences that nurture and convert." },
+      "Article Writing",
+      "Content Writing",
+      "Email Marketing Services",
+      "Content Marketing Services",
+      "Product Descriptions",
+      "Blog Writing",
+      "Copywriting",
+      "Social Media Content",
+    ],
+  },
+  {
+    title: "AI & Automation",
+    color: "#c9a227",
+    items: [
+      "AI Chatbot Integration",
+      "WhatsApp Business Automation",
+      "Lead Follow-up Automation",
+      "Appointment Reminders",
+      "Order Confirmation Flows",
+      "CRM Integration",
     ],
   },
 ];
@@ -103,76 +136,80 @@ const SERVICES = [
 export default function ServicesPage() {
   return (
     <div style={S("background:#08090A;color:#F4F3F1;font-family:Geist,Arial,sans-serif;min-height:100vh;overflow-x:hidden")}>
-
-      {/* Nav */}
-      <header style={S("position:sticky;top:0;z-index:50;display:flex;align-items:center;justify-content:space-between;padding:16px 28px;background:rgba(8,9,10,0.88);backdrop-filter:blur(18px);border-bottom:" + HAIR)}>
-        <a href="/" style={S("display:flex;align-items:center;gap:10px;text-decoration:none;color:#F4F3F1")}>
-          <img src="/assets/images/logo/creator-touch.png" alt="Creators Touch" style={S("width:32px;height:32px")} />
-          <span style={S("font-size:13px;font-weight:600;letter-spacing:-0.03em")}>Creators Touch</span>
-        </a>
-        <nav style={S(`display:flex;align-items:center;gap:20px;${MONO};font-size:10px;letter-spacing:0.14em;text-transform:uppercase`)}>
-          <a href="/" style={S("color:rgba(244,243,241,0.5);text-decoration:none")}>Home</a>
-          <a href="/work" style={S("color:rgba(244,243,241,0.5);text-decoration:none")}>Portfolio</a>
-          <a href="/about" style={S("color:rgba(244,243,241,0.5);text-decoration:none")}>About</a>
-          <a href="/blog" style={S("color:rgba(244,243,241,0.5);text-decoration:none")}>Blog</a>
-        </nav>
-      </header>
+      {/* eslint-disable-next-line @next/next/no-css-tags */}
+      <style dangerouslySetInnerHTML={{ __html: `
+        .svc-grid{display:grid;grid-template-columns:1fr;gap:56px}
+        @media(min-width:640px){.svc-grid{grid-template-columns:repeat(2,1fr)}}
+        @media(min-width:1024px){.svc-grid{grid-template-columns:repeat(3,1fr)}}
+        .svc-item{padding:14px 0;border-bottom:1px solid rgba(244,243,241,0.08);color:rgba(244,243,241,0.7);font-size:15px;letter-spacing:-0.01em;transition:color 0.2s,padding-left 0.2s}
+        .svc-item:first-child{border-top:1px solid rgba(244,243,241,0.08)}
+        .svc-item:hover{color:#F4F3F1;padding-left:8px}
+      `}} />
 
       {/* Hero */}
       <section style={S("padding:96px 28px 72px;border-bottom:" + HAIR)}>
-        <div style={S("max-width:960px;margin:0 auto")}>
+        <div style={S("max-width:1200px;margin:0 auto")}>
           <p style={S(`${MONO};font-size:10px;letter-spacing:0.22em;text-transform:uppercase;color:rgba(244,243,241,0.35);margin:0 0 28px`)}>
             What we do
           </p>
           <h1 style={S("margin:0 0 28px;font-size:clamp(42px,7vw,96px);font-weight:500;line-height:0.94;letter-spacing:-0.05em")}>
-            Services
+            Our Services
           </h1>
-          <p style={S(`${SERIF};font-size:clamp(18px,2.2vw,26px);line-height:1.5;color:rgba(244,243,241,0.65);max-width:580px;margin:0`)}>
-            Five ways we help Indian small businesses grow faster, look better, and work smarter.
+          <p style={S(`${SERIF};font-size:clamp(18px,2.2vw,26px);line-height:1.5;color:rgba(244,243,241,0.65);max-width:620px;margin:0`)}>
+            Everything your business needs to grow online &mdash; strategy, design, development, marketing and automation, all under one roof.
           </p>
         </div>
       </section>
 
-      {/* Services list */}
-      <div style={S("max-width:960px;margin:0 auto;padding:0 28px")}>
-        {SERVICES.map((svc, idx) => (
-          <section key={svc.num} style={S(`padding:72px 0;border-bottom:${idx < SERVICES.length - 1 ? HAIR : "none"}`)}>
-
-            {/* Header row */}
-            <div style={S("display:grid;grid-template-columns:80px 1fr;gap:32px;align-items:start;margin-bottom:48px")}>
-              <span style={S(`${MONO};font-size:11px;letter-spacing:0.18em;text-transform:uppercase;color:rgba(244,243,241,0.28);padding-top:4px`)}>
-                {svc.num}
-              </span>
+      {/* Services grid */}
+      <section style={S("max-width:1200px;margin:0 auto;padding:72px 28px 96px")}>
+        <div className="svc-grid">
+          {SERVICE_CATEGORIES.map((cat) => (
+            <div key={cat.title}>
+              <h2 style={S(`margin:0 0 24px;font-size:20px;font-weight:600;letter-spacing:-0.03em;color:${cat.color}`)}>
+                {cat.title}
+              </h2>
               <div>
-                <h2 style={S(`margin:0 0 18px;font-size:clamp(28px,4vw,52px);font-weight:500;letter-spacing:-0.04em;color:${svc.color}`)}>
-                  {svc.title}
-                </h2>
-                <p style={S("margin:0;font-size:clamp(15px,1.6vw,18px);line-height:1.65;color:rgba(244,243,241,0.6);max-width:540px")}>
-                  {svc.desc}
-                </p>
+                {cat.items.map((item) => (
+                  <a
+                    key={item}
+                    href={`/services/${item.toLowerCase().replace(/[^a-z0-9]+/g, "-").replace(/(^-|-$)/g, "")}`}
+                    className="svc-item"
+                    style={S("display:block;text-decoration:none;cursor:pointer")}
+                  >
+                    {item}
+                  </a>
+                ))}
               </div>
             </div>
+          ))}
+        </div>
+      </section>
 
-            {/* Item cards */}
-            <div style={S("display:grid;grid-template-columns:repeat(2,1fr);gap:2px;margin-left:112px")}>
-              {svc.items.map((item) => (
-                <div key={item.name} style={S(`padding:28px 24px;background:#0C0D10;border-radius:4px;display:flex;flex-direction:column;gap:10px`)}>
-                  <h3 style={S("margin:0;font-size:15px;font-weight:500;letter-spacing:-0.025em;color:#F4F3F1")}>
-                    {item.name}
-                  </h3>
-                  <p style={S("margin:0;font-size:13px;line-height:1.6;color:rgba(244,243,241,0.48)")}>
-                    {item.detail}
-                  </p>
-                </div>
-              ))}
+      {/* Stats strip */}
+      <section style={S(`border-top:${HAIR};border-bottom:${HAIR};background:#0C0D10`)}>
+        <div style={S("max-width:1200px;margin:0 auto;display:grid;grid-template-columns:repeat(4,1fr)")}>
+          {[
+            { value: "17+", label: "Years of experience" },
+            { value: "2000+", label: "Projects delivered" },
+            { value: "5", label: "Countries served" },
+            { value: "95+", label: "Avg. performance score" },
+          ].map((s, i) => (
+            <div key={s.label} style={S(`padding:40px 28px;display:flex;flex-direction:column;gap:8px;${i < 3 ? "border-right:" + HAIR : ""}`)}>
+              <span style={S("font-size:clamp(26px,3.5vw,44px);font-weight:500;letter-spacing:-0.05em;color:#FF3D8F")}>
+                {s.value}
+              </span>
+              <span style={S(`${MONO};font-size:10px;letter-spacing:0.14em;text-transform:uppercase;color:rgba(244,243,241,0.38)`)}>
+                {s.label}
+              </span>
             </div>
-          </section>
-        ))}
-      </div>
+          ))}
+        </div>
+      </section>
 
       {/* CTA strip */}
-      <section style={S(`padding:96px 28px;background:#0C0D10;border-top:${HAIR}`)}>
-        <div style={S("max-width:960px;margin:0 auto;display:flex;justify-content:space-between;align-items:center;gap:40px;flex-wrap:wrap")}>
+      <section style={S("padding:96px 28px;background:#08090A")}>
+        <div style={S("max-width:1200px;margin:0 auto;display:flex;justify-content:space-between;align-items:center;gap:40px;flex-wrap:wrap")}>
           <div>
             <h2 style={S("margin:0 0 14px;font-size:clamp(28px,4vw,52px);font-weight:500;letter-spacing:-0.04em")}>
               Ready to start?
@@ -186,7 +223,7 @@ export default function ServicesPage() {
               href="/contact"
               style={S("display:inline-flex;align-items:center;gap:12px;padding:18px 32px;background:#FF3D8F;border-radius:100px;font-size:14px;font-weight:500;letter-spacing:-0.02em;color:#08090A;text-decoration:none")}
             >
-              Get a free consultation →
+              Get a free consultation &rarr;
             </a>
             <a
               href="/work"
@@ -201,7 +238,7 @@ export default function ServicesPage() {
       {/* Footer */}
       <footer style={S(`padding:24px 28px;border-top:${HAIR};display:flex;justify-content:space-between;align-items:center`)}>
         <span style={S(`${MONO};font-size:10px;letter-spacing:0.14em;text-transform:uppercase;color:rgba(244,243,241,0.28)`)}>
-          Creators Touch Global &middot; © 2026
+          Creators Touch Global &middot; &copy; 2026
         </span>
         <a href="/" style={S(`${MONO};font-size:10px;letter-spacing:0.14em;text-transform:uppercase;color:rgba(244,243,241,0.35);text-decoration:none`)}>
           Back to home

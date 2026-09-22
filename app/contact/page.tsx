@@ -35,6 +35,8 @@ function ContactForm() {
     needs: f.needs.includes(need) ? f.needs.filter(n => n !== need) : [...f.needs, need],
   }));
 
+  const fullPhone = () => `+91${fields.phone.replace(/\s/g, "")}`;
+
   const requestOtp = async () => {
     if (!fields.phone.trim()) { setOtpError("Enter your phone number first"); return; }
     setOtpStep("sending");
@@ -43,7 +45,7 @@ function ContactForm() {
       const res = await fetch("/api/otp/request", {
         method: "POST",
         headers: { "Content-Type": "application/json" },
-        body: JSON.stringify({ phone: fields.phone.trim() }),
+        body: JSON.stringify({ phone: fullPhone() }),
       });
       const data = await res.json();
       if (!res.ok) { setOtpError(data.error || "Failed to send OTP"); setOtpStep("none"); return; }
@@ -61,7 +63,7 @@ function ContactForm() {
       const res = await fetch("/api/otp/verify", {
         method: "POST",
         headers: { "Content-Type": "application/json" },
-        body: JSON.stringify({ phone: fields.phone.trim(), code: otpCode.trim() }),
+        body: JSON.stringify({ phone: fullPhone(), code: otpCode.trim() }),
       });
       const data = await res.json();
       if (!res.ok) { setOtpError(data.error || "Verification failed"); setOtpStep("sent"); return; }
@@ -79,7 +81,7 @@ function ContactForm() {
     fetch("/api/contact", {
       method: "POST",
       headers: { "Content-Type": "application/json" },
-      body: JSON.stringify(fields),
+      body: JSON.stringify({ ...fields, phone: fields.phone.trim() ? fullPhone() : "" }),
     })
       .then(r => r.ok ? setStatus("sent") : setStatus("error"))
       .catch(() => setStatus("error"));
@@ -108,9 +110,12 @@ function ContactForm() {
         <div className="flex flex-col gap-2">
           <label htmlFor="ct-phone" className={LABEL}>Phone / WhatsApp</label>
           <div className="flex gap-2">
-            <input id="ct-phone" name="phone" type="tel" className={`${inputCls} flex-1`}
-              value={fields.phone} onChange={e => { setFields(f => ({ ...f, phone: e.target.value })); if (otpStep === "verified") setOtpStep("none"); }}
-              placeholder="+91 98859 33339" disabled={otpStep === "verified"} />
+            <div className="flex flex-1 items-stretch">
+              <span className="inline-flex items-center px-3.5 bg-ct-fg/6 border border-ct-fg/14 border-r-0 rounded-l-[10px] text-ct-fg/50 text-[14px] tracking-[-0.01em] select-none whitespace-nowrap">+91</span>
+              <input id="ct-phone" name="phone" type="tel" className={`${inputCls} flex-1 !rounded-l-none`}
+                value={fields.phone} onChange={e => { setFields(f => ({ ...f, phone: e.target.value.replace(/[^0-9\s]/g, "") })); if (otpStep === "verified") setOtpStep("none"); }}
+                placeholder="98859 33339" maxLength={12} disabled={otpStep === "verified"} />
+            </div>
             {otpStep === "verified" ? (
               <span className="inline-flex items-center gap-1.5 px-4 py-3 rounded-[10px] bg-ct-green/12 text-ct-green text-[13px] font-medium whitespace-nowrap border border-ct-green/20">
                 &#10003; Verified
@@ -185,20 +190,6 @@ function ContactForm() {
 export default function ContactPage() {
   return (
     <div className="min-h-screen bg-ct-bg text-ct-fg font-sans overflow-x-hidden">
-      {/* Nav */}
-      <header className="sticky top-0 z-50 flex items-center justify-between px-7 py-4 bg-ct-bg/88 backdrop-blur-[18px] border-b border-ct-fg/10">
-        <Link href="/" className="flex items-center gap-2.5 no-underline text-ct-fg">
-          <img src="/assets/images/logo/creator-touch.png" alt="Creators Touch" className="w-8 h-8" />
-          <span className="text-[13px] font-semibold tracking-[-0.03em]">Creators Touch</span>
-        </Link>
-        <nav className="flex items-center gap-5 font-mono text-[10px] tracking-[0.14em] uppercase">
-          <Link href="/" className="text-ct-fg/50 no-underline hover:text-ct-fg transition-colors">Home</Link>
-          <Link href="/services" className="text-ct-fg/50 no-underline hover:text-ct-fg transition-colors">Services</Link>
-          <Link href="/work" className="text-ct-fg/50 no-underline hover:text-ct-fg transition-colors">Portfolio</Link>
-          <Link href="/about" className="text-ct-fg/50 no-underline hover:text-ct-fg transition-colors">About</Link>
-        </nav>
-      </header>
-
       {/* Hero */}
       <section className="px-7 pt-20 pb-16 border-b border-ct-fg/10">
         <div className="max-w-[1100px] mx-auto">

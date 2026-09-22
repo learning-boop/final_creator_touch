@@ -28,14 +28,19 @@ const SERVICES = [
 ];
 
 const CLIENTS = [
-  ["Trust Hospital", "trust-hospital.png"],
-  ["Anjaneya Jewellery", "anjaneya-jewellery.png"],
-  ["Change NGO", "change-ngo.png"],
-  ["Dr. Matla", "dr-matla.png"],
-  ["Lot Mobiles", "lot-mobiles.png"],
-  ["St. Paul's School VJA", "st-pauls-school.png"],
-  ["Meditron CDC", "meditron-cdc.png"],
-  ["Kensley Aesthetics", "kensley-aesthetics.png"],
+  ["Trust Hospital", "Trust-Hospital-dark-theme-HQ.png"],
+  ["Anjaneya Jewellery", "Anjaneya-Jewellery-dark-theme-HQ.png"],
+  ["Change NGO", "CHANGE-NGO-dark-theme-HQ.png"],
+  ["Dr. Matla", "Dr-Matla-dark-theme-HQ.png"],
+  ["St. Paul's School VJA", "St-Pauls-School-dark-theme-HQ.png"],
+  ["Meditron CDC", "Meditron-dark-theme-HQ.png"],
+  ["Kensley Aesthetics", "Kensley-Aesthetics-dark-theme-HQ.png"],
+  ["PRP Treatment", "PRP-Treatment-dark-theme-HQ.png"],
+  ["Aptos Newcastle", "Aptos-Newcastle-dark-theme-HQ.png"],
+  ["Fillers Skin", "Fillers-Skin-dark-theme-HQ.png"],
+  ["Aesthetic Icon", "Aesthetic-Icon-dark-theme-HQ.png"],
+  ["Botox Newcastle", "Botox-Newcastle-dark-theme-HQ.png"],
+  ["Razorpay", "ChatGPT Image Sep 22, 2026, 01_41_04 PM.png"],
 ].map(([name, f]) => ({ name, logo: "/assets/images/clients/" + f }));
 
 const PROJECTS = [
@@ -98,7 +103,7 @@ const INDUSTRIES = [
   { num: "06", title: "Jewellery & Luxury", tags: "Lookbooks", img: "/assets/images/industries/jewellery-luxury.png" },
 ];
 
-const REVIEWS = [
+const FALLBACK_REVIEWS = [
   { name: "Sudheer Kumar", company: "AP Yellow Pages", initials: "SK", text: "There is no company that can beat Creators Touch. Thanks to their talent, our site has taken off in the search engines like a rocket." },
   { name: "Karthika", company: "APGEA", initials: "KA", text: "Highly innovative in their work. They have the best team on board, bubbling with talent. I would highly recommend their services." },
   { name: "Sanjana", company: "Anu Hospitals", initials: "SA", text: "Very sharp, high-quality team. The project management was fantastic — specific timelines for all the bits and pieces. They design and build in a nice, elegant way." },
@@ -208,7 +213,11 @@ function ReviewCard({ r, hidden }) {
       </div>
       <p className="m-0 text-sm md:text-[15px] leading-[1.6] text-ct-fg/72">&ldquo;{r.text}&rdquo;</p>
       <div className="flex items-center gap-3 mt-auto">
-        <span className="w-[38px] h-[38px] rounded-full bg-[linear-gradient(135deg,rgba(204,0,102,0.4),rgba(9,119,168,0.4))] inline-flex items-center justify-center text-xs font-semibold tracking-[0.02em]">{r.initials}</span>
+        {r.photo ? (
+          <img src={r.photo} alt={r.name} referrerPolicy="no-referrer" className="w-[38px] h-[38px] rounded-full object-cover" />
+        ) : (
+          <span className="w-[38px] h-[38px] rounded-full bg-[linear-gradient(135deg,rgba(204,0,102,0.4),rgba(9,119,168,0.4))] inline-flex items-center justify-center text-xs font-semibold tracking-[0.02em]">{r.initials}</span>
+        )}
         <span className="flex flex-col gap-0.5">
           <span className="text-sm font-medium tracking-[-0.01em]">{r.name}</span>
           <span className="font-mono text-[10px] tracking-[0.12em] uppercase text-ct-fg/42">{r.company}</span>
@@ -344,33 +353,10 @@ function ContactForm() {
 export default function CreatorsTouchHome({ visualReview = false } = {}) {
   useEffect(() => initHomeFX({ logoSrc: "/assets/images/logo/creator-touch.png", disableLogo: visualReview }), [visualReview]);
 
-  const [menuOpen, setMenuOpen] = useState(false);
-  useEffect(() => {
-    document.documentElement.style.overflow = menuOpen ? "hidden" : "";
-    return () => { document.documentElement.style.overflow = ""; };
-  }, [menuOpen]);
-
-  const progressRef = useRef(null);
   const mobCtaRef = useRef(null);
   useEffect(() => {
     const onScroll = () => {
       const sy = window.scrollY;
-      const header = document.getElementById("ct-header");
-      if (header) {
-        if (sy > 48) {
-          header.style.background = "rgba(8,9,10,0.88)";
-          header.style.backdropFilter = "blur(18px)";
-          header.style.borderBottomColor = "rgba(244,243,241,0.10)";
-        } else {
-          header.style.background = "rgba(8,9,10,0)";
-          header.style.backdropFilter = "none";
-          header.style.borderBottomColor = "transparent";
-        }
-      }
-      if (progressRef.current) {
-        const docH = document.documentElement.scrollHeight - window.innerHeight;
-        progressRef.current.style.width = docH > 0 ? (sy / docH * 100) + "%" : "0%";
-      }
       if (mobCtaRef.current) {
         mobCtaRef.current.classList.toggle("ct-show", sy > window.innerHeight * 0.6);
       }
@@ -384,6 +370,28 @@ export default function CreatorsTouchHome({ visualReview = false } = {}) {
   const [heroText, setHeroText] = useState("");
   const [heroIdx, setHeroIdx] = useState(0);
   const [isDeleting, setIsDeleting] = useState(false);
+  const [reviews, setReviews] = useState(FALLBACK_REVIEWS);
+  const [reviewMeta, setReviewMeta] = useState({ rating: 5.0, total: FALLBACK_REVIEWS.length });
+
+  useEffect(() => {
+    fetch("/api/reviews")
+      .then(r => r.json())
+      .then(data => {
+        if (data.reviews && data.reviews.length > 0) {
+          const mapped = data.reviews.map(r => ({
+            name: r.author_name,
+            company: r.relative_time_description || "",
+            initials: r.author_name.split(" ").map(w => w[0]).join("").slice(0, 2).toUpperCase(),
+            text: r.text,
+            rating: r.rating,
+            photo: r.profile_photo_url || "",
+          }));
+          setReviews(mapped);
+          setReviewMeta({ rating: data.rating, total: data.total });
+        }
+      })
+      .catch(() => {});
+  }, []);
   useEffect(() => {
     const headline = HERO_HEADLINES[heroIdx];
     let timeout;
@@ -417,61 +425,6 @@ export default function CreatorsTouchHome({ visualReview = false } = {}) {
         </a>
       </div>
 
-      {/* Scroll progress bar */}
-      <div className="fixed top-0 left-0 right-0 h-0.5 z-[9999] bg-ct-fg/6">
-        <div ref={progressRef} className="h-full w-0 bg-[linear-gradient(90deg,#FF3D8F,#29A8DC)] transition-[width] duration-100 ease-linear" />
-      </div>
-
-      {/* Mobile full-screen menu */}
-      {menuOpen && (
-        <div className="fixed inset-0 z-[200] bg-ct-bg flex flex-col px-7 pt-4 pb-8" aria-modal="true" role="dialog" aria-label="Navigation menu">
-          <div className="flex items-center justify-between pb-12">
-            <a href="#top" onClick={() => setMenuOpen(false)} className="flex items-center gap-2.5">
-              <img src="/assets/images/logo/creator-touch.png" alt="Creators Touch" className="w-16 h-16 block" />
-              <span className="flex flex-col leading-[1.05]">
-                <span className="text-sm font-semibold tracking-[-0.03em]">Creators Touch</span>
-              </span>
-            </a>
-            <button onClick={() => setMenuOpen(false)} aria-label="Close menu" className="bg-transparent border-none text-ct-fg cursor-pointer p-2 flex items-center justify-center">
-              <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.5" strokeLinecap="round" aria-hidden="true">
-                <path d="M18 6L6 18M6 6l12 12" />
-              </svg>
-            </button>
-          </div>
-          <nav className="flex flex-col">
-            {[["/work","Portfolio"],["/services","Services"],["/blog","Blog"],["/about","About"],["/contact","Contact"]].map(([href, label], i) => (
-              <a key={label} href={href} onClick={() => setMenuOpen(false)}
-                className="ct-menu-item text-[clamp(36px,9vw,60px)] font-normal tracking-[-0.04em] text-ct-fg py-3 border-b border-ct-fg/8 leading-[1.1]"
-                style={{ animationDelay: `${i * 60 + 40}ms` }}>
-                {label}
-              </a>
-            ))}
-          </nav>
-          <div className="mt-auto flex flex-wrap gap-6 pt-8">
-            <a href="tel:+919885933339" className="font-mono text-[11px] tracking-[0.14em] uppercase text-ct-fg/42">+91 98859 33339</a>
-            <a href="mailto:hello@creatorstouch.in" className="font-mono text-[11px] tracking-[0.14em] uppercase text-ct-fg/42">hello@creatorstouch.in</a>
-          </div>
-        </div>
-      )}
-
-      {/* Header */}
-      <header id="ct-header" className="sticky top-0 z-50 flex items-center justify-between gap-6 px-[18px] py-3 md:px-7 md:py-4 bg-[rgba(8,9,10,0)] border-b border-transparent transition-[background,border-color,backdrop-filter] duration-[350ms]">
-        <a href="#top" className="flex items-center">
-          <img src="/assets/images/logo/creator-touch.png" alt="Creators Touch" className="h-8 md:h-10 w-auto block" />
-        </a>
-        <nav className="hidden md:flex items-center gap-7 font-mono text-[11px] tracking-[0.14em] uppercase text-ct-fg/62">
-          <RollLink href="/work" label="Portfolio" hi="#29A8DC" />
-          <RollLink href="/services" label="Services" hi="#29A8DC" />
-          <RollLink href="/blog" label="Blog" hi="#29A8DC" />
-          <RollLink href="/about" label="About" hi="#29A8DC" />
-          <a href="/contact" data-magnetic="1" className="inline-flex items-center gap-2 px-4 py-[9px] border border-ct-fg/22 rounded-full text-ct-fg hover:bg-ct-fg hover:text-ct-bg hover:border-ct-fg transition-[background,color,border-color] duration-200">Start a project</a>
-        </nav>
-        <button onClick={() => setMenuOpen(true)} aria-label="Open menu" className="flex md:hidden bg-transparent border-none text-ct-fg cursor-pointer p-1.5 items-center justify-center">
-          <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.5" strokeLinecap="round" aria-hidden="true">
-            <path d="M4 6h16M4 12h16M4 18h16" />
-          </svg>
-        </button>
-      </header>
 
       {/* ── HERO ── */}
       <section id="top" className="relative z-[1] flex flex-col justify-between min-h-svh md:min-h-[92vh] px-[18px] pt-7 pb-[22px] md:px-7 md:pt-[72px] md:pb-7 gap-6 md:gap-0 border-b border-ct-fg/10">
@@ -593,6 +546,8 @@ export default function CreatorsTouchHome({ visualReview = false } = {}) {
             Every project here solved a real problem for a real business.
           </p>
         </div>
+
+        {/* Video showreel */}
         <div data-reveal="1" className="relative rounded-[20px] overflow-hidden mb-12 aspect-video">
           <video src="/assets/videos/work-showreel.mp4" autoPlay loop muted playsInline
             className="w-full h-full object-cover block" />
@@ -601,32 +556,57 @@ export default function CreatorsTouchHome({ visualReview = false } = {}) {
             <p className="font-mono m-0 text-[11px] tracking-[0.18em] uppercase text-ct-fg/65">Aesthetics &middot; Healthcare &middot; Thread Lifting &middot; Dermal Fillers &middot; Body Contouring &middot; Skin Rejuvenation</p>
           </div>
         </div>
-        <div data-stagger="1" className="grid grid-cols-1 min-[761px]:grid-cols-2 min-[1025px]:grid-cols-3 gap-7">
-          {PROJECTS.map(p => (
+
+        {/* Featured project */}
+        {(() => { const featured = PROJECTS[0]; return (
+        <a data-reveal="1" href={featured.caseStudy || featured.url} target={featured.caseStudy ? "_self" : "_blank"} rel={featured.caseStudy ? undefined : "noopener noreferrer"}
+          className="block no-underline text-ct-fg mb-12 md:mb-16 cursor-pointer" data-cursor-text={featured.caseStudy ? "Case study" : "View"}>
+          <div className="flex items-center gap-3.5 mb-6 flex-wrap">
+            <span className="font-mono text-[10px] tracking-[0.18em] uppercase px-3.5 py-[5px] border border-ct-pink/40 rounded-full text-ct-pink">Featured</span>
+            <span className="font-mono text-[10px] tracking-[0.18em] uppercase text-ct-fg/28">{featured.category}</span>
+          </div>
+          <div className="flex flex-col min-[850px]:grid min-[850px]:grid-cols-[1.15fr_1fr] gap-8 min-[850px]:gap-14 items-center">
+            <div className="rounded-[20px] overflow-hidden aspect-[4/3] bg-ct-card">
+              <img src={featured.img} alt={featured.title} className="w-full h-full object-cover object-top block" />
+            </div>
+            <div className="flex flex-col gap-6">
+              <h3 className="m-0 text-[clamp(36px,5vw,72px)] font-medium leading-[0.94] tracking-[-0.05em] text-ct-pink">{featured.title}</h3>
+              <p className="font-serif italic font-normal text-[clamp(17px,1.8vw,22px)] leading-[1.5] text-ct-fg/65 m-0 max-w-[440px]">{featured.desc}</p>
+              <div className="flex flex-wrap gap-2 mt-1">
+                <span className="font-mono text-[9px] tracking-[0.1em] uppercase px-3 py-[5px] border border-ct-fg/10 rounded-full text-ct-fg/40">{featured.tag}</span>
+                <span className="font-mono text-[9px] tracking-[0.1em] uppercase px-3 py-[5px] border border-ct-fg/10 rounded-full text-ct-fg/40">{featured.year}</span>
+              </div>
+              <span className="font-mono text-[10px] tracking-[0.16em] uppercase text-ct-fg/45 mt-2">{featured.caseStudy ? "View case study" : "View live site"} &rarr;</span>
+            </div>
+          </div>
+        </a>
+        ); })()}
+
+        {/* Alternating project rows */}
+        <div data-stagger="1" className="flex flex-col">
+          {PROJECTS.slice(1).map((p, idx) => (
             <a key={p.title} href={p.caseStudy || p.url} target={p.caseStudy ? "_self" : "_blank"} rel={p.caseStudy ? undefined : "noopener noreferrer"}
-              className="group/proj relative overflow-visible min-[761px]:overflow-hidden min-[761px]:rounded-2xl cursor-pointer block [transform-style:preserve-3d] hover:shadow-[0_28px_72px_rgba(0,0,0,0.55)]"
+              className="group/proj flex flex-col min-[850px]:grid min-[850px]:grid-cols-2 gap-8 min-[850px]:gap-12 items-center py-12 min-[850px]:py-[72px] border-t border-ct-fg/10 no-underline text-ct-fg cursor-pointer"
               data-cursor-text={p.caseStudy ? "Case study" : "View"}>
-              <div className="aspect-[4/3] overflow-hidden rounded-2xl min-[761px]:rounded-none bg-ct-card">
+              {/* Image */}
+              <div className={`rounded-2xl overflow-hidden aspect-[4/3] bg-ct-card relative ${idx % 2 === 1 ? "min-[850px]:order-2" : ""}`}>
                 <img src={p.img} alt={p.title} loading="lazy"
                   className="w-full h-full object-cover object-top block transition-transform duration-700 [transition-timing-function:cubic-bezier(.22,1,.36,1)] group-hover/proj:scale-[1.06]" />
+                <span className="absolute top-4 left-4 font-mono text-[10px] tracking-[0.14em] uppercase px-3.5 py-[5px] bg-ct-bg/72 backdrop-blur-[8px] border border-ct-fg/12 rounded-full text-ct-fg/60">{p.year}</span>
               </div>
-              {/* Desktop/tablet overlay */}
-              <div className="hidden min-[761px]:flex absolute inset-0 bg-[linear-gradient(0deg,rgba(8,9,10,0.94)_0%,rgba(8,9,10,0.18)_55%,transparent_100%)] flex-col justify-end p-[22px]">
-                <div className="absolute top-4 right-4 flex items-center gap-2">
-                  {p.caseStudy && <span className="font-mono text-[9px] tracking-[0.12em] uppercase px-3 py-[5px] bg-ct-pink/18 border border-ct-pink/40 rounded-full text-ct-pink/90">Case study</span>}
-                  <span className="font-mono text-[9px] tracking-[0.12em] uppercase px-3 py-[5px] bg-ct-bg/65 border border-ct-fg/14 rounded-full text-ct-fg/70">{p.tag}</span>
+              {/* Text */}
+              <div className={idx % 2 === 1 ? "min-[850px]:order-1" : ""}>
+                <div className="flex items-center gap-3.5 mb-5 flex-wrap">
+                  <span className="font-mono text-[10px] tracking-[0.16em] uppercase px-3.5 py-[5px] border border-ct-fg/14 rounded-full text-ct-fg/50">{p.category}</span>
                 </div>
-                <span className="font-mono text-[9px] tracking-[0.16em] uppercase text-ct-fg/50 mb-1.5">{p.category}</span>
-                <h3 className="m-0 mb-1.5 text-[22px] font-normal tracking-[-0.03em] text-ct-fg">{p.title}</h3>
-                <p className="m-0 text-[13px] leading-[1.5] text-ct-fg/55">{p.desc}</p>
-              </div>
-              {/* Mobile label below image */}
-              <div className="min-[761px]:hidden flex flex-col gap-[5px] pt-3 px-1">
-                <span className="font-mono text-[9px] tracking-[0.16em] uppercase text-ct-fg/42">{p.category}</span>
-                <div className="flex items-center justify-between gap-2">
-                  <h3 className="m-0 text-[17px] font-normal tracking-[-0.03em] text-ct-fg leading-[1.2]">{p.title}</h3>
-                  {p.caseStudy && <span className="font-mono text-[9px] tracking-[0.1em] uppercase px-[11px] py-[5px] border border-ct-pink/40 rounded-full text-ct-pink/90 whitespace-nowrap shrink-0">Case study &rarr;</span>}
+                <h3 className="m-0 mb-4 text-[clamp(30px,4vw,56px)] font-medium leading-[0.94] tracking-[-0.05em] text-ct-pink">{p.title}</h3>
+                <p className="font-serif italic font-normal text-[clamp(16px,1.6vw,20px)] leading-[1.5] text-ct-fg/58 m-0 mb-7 max-w-[420px]">{p.desc}</p>
+                <div className="flex flex-wrap gap-2 mb-6">
+                  {p.tag.split(" + ").map(s => (
+                    <span key={s} className="font-mono text-[9px] tracking-[0.1em] uppercase px-3 py-[5px] border border-ct-fg/10 rounded-full text-ct-fg/40">{s}</span>
+                  ))}
                 </div>
+                <span className="font-mono text-[10px] tracking-[0.16em] uppercase text-ct-fg/45">{p.caseStudy ? "View case study" : "View live site"} &rarr;</span>
               </div>
             </a>
           ))}
@@ -771,15 +751,15 @@ export default function CreatorsTouchHome({ visualReview = false } = {}) {
               </svg>
               <div>
                 <Star5 size={14} />
-                <p className="font-mono m-0 mt-[5px] text-[10px] tracking-[0.14em] uppercase text-ct-fg/42">5.0 &middot; Google Reviews</p>
+                <p className="font-mono m-0 mt-[5px] text-[10px] tracking-[0.14em] uppercase text-ct-fg/42">{reviewMeta.rating} &middot; {reviewMeta.total} Google Reviews</p>
               </div>
             </div>
           </div>
         </div>
         <div className="overflow-hidden mx-[-18px] md:mx-[-28px]">
           <div data-rev-track="1" className="flex gap-5 w-max animate-[ct-marquee_80s_linear_infinite]">
-            {REVIEWS.map(r => <ReviewCard key={r.name} r={r} />)}
-            {REVIEWS.map(r => <ReviewCard key={r.name + "-dup"} r={r} hidden />)}
+            {reviews.map(r => <ReviewCard key={r.name} r={r} />)}
+            {reviews.map(r => <ReviewCard key={r.name + "-dup"} r={r} hidden />)}
           </div>
         </div>
       </section>
@@ -935,7 +915,7 @@ export default function CreatorsTouchHome({ visualReview = false } = {}) {
       <footer className="relative z-[1] flex flex-col md:flex-row justify-between items-start md:items-end gap-3.5 md:gap-8 px-[18px] py-6 md:px-7 md:py-8 pb-[calc(env(safe-area-inset-bottom,0px)+96px)] md:pb-8 border-t border-ct-fg/10 bg-ct-bg">
         <div className="flex flex-col gap-4">
           <div className="flex items-center gap-3">
-            <img src="/assets/images/logo/creator-touch.png" alt="" className="w-7 h-7 block" />
+            <img src="/assets/images/logo/creator-touch.png" alt="" className="w-7 h-7 block rounded-md" style={{ mixBlendMode: "screen" }} />
             <span className="font-mono text-[10px] tracking-[0.14em] uppercase text-ct-fg/42">Creators Touch Global &middot; &copy; 2026</span>
           </div>
           <div className="flex gap-2.5">
@@ -947,12 +927,27 @@ export default function CreatorsTouchHome({ visualReview = false } = {}) {
             ))}
           </div>
         </div>
-        <div className="flex flex-wrap gap-3.5 gap-x-4 md:gap-6 font-mono text-[10px] tracking-[0.14em] uppercase text-ct-fg/42">
-          <RollLink href="/work" label="Portfolio" h={14} dim="rgba(244,243,241,0.42)" hi="#F4F3F1" />
-          <RollLink href="/services" label="Services" h={14} dim="rgba(244,243,241,0.42)" hi="#F4F3F1" />
-          <RollLink href="/blog" label="Blog" h={14} dim="rgba(244,243,241,0.42)" hi="#F4F3F1" />
-          <RollLink href="/about" label="About" h={14} dim="rgba(244,243,241,0.42)" hi="#F4F3F1" />
-          <RollLink href="/contact" label="Contact" h={14} dim="rgba(244,243,241,0.42)" hi="#F4F3F1" />
+        <div className="flex flex-col items-start md:items-end gap-4">
+          <div className="flex flex-wrap gap-3.5 gap-x-4 md:gap-6 font-mono text-[10px] tracking-[0.14em] uppercase text-ct-fg/42">
+            <RollLink href="/work" label="Portfolio" h={14} dim="rgba(244,243,241,0.42)" hi="#F4F3F1" />
+            <RollLink href="/services" label="Services" h={14} dim="rgba(244,243,241,0.42)" hi="#F4F3F1" />
+            <RollLink href="/blog" label="Blog" h={14} dim="rgba(244,243,241,0.42)" hi="#F4F3F1" />
+            <RollLink href="/about" label="About" h={14} dim="rgba(244,243,241,0.42)" hi="#F4F3F1" />
+            <RollLink href="/contact" label="Contact" h={14} dim="rgba(244,243,241,0.42)" hi="#F4F3F1" />
+          </div>
+          <div className="flex flex-wrap gap-3.5 gap-x-4 md:gap-6 font-mono text-[10px] tracking-[0.14em] uppercase text-ct-fg/28">
+            <RollLink href="/privacy-policy" label="Privacy Policy" h={14} dim="rgba(244,243,241,0.28)" hi="rgba(244,243,241,0.6)" />
+            <RollLink href="/terms-and-conditions" label="Terms & Conditions" h={14} dim="rgba(244,243,241,0.28)" hi="rgba(244,243,241,0.6)" />
+          </div>
+          <div className="flex items-center gap-3">
+            {[
+              ["Visa", "ChatGPT Image Sep 22, 2026, 01_41_12 PM.png"],
+              ["Mastercard", "ChatGPT Image Sep 22, 2026, 01_41_18 PM.png"],
+              ["RuPay", "ChatGPT Image Sep 22, 2026, 01_41_22 PM.png"],
+            ].map(([alt, file]) => (
+              <img key={alt} src={`/assets/images/clients/${file}`} alt={alt} className="h-6 md:h-7 w-auto object-contain opacity-60" />
+            ))}
+          </div>
         </div>
       </footer>
     </div>

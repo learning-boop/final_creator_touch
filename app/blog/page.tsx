@@ -64,20 +64,6 @@ export default async function BlogPage() {
   return (
     <div style={S("background:#08090A;color:#F4F3F1;font-family:Geist,Arial,sans-serif;min-height:100vh;overflow-x:hidden")}>
 
-      {/* Nav */}
-      <header style={S("position:sticky;top:0;z-index:50;display:flex;align-items:center;justify-content:space-between;padding:16px 28px;background:rgba(8,9,10,0.88);backdrop-filter:blur(18px);border-bottom:" + HAIR)}>
-        <a href="/" style={S("display:flex;align-items:center;gap:10px;text-decoration:none;color:#F4F3F1")}>
-          <img src="/assets/images/logo/creator-touch.png" alt="Creators Touch" style={S("width:32px;height:32px")} />
-          <span style={S("font-size:13px;font-weight:600;letter-spacing:-0.03em")}>Creators Touch</span>
-        </a>
-        <nav style={S(`display:flex;align-items:center;gap:20px;${MONO};font-size:10px;letter-spacing:0.14em;text-transform:uppercase`)}>
-          <a href="/" style={S("color:rgba(244,243,241,0.5);text-decoration:none")}>Home</a>
-          <a href="/work" style={S("color:rgba(244,243,241,0.5);text-decoration:none")}>Portfolio</a>
-          <a href="/services" style={S("color:rgba(244,243,241,0.5);text-decoration:none")}>Services</a>
-          <a href="/about" style={S("color:rgba(244,243,241,0.5);text-decoration:none")}>About</a>
-        </nav>
-      </header>
-
       {/* Hero */}
       <section style={S("padding:96px 28px 72px;border-bottom:" + HAIR)}>
         <div style={S("max-width:1100px;margin:0 auto")}>

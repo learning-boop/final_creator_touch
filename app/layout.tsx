@@ -1,5 +1,6 @@
 import type { Metadata } from "next";
 import "./globals.css";
+import Navbar from "./_components/Navbar";
 
 export const metadata: Metadata = {
   metadataBase: new URL("https://creatorstouchglobal.com"),
@@ -174,6 +175,7 @@ export default function RootLayout({ children }: LayoutProps<"/">) {
             style={{ display: "none", visibility: "hidden" }}
           />
         </noscript>
+        <Navbar />
         {children}
       </body>
     </html>
