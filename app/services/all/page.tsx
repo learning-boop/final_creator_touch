@@ -75,7 +75,7 @@ export default function AllServicesPage() {
               {SERVICES.map((service) => (
                 <Link
                   key={service.slug}
-                  href={`/services/${service.slug}-in-${city.slug}`}
+                  href={`/${service.slug}-${city.slug}`}
                   className="group flex items-start gap-3 p-5 rounded-xl bg-ct-card border border-ct-fg/6 no-underline hover:border-ct-fg/16 transition-colors"
                 >
                   <span
@@ -116,7 +116,7 @@ export default function AllServicesPage() {
                 {CITIES.map((city) => (
                   <Link
                     key={city.slug}
-                    href={`/services/${service.slug}-in-${city.slug}`}
+                    href={`/${service.slug}-${city.slug}`}
                     className="px-4 py-2 rounded-full border text-[12px] no-underline hover:text-ct-fg transition-colors"
                     style={{ borderColor: service.color + "33", color: service.color + "cc" }}
                   >

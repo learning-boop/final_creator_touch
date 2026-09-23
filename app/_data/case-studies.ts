@@ -513,6 +513,142 @@ export const CASE_STUDIES: CaseStudy[] = [
     },
     color: "#08090A",
     accentColor: "#E5A100",
+    nextSlug: "jobyatra-india",
+  },
+  {
+    slug: "jobyatra-india",
+    client: "Jobyatra India",
+    url: "https://jobyatraindia.com",
+    year: "2025",
+    category: "Recruitment · Job Portal",
+    tagline: "Your journey to success begins here.",
+    summary:
+      "Jobyatra India is a flagship online job mela platform connecting job seekers with recruiters across India. We built a scalable web platform that powers hiring campaigns, profile screening, and interview scheduling — making recruitment accessible at scale.",
+    challenge:
+      "Online job portals are dominated by giants like Naukri and Indeed. Jobyatra needed a platform that offered something different — large-scale virtual job melas where thousands of candidates and hundreds of recruiters connect in a structured, time-bound hiring event.",
+    approach: [
+      "Event-driven architecture: Built around scheduled job melas with registration, profile creation, and recruiter matching — not just a static job board.",
+      "Candidate experience: A simple registration flow with profile screening and interview movement tracking — so candidates always know where they stand.",
+      "Recruiter dashboard: Tools for recruiters to post openings, filter candidates, and schedule interviews during mela windows.",
+      "Scale-ready: Designed to handle 20,000+ registrations per event with reliable performance under load.",
+    ],
+    outcome:
+      "Jobyatra successfully conducted multiple national-level online job melas, with thousands of candidates registered and placed across industries.",
+    services: ["Web Platform", "Development", "UX Design", "SEO"],
+    results: [
+      { label: "Registrations per event", value: "20,000+" },
+      { label: "Pan-India reach", value: "Yes" },
+      { label: "Mobile-first", value: "Yes" },
+      { label: "Status", value: "Live" },
+    ],
+    images: {
+      hero: "/assets/images/projects/jobyatra-india/screen-1.png",
+      screens: [],
+    },
+    color: "#08090A",
+    accentColor: "#1B4F8A",
+    nextSlug: "aayush-hospitals",
+  },
+  {
+    slug: "aayush-hospitals",
+    client: "Aayush Hospitals",
+    url: "https://www.aayushhospitals.com",
+    year: "2025",
+    category: "Healthcare · Multi-Speciality",
+    tagline: "Where compassion meets advanced care.",
+    summary:
+      "Aayush Hospitals is a leading multi-speciality healthcare network in Vijayawada and Eluru, delivering advanced medical expertise across departments. We designed a comprehensive website that helps patients find doctors, book appointments, and access health resources seamlessly.",
+    challenge:
+      "A multi-location hospital network needs to serve diverse patient needs — from emergency cases to routine consultations — while maintaining a unified brand experience across locations. The website had to make finding the right doctor and booking an appointment effortless.",
+    approach: [
+      "Department-first navigation: Every speciality has a dedicated section with doctor profiles, facilities, and services — so patients land exactly where they need.",
+      "Multi-location support: Location-specific pages for Vijayawada and Eluru with relevant doctors, facilities, and contact information.",
+      "Appointment booking: A streamlined booking flow integrated with the hospital's scheduling system for quick, friction-free appointments.",
+      "Health resources: Patient education content and facility galleries that build confidence before the first visit.",
+    ],
+    outcome:
+      "The website became the primary digital touchpoint for Aayush Hospitals, driving a significant increase in online appointment bookings and reducing reception call volume for basic enquiries.",
+    services: ["Website Design", "Development", "SEO", "Content Strategy"],
+    results: [
+      { label: "Departments listed", value: "25+" },
+      { label: "Multi-location", value: "Vijayawada & Eluru" },
+      { label: "Mobile-first", value: "Yes" },
+      { label: "Status", value: "Live" },
+    ],
+    images: {
+      hero: "/assets/images/projects/aayush-hospitals/screen-1.png",
+      screens: [],
+    },
+    color: "#08090A",
+    accentColor: "#00A89D",
+    nextSlug: "kpetz",
+  },
+  {
+    slug: "kpetz",
+    client: "K-Petz",
+    url: "https://www.kpetz.com",
+    year: "2025",
+    category: "Pet Care · Veterinary",
+    tagline: "We love, care, treat your pets.",
+    summary:
+      "K-Petz is a trainer-run pet hospital and store in Vijayawada offering veterinary services, grooming, training, boarding, and adoption support. We built a warm, trust-driven website that helps pet owners find the right care for their companions.",
+    challenge:
+      "Pet owners are emotionally invested — they need to trust a clinic before they walk in. K-Petz needed a website that felt caring and professional, showcased their range of services, and made booking consultations and grooming appointments simple.",
+    approach: [
+      "Warm, approachable design: A friendly visual language with soft colours and real imagery — making pet owners feel their pets are in safe hands.",
+      "Service clarity: Dedicated pages for veterinary care, grooming, training, boarding, and adoption — each with clear descriptions and booking options.",
+      "Online consultancy: A built-in online consultation feature for quick veterinary advice without visiting the clinic.",
+      "Review integration: Customer reviews and ratings prominently displayed to build social proof and trust.",
+    ],
+    outcome:
+      "The website established K-Petz as Vijayawada's go-to pet care destination, with online bookings for grooming and consultations growing steadily since launch.",
+    services: ["Website Design", "Development", "Brand Identity", "SEO"],
+    results: [
+      { label: "Services listed", value: "5+" },
+      { label: "Online booking", value: "Yes" },
+      { label: "Mobile-first", value: "Yes" },
+      { label: "Status", value: "Live" },
+    ],
+    images: {
+      hero: "/assets/images/projects/kpetz/screen-1.png",
+      screens: [],
+    },
+    color: "#08090A",
+    accentColor: "#2D2459",
+    nextSlug: "mitra-hospitals",
+  },
+  {
+    slug: "mitra-hospitals",
+    client: "Mitra Hospitals",
+    url: "https://www.mithrahospitals.com",
+    year: "2025",
+    category: "Healthcare · Multi-Speciality",
+    tagline: "Empowering health. Inspiring recovery.",
+    summary:
+      "Mitra Multi Speciality Hospital provides comprehensive healthcare services with experienced consultants across orthopaedics, urology, paediatrics, and more. We designed a professional website that showcases their medical expertise and drives patient appointments.",
+    challenge:
+      "Patients choosing a hospital want to know two things: are the doctors qualified, and can I book easily? Mitra needed a website that put their specialist doctors front and centre while making the path from search to appointment as short as possible.",
+    approach: [
+      "Doctor-led design: Specialist profiles with qualifications, experience, and department information prominently featured — because patients choose doctors, not hospitals.",
+      "Service architecture: Clear department pages covering facilities, treatments, and conditions — helping patients find the right specialist quickly.",
+      "Appointment booking: A direct booking flow with department and doctor selection — minimising the steps between intent and action.",
+      "Trust signals: Gallery showcasing modern facilities and equipment — building confidence in the hospital's capabilities.",
+    ],
+    outcome:
+      "The website improved Mitra's digital visibility and became a consistent source of new patient appointments, particularly for specialist consultations.",
+    services: ["Website Design", "Development", "SEO"],
+    results: [
+      { label: "Specialists listed", value: "10+" },
+      { label: "Departments", value: "8+" },
+      { label: "Mobile-first", value: "Yes" },
+      { label: "Status", value: "Live" },
+    ],
+    images: {
+      hero: "/assets/images/projects/mitra-hospitals/screen-1.png",
+      screens: [],
+    },
+    color: "#08090A",
+    accentColor: "#6B4FA0",
     nextSlug: "threadlift",
   },
 ];

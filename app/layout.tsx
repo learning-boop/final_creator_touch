@@ -75,8 +75,8 @@ export default function RootLayout({ children }: LayoutProps<"/">) {
           href="https://fonts.googleapis.com/css2?family=Geist:wght@300;400;500;600;700&family=Instrument+Serif:ital@0;1&family=Geist+Mono:wght@400&display=swap"
           rel="stylesheet"
         />
-        <link rel="icon" href="/assets/images/logo/creator-touch.png" />
-        <link rel="apple-touch-icon" href="/assets/images/logo/creator-touch.png" />
+        <link rel="icon" href="/assets/images/logo/creator-touch1.png" />
+        <link rel="apple-touch-icon" href="/assets/images/logo/creator-touch1.png" />
         <meta name="theme-color" content="#08090A" />
 
         {/* Google Tag Manager */}

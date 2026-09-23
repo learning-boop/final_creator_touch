@@ -41,7 +41,7 @@ export default function Navbar() {
             </button>
           </div>
           <nav className="flex flex-col">
-            {[["/work","Portfolio"],["/services","Services"],["/blog","Blog"],["/about","About"],["/contact","Contact"]].map(([href, label], i) => (
+            {[["/portfolio","Portfolio"],["/services","Services"],["/blog","Blog"],["/about","About"],["/careers","Careers"],["/contact","Contact"]].map(([href, label], i) => (
               <a key={label} href={href} onClick={() => setMenuOpen(false)}
                 className="text-[clamp(36px,9vw,60px)] font-normal tracking-[-0.04em] text-ct-fg py-3 border-b border-ct-fg/8 leading-[1.1] no-underline"
                 style={{ animationDelay: `${i * 60 + 40}ms` }}>
@@ -69,10 +69,11 @@ export default function Navbar() {
           <img src="/assets/images/logo/creator-touch.png" alt="Creators Touch" className="h-8 md:h-10 w-auto block rounded" style={{ mixBlendMode: "screen" }} />
         </a>
         <nav className="nav-roll hidden md:flex items-center gap-7 font-mono text-[11px] tracking-[0.14em] uppercase text-ct-fg/62">
-          <RollLink href="/work" label="Portfolio" />
+          <RollLink href="/portfolio" label="Portfolio" />
           <RollLink href="/services" label="Services" />
           <RollLink href="/blog" label="Blog" />
           <RollLink href="/about" label="About" />
+          <RollLink href="/careers" label="Careers" />
           <a href="/contact" className="inline-flex items-center gap-2 px-4 py-[9px] border border-ct-fg/22 rounded-full text-ct-fg hover:bg-ct-fg hover:text-ct-bg hover:border-ct-fg transition-[background,color,border-color] duration-200 no-underline">Start a project</a>
         </nav>
         <button onClick={() => setMenuOpen(true)} aria-label="Open menu" className="flex md:hidden bg-transparent border-none text-ct-fg cursor-pointer p-1.5 items-center justify-center">

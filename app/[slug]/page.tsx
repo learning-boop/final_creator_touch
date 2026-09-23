@@ -1,32 +1,37 @@
 import type { Metadata } from "next";
 import { notFound } from "next/navigation";
 import Link from "next/link";
-import { SERVICES, CITIES } from "@/app/_data/services-cities";
-import { INDIVIDUAL_SERVICES, getAllIndividualServiceSlugs, getIndividualService, type IndividualService } from "@/app/_data/individual-services";
+import { SERVICES, CITIES, getAllServiceCitySlugs, parseSlug, type ServiceData, type CityData } from "@/app/_data/services-cities";
 import { CASE_STUDIES } from "@/app/_data/case-studies";
 
-// ── Static params: individual services only ──
+// ── Static params: all service-city combos ──
 export function generateStaticParams() {
-  return getAllIndividualServiceSlugs().map((slug) => ({ slug }));
+  return getAllServiceCitySlugs().map((slug) => ({ slug }));
 }
 
 // ── Metadata ──
 export async function generateMetadata({ params }: { params: Promise<{ slug: string }> }): Promise<Metadata> {
   const { slug } = await params;
-  const s = getIndividualService(slug);
-  if (!s) return {};
+  const match = parseSlug(slug);
+  if (!match) return {};
 
-  const title = `${s.title} Services | Creators Touch Global`;
-  const description = `${s.shortDesc} Trusted by 2000+ brands across India, UK, UAE, Singapore, and USA.`;
+  const { service, city } = match;
+  const title = `Best ${service.title} in ${city.name} | Creators Touch Global`;
+  const description = `Looking for the best ${service.title.toLowerCase()} in ${city.name}? Creators Touch Global delivers ${service.shortDesc.toLowerCase()} Trusted by 2000+ brands across ${city.state}.`;
   return {
     title,
     description,
-    alternates: { canonical: `https://creatorstouchglobal.com/services/${slug}` },
-    keywords: [...s.keywords, `${s.title.toLowerCase()} agency`, `best ${s.title.toLowerCase()} company`],
+    alternates: { canonical: `https://creatorstouchglobal.com/${slug}` },
+    keywords: [
+      ...service.keywords.map((k) => `${k} ${city.name.toLowerCase()}`),
+      `best ${service.title.toLowerCase()} in ${city.name.toLowerCase()}`,
+      `${service.title.toLowerCase()} agency ${city.name.toLowerCase()}`,
+      `${service.title.toLowerCase()} company ${city.name.toLowerCase()}`,
+    ],
     openGraph: {
       title,
       description,
-      url: `https://creatorstouchglobal.com/services/${slug}`,
+      url: `https://creatorstouchglobal.com/${slug}`,
       siteName: "Creators Touch Global",
       type: "website",
       images: [{ url: "https://creatorstouchglobal.com/assets/images/logo/creator-touch.png", width: 512, height: 512, alt: "Creators Touch Global" }],
@@ -36,30 +41,15 @@ export async function generateMetadata({ params }: { params: Promise<{ slug: str
 }
 
 // ── Page ──
-export default async function ServicePage({ params }: { params: Promise<{ slug: string }> }) {
+export default async function ServiceCityPage({ params }: { params: Promise<{ slug: string }> }) {
   const { slug } = await params;
-  const service = getIndividualService(slug);
-  if (!service) notFound();
+  const match = parseSlug(slug);
+  if (!match) notFound();
 
-  return <IndividualServicePage service={service} />;
-}
-
-// ═══════════════════════════════════════════════════════════════════
-// Individual Service Page (standalone, no city)
-// ═══════════════════════════════════════════════════════════════════
-function IndividualServicePage({ service }: { service: IndividualService }) {
+  const { service, city } = match;
+  const otherCities = CITIES.filter((c) => c.slug !== city.slug);
+  const otherServices = SERVICES.filter((s) => s.slug !== service.slug).slice(0, 5);
   const relatedProjects = CASE_STUDIES.filter((cs) => service.relatedSlugs.includes(cs.slug));
-  const otherServices = INDIVIDUAL_SERVICES.filter((s) => s.category === service.category && s.slug !== service.slug).slice(0, 6);
-
-  // Map category to parent service slug for city links
-  const parentSlug =
-    service.category === "Web Design & Development" ? "website-design" :
-    service.category === "Design & Branding" ? "brand-logo-design" :
-    service.category === "Digital Marketing" ? "seo" :
-    service.category === "Mobile Applications" ? "web-development" :
-    service.category === "Content Writing Services" ? "content-social-media" :
-    service.category === "AI & Automation" ? "whatsapp-crm-automation" :
-    null;
 
   return (
     <div className="min-h-screen bg-ct-bg text-ct-fg font-sans overflow-x-hidden">
@@ -70,7 +60,7 @@ function IndividualServicePage({ service }: { service: IndividualService }) {
           <span>/</span>
           <Link href="/services" className="text-ct-fg/35 no-underline hover:text-ct-fg/60 transition-colors">Services</Link>
           <span>/</span>
-          <span className="text-ct-fg/60">{service.title}</span>
+          <span className="text-ct-fg/60">{service.title} in {city.name}</span>
         </nav>
       </div>
 
@@ -78,10 +68,13 @@ function IndividualServicePage({ service }: { service: IndividualService }) {
       <section className="px-7 pt-16 pb-20 border-b border-ct-fg/10">
         <div className="max-w-[960px] mx-auto">
           <span className="font-mono text-[10px] tracking-[0.22em] uppercase text-ct-fg/35 block mb-7">
-            {service.category}
+            {city.name}, {city.state}
           </span>
           <h1 className="m-0 mb-7 text-[clamp(36px,6vw,80px)] font-medium leading-[0.96] tracking-[-0.05em]">
+            Best{" "}
             <span style={{ color: service.color }}>{service.title}</span>
+            <br />
+            in {city.name}
           </h1>
           <p className="font-serif italic text-[clamp(20px,2.5vw,32px)] leading-[1.35] text-ct-fg/75 max-w-[700px] m-0 mb-8">
             {service.tagline}
@@ -121,6 +114,21 @@ function IndividualServicePage({ service }: { service: IndividualService }) {
         </div>
       </section>
 
+      {/* Why this city */}
+      <section className="px-7 py-20 border-b border-ct-fg/10">
+        <div className="max-w-[960px] mx-auto">
+          <span className="font-mono text-[10px] tracking-[0.22em] uppercase text-ct-fg/35 block mb-5">
+            Why {city.name}
+          </span>
+          <h2 className="m-0 mb-6 text-[clamp(28px,4vw,48px)] font-medium tracking-[-0.04em]">
+            Why Businesses in {city.name} Choose Us
+          </h2>
+          <p className="m-0 mb-10 text-[17px] leading-[1.75] text-ct-fg/60 max-w-[640px]">
+            {city.name} is {city.tagline}. Local businesses here need a digital partner who understands the market, speaks the language, and delivers results — not just promises. With 2000+ brands served since 2008, Creators Touch Global is the most trusted {service.title.toLowerCase()} agency in {city.name}.
+          </p>
+        </div>
+      </section>
+
       {/* Benefits */}
       <section className="px-7 py-20 border-b border-ct-fg/10">
         <div className="max-w-[960px] mx-auto">
@@ -128,7 +136,7 @@ function IndividualServicePage({ service }: { service: IndividualService }) {
             What You Get
           </span>
           <h2 className="m-0 mb-10 text-[clamp(28px,4vw,48px)] font-medium tracking-[-0.04em]">
-            Our {service.title} Services
+            Our {service.title} Services in {city.name}
           </h2>
           <div className="grid grid-cols-1 md:grid-cols-2 gap-[2px]">
             {service.benefits.map((benefit, i) => (
@@ -205,7 +213,7 @@ function IndividualServicePage({ service }: { service: IndividualService }) {
           </h2>
           <div className="grid grid-cols-1 md:grid-cols-4 gap-6">
             {[
-              { step: "01", label: "Discovery", desc: "We learn about your business, your market, and your goals." },
+              { step: "01", label: "Discovery", desc: `We learn about your business, your ${city.name} market, and your goals.` },
               { step: "02", label: "Strategy", desc: "We create a tailored plan with clear timelines and deliverables." },
               { step: "03", label: "Execution", desc: "Our in-house team builds, tests, and refines every detail." },
               { step: "04", label: "Growth", desc: "We launch, measure results, and optimise for continuous improvement." },
@@ -220,69 +228,65 @@ function IndividualServicePage({ service }: { service: IndividualService }) {
         </div>
       </section>
 
-      {/* City-specific variants */}
-      {parentSlug && (
-        <section className="px-7 py-20 border-b border-ct-fg/10">
-          <div className="max-w-[960px] mx-auto">
-            <span className="font-mono text-[10px] tracking-[0.22em] uppercase text-ct-fg/35 block mb-5">
-              Available In
-            </span>
-            <h2 className="m-0 mb-8 text-[clamp(24px,3vw,36px)] font-medium tracking-[-0.04em]">
-              {service.title} by City
-            </h2>
-            <div className="flex flex-wrap gap-3">
-              {CITIES.map((c) => (
-                <Link
-                  key={c.slug}
-                  href={`/${parentSlug}-${c.slug}`}
-                  className="inline-flex items-center gap-2 px-5 py-2.5 rounded-full border border-ct-fg/12 text-[13px] text-ct-fg/70 no-underline hover:border-ct-fg/30 hover:text-ct-fg transition-colors"
-                >
-                  {c.name}
-                </Link>
-              ))}
-            </div>
-          </div>
-        </section>
-      )}
-
-      {/* Other services in same category */}
-      {otherServices.length > 0 && (
-        <section className="px-7 py-20 border-b border-ct-fg/10">
-          <div className="max-w-[960px] mx-auto">
-            <span className="font-mono text-[10px] tracking-[0.22em] uppercase text-ct-fg/35 block mb-5">
-              Related Services
-            </span>
-            <h2 className="m-0 mb-8 text-[clamp(24px,3vw,36px)] font-medium tracking-[-0.04em]">
-              More {service.category} Services
-            </h2>
-            <div className="flex flex-wrap gap-3">
-              {otherServices.map((s) => (
-                <Link
-                  key={s.slug}
-                  href={`/services/${s.slug}`}
-                  className="inline-flex items-center gap-2 px-5 py-2.5 rounded-full border text-[13px] no-underline hover:text-ct-fg transition-colors"
-                  style={{ borderColor: s.color + "44", color: s.color }}
-                >
-                  {s.title}
-                </Link>
-              ))}
+      {/* Same service, other cities */}
+      <section className="px-7 py-20 border-b border-ct-fg/10">
+        <div className="max-w-[960px] mx-auto">
+          <span className="font-mono text-[10px] tracking-[0.22em] uppercase text-ct-fg/35 block mb-5">
+            Also Available In
+          </span>
+          <h2 className="m-0 mb-8 text-[clamp(24px,3vw,36px)] font-medium tracking-[-0.04em]">
+            {service.title} in Other Cities
+          </h2>
+          <div className="flex flex-wrap gap-3">
+            {otherCities.map((c) => (
               <Link
-                href="/services"
-                className="inline-flex items-center gap-2 px-5 py-2.5 rounded-full border border-ct-fg/12 text-[13px] text-ct-fg/50 no-underline hover:text-ct-fg transition-colors"
+                key={c.slug}
+                href={`/${service.slug}-${c.slug}`}
+                className="inline-flex items-center gap-2 px-5 py-2.5 rounded-full border border-ct-fg/12 text-[13px] text-ct-fg/70 no-underline hover:border-ct-fg/30 hover:text-ct-fg transition-colors"
               >
-                View all services &rarr;
+                {service.title} in {c.name}
               </Link>
-            </div>
+            ))}
           </div>
-        </section>
-      )}
+        </div>
+      </section>
+
+      {/* Other services in same city */}
+      <section className="px-7 py-20 border-b border-ct-fg/10">
+        <div className="max-w-[960px] mx-auto">
+          <span className="font-mono text-[10px] tracking-[0.22em] uppercase text-ct-fg/35 block mb-5">
+            More Services
+          </span>
+          <h2 className="m-0 mb-8 text-[clamp(24px,3vw,36px)] font-medium tracking-[-0.04em]">
+            Other Services in {city.name}
+          </h2>
+          <div className="flex flex-wrap gap-3">
+            {otherServices.map((s) => (
+              <Link
+                key={s.slug}
+                href={`/${s.slug}-${city.slug}`}
+                className="inline-flex items-center gap-2 px-5 py-2.5 rounded-full border text-[13px] no-underline hover:text-ct-fg transition-colors"
+                style={{ borderColor: s.color + "44", color: s.color }}
+              >
+                {s.title}
+              </Link>
+            ))}
+            <Link
+              href="/services/all"
+              className="inline-flex items-center gap-2 px-5 py-2.5 rounded-full border border-ct-fg/12 text-[13px] text-ct-fg/50 no-underline hover:text-ct-fg transition-colors"
+            >
+              View all services &rarr;
+            </Link>
+          </div>
+        </div>
+      </section>
 
       {/* CTA */}
       <section className="px-7 py-24 bg-ct-card border-t border-ct-fg/10">
         <div className="max-w-[960px] mx-auto flex justify-between items-center gap-10 flex-wrap">
           <div>
             <h2 className="m-0 mb-4 text-[clamp(28px,4vw,52px)] font-medium tracking-[-0.04em]">
-              Ready to get started?
+              Ready to grow in {city.name}?
             </h2>
             <p className="m-0 text-[17px] leading-[1.6] text-ct-fg/55 max-w-[440px]">
               Tell us what you need. We&apos;ll put together a {service.title.toLowerCase()} plan built around your business and your budget.

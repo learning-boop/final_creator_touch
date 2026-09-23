@@ -15,7 +15,9 @@ const CORE_PAGES = [
   { href: "/", label: "Home" },
   { href: "/about", label: "About Us" },
   { href: "/services", label: "Services" },
-  { href: "/work", label: "Our Work" },
+  { href: "/portfolio", label: "Portfolio" },
+  { href: "/case-studies", label: "Case Studies" },
+  { href: "/industries", label: "Industries We Serve" },
   { href: "/blog", label: "Blog" },
   { href: "/contact", label: "Contact / Start a Project" },
   { href: "/services/all", label: "All Services & Locations" },
@@ -121,7 +123,7 @@ export default function SitemapLinksPage() {
                 {CITIES.map((city) => (
                   <Link
                     key={city.slug}
-                    href={`/services/${service.slug}-in-${city.slug}`}
+                    href={`/${service.slug}-${city.slug}`}
                     className="px-4 py-2.5 rounded-lg bg-ct-card border border-ct-fg/6 text-[12px] text-ct-fg/60 no-underline hover:border-ct-fg/16 hover:text-ct-fg transition-colors text-center"
                   >
                     {city.name}

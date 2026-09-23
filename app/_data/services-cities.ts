@@ -20,28 +20,88 @@ export interface CityData {
 
 export const SERVICES: ServiceData[] = [
   {
-    slug: "website-development",
-    title: "Website Development",
-    color: "#29A8DC",
-    shortDesc: "Custom websites built to attract customers and drive real enquiries.",
-    tagline: "We Build the Best Websites Your Business Will Ever Have",
-    aboutUs: "Creators Touch Global has been designing and developing websites since 2008 — for hospitals, clinics, schools, jewellers, malls, and restaurants across India, the UK, UAE, Singapore, and the USA. Every site we build is hand-coded, performance-optimised, and designed to convert visitors into customers. No templates. No shortcuts. Just websites that work.",
+    slug: "website-design",
+    title: "Website Design",
+    color: "#FF3D8F",
+    shortDesc: "Custom website designs that look premium and convert visitors into customers.",
+    tagline: "Beautiful Websites That Work as Hard as You Do",
+    aboutUs: "Creators Touch Global has been designing websites since 2008 — for hospitals, clinics, schools, jewellers, malls, and restaurants across India, the UK, UAE, Singapore, and the USA. Every site we design is hand-crafted, conversion-focused, and built to impress. No templates. No shortcuts. Just designs that work.",
     longDesc:
-      "We design and develop fast, responsive, mobile-first websites that look premium and convert visitors into paying customers. Every site is hand-crafted with clean code, optimised for speed, and built to rank on Google from day one.",
+      "We design stunning, mobile-first websites that capture your brand's personality and guide every visitor towards action. Every design is hand-crafted with clean layouts optimised for speed, readability, and conversion.",
     benefits: [
       "Custom designs tailored to your brand and audience",
       "Mobile-first, fully responsive on every device",
-      "Lightning-fast load times and Core Web Vitals optimised",
+      "Conversion-focused layouts that turn visitors into enquiries",
       "SEO-ready structure with clean, semantic code",
+      "Fast load times with optimised images and assets",
       "Easy-to-manage CMS so you can update content yourself",
-      "Secure hosting setup with SSL and daily backups",
     ],
-    keywords: ["website development", "web design", "custom website", "responsive website", "business website"],
+    keywords: ["website design", "web design", "custom website design", "responsive website design", "business website design"],
     relatedSlugs: ["threadlift", "rma", "meditron-cdc", "fillers-skin", "kensley-aesthetics", "trust-hospital", "anjaneya-jewellery"],
   },
   {
-    slug: "seo-digital-marketing",
-    title: "SEO & Digital Marketing",
+    slug: "web-development",
+    title: "Web Development",
+    color: "#29A8DC",
+    shortDesc: "Custom-coded websites built for speed, security, and scalability.",
+    tagline: "Hand-Coded Websites That Perform — No Templates, No Limits",
+    aboutUs: "Creators Touch Global builds websites from the ground up. We don't use generic templates or page builders. Our development team writes clean, semantic code that loads fast, ranks well, and scales with your business. From hospital portals to e-commerce platforms — we've built it all.",
+    longDesc:
+      "We develop fast, secure, and scalable websites using modern technologies — React, Next.js, Node.js, and more. Every line of code is hand-written, performance-optimised, and built to handle your business growth without breaking.",
+    benefits: [
+      "Custom development with React, Next.js, and modern frameworks",
+      "Lightning-fast performance with Core Web Vitals optimised",
+      "Secure architecture with SSL, firewalls, and daily backups",
+      "API integrations with payment gateways, CRMs, and third-party tools",
+      "Scalable codebase that grows with your business",
+      "Clean, semantic code that search engines love",
+    ],
+    keywords: ["web development", "website development", "custom website", "responsive website", "business website"],
+    relatedSlugs: ["meditron-cdc", "trust-hospital", "jobyatra-india", "aayush-hospitals"],
+  },
+  {
+    slug: "ecommerce-website-design",
+    title: "E-commerce Website Design",
+    color: "#0977a8",
+    shortDesc: "Online stores built to look like your brand and sell like a machine.",
+    tagline: "The Best E-commerce Websites We Can Build — Stores That Sell While You Sleep",
+    aboutUs: "Creators Touch Global builds e-commerce stores that look premium and convert. From Anjaneya Jewellery's heritage catalogue to modern Shopify stores for UK clinics — we have built online stores across every industry. UPI, cards, COD — we set up every payment method your customers expect.",
+    longDesc:
+      "From your first product to your thousandth order — we build e-commerce stores on Shopify and WooCommerce that make buying simple, fast, and trustworthy. Product catalogues, secure checkout, payment gateway integration, and inventory management — all set up so you can focus on your products.",
+    benefits: [
+      "Shopify and WooCommerce store design and setup",
+      "Product catalogue with professional photography guidelines",
+      "UPI, card, and COD payment gateway integration",
+      "Inventory tracking with low-stock alerts",
+      "Secure checkout flow optimised for conversions",
+      "Order management and shipping integration",
+    ],
+    keywords: ["ecommerce website design", "ecommerce development", "Shopify store", "WooCommerce", "online store"],
+    relatedSlugs: ["anjaneya-jewellery", "threadlift", "fillers-skin"],
+  },
+  {
+    slug: "wordpress-development",
+    title: "WordPress Development",
+    color: "#21759B",
+    shortDesc: "Professional WordPress websites that are easy to manage and built to perform.",
+    tagline: "WordPress Websites Built Right — Fast, Secure, and Easy to Manage",
+    aboutUs: "Creators Touch Global has built hundreds of WordPress websites since 2008. We don't just install a theme and call it done — we build custom themes, optimise every plugin, and set up security so your site is fast, safe, and easy to manage. Schools, hospitals, restaurants, NGOs — we've done it all on WordPress.",
+    longDesc:
+      "We build custom WordPress websites with clean themes, optimised plugins, and a CMS setup that lets you update content without touching code. From business websites to blogs and directories — WordPress done right, without the bloat.",
+    benefits: [
+      "Custom WordPress theme design — no generic templates",
+      "Plugin selection and optimisation for speed and security",
+      "SEO-ready setup with Yoast/RankMath configuration",
+      "Content management training so you can update your site yourself",
+      "WooCommerce integration for selling products online",
+      "Security hardening with firewall, malware scanning, and backups",
+    ],
+    keywords: ["wordpress development", "wordpress website", "wordpress developer", "custom wordpress", "wordpress agency"],
+    relatedSlugs: ["trust-hospital", "st-pauls-school", "change-ngo", "anjaneya-jewellery"],
+  },
+  {
+    slug: "seo",
+    title: "SEO",
     color: "#cc0066",
     shortDesc: "Rank higher on Google and drive organic traffic that keeps growing.",
     tagline: "Dominate Google Search Results — We Make Sure Your Customers Find You First",
@@ -56,28 +116,48 @@ export const SERVICES: ServiceData[] = [
       "Monthly performance reports with actionable insights",
       "Content strategy aligned with search intent",
     ],
-    keywords: ["SEO services", "digital marketing", "Google ranking", "local SEO", "search engine optimisation"],
+    keywords: ["SEO services", "search engine optimisation", "Google ranking", "local SEO", "SEO agency"],
     relatedSlugs: ["meditron-cdc", "threadlift", "kensley-aesthetics", "trust-hospital"],
   },
   {
-    slug: "google-meta-advertising",
-    title: "Google & Meta Advertising",
+    slug: "digital-marketing",
+    title: "Digital Marketing",
     color: "#96BF48",
-    shortDesc: "Targeted ad campaigns that bring paying customers straight to your door.",
-    tagline: "Every Rupee Tracked, Every Ad Tested — Advertising That Actually Pays for Itself",
-    aboutUs: "Creators Touch Global runs high-performance ad campaigns for clinics, e-commerce brands, and service businesses. As a Google Certified Partner and Meta Business Partner, we combine deep platform expertise with creative strategy to deliver measurable ROI on every campaign.",
+    shortDesc: "Targeted ad campaigns and full-service digital marketing that brings paying customers.",
+    tagline: "Every Rupee Tracked, Every Ad Tested — Digital Marketing That Actually Pays for Itself",
+    aboutUs: "Creators Touch Global is a Google Certified Partner and Meta Business Partner. We run high-performance ad campaigns and full-service digital marketing for clinics, e-commerce brands, and service businesses. We combine deep platform expertise with creative strategy to deliver measurable ROI on every campaign.",
     longDesc:
-      "We run high-performance ad campaigns on Google Search, Google Display, Facebook, and Instagram to reach the right audience at the right time. Every rupee is tracked, every ad is tested, and every campaign is optimised for maximum return on ad spend.",
+      "We run complete digital marketing campaigns — Google Ads, Facebook Ads, Instagram marketing, content strategy, and email automation — all designed to bring paying customers to your business. Every campaign is tracked, tested, and optimised for maximum return on ad spend.",
     benefits: [
       "Google Search Ads targeting high-intent buyer keywords",
       "Facebook and Instagram ads with precise audience targeting",
+      "Content marketing and social media management",
       "Retargeting campaigns to convert warm leads",
-      "A/B tested ad creatives for maximum click-through rates",
       "Conversion tracking setup with Google Analytics and Meta Pixel",
       "Monthly ROI reports with transparent spend breakdowns",
     ],
-    keywords: ["Google Ads", "Facebook Ads", "Meta advertising", "PPC", "paid advertising", "Instagram Ads"],
-    relatedSlugs: ["fillers-skin", "botox", "prp-treatment", "aptos-uk"],
+    keywords: ["digital marketing", "Google Ads", "Facebook Ads", "social media marketing", "online marketing"],
+    relatedSlugs: ["fillers-skin", "botox", "prp-treatment", "aptos-uk", "kensley-aesthetics"],
+  },
+  {
+    slug: "website-maintenance",
+    title: "Website Maintenance",
+    color: "#E85D2A",
+    shortDesc: "Keep your website fast, secure, and up-to-date — without lifting a finger.",
+    tagline: "Your Website Runs 24/7 — So Should Its Support",
+    aboutUs: "Creators Touch Global maintains websites for businesses across India and the UK — hospitals, schools, e-commerce stores, and corporate sites. We've seen what happens when websites are neglected: slow speeds, security breaches, broken pages. Our maintenance plans prevent all of that, with proactive monitoring and rapid response times.",
+    longDesc:
+      "We handle everything — security updates, plugin patches, performance monitoring, content updates, backups, and uptime monitoring — so your website stays fast, secure, and working perfectly while you focus on running your business.",
+    benefits: [
+      "Regular security updates and vulnerability patching",
+      "Daily automated backups with one-click restore",
+      "Performance monitoring and speed optimisation",
+      "Content updates — text, images, and new pages",
+      "Uptime monitoring with instant downtime alerts",
+      "Monthly health reports with recommendations",
+    ],
+    keywords: ["website maintenance", "website support", "website management", "website care plan", "website updates"],
+    relatedSlugs: ["trust-hospital", "meditron-cdc", "st-pauls-school", "aayush-hospitals"],
   },
   {
     slug: "content-social-media",
@@ -98,26 +178,6 @@ export const SERVICES: ServiceData[] = [
     ],
     keywords: ["social media management", "content marketing", "Instagram management", "social media agency", "content creation"],
     relatedSlugs: ["kensley-aesthetics", "change-ngo", "anjaneya-jewellery", "dr-matla"],
-  },
-  {
-    slug: "ecommerce-solutions",
-    title: "E-commerce Solutions",
-    color: "#0977a8",
-    shortDesc: "Online stores built to look like your brand and sell like a machine.",
-    tagline: "The Best E-commerce Websites We Can Build — Stores That Sell While You Sleep",
-    aboutUs: "Creators Touch Global builds e-commerce stores that look premium and convert. From Anjaneya Jewellery's heritage catalogue to modern Shopify stores for UK clinics — we have built online stores across every industry. UPI, cards, COD — we set up every payment method your customers expect.",
-    longDesc:
-      "From your first product to your thousandth order — we build e-commerce stores on Shopify and WooCommerce that make buying simple, fast, and trustworthy. Product catalogues, secure checkout, payment gateway integration, and inventory management — all set up so you can focus on your products.",
-    benefits: [
-      "Shopify and WooCommerce store design and setup",
-      "Product catalogue with professional photography guidelines",
-      "UPI, card, and COD payment gateway integration",
-      "Inventory tracking with low-stock alerts",
-      "Secure checkout flow optimised for conversions",
-      "Order management and shipping integration",
-    ],
-    keywords: ["ecommerce development", "Shopify store", "WooCommerce", "online store", "ecommerce website"],
-    relatedSlugs: ["anjaneya-jewellery", "threadlift", "fillers-skin"],
   },
   {
     slug: "ui-ux-design",
@@ -255,7 +315,7 @@ export function getAllServiceCitySlugs() {
   const slugs: string[] = [];
   for (const service of SERVICES) {
     for (const city of CITIES) {
-      slugs.push(`${service.slug}-in-${city.slug}`);
+      slugs.push(`${service.slug}-${city.slug}`);
     }
   }
   return slugs;
@@ -268,7 +328,7 @@ export function getServiceBySlug(slug: string): ServiceData | undefined {
 export function parseSlug(slug: string): { service: ServiceData; city: CityData } | null {
   for (const service of SERVICES) {
     for (const city of CITIES) {
-      if (slug === `${service.slug}-in-${city.slug}`) {
+      if (slug === `${service.slug}-${city.slug}`) {
         return { service, city };
       }
     }

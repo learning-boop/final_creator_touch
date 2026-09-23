@@ -226,7 +226,7 @@ export default function ServicesPage() {
               Get a free consultation &rarr;
             </a>
             <a
-              href="/work"
+              href="/portfolio"
               style={S(`display:inline-flex;align-items:center;gap:12px;padding:18px 32px;border:${HAIR};border-radius:100px;font-size:14px;letter-spacing:-0.02em;color:#F4F3F1;text-decoration:none`)}
             >
               See our work

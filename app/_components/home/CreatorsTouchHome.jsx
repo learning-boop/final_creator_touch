@@ -41,6 +41,10 @@ const CLIENTS = [
   ["Aesthetic Icon", "Aesthetic-Icon-dark-theme-HQ.png"],
   ["Botox Newcastle", "Botox-Newcastle-dark-theme-HQ.png"],
   ["Razorpay", "ChatGPT Image Sep 22, 2026, 01_41_04 PM.png"],
+  ["Jobyatra India", "Jobyatra-India-dark-theme-HQ.png"],
+  ["Aayush Hospitals", "Aayush-Hospitals-dark-theme-HQ.webp"],
+  ["Kpetz", "Kpetz-dark-theme-HQ.png"],
+  ["Mitra Hospitals", "Mitra-Hospitals-dark-theme-HQ.png"],
 ].map(([name, f]) => ({ name, logo: "/assets/images/clients/" + f }));
 
 const PROJECTS = [
@@ -91,6 +95,30 @@ const PROJECTS = [
     desc: "A doctor-led non-surgical buttock enhancement website — subtle, natural results with collagen-stimulating treatments, designed to build trust and drive bookings.",
     img: "/assets/images/projects/buttock-lift/screen-1.png",
     url: "https://buttocklift.uk"
+  },
+  {
+    title: "Jobyatra India", category: "Recruitment · Job Portal", year: "2025", tag: "Web + Platform",
+    desc: "India's flagship online job mela platform — connecting job seekers with recruiters through hiring campaigns, profile screening, and interview scheduling at scale.",
+    img: "/assets/images/projects/jobyatra-india/screen-1.png",
+    url: "https://jobyatraindia.com"
+  },
+  {
+    title: "Aayush Hospitals", category: "Healthcare · Multi-speciality", year: "2025", tag: "Web + SEO",
+    desc: "A leading multi-speciality healthcare network in Vijayawada and Eluru — delivering advanced medical expertise with seamless appointment booking and patient care.",
+    img: "/assets/images/projects/aayush-hospitals/screen-1.png",
+    url: "https://www.aayushhospitals.com"
+  },
+  {
+    title: "K-Petz", category: "Pet Care · Veterinary", year: "2025", tag: "Web + Brand",
+    desc: "A trainer-run pet care platform in Vijayawada offering veterinary services, grooming, training, boarding and adoption support — built to earn pet owners' trust.",
+    img: "/assets/images/projects/kpetz/screen-1.png",
+    url: "https://www.kpetz.com"
+  },
+  {
+    title: "Mitra Hospitals", category: "Healthcare · Multi-speciality", year: "2025", tag: "Web + SEO",
+    desc: "A multi-speciality hospital website showcasing expert doctors, advanced facilities, and seamless patient booking — designed to build confidence and drive appointments.",
+    img: "/assets/images/projects/mitra-hospitals/screen-1.png",
+    url: "https://www.mithrahospitals.com"
   },
 ];
 
@@ -929,11 +957,12 @@ export default function CreatorsTouchHome({ visualReview = false } = {}) {
         </div>
         <div className="flex flex-col items-start md:items-end gap-4">
           <div className="flex flex-wrap gap-3.5 gap-x-4 md:gap-6 font-mono text-[10px] tracking-[0.14em] uppercase text-ct-fg/42">
-            <RollLink href="/work" label="Portfolio" h={14} dim="rgba(244,243,241,0.42)" hi="#F4F3F1" />
+            <RollLink href="/portfolio" label="Portfolio" h={14} dim="rgba(244,243,241,0.42)" hi="#F4F3F1" />
             <RollLink href="/services" label="Services" h={14} dim="rgba(244,243,241,0.42)" hi="#F4F3F1" />
             <RollLink href="/blog" label="Blog" h={14} dim="rgba(244,243,241,0.42)" hi="#F4F3F1" />
             <RollLink href="/about" label="About" h={14} dim="rgba(244,243,241,0.42)" hi="#F4F3F1" />
             <RollLink href="/contact" label="Contact" h={14} dim="rgba(244,243,241,0.42)" hi="#F4F3F1" />
+            <RollLink href="/careers" label="Careers" h={14} dim="rgba(244,243,241,0.42)" hi="#F4F3F1" />
           </div>
           <div className="flex flex-wrap gap-3.5 gap-x-4 md:gap-6 font-mono text-[10px] tracking-[0.14em] uppercase text-ct-fg/28">
             <RollLink href="/privacy-policy" label="Privacy Policy" h={14} dim="rgba(244,243,241,0.28)" hi="rgba(244,243,241,0.6)" />
