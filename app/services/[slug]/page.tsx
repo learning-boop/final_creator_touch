@@ -1,7 +1,6 @@
 import type { Metadata } from "next";
 import { notFound } from "next/navigation";
 import Link from "next/link";
-import { SERVICES, CITIES } from "@/app/_data/services-cities";
 import { INDIVIDUAL_SERVICES, getAllIndividualServiceSlugs, getIndividualService, type IndividualService } from "@/app/_data/individual-services";
 import { CASE_STUDIES } from "@/app/_data/case-studies";
 
@@ -16,8 +15,8 @@ export async function generateMetadata({ params }: { params: Promise<{ slug: str
   const s = getIndividualService(slug);
   if (!s) return {};
 
-  const title = `${s.title} Services | Creators Touch Global`;
-  const description = `${s.shortDesc} Trusted by 2000+ brands across India, UK, UAE, Singapore, and USA.`;
+  const title = `Best ${s.title} in Vijayawada | Creators Touch Global`;
+  const description = `${s.shortDesc} Top-rated ${s.title.toLowerCase()} agency in Vijayawada. Trusted by 2000+ brands across India, UK, UAE, Singapore, and USA.`;
   return {
     title,
     description,
@@ -50,16 +49,6 @@ export default async function ServicePage({ params }: { params: Promise<{ slug: 
 function IndividualServicePage({ service }: { service: IndividualService }) {
   const relatedProjects = CASE_STUDIES.filter((cs) => service.relatedSlugs.includes(cs.slug));
   const otherServices = INDIVIDUAL_SERVICES.filter((s) => s.category === service.category && s.slug !== service.slug).slice(0, 6);
-
-  // Map category to parent service slug for city links
-  const parentSlug =
-    service.category === "Web Design & Development" ? "website-design" :
-    service.category === "Design & Branding" ? "brand-logo-design" :
-    service.category === "Digital Marketing" ? "seo" :
-    service.category === "Mobile Applications" ? "web-development" :
-    service.category === "Content Writing Services" ? "content-social-media" :
-    service.category === "AI & Automation" ? "whatsapp-crm-automation" :
-    null;
 
   return (
     <div className="min-h-screen bg-ct-bg text-ct-fg font-sans overflow-x-hidden">
@@ -220,31 +209,6 @@ function IndividualServicePage({ service }: { service: IndividualService }) {
         </div>
       </section>
 
-      {/* City-specific variants */}
-      {parentSlug && (
-        <section className="px-7 py-20 border-b border-ct-fg/10">
-          <div className="max-w-[960px] mx-auto">
-            <span className="font-mono text-[10px] tracking-[0.22em] uppercase text-ct-fg/35 block mb-5">
-              Available In
-            </span>
-            <h2 className="m-0 mb-8 text-[clamp(24px,3vw,36px)] font-medium tracking-[-0.04em]">
-              {service.title} by City
-            </h2>
-            <div className="flex flex-wrap gap-3">
-              {CITIES.map((c) => (
-                <Link
-                  key={c.slug}
-                  href={`/${parentSlug}-${c.slug}`}
-                  className="inline-flex items-center gap-2 px-5 py-2.5 rounded-full border border-ct-fg/12 text-[13px] text-ct-fg/70 no-underline hover:border-ct-fg/30 hover:text-ct-fg transition-colors"
-                >
-                  {c.name}
-                </Link>
-              ))}
-            </div>
-          </div>
-        </section>
-      )}
-
       {/* Other services in same category */}
       {otherServices.length > 0 && (
         <section className="px-7 py-20 border-b border-ct-fg/10">
@@ -306,15 +270,6 @@ function IndividualServicePage({ service }: { service: IndividualService }) {
         </div>
       </section>
 
-      {/* Footer */}
-      <footer className="px-7 py-6 border-t border-ct-fg/10 flex justify-between items-center">
-        <span className="font-mono text-[10px] tracking-[0.14em] uppercase text-ct-fg/28">
-          Creators Touch Global &middot; &copy; 2026
-        </span>
-        <Link href="/" className="font-mono text-[10px] tracking-[0.14em] uppercase text-ct-fg/35 no-underline hover:text-ct-fg/60 transition-colors">
-          Back to home
-        </Link>
-      </footer>
     </div>
   );
 }

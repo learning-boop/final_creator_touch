@@ -1,5 +1,4 @@
 import type { MetadataRoute } from "next";
-import { getAllServiceCitySlugs } from "@/app/_data/services-cities";
 import { getAllIndividualServiceSlugs } from "@/app/_data/individual-services";
 import { CASE_STUDIES } from "@/app/_data/case-studies";
 
@@ -29,14 +28,6 @@ export default function sitemap(): MetadataRoute.Sitemap {
     priority: 0.7,
   }));
 
-  // Service + city pages (11 services × 7 cities = 77)
-  const serviceCityPages: MetadataRoute.Sitemap = getAllServiceCitySlugs().map((slug) => ({
-    url: `${BASE}/services/${slug}`,
-    lastModified: now,
-    changeFrequency: "monthly",
-    priority: 0.6,
-  }));
-
   // Case study / portfolio pages
   const caseStudyPages: MetadataRoute.Sitemap = CASE_STUDIES.map((cs) => ({
     url: `${BASE}/work/${cs.slug}`,
@@ -45,5 +36,5 @@ export default function sitemap(): MetadataRoute.Sitemap {
     priority: 0.8,
   }));
 
-  return [...staticPages, ...individualServices, ...serviceCityPages, ...caseStudyPages];
+  return [...staticPages, ...individualServices, ...caseStudyPages];
 }

@@ -141,7 +141,6 @@ export function initHomeFX(opts = {}) {
     window.scrollTo(0, 0);
     document.documentElement.style.overflow = "hidden";
     document.body.style.overflow = "hidden";
-    // Block all scroll-inducing events while preloader is active
     const blockScroll = e => { e.preventDefault(); };
     const blockKeys = e => {
       const k = e.key;
@@ -153,7 +152,6 @@ export function initHomeFX(opts = {}) {
     window.addEventListener("wheel", blockScroll, { passive: false });
     window.addEventListener("touchmove", blockScroll, { passive: false });
     window.addEventListener("keydown", blockKeys, { passive: false });
-    // Also pin scroll position in case anything slips through
     const pinScroll = () => { window.scrollTo(0, 0); };
     window.addEventListener("scroll", pinScroll);
     const unlockScroll = () => {
@@ -170,40 +168,21 @@ export function initHomeFX(opts = {}) {
     pre.style.cssText = "position:fixed;inset:0;z-index:9999;background:#08090A;display:flex;flex-direction:column;align-items:center;justify-content:center;gap:18px;transition:transform .9s cubic-bezier(.76,0,.24,1)";
     const img = document.createElement("img");
     img.src = logoSrc;
-    img.style.cssText = "width:52px;height:52px;animation:ct-pulse 1.2s ease-in-out infinite";
-    const num = document.createElement("div");
-    num.style.cssText = "font-family:'Instrument Serif',Georgia,serif;font-style:italic;font-size:clamp(72px,12vw,130px);line-height:1;color:#F4F3F1;letter-spacing:-0.03em";
-    num.textContent = "0";
+    img.style.cssText = "width:120px;height:120px;object-fit:contain;animation:ct-pulse 1.2s ease-in-out infinite";
     const lab = document.createElement("div");
     lab.style.cssText = "font-family:'Geist Mono',monospace;font-size:10px;letter-spacing:.22em;color:rgba(244,243,241,.4);text-transform:uppercase";
     lab.textContent = "Creators Touch Global";
-    const bar = document.createElement("div");
-    bar.style.cssText = "position:absolute;left:0;bottom:0;height:2px;width:0%;background:linear-gradient(90deg,#cc0066,#0977a8);transition:width .1s linear";
-    pre.append(img, num, lab, bar);
+    pre.append(img, lab);
     document.body.appendChild(pre);
-    const t0 = performance.now(), D = 1250;
-    const ease = x => 1 - Math.pow(1 - x, 3);
-    let fin = false;
+    const D = 1250;
     const finish = () => {
-      if (fin) return; fin = true;
-      num.textContent = "100"; bar.style.width = "100%";
-      setTimeout(() => {
-        if (!pre) return;
-        pre.style.transform = "translateY(-101%)";
-        unlockScroll();
-        afterPreloader();
-        setTimeout(() => { pre && pre.remove(); pre = null; }, 950);
-      }, 120);
+      if (!pre) return;
+      pre.style.transform = "translateY(-101%)";
+      unlockScroll();
+      afterPreloader();
+      setTimeout(() => { pre && pre.remove(); pre = null; }, 950);
     };
-    const tick = now => {
-      if (fin) return;
-      const p = Math.min(1, (now - t0) / D), v = Math.round(ease(p) * 100);
-      num.textContent = v; bar.style.width = v + "%";
-      if (p < 1) requestAnimationFrame(tick);
-      else finish();
-    };
-    requestAnimationFrame(tick);
-    const ft = setTimeout(finish, D + 700); // rAF stalls in background tabs
+    const ft = setTimeout(finish, D);
     cleanups.push(() => { clearTimeout(ft); unlockScroll(); pre && pre.remove(); pre = null; });
   };
   initPreloader();

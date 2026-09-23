@@ -29,9 +29,9 @@ export default function Navbar() {
         <div className="fixed inset-0 z-[200] bg-ct-bg flex flex-col px-7 pt-4 pb-8" aria-modal="true" role="dialog" aria-label="Navigation menu">
           <div className="flex items-center justify-between pb-12">
             <a href="/" onClick={() => setMenuOpen(false)} className="flex items-center gap-2.5">
-              <img src="/assets/images/logo/creator-touch.png" alt="Creators Touch" className="w-16 h-16 block rounded-lg" style={{ mixBlendMode: "screen" }} />
+              <img src="/assets/images/logo/creator-touch.png" alt="creatorstouchglobal.com" className="w-16 h-16 block rounded-lg" style={{ mixBlendMode: "screen" }} />
               <span className="flex flex-col leading-[1.05]">
-                <span className="text-sm font-semibold tracking-[-0.03em]">Creators Touch</span>
+                <span className="text-sm font-semibold tracking-[-0.03em]">creatorstouchglobal.com</span>
               </span>
             </a>
             <button onClick={() => setMenuOpen(false)} aria-label="Close menu" className="bg-transparent border-none text-ct-fg cursor-pointer p-2 flex items-center justify-center">
@@ -51,7 +51,7 @@ export default function Navbar() {
           </nav>
           <div className="mt-auto flex flex-wrap gap-6 pt-8">
             <a href="tel:+919885933339" className="font-mono text-[11px] tracking-[0.14em] uppercase text-ct-fg/42 no-underline">+91 98859 33339</a>
-            <a href="mailto:hello@creatorstouch.in" className="font-mono text-[11px] tracking-[0.14em] uppercase text-ct-fg/42 no-underline">hello@creatorstouch.in</a>
+            <a href="mailto:hello@creatorstouchglobal.com" className="font-mono text-[11px] tracking-[0.14em] uppercase text-ct-fg/42 no-underline">hello@creatorstouchglobal.com</a>
           </div>
         </div>
       )}
@@ -66,7 +66,7 @@ export default function Navbar() {
         }`}
       >
         <a href="/" className="flex items-center">
-          <img src="/assets/images/logo/creator-touch.png" alt="Creators Touch" className="h-8 md:h-10 w-auto block rounded" style={{ mixBlendMode: "screen" }} />
+          <img src="/assets/images/logo/creator-touch.png" alt="creatorstouchglobal.com" className="h-11 md:h-14 w-auto block rounded" style={{ mixBlendMode: "screen" }} />
         </a>
         <nav className="nav-roll hidden md:flex items-center gap-7 font-mono text-[11px] tracking-[0.14em] uppercase text-ct-fg/62">
           <RollLink href="/portfolio" label="Portfolio" />

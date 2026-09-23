@@ -10,7 +10,7 @@ const NEEDS = ["Website", "Marketing", "SEO", "Branding", "E-commerce", "Automat
 
 const CONTACT_INFO = [
   { label: "Call or WhatsApp", value: "+91 98859 33339", href: "tel:+919885933339" },
-  { label: "Email us", value: "hello@creatorstouch.in", href: "mailto:hello@creatorstouch.in" },
+  { label: "Email us", value: "hello@creatorstouchglobal.com", href: "mailto:hello@creatorstouchglobal.com" },
   { label: "Find us", value: "Vijayawada, Andhra Pradesh", href: null },
 ];
 
@@ -180,7 +180,7 @@ function ContactForm() {
           <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" aria-hidden="true"><path d="M21 15a2 2 0 01-2 2H7l-4 4V5a2 2 0 012-2h14a2 2 0 012 2z"/></svg>
           Chat on WhatsApp
         </a>
-        {status === "error" && <span className="text-[13px] text-ct-pink">Something went wrong &mdash; email hello@creatorstouch.in</span>}
+        {status === "error" && <span className="text-[13px] text-ct-pink">Something went wrong &mdash; email hello@creatorstouchglobal.com</span>}
       </div>
       <p className="font-mono m-0 text-[10px] tracking-[0.12em] uppercase text-ct-fg/28">We usually respond within one business day.</p>
     </form>
@@ -301,15 +301,6 @@ export default function ContactPage() {
         </div>
       </section>
 
-      {/* Footer */}
-      <footer className="px-7 py-6 border-t border-ct-fg/10 flex justify-between items-center">
-        <span className="font-mono text-[10px] tracking-[0.14em] uppercase text-ct-fg/28">
-          Creators Touch Global &middot; &copy; 2026
-        </span>
-        <Link href="/" className="font-mono text-[10px] tracking-[0.14em] uppercase text-ct-fg/35 no-underline hover:text-ct-fg/60 transition-colors">
-          Back to home
-        </Link>
-      </footer>
     </div>
   );
 }

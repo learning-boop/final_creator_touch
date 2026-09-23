@@ -156,15 +156,6 @@ export default function IndustriesPage() {
         </div>
       </section>
 
-      {/* Footer */}
-      <footer className="px-7 py-6 border-t border-ct-fg/10 flex justify-between items-center">
-        <span className="font-mono text-[10px] tracking-[0.14em] uppercase text-ct-fg/28">
-          Creators Touch Global &middot; &copy; 2026
-        </span>
-        <Link href="/" className="font-mono text-[10px] tracking-[0.14em] uppercase text-ct-fg/35 no-underline hover:text-ct-fg/60 transition-colors">
-          Back to home
-        </Link>
-      </footer>
     </div>
   );
 }

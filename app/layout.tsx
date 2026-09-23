@@ -1,6 +1,7 @@
 import type { Metadata } from "next";
 import "./globals.css";
 import Navbar from "./_components/Navbar";
+import Footer from "./_components/Footer";
 
 export const metadata: Metadata = {
   metadataBase: new URL("https://creatorstouchglobal.com"),
@@ -129,7 +130,7 @@ export default function RootLayout({ children }: LayoutProps<"/">) {
               description:
                 "Digital studio offering web design, development, ecommerce, SEO and online marketing since 2008.",
               telephone: "+91-98859-33339",
-              email: "hello@creatorstouch.in",
+              email: "hello@creatorstouchglobal.com",
               address: {
                 "@type": "PostalAddress",
                 addressLocality: "Vijayawada",
@@ -177,6 +178,7 @@ export default function RootLayout({ children }: LayoutProps<"/">) {
         </noscript>
         <Navbar />
         {children}
+        <Footer />
       </body>
     </html>
   );

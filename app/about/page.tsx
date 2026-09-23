@@ -225,15 +225,6 @@ export default function AboutPage() {
         </div>
       </section>
 
-      {/* Footer */}
-      <footer className="abt-footer" style={S(`border-top:${HAIR};display:flex;justify-content:space-between;align-items:center`)}>
-        <span style={S(`${MONO};font-size:10px;letter-spacing:0.14em;text-transform:uppercase;color:rgba(244,243,241,0.28)`)}>
-          Creators Touch Global &middot; &copy; 2026
-        </span>
-        <a href="/" style={S(`${MONO};font-size:10px;letter-spacing:0.14em;text-transform:uppercase;color:rgba(244,243,241,0.35);text-decoration:none`)}>
-          Back to home
-        </a>
-      </footer>
     </div>
   );
 }

@@ -4,6 +4,10 @@ import { useEffect, useState, useRef } from "react";
 import "../css/home.css";
 import { initHomeFX } from "./home-fx";
 import ServicesSection from "../services/ServicesSection";
+import gsap from "gsap";
+import { ScrollTrigger } from "gsap/ScrollTrigger";
+
+gsap.registerPlugin(ScrollTrigger);
 
 const HERO_HEADLINES = [
   "We create and grow digital brands people cannot ignore.",
@@ -48,6 +52,30 @@ const CLIENTS = [
 ].map(([name, f]) => ({ name, logo: "/assets/images/clients/" + f }));
 
 const PROJECTS = [
+  {
+    title: "Jobyatra India", category: "Recruitment · Job Portal", year: "2025", tag: "Web + Platform",
+    desc: "India's flagship online job mela platform — connecting job seekers with recruiters through hiring campaigns, profile screening, and interview scheduling at scale.",
+    img: "/assets/images/projects/jobyatra-india/screen-1.png",
+    url: "https://jobyatraindia.com"
+  },
+  {
+    title: "Aayush Hospitals", category: "Healthcare · Multi-speciality", year: "2025", tag: "Web + SEO",
+    desc: "A leading multi-speciality healthcare network in Vijayawada and Eluru — delivering advanced medical expertise with seamless appointment booking and patient care.",
+    img: "/assets/images/projects/aayush-hospitals/screen-1.png",
+    url: "https://www.aayushhospitals.com"
+  },
+  {
+    title: "K-Petz", category: "Pet Care · Veterinary", year: "2025", tag: "Web + Brand",
+    desc: "A trainer-run pet care platform in Vijayawada offering veterinary services, grooming, training, boarding and adoption support — built to earn pet owners' trust.",
+    img: "/assets/images/projects/kpetz/screen-1.png",
+    url: "https://www.kpetz.com"
+  },
+  {
+    title: "Mitra Hospitals", category: "Healthcare · Multi-speciality", year: "2025", tag: "Web + SEO",
+    desc: "A multi-speciality hospital website showcasing expert doctors, advanced facilities, and seamless patient booking — designed to build confidence and drive appointments.",
+    img: "/assets/images/projects/mitra-hospitals/screen-1.png",
+    url: "https://www.mithrahospitals.com"
+  },
   {
     title: "Thread Lift", category: "Aesthetics · Thread Treatments", year: "2025", tag: "Web + Brand",
     desc: "A premium thread lift clinic website with expert treatment guides, before/after galleries, and a seamless consultation booking flow — built to convert high-intent visitors.",
@@ -95,30 +123,6 @@ const PROJECTS = [
     desc: "A doctor-led non-surgical buttock enhancement website — subtle, natural results with collagen-stimulating treatments, designed to build trust and drive bookings.",
     img: "/assets/images/projects/buttock-lift/screen-1.png",
     url: "https://buttocklift.uk"
-  },
-  {
-    title: "Jobyatra India", category: "Recruitment · Job Portal", year: "2025", tag: "Web + Platform",
-    desc: "India's flagship online job mela platform — connecting job seekers with recruiters through hiring campaigns, profile screening, and interview scheduling at scale.",
-    img: "/assets/images/projects/jobyatra-india/screen-1.png",
-    url: "https://jobyatraindia.com"
-  },
-  {
-    title: "Aayush Hospitals", category: "Healthcare · Multi-speciality", year: "2025", tag: "Web + SEO",
-    desc: "A leading multi-speciality healthcare network in Vijayawada and Eluru — delivering advanced medical expertise with seamless appointment booking and patient care.",
-    img: "/assets/images/projects/aayush-hospitals/screen-1.png",
-    url: "https://www.aayushhospitals.com"
-  },
-  {
-    title: "K-Petz", category: "Pet Care · Veterinary", year: "2025", tag: "Web + Brand",
-    desc: "A trainer-run pet care platform in Vijayawada offering veterinary services, grooming, training, boarding and adoption support — built to earn pet owners' trust.",
-    img: "/assets/images/projects/kpetz/screen-1.png",
-    url: "https://www.kpetz.com"
-  },
-  {
-    title: "Mitra Hospitals", category: "Healthcare · Multi-speciality", year: "2025", tag: "Web + SEO",
-    desc: "A multi-speciality hospital website showcasing expert doctors, advanced facilities, and seamless patient booking — designed to build confidence and drive appointments.",
-    img: "/assets/images/projects/mitra-hospitals/screen-1.png",
-    url: "https://www.mithrahospitals.com"
   },
 ];
 
@@ -177,55 +181,7 @@ const INSIGHTS = [
   { cat: "Design", title: "The Real Cost of a Badly Designed Website", excerpt: "Bad design isn't just ugly — it actively costs you customers, rankings and credibility. Here's what to look for and how to fix it.", date: "May 2026", read: "4 min", color: "#96BF48", cover: "/assets/images/blog-cover-images/06-cost-of-bad-website-design.png" },
 ];
 
-const SOCIALS = [
-  {
-    label: "Instagram", href: "#",
-    icon: (
-      <svg width="17" height="17" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round" aria-hidden="true">
-        <rect x="2" y="2" width="20" height="20" rx="5" ry="5" />
-        <circle cx="12" cy="12" r="4" />
-        <circle cx="17.5" cy="6.5" r="0.5" fill="currentColor" stroke="none" />
-      </svg>
-    )
-  },
-  {
-    label: "LinkedIn", href: "#",
-    icon: (
-      <svg width="17" height="17" viewBox="0 0 24 24" fill="currentColor" aria-hidden="true">
-        <path d="M16 8a6 6 0 016 6v7h-4v-7a2 2 0 00-2-2 2 2 0 00-2 2v7h-4v-7a6 6 0 016-6z" />
-        <rect x="2" y="9" width="4" height="12" />
-        <circle cx="4" cy="4" r="2" />
-      </svg>
-    )
-  },
-  {
-    label: "Facebook", href: "#",
-    icon: (
-      <svg width="17" height="17" viewBox="0 0 24 24" fill="currentColor" aria-hidden="true">
-        <path d="M18 2h-3a5 5 0 00-5 5v3H7v4h3v8h4v-8h3l1-4h-4V7a1 1 0 011-1h3z" />
-      </svg>
-    )
-  },
-  {
-    label: "X", href: "#",
-    icon: (
-      <svg width="17" height="17" viewBox="0 0 24 24" fill="currentColor" aria-hidden="true">
-        <path d="M18.244 2.25h3.308l-7.227 8.26 8.502 11.24H16.17l-5.214-6.817L4.99 21.75H1.68l7.73-8.835L1.254 2.25H8.08l4.713 6.231zm-1.161 17.52h1.833L7.084 4.126H5.117z" />
-      </svg>
-    )
-  },
-];
 
-function RollLink({ href, label, h = 15, dim = "rgba(244,243,241,0.62)", hi = "#FF3D8F" }) {
-  return (
-    <a href={href} data-roll="1" className="block overflow-hidden" style={{ height: h, lineHeight: `${h}px`, color: dim }}>
-      <span data-roll-inner="1" className="block transition-transform duration-[400ms] [transition-timing-function:cubic-bezier(.76,0,.24,1)]">
-        <span className="block" style={{ height: h }}>{label}</span>
-        <span aria-hidden="true" className="block" style={{ height: h, color: hi }}>{label}</span>
-      </span>
-    </a>
-  );
-}
 
 function Star5({ size = 13 }) {
   return <span className="text-ct-star tracking-[3px] leading-none" style={{ fontSize: size }}>★★★★★</span>;
@@ -371,7 +327,7 @@ function ContactForm() {
           <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" aria-hidden="true"><path d="M21 15a2 2 0 01-2 2H7l-4 4V5a2 2 0 012-2h14a2 2 0 012 2z"/></svg>
           Chat on WhatsApp
         </a>
-        {status === "error" && <span className="text-[13px] text-ct-pink">Something went wrong &mdash; email hello@creatorstouch.in</span>}
+        {status === "error" && <span className="text-[13px] text-ct-pink">Something went wrong &mdash; email hello@creatorstouchglobal.com</span>}
       </div>
       <p className="font-mono m-0 text-[10px] tracking-[0.12em] uppercase text-ct-fg/28">We usually respond within one business day.</p>
     </form>
@@ -380,6 +336,35 @@ function ContactForm() {
 
 export default function CreatorsTouchHome({ visualReview = false } = {}) {
   useEffect(() => initHomeFX({ logoSrc: "/assets/images/logo/creator-touch.png", disableLogo: visualReview }), [visualReview]);
+
+  // Work section stacking card animation (same as services)
+  useEffect(() => {
+    if (matchMedia("(prefers-reduced-motion: reduce)").matches) return;
+    const ctx = gsap.context(() => {
+      document.querySelectorAll(".work-stack-group").forEach((group) => {
+        const cards = gsap.utils.toArray(".work-stack-card", group);
+        cards.forEach((card, index) => {
+          const nextCard = cards[index + 1];
+          if (!nextCard) return;
+          gsap.fromTo(card,
+            { scale: 1, filter: "brightness(1)", y: 0 },
+            {
+              scale: 0.95,
+              filter: "brightness(0.4)",
+              y: -10,
+              scrollTrigger: {
+                trigger: nextCard,
+                start: "top 80%",
+                end: "top 30%",
+                scrub: 1,
+              },
+            }
+          );
+        });
+      });
+    });
+    return () => ctx.revert();
+  }, []);
 
   const mobCtaRef = useRef(null);
   useEffect(() => {
@@ -399,7 +384,7 @@ export default function CreatorsTouchHome({ visualReview = false } = {}) {
   const [heroIdx, setHeroIdx] = useState(0);
   const [isDeleting, setIsDeleting] = useState(false);
   const [reviews, setReviews] = useState(FALLBACK_REVIEWS);
-  const [reviewMeta, setReviewMeta] = useState({ rating: 5.0, total: FALLBACK_REVIEWS.length });
+  const [reviewMeta, setReviewMeta] = useState({ rating: 4.9, total: 365 });
 
   useEffect(() => {
     fetch("/api/reviews")
@@ -585,56 +570,39 @@ export default function CreatorsTouchHome({ visualReview = false } = {}) {
           </div>
         </div>
 
-        {/* Featured project */}
-        {(() => { const featured = PROJECTS[0]; return (
-        <a data-reveal="1" href={featured.caseStudy || featured.url} target={featured.caseStudy ? "_self" : "_blank"} rel={featured.caseStudy ? undefined : "noopener noreferrer"}
-          className="block no-underline text-ct-fg mb-12 md:mb-16 cursor-pointer" data-cursor-text={featured.caseStudy ? "Case study" : "View"}>
-          <div className="flex items-center gap-3.5 mb-6 flex-wrap">
-            <span className="font-mono text-[10px] tracking-[0.18em] uppercase px-3.5 py-[5px] border border-ct-pink/40 rounded-full text-ct-pink">Featured</span>
-            <span className="font-mono text-[10px] tracking-[0.18em] uppercase text-ct-fg/28">{featured.category}</span>
-          </div>
-          <div className="flex flex-col min-[850px]:grid min-[850px]:grid-cols-[1.15fr_1fr] gap-8 min-[850px]:gap-14 items-center">
-            <div className="rounded-[20px] overflow-hidden aspect-[4/3] bg-ct-card">
-              <img src={featured.img} alt={featured.title} className="w-full h-full object-cover object-top block" />
-            </div>
-            <div className="flex flex-col gap-6">
-              <h3 className="m-0 text-[clamp(36px,5vw,72px)] font-medium leading-[0.94] tracking-[-0.05em] text-ct-pink">{featured.title}</h3>
-              <p className="font-serif italic font-normal text-[clamp(17px,1.8vw,22px)] leading-[1.5] text-ct-fg/65 m-0 max-w-[440px]">{featured.desc}</p>
-              <div className="flex flex-wrap gap-2 mt-1">
-                <span className="font-mono text-[9px] tracking-[0.1em] uppercase px-3 py-[5px] border border-ct-fg/10 rounded-full text-ct-fg/40">{featured.tag}</span>
-                <span className="font-mono text-[9px] tracking-[0.1em] uppercase px-3 py-[5px] border border-ct-fg/10 rounded-full text-ct-fg/40">{featured.year}</span>
-              </div>
-              <span className="font-mono text-[10px] tracking-[0.16em] uppercase text-ct-fg/45 mt-2">{featured.caseStudy ? "View case study" : "View live site"} &rarr;</span>
-            </div>
-          </div>
-        </a>
-        ); })()}
-
-        {/* Alternating project rows */}
-        <div data-stagger="1" className="flex flex-col">
-          {PROJECTS.slice(1).map((p, idx) => (
-            <a key={p.title} href={p.caseStudy || p.url} target={p.caseStudy ? "_self" : "_blank"} rel={p.caseStudy ? undefined : "noopener noreferrer"}
-              className="group/proj flex flex-col min-[850px]:grid min-[850px]:grid-cols-2 gap-8 min-[850px]:gap-12 items-center py-12 min-[850px]:py-[72px] border-t border-ct-fg/10 no-underline text-ct-fg cursor-pointer"
-              data-cursor-text={p.caseStudy ? "Case study" : "View"}>
-              {/* Image */}
-              <div className={`rounded-2xl overflow-hidden aspect-[4/3] bg-ct-card relative ${idx % 2 === 1 ? "min-[850px]:order-2" : ""}`}>
-                <img src={p.img} alt={p.title} loading="lazy"
-                  className="w-full h-full object-cover object-top block transition-transform duration-700 [transition-timing-function:cubic-bezier(.22,1,.36,1)] group-hover/proj:scale-[1.06]" />
-                <span className="absolute top-4 left-4 font-mono text-[10px] tracking-[0.14em] uppercase px-3.5 py-[5px] bg-ct-bg/72 backdrop-blur-[8px] border border-ct-fg/12 rounded-full text-ct-fg/60">{p.year}</span>
-              </div>
-              {/* Text */}
-              <div className={idx % 2 === 1 ? "min-[850px]:order-1" : ""}>
-                <div className="flex items-center gap-3.5 mb-5 flex-wrap">
-                  <span className="font-mono text-[10px] tracking-[0.16em] uppercase px-3.5 py-[5px] border border-ct-fg/14 rounded-full text-ct-fg/50">{p.category}</span>
+        {/* Stacking project cards */}
+        <div className="work-stack-group relative">
+          {PROJECTS.map((p, index) => (
+            <a
+              key={p.title}
+              href={p.caseStudy || p.url}
+              target={p.caseStudy ? "_self" : "_blank"}
+              rel={p.caseStudy ? undefined : "noopener noreferrer"}
+              className="work-stack-card static min-[851px]:sticky overflow-hidden rounded-[20px] min-[851px]:rounded-[32px] bg-[#0C0D10] shadow-[0_24px_80px_rgba(0,0,0,0.45)] origin-top will-change-[transform,filter] border border-ct-fg/8 mb-6 min-[851px]:mb-[300px] block no-underline text-ct-fg cursor-pointer"
+              style={{ top: `${80 + index * 16}px`, zIndex: index + 1 }}
+              data-cursor-text={p.caseStudy ? "Case study" : "View"}
+            >
+              <div className="relative p-7 min-[851px]:p-[clamp(32px,5vw,64px)] flex flex-col min-[851px]:flex-row gap-5 min-[851px]:gap-10">
+                <div className="flex flex-col gap-5 min-[851px]:gap-7 flex-1 min-w-0">
+                  <div className="flex items-center gap-3.5 flex-wrap">
+                    <span className="font-mono text-[10px] tracking-[0.16em] uppercase px-3.5 py-[5px] border border-ct-fg/14 rounded-full text-ct-fg/50">{p.category}</span>
+                    <span className="font-mono text-[10px] tracking-[0.14em] uppercase text-ct-fg/28">{p.year}</span>
+                  </div>
+                  <h3 className="m-0 text-[34px] min-[541px]:text-[clamp(32px,4vw,64px)] leading-[0.95] tracking-[-0.04em] font-medium text-ct-pink">{p.title}</h3>
+                  <p className="max-w-[680px] m-0 text-ct-fg/60 text-[15px] min-[541px]:text-base leading-[1.65] font-serif italic">{p.desc}</p>
+                  <div className="flex flex-wrap gap-2">
+                    {p.tag.split(" + ").map(s => (
+                      <span key={s} className="font-mono text-[9px] tracking-[0.12em] uppercase px-3.5 py-1.5 rounded-full border border-ct-pink/30 text-ct-pink bg-ct-fg/3">{s}</span>
+                    ))}
+                  </div>
+                  <span className="font-mono text-[10px] tracking-[0.16em] uppercase text-ct-fg/45 mt-1">{p.caseStudy ? "View case study" : "View live site"} &rarr;</span>
                 </div>
-                <h3 className="m-0 mb-4 text-[clamp(30px,4vw,56px)] font-medium leading-[0.94] tracking-[-0.05em] text-ct-pink">{p.title}</h3>
-                <p className="font-serif italic font-normal text-[clamp(16px,1.6vw,20px)] leading-[1.5] text-ct-fg/58 m-0 mb-7 max-w-[420px]">{p.desc}</p>
-                <div className="flex flex-wrap gap-2 mb-6">
-                  {p.tag.split(" + ").map(s => (
-                    <span key={s} className="font-mono text-[9px] tracking-[0.1em] uppercase px-3 py-[5px] border border-ct-fg/10 rounded-full text-ct-fg/40">{s}</span>
-                  ))}
+                <div className="shrink-0 flex items-center justify-center min-[851px]:w-[280px] min-[1024px]:w-[340px]">
+                  <div className="rounded-2xl overflow-hidden aspect-[4/3] w-full bg-ct-card">
+                    <img src={p.img} alt={p.title} loading="lazy" className="w-full h-full object-cover object-top block" />
+                  </div>
                 </div>
-                <span className="font-mono text-[10px] tracking-[0.16em] uppercase text-ct-fg/45">{p.caseStudy ? "View case study" : "View live site"} &rarr;</span>
+                <div className="absolute bottom-0 left-0 right-0 h-[3px] opacity-60 bg-ct-pink" />
               </div>
             </a>
           ))}
@@ -770,16 +738,39 @@ export default function CreatorsTouchHome({ visualReview = false } = {}) {
             <p data-reveal="1" className="m-0 text-base leading-[1.7] text-ct-fg/55 max-w-[380px]">
               Nothing we say about our own work is worth as much as what a client says about how it changed theirs.
             </p>
-            <div data-reveal="1" className="flex items-center gap-4 px-6 py-5 bg-ct-card rounded-[14px] border border-ct-fg/8">
-              <svg width="28" height="28" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg" aria-hidden="true">
-                <path d="M22.56 12.25c0-.78-.07-1.53-.2-2.25H12v4.26h5.92c-.26 1.37-1.04 2.53-2.21 3.31v2.77h3.57c2.08-1.92 3.28-4.74 3.28-8.09z" fill="#4285F4" />
-                <path d="M12 23c2.97 0 5.46-.98 7.28-2.66l-3.57-2.77c-.98.66-2.23 1.06-3.71 1.06-2.86 0-5.29-1.93-6.16-4.53H2.18v2.84C3.99 20.53 7.7 23 12 23z" fill="#34A853" />
-                <path d="M5.84 14.09c-.22-.66-.35-1.36-.35-2.09s.13-1.43.35-2.09V7.07H2.18C1.43 8.55 1 10.22 1 12s.43 3.45 1.18 4.93l2.85-2.22.81-.62z" fill="#FBBC05" />
-                <path d="M12 5.38c1.62 0 3.06.56 4.21 1.64l3.15-3.15C17.45 2.09 14.97 1 12 1 7.7 1 3.99 3.47 2.18 7.07l3.66 2.84c.87-2.6 3.3-4.53 6.16-4.53z" fill="#EA4335" />
-              </svg>
-              <div>
-                <Star5 size={14} />
-                <p className="font-mono m-0 mt-[5px] text-[10px] tracking-[0.14em] uppercase text-ct-fg/42">{reviewMeta.rating} &middot; {reviewMeta.total} Google Reviews</p>
+            <div data-reveal="1" className="flex flex-col gap-4">
+              <a
+                href="https://g.page/r/CWUyBbJbuKjRAQ/review"
+                target="_blank"
+                rel="noopener noreferrer"
+                className="flex items-center gap-4 px-6 py-5 bg-ct-card rounded-[14px] border border-ct-fg/8 no-underline hover:border-ct-fg/20 transition-colors"
+              >
+                <svg width="32" height="32" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg" aria-hidden="true">
+                  <path d="M22.56 12.25c0-.78-.07-1.53-.2-2.25H12v4.26h5.92c-.26 1.37-1.04 2.53-2.21 3.31v2.77h3.57c2.08-1.92 3.28-4.74 3.28-8.09z" fill="#4285F4" />
+                  <path d="M12 23c2.97 0 5.46-.98 7.28-2.66l-3.57-2.77c-.98.66-2.23 1.06-3.71 1.06-2.86 0-5.29-1.93-6.16-4.53H2.18v2.84C3.99 20.53 7.7 23 12 23z" fill="#34A853" />
+                  <path d="M5.84 14.09c-.22-.66-.35-1.36-.35-2.09s.13-1.43.35-2.09V7.07H2.18C1.43 8.55 1 10.22 1 12s.43 3.45 1.18 4.93l2.85-2.22.81-.62z" fill="#FBBC05" />
+                  <path d="M12 5.38c1.62 0 3.06.56 4.21 1.64l3.15-3.15C17.45 2.09 14.97 1 12 1 7.7 1 3.99 3.47 2.18 7.07l3.66 2.84c.87-2.6 3.3-4.53 6.16-4.53z" fill="#EA4335" />
+                </svg>
+                <div>
+                  <div className="flex items-center gap-2">
+                    <span className="text-[clamp(24px,3vw,32px)] font-medium tracking-[-0.03em] text-ct-fg">{reviewMeta.rating}</span>
+                    <Star5 size={16} />
+                  </div>
+                  <p className="font-mono m-0 mt-[3px] text-[11px] tracking-[0.12em] uppercase text-ct-fg/42">{reviewMeta.total} Google Reviews</p>
+                </div>
+                <span className="ml-auto font-mono text-[10px] tracking-[0.14em] uppercase text-ct-fg/35">View all &rarr;</span>
+              </a>
+              <div className="rounded-[14px] overflow-hidden border border-ct-fg/8">
+                <iframe
+                  src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3825.4!2d80.62557!3d16.50617!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x3a35eff9482d944b%3A0xd1a8b232056532659!2sCreators%20Touch%20Global!5e0!3m2!1sen!2sin!4v1695000000000!5m2!1sen!2sin"
+                  width="100%"
+                  height="180"
+                  style={{ border: 0, borderRadius: 14 }}
+                  allowFullScreen={false}
+                  loading="lazy"
+                  referrerPolicy="no-referrer-when-downgrade"
+                  title="Creators Touch Global on Google Maps"
+                />
               </div>
             </div>
           </div>
@@ -921,7 +912,7 @@ export default function CreatorsTouchHome({ visualReview = false } = {}) {
             <div data-reveal="1" className="flex flex-col">
               {[
                 ["Call or WhatsApp", "+91 98859 33339", "tel:+919885933339"],
-                ["Email us", "hello@creatorstouch.in", "mailto:hello@creatorstouch.in"],
+                ["Email us", "hello@creatorstouchglobal.com", "mailto:hello@creatorstouchglobal.com"],
                 ["Find us", "Vijayawada, Andhra Pradesh", null],
               ].map(([lab, val, href]) => (
                 <div key={lab} className="flex flex-col gap-[5px] py-[18px] border-b border-ct-fg/14">
@@ -938,47 +929,6 @@ export default function CreatorsTouchHome({ visualReview = false } = {}) {
           </div>
         </div>
       </section>
-
-      {/* Footer */}
-      <footer className="relative z-[1] flex flex-col md:flex-row justify-between items-start md:items-end gap-3.5 md:gap-8 px-[18px] py-6 md:px-7 md:py-8 pb-[calc(env(safe-area-inset-bottom,0px)+96px)] md:pb-8 border-t border-ct-fg/10 bg-ct-bg">
-        <div className="flex flex-col gap-4">
-          <div className="flex items-center gap-3">
-            <img src="/assets/images/logo/creator-touch.png" alt="" className="w-7 h-7 block rounded-md" style={{ mixBlendMode: "screen" }} />
-            <span className="font-mono text-[10px] tracking-[0.14em] uppercase text-ct-fg/42">Creators Touch Global &middot; &copy; 2026</span>
-          </div>
-          <div className="flex gap-2.5">
-            {SOCIALS.map(s => (
-              <a key={s.label} href={s.href} aria-label={s.label}
-                className="flex items-center justify-center w-[34px] h-[34px] border border-ct-fg/14 rounded-full text-ct-fg/45 transition-[color,border-color] duration-[250ms] hover:text-ct-fg hover:border-ct-fg/40">
-                {s.icon}
-              </a>
-            ))}
-          </div>
-        </div>
-        <div className="flex flex-col items-start md:items-end gap-4">
-          <div className="flex flex-wrap gap-3.5 gap-x-4 md:gap-6 font-mono text-[10px] tracking-[0.14em] uppercase text-ct-fg/42">
-            <RollLink href="/portfolio" label="Portfolio" h={14} dim="rgba(244,243,241,0.42)" hi="#F4F3F1" />
-            <RollLink href="/services" label="Services" h={14} dim="rgba(244,243,241,0.42)" hi="#F4F3F1" />
-            <RollLink href="/blog" label="Blog" h={14} dim="rgba(244,243,241,0.42)" hi="#F4F3F1" />
-            <RollLink href="/about" label="About" h={14} dim="rgba(244,243,241,0.42)" hi="#F4F3F1" />
-            <RollLink href="/contact" label="Contact" h={14} dim="rgba(244,243,241,0.42)" hi="#F4F3F1" />
-            <RollLink href="/careers" label="Careers" h={14} dim="rgba(244,243,241,0.42)" hi="#F4F3F1" />
-          </div>
-          <div className="flex flex-wrap gap-3.5 gap-x-4 md:gap-6 font-mono text-[10px] tracking-[0.14em] uppercase text-ct-fg/28">
-            <RollLink href="/privacy-policy" label="Privacy Policy" h={14} dim="rgba(244,243,241,0.28)" hi="rgba(244,243,241,0.6)" />
-            <RollLink href="/terms-and-conditions" label="Terms & Conditions" h={14} dim="rgba(244,243,241,0.28)" hi="rgba(244,243,241,0.6)" />
-          </div>
-          <div className="flex items-center gap-3">
-            {[
-              ["Visa", "ChatGPT Image Sep 22, 2026, 01_41_12 PM.png"],
-              ["Mastercard", "ChatGPT Image Sep 22, 2026, 01_41_18 PM.png"],
-              ["RuPay", "ChatGPT Image Sep 22, 2026, 01_41_22 PM.png"],
-            ].map(([alt, file]) => (
-              <img key={alt} src={`/assets/images/clients/${file}`} alt={alt} className="h-6 md:h-7 w-auto object-contain opacity-60" />
-            ))}
-          </div>
-        </div>
-      </footer>
     </div>
   );
 }

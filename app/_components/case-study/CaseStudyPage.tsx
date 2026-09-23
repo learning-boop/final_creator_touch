@@ -191,15 +191,6 @@ export default function CaseStudyPage({ cs }: { cs: CaseStudy }) {
         </div>
       </a>
 
-      {/* Footer */}
-      <footer style={S(`padding:24px 28px;border-top:${HAIR};display:flex;justify-content:space-between;align-items:center`)}>
-        <span style={S(`${MONO};font-size:10px;letter-spacing:0.14em;text-transform:uppercase;color:rgba(244,243,241,0.28)`)}>
-          Creators Touch Global &middot; © 2026
-        </span>
-        <a href="/" style={S(`${MONO};font-size:10px;letter-spacing:0.14em;text-transform:uppercase;color:rgba(244,243,241,0.35);text-decoration:none`)}>
-          Back to home
-        </a>
-      </footer>
     </div>
   );
 }

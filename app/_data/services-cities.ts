@@ -37,7 +37,7 @@ export const SERVICES: ServiceData[] = [
       "Easy-to-manage CMS so you can update content yourself",
     ],
     keywords: ["website design", "web design", "custom website design", "responsive website design", "business website design"],
-    relatedSlugs: ["threadlift", "rma", "meditron-cdc", "fillers-skin", "kensley-aesthetics", "trust-hospital", "anjaneya-jewellery"],
+    relatedSlugs: ["threadlift", "rma", "meditron-cdc", "fillers-skin", "kensley-aesthetics"],
   },
   {
     slug: "web-development",
@@ -57,7 +57,7 @@ export const SERVICES: ServiceData[] = [
       "Clean, semantic code that search engines love",
     ],
     keywords: ["web development", "website development", "custom website", "responsive website", "business website"],
-    relatedSlugs: ["meditron-cdc", "trust-hospital", "jobyatra-india", "aayush-hospitals"],
+    relatedSlugs: ["meditron-cdc", "jobyatra-india", "aayush-hospitals"],
   },
   {
     slug: "ecommerce-website-design",
@@ -77,7 +77,7 @@ export const SERVICES: ServiceData[] = [
       "Order management and shipping integration",
     ],
     keywords: ["ecommerce website design", "ecommerce development", "Shopify store", "WooCommerce", "online store"],
-    relatedSlugs: ["anjaneya-jewellery", "threadlift", "fillers-skin"],
+    relatedSlugs: ["threadlift", "fillers-skin"],
   },
   {
     slug: "wordpress-development",
@@ -97,7 +97,7 @@ export const SERVICES: ServiceData[] = [
       "Security hardening with firewall, malware scanning, and backups",
     ],
     keywords: ["wordpress development", "wordpress website", "wordpress developer", "custom wordpress", "wordpress agency"],
-    relatedSlugs: ["trust-hospital", "st-pauls-school", "change-ngo", "anjaneya-jewellery"],
+    relatedSlugs: ["st-pauls-school", "change-ngo"],
   },
   {
     slug: "seo",
@@ -117,7 +117,7 @@ export const SERVICES: ServiceData[] = [
       "Content strategy aligned with search intent",
     ],
     keywords: ["SEO services", "search engine optimisation", "Google ranking", "local SEO", "SEO agency"],
-    relatedSlugs: ["meditron-cdc", "threadlift", "kensley-aesthetics", "trust-hospital"],
+    relatedSlugs: ["meditron-cdc", "threadlift", "kensley-aesthetics"],
   },
   {
     slug: "digital-marketing",
@@ -157,7 +157,7 @@ export const SERVICES: ServiceData[] = [
       "Monthly health reports with recommendations",
     ],
     keywords: ["website maintenance", "website support", "website management", "website care plan", "website updates"],
-    relatedSlugs: ["trust-hospital", "meditron-cdc", "st-pauls-school", "aayush-hospitals"],
+    relatedSlugs: ["meditron-cdc", "st-pauls-school", "aayush-hospitals"],
   },
   {
     slug: "content-social-media",
@@ -177,7 +177,7 @@ export const SERVICES: ServiceData[] = [
       "Performance analytics and monthly growth reports",
     ],
     keywords: ["social media management", "content marketing", "Instagram management", "social media agency", "content creation"],
-    relatedSlugs: ["kensley-aesthetics", "change-ngo", "anjaneya-jewellery", "dr-matla"],
+    relatedSlugs: ["kensley-aesthetics", "change-ngo", "dr-matla"],
   },
   {
     slug: "ui-ux-design",
@@ -237,7 +237,7 @@ export const SERVICES: ServiceData[] = [
       "Multi-channel automation across WhatsApp, email, and SMS",
     ],
     keywords: ["WhatsApp automation", "CRM setup", "business automation", "WhatsApp API", "lead management"],
-    relatedSlugs: ["meditron-cdc", "trust-hospital", "kensley-aesthetics", "rma"],
+    relatedSlugs: ["meditron-cdc", "kensley-aesthetics", "rma"],
   },
   {
     slug: "ai-assistance",
@@ -257,7 +257,7 @@ export const SERVICES: ServiceData[] = [
       "Integration with your existing tools and platforms",
     ],
     keywords: ["AI chatbot", "artificial intelligence", "business automation", "AI solutions", "workflow automation"],
-    relatedSlugs: ["kensley-aesthetics", "meditron-cdc", "trust-hospital"],
+    relatedSlugs: ["kensley-aesthetics", "meditron-cdc"],
   },
   {
     slug: "brand-logo-design",
@@ -277,7 +277,7 @@ export const SERVICES: ServiceData[] = [
       "Packaging design and print-ready files",
     ],
     keywords: ["logo design", "brand identity", "branding agency", "brand guidelines", "visual identity"],
-    relatedSlugs: ["fillers-skin", "anjaneya-jewellery", "change-ngo", "threadlift", "botox", "dr-matla"],
+    relatedSlugs: ["fillers-skin", "change-ngo", "threadlift", "botox", "dr-matla"],
   },
   {
     slug: "consulting-strategy",
@@ -297,7 +297,7 @@ export const SERVICES: ServiceData[] = [
       "Quarterly strategy reviews and performance tracking",
     ],
     keywords: ["digital consulting", "business strategy", "competitor analysis", "growth strategy", "digital audit"],
-    relatedSlugs: ["meditron-cdc", "kensley-aesthetics", "trust-hospital", "st-pauls-school"],
+    relatedSlugs: ["meditron-cdc", "kensley-aesthetics", "st-pauls-school"],
   },
 ];
 

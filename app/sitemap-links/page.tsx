@@ -1,6 +1,6 @@
 import type { Metadata } from "next";
 import Link from "next/link";
-import { SERVICES, CITIES } from "@/app/_data/services-cities";
+import { INDIVIDUAL_SERVICES } from "@/app/_data/individual-services";
 import { BLOG_POSTS } from "@/app/_data/blog-posts";
 import { CASE_STUDIES } from "@/app/_data/case-studies";
 
@@ -25,8 +25,7 @@ const CORE_PAGES = [
 ];
 
 export default function SitemapLinksPage() {
-  const totalServiceCity = SERVICES.length * CITIES.length;
-  const totalPages = CORE_PAGES.length + totalServiceCity + CASE_STUDIES.length + BLOG_POSTS.length;
+  const totalPages = CORE_PAGES.length + INDIVIDUAL_SERVICES.length + CASE_STUDIES.length + BLOG_POSTS.length;
 
   return (
     <div className="min-h-screen bg-ct-bg text-ct-fg font-sans overflow-x-hidden">
@@ -106,27 +105,28 @@ export default function SitemapLinksPage() {
           </div>
         </section>
 
-        {/* ── Service × City Pages ── */}
+        {/* ── Individual Service Pages ── */}
         <section className="py-14">
           <div className="flex items-baseline gap-4 mb-8">
             <span className="font-mono text-[11px] tracking-[0.14em] text-ct-fg/28">04</span>
-            <h2 className="m-0 text-[clamp(24px,3vw,40px)] font-medium tracking-[-0.04em]">Service &times; City Pages</h2>
-            <span className="font-mono text-[11px] tracking-[0.14em] text-ct-fg/28 ml-auto">{totalServiceCity} pages</span>
+            <h2 className="m-0 text-[clamp(24px,3vw,40px)] font-medium tracking-[-0.04em]">Service Pages</h2>
+            <span className="font-mono text-[11px] tracking-[0.14em] text-ct-fg/28 ml-auto">{INDIVIDUAL_SERVICES.length} pages</span>
           </div>
 
-          {SERVICES.map((service) => (
-            <div key={service.slug} className="mb-10 last:mb-0">
-              <h3 className="m-0 mb-4 text-[18px] font-medium tracking-[-0.02em]" style={{ color: service.color }}>
-                {service.title}
+          {Array.from(new Set(INDIVIDUAL_SERVICES.map((s) => s.category))).map((category) => (
+            <div key={category} className="mb-10 last:mb-0">
+              <h3 className="m-0 mb-4 text-[18px] font-medium tracking-[-0.02em] text-ct-fg/60">
+                {category}
               </h3>
-              <div className="grid grid-cols-2 sm:grid-cols-3 md:grid-cols-4 lg:grid-cols-7 gap-2">
-                {CITIES.map((city) => (
+              <div className="grid grid-cols-2 sm:grid-cols-3 md:grid-cols-4 gap-2">
+                {INDIVIDUAL_SERVICES.filter((s) => s.category === category).map((s) => (
                   <Link
-                    key={city.slug}
-                    href={`/${service.slug}-${city.slug}`}
-                    className="px-4 py-2.5 rounded-lg bg-ct-card border border-ct-fg/6 text-[12px] text-ct-fg/60 no-underline hover:border-ct-fg/16 hover:text-ct-fg transition-colors text-center"
+                    key={s.slug}
+                    href={`/services/${s.slug}`}
+                    className="p-4 rounded-xl bg-ct-card border border-ct-fg/6 no-underline hover:border-ct-fg/16 transition-colors"
                   >
-                    {city.name}
+                    <span className="text-[14px] font-medium text-ct-fg block">{s.title}</span>
+                    <span className="text-[11px] text-ct-fg/30 font-mono block mt-1">/services/{s.slug}</span>
                   </Link>
                 ))}
               </div>
@@ -135,15 +135,6 @@ export default function SitemapLinksPage() {
         </section>
       </div>
 
-      {/* Footer */}
-      <footer className="px-7 py-6 border-t border-ct-fg/10 flex justify-between items-center">
-        <span className="font-mono text-[10px] tracking-[0.14em] uppercase text-ct-fg/28">
-          Creators Touch Global &middot; &copy; 2026
-        </span>
-        <Link href="/" className="font-mono text-[10px] tracking-[0.14em] uppercase text-ct-fg/35 no-underline hover:text-ct-fg/60 transition-colors">
-          Back to home
-        </Link>
-      </footer>
     </div>
   );
 }

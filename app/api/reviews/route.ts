@@ -15,7 +15,7 @@ export const revalidate = 3600; // cache for 1 hour
 export async function GET() {
   if (!API_KEY || !PLACE_ID) {
     // Return fallback static reviews when credentials aren't configured
-    return NextResponse.json({ reviews: FALLBACK_REVIEWS, rating: 5.0, total: 7, live: false });
+    return NextResponse.json({ reviews: FALLBACK_REVIEWS, rating: 4.9, total: 365, live: false });
   }
 
   try {
@@ -26,7 +26,7 @@ export async function GET() {
     const data = await res.json();
 
     if (data.status !== "OK") {
-      return NextResponse.json({ reviews: FALLBACK_REVIEWS, rating: 5.0, total: 7, live: false });
+      return NextResponse.json({ reviews: FALLBACK_REVIEWS, rating: 4.9, total: 365, live: false });
     }
 
     const { result } = data;
@@ -37,7 +37,7 @@ export async function GET() {
       live: true,
     });
   } catch {
-    return NextResponse.json({ reviews: FALLBACK_REVIEWS, rating: 5.0, total: 7, live: false });
+    return NextResponse.json({ reviews: FALLBACK_REVIEWS, rating: 4.9, total: 365, live: false });
   }
 }
 

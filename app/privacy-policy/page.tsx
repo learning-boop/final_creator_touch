@@ -73,7 +73,7 @@ const SECTIONS = [
   },
   {
     heading: "11. Contact Us",
-    body: `If you have any questions, concerns, or requests regarding this Privacy Policy or how we handle your personal data, please contact us:\n\nCreators Touch Global\nVijayawada, Andhra Pradesh, India\nEmail: hello@creatorstouch.in\nPhone: +91-98859-33339\nWebsite: creatorstouchglobal.com`,
+    body: `If you have any questions, concerns, or requests regarding this Privacy Policy or how we handle your personal data, please contact us:\n\nCreators Touch Global\nVijayawada, Andhra Pradesh, India\nEmail: hello@creatorstouchglobal.com\nPhone: +91-98859-33339\nWebsite: creatorstouchglobal.com`,
   },
   {
     heading: "12. Changes to This Policy",
@@ -150,15 +150,6 @@ export default function PrivacyPolicyPage() {
         </div>
       </section>
 
-      {/* Footer */}
-      <footer className="legal-footer" style={S(`border-top:${HAIR};display:flex;justify-content:space-between;align-items:center`)}>
-        <span style={S(`${MONO};font-size:10px;letter-spacing:0.14em;text-transform:uppercase;color:rgba(244,243,241,0.28)`)}>
-          Creators Touch Global &middot; &copy; 2026
-        </span>
-        <a href="/" style={S(`${MONO};font-size:10px;letter-spacing:0.14em;text-transform:uppercase;color:rgba(244,243,241,0.35);text-decoration:none`)}>
-          Back to home
-        </a>
-      </footer>
     </div>
   );
 }
