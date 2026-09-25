@@ -1,0 +1,23 @@
+version: 1
+frontend:
+  phases:
+    preBuild:
+      commands:
+        - npm ci
+        - echo "DATABASE_URL=$DATABASE_URL" >> .env.production
+        - echo "TWILIO_ACCOUNT_SID=$TWILIO_ACCOUNT_SID" >> .env.production
+        - echo "TWILIO_AUTH_TOKEN=$TWILIO_AUTH_TOKEN" >> .env.production
+        - echo "TWILIO_PHONE_NUMBER=$TWILIO_PHONE_NUMBER" >> .env.production
+        - echo "ADMIN_API_KEY=$ADMIN_API_KEY" >> .env.production
+        - npx prisma generate
+    build:
+      commands:
+        - npm run build
+  artifacts:
+    baseDirectory: .next
+    files:
+      - '**/*'
+  cache:
+    paths:
+      - node_modules/**/*
+      - .next/cache/**/*
