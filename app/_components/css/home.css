@@ -47,6 +47,10 @@
 .ct-growth-step { opacity: 0 }
 .ct-growth-step.ct-vis { animation: ct-step-in .7s cubic-bezier(.22,1,.36,1) both }
 
+/* ── Service card stacking — responsive top offsets ── */
+:root { --svc-top-base: 56px; --svc-top-step: 24px; }
+@media (min-width: 851px) { :root { --svc-top-base: 120px; --svc-top-step: 50px; } }
+
 /* ── Scroll-pinned service card states (managed by home-fx.js) ── */
 .ct-sp-slide { position: absolute; top: 0; left: 0; right: 0; height: 300px; transform: translateY(40px) scale(0.87); opacity: 0; transition: transform .65s cubic-bezier(.22,1,.36,1), opacity .52s ease, filter .52s ease; pointer-events: none; will-change: transform, opacity }
 .ct-sp-slide.ct-sp-active { transform: translateY(0) scale(1); opacity: 1; filter: none; pointer-events: auto }

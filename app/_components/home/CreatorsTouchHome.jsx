@@ -383,6 +383,7 @@ export default function CreatorsTouchHome({ visualReview = false } = {}) {
   const [heroText, setHeroText] = useState("");
   const [heroIdx, setHeroIdx] = useState(0);
   const [isDeleting, setIsDeleting] = useState(false);
+  const [showAllWork, setShowAllWork] = useState(false);
   const [reviews, setReviews] = useState(FALLBACK_REVIEWS);
   const [reviewMeta, setReviewMeta] = useState({ rating: 4.9, total: 365 });
 
@@ -426,7 +427,7 @@ export default function CreatorsTouchHome({ visualReview = false } = {}) {
   }, [heroText, isDeleting, heroIdx]);
 
   return (
-    <div className="ct-root bg-ct-bg text-ct-fg font-sans font-normal tracking-[-0.02em] overflow-x-clip cursor-default">
+    <div className="ct-root bg-ct-bg text-ct-fg font-sans font-normal tracking-[-0.02em] min-[851px]:overflow-x-clip cursor-default">
       {/* Film grain overlay */}
       <div aria-hidden="true" className="ct-grain" />
 
@@ -578,7 +579,7 @@ export default function CreatorsTouchHome({ visualReview = false } = {}) {
               href={p.caseStudy || p.url}
               target={p.caseStudy ? "_self" : "_blank"}
               rel={p.caseStudy ? undefined : "noopener noreferrer"}
-              className="work-stack-card static min-[851px]:sticky overflow-hidden rounded-[20px] min-[851px]:rounded-[32px] bg-[#0C0D10] shadow-[0_24px_80px_rgba(0,0,0,0.45)] origin-top will-change-[transform,filter] border border-ct-fg/8 mb-6 min-[851px]:mb-[300px] block no-underline text-ct-fg cursor-pointer"
+              className={`work-stack-card static min-[851px]:sticky overflow-hidden rounded-[20px] min-[851px]:rounded-[32px] bg-[#0C0D10] shadow-[0_24px_80px_rgba(0,0,0,0.45)] origin-top will-change-[transform,filter] border border-ct-fg/8 mb-6 min-[851px]:mb-[300px] block no-underline text-ct-fg cursor-pointer ${index >= 2 && !showAllWork ? "hidden min-[851px]:block" : ""}`}
               style={{ top: `${80 + index * 16}px`, zIndex: index + 1 }}
               data-cursor-text={p.caseStudy ? "Case study" : "View"}
             >
@@ -607,6 +608,17 @@ export default function CreatorsTouchHome({ visualReview = false } = {}) {
             </a>
           ))}
         </div>
+
+        {/* Load More — mobile only */}
+        {PROJECTS.length > 2 && (
+          <button
+            onClick={() => setShowAllWork(v => !v)}
+            className="mt-4 mx-auto flex items-center gap-2 px-6 py-3 border border-ct-fg/16 rounded-full font-mono text-[11px] tracking-[0.14em] uppercase text-ct-fg/60 bg-transparent cursor-pointer transition-[border-color,color] duration-200 hover:border-ct-fg/40 hover:text-ct-fg min-[851px]:hidden"
+          >
+            {showAllWork ? "Show less" : `Load more (${PROJECTS.length - 2})`}
+            <span className={`inline-block transition-transform duration-300 ${showAllWork ? "rotate-180" : ""}`}>&#8595;</span>
+          </button>
+        )}
       </section>
 
       {/* ── Certificates marquee ── */}

@@ -184,9 +184,9 @@ export default function ServicesSection() {
           {pathGroup.cards.map((card, index) => (
             <article
               key={card.num + pathGroup.path}
-              className="svc-stack-card static min-[851px]:sticky overflow-hidden rounded-[20px] min-[851px]:rounded-[32px] bg-[#0C0D10] shadow-[0_24px_80px_rgba(0,0,0,0.45)] origin-top will-change-[transform,filter] border border-ct-fg/8 mb-6 min-[851px]:mb-[300px] last:mb-0"
+              className="svc-stack-card sticky overflow-hidden rounded-[20px] min-[851px]:rounded-[32px] bg-[#0C0D10] shadow-[0_24px_80px_rgba(0,0,0,0.45)] origin-top will-change-[transform,filter] border border-ct-fg/8 mb-[200px] min-[851px]:mb-[300px] last:mb-0"
               style={{
-                top: `${120 + index * 50}px`,
+                top: `calc(var(--svc-top-base) + var(--svc-top-step) * ${index})`,
                 zIndex: index + 1,
               }}
             >
