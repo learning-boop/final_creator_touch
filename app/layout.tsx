@@ -55,7 +55,7 @@ export const metadata: Metadata = {
     images: ["https://creatorstouchglobal.com/assets/images/logo/creator-touch.png"],
   },
   verification: {
-    google: undefined, // add Google Search Console verification code when available
+    google: "hjOaZwECZfL-yuG8J7tJXIlHXjyroeXNBrnG6JJnZ48",
   },
   other: {
     "alexaVerifyID": "Ga_5_V4AKQTrjs_J0zDIYN9uwYs",
@@ -91,7 +91,7 @@ export default function RootLayout({ children }: LayoutProps<"/">) {
         <script async src="https://www.googletagmanager.com/gtag/js?id=UA-13267804-5" />
         <script
           dangerouslySetInnerHTML={{
-            __html: `window.dataLayer=window.dataLayer||[];function gtag(){dataLayer.push(arguments);}gtag('js',new Date());gtag('config','UA-13267804-5');gtag('config','AW-18125818615');`,
+            __html: `window.dataLayer=window.dataLayer||[];function gtag(){dataLayer.push(arguments);}gtag('js',new Date());gtag('config','UA-13267804-5');gtag('config','AW-18125818615');gtag('config','G-7NHJTCW7FG');`,
           }}
         />
 
