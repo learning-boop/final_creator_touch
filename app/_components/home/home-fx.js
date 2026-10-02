@@ -137,6 +137,13 @@ export function initHomeFX(opts = {}) {
     }
   };
   const initPreloader = () => {
+    // Only show the intro video once ever (first visit)
+    const SEEN_KEY = "ct_intro_seen";
+    if (localStorage.getItem(SEEN_KEY)) {
+      afterPreloader();
+      return;
+    }
+
     // Lock scroll to hero during preloader
     window.scrollTo(0, 0);
     document.documentElement.style.overflow = "hidden";
@@ -165,24 +172,36 @@ export function initHomeFX(opts = {}) {
     cleanups.push(unlockScroll);
     pre = document.createElement("div");
     pre.setAttribute("aria-hidden", "true");
-    pre.style.cssText = "position:fixed;inset:0;z-index:9999;background:#08090A;display:flex;flex-direction:column;align-items:center;justify-content:center;gap:18px;transition:transform .9s cubic-bezier(.76,0,.24,1)";
-    const img = document.createElement("img");
-    img.src = logoSrc;
-    img.style.cssText = "width:120px;height:120px;object-fit:contain;animation:ct-pulse 1.2s ease-in-out infinite";
-    const lab = document.createElement("div");
-    lab.style.cssText = "font-family:'Geist Mono',monospace;font-size:10px;letter-spacing:.22em;color:rgba(244,243,241,.4);text-transform:uppercase";
-    lab.textContent = "Creators Touch Global";
-    pre.append(img, lab);
+    pre.style.cssText = "position:fixed;inset:0;z-index:99999;background:#08090A;display:flex;align-items:center;justify-content:center";
+    const vid = document.createElement("video");
+    vid.src = "/assets/videos/intro.mp4";
+    vid.muted = true;
+    vid.defaultMuted = true;
+    vid.playsInline = true;
+    vid.autoplay = true;
+    vid.setAttribute("playsinline", "");
+    vid.setAttribute("muted", "");
+    vid.setAttribute("autoplay", "");
+    vid.style.cssText = "position:absolute;inset:0;width:100%;height:100%;object-fit:cover";
+    pre.appendChild(vid);
     document.body.appendChild(pre);
-    const D = 1250;
+    let finished = false;
     const finish = () => {
-      if (!pre) return;
-      pre.style.transform = "translateY(-101%)";
+      if (finished) return;
+      finished = true;
+      localStorage.setItem(SEEN_KEY, "1");
+      clearTimeout(ft);
+      pre.style.transition = "opacity .6s ease";
+      pre.style.opacity = "0";
       unlockScroll();
       afterPreloader();
-      setTimeout(() => { pre && pre.remove(); pre = null; }, 950);
+      setTimeout(() => { pre && pre.remove(); pre = null; }, 650);
     };
-    const ft = setTimeout(finish, D);
+    // Try to play — use both autoplay attribute and JS .play()
+    vid.play().catch(() => { finish(); });
+    vid.addEventListener("ended", finish, { once: true });
+    // Safety fallback if video stalls
+    const ft = setTimeout(finish, 20000);
     cleanups.push(() => { clearTimeout(ft); unlockScroll(); pre && pre.remove(); pre = null; });
   };
   initPreloader();

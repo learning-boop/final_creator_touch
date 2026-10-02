@@ -1,7 +1,5 @@
 "use client";
-import { useState, useEffect } from "react";
 import type { CaseStudy } from "@/app/_data/case-studies";
-import OtpGateModal from "@/app/_components/OtpGateModal";
 
 const MONO = "font-family:'Geist Mono',monospace";
 const SERIF = "font-family:'Instrument Serif',Georgia,serif;font-style:italic;font-weight:400";
@@ -21,25 +19,6 @@ function S(css: string): React.CSSProperties {
 
 export default function CaseStudyPage({ cs }: { cs: CaseStudy }) {
   const hasHero = cs.images.hero && !cs.images.hero.endsWith("hero.jpg") && !cs.images.hero.endsWith("hero.png");
-  const [showOtp, setShowOtp] = useState(false);
-  const [verified, setVerified] = useState(false);
-
-  useEffect(() => {
-    if (sessionStorage.getItem("otp_verified") === "true") setVerified(true);
-  }, []);
-
-  const handleLiveClick = (e: React.MouseEvent) => {
-    if (verified) return; // already verified, let the link work
-    e.preventDefault();
-    setShowOtp(true);
-  };
-
-  const handleVerified = () => {
-    setVerified(true);
-    setShowOtp(false);
-    // Open the live site after verification
-    window.open(cs.url, "_blank", "noopener,noreferrer");
-  };
 
   return (
     <div style={S("background:#08090A;color:#F4F3F1;font-family:Geist,Arial,sans-serif;min-height:100vh;overflow-x:hidden")}>
@@ -81,12 +60,10 @@ export default function CaseStudyPage({ cs }: { cs: CaseStudy }) {
 
           {cs.url !== "#" && (
             <a href={cs.url} target="_blank" rel="noopener noreferrer"
-              onClick={handleLiveClick}
               style={S(`display:inline-flex;align-items:center;gap:10px;padding:12px 22px;border:1px solid rgba(244,243,241,0.18);border-radius:100px;font-size:13px;letter-spacing:-0.02em;color:#F4F3F1;text-decoration:none;align-self:flex-start;${MONO};font-size:10px;letter-spacing:0.14em;text-transform:uppercase`)}>
               Visit live site →
             </a>
           )}
-          {showOtp && <OtpGateModal onVerified={handleVerified} onClose={() => setShowOtp(false)} />}
         </div>
       </section>
 

@@ -173,7 +173,32 @@
       "Bash(cd \"D:/creative_touch/creatortouch/creator-structure\" && npm run build 2>&1 | tail -60)",
       "Bash(cd \"D:\\\\creative_touch\\\\creatortouch\\\\creator-structure\" && npx next build 2>&1 | tail -20)",
       "Bash(cd \"D:\\\\creative_touch\\\\creatortouch\\\\creator-structure\" && npx next build 2>&1 | tail -5)",
-      "Bash(cd \"D:\\\\creative_touch\\\\creatortouch\\\\creator-structure\" && npx next build 2>&1 | tail -8)"
+      "Bash(cd \"D:\\\\creative_touch\\\\creatortouch\\\\creator-structure\" && npx next build 2>&1 | tail -8)",
+      "WebSearch",
+      "WebFetch(domain:web.archive.org)",
+      "Bash(cd \"D:\\\\creative_touch\\\\creatortouch\\\\creator-structure\" && mv app/api app/_api && mv app/blog app/_blog)",
+      "Bash(cd \"D:\\\\creative_touch\\\\creatortouch\\\\creator-structure\" && rm -rf .next && npm run build 2>&1)",
+      "Bash(cd \"D:\\\\creative_touch\\\\creatortouch\\\\creator-structure\" && mv app/sitemap.ts app/_sitemap.ts)",
+      "Bash(cd \"D:\\\\creative_touch\\\\creatortouch\\\\creator-structure\" && rm -rf .next out && npm run build 2>&1)",
+      "Bash(cd \"D:\\\\creative_touch\\\\creatortouch\\\\creator-structure\" && npm install firebase @emailjs/browser @sanity/client)",
+      "Bash(cd \"D:\\\\creative_touch\\\\creatortouch\\\\creator-structure\" && npx next build 2>&1 | tail -40)",
+      "Bash(cd \"D:\\\\creative_touch\\\\creatortouch\\\\creator-structure\" && npm install sanity next-sanity)",
+      "Bash(cd \"D:\\\\creative_touch\\\\creatortouch\\\\creator-structure\" && npx next build 2>&1 | tail -50)",
+      "Bash(cd \"D:\\\\creative_touch\\\\creatortouch\\\\creator-structure\" && npx next dev 2>&1)",
+      "Bash(cd \"D:\\\\creative_touch\\\\creatortouch\\\\creator-structure\" && npx tsx lib/seed-sanity-blogs.ts)",
+      "Bash(cd \"D:\\\\creative_touch\\\\creatortouch\\\\creator-structure\" && npm uninstall firebase twilio bcryptjs @types/bcryptjs)",
+      "Bash(cd \"D:\\\\creative_touch\\\\creatortouch\\\\creator-structure\" && npm uninstall prisma @prisma/client @prisma/adapter-pg pg)",
+      "Bash(rm \"D:\\\\creative_touch\\\\creatortouch\\\\creator-structure\\\\prisma.config.ts\" 2>/dev/null; ls \"D:\\\\creative_touch\\\\creatortouch\\\\creator-structure\"/*.prisma* 2>/dev/null; ls \"D:\\\\creative_touch\\\\creatortouch\\\\creator-structure\"/prisma* 2>/dev/null)",
+      "Bash(cd \"D:\\\\creative_touch\\\\creatortouch\\\\creator-structure\" && npx tsx lib/seed-blog-images.ts)",
+      "Bash(cd \"D:\\\\creative_touch\\\\creatortouch\\\\creator-structure\" && npx sanity deploy 2>&1)",
+      "Bash(cd \"D:\\\\creative_touch\\\\creatortouch\\\\creator-structure\" && npx sanity login 2>&1)",
+      "Bash(cd \"D:\\\\creative_touch\\\\creatortouch\\\\creator-structure\" && npx sanity login --provider sanity 2>&1)",
+      "Bash(cd \"D:\\\\creative_touch\\\\creatortouch\\\\creator-structure\" && echo \"creators-touch\" | npx sanity deploy 2>&1)",
+      "Bash(cd \"D:\\\\creative_touch\\\\creatortouch\\\\creator-structure\" && npm install styled-components)",
+      "Bash(cd \"D:/creative_touch/creatortouch/creator-structure\" && npm run dev 2>&1 | head -20)",
+      "Bash(ffprobe -v quiet -print_format json -show_format -show_streams \"D:/creative_touch/creatortouch/creator-structure/public/assets/videos/intro.mp4\" 2>&1)",
+      "Bash(ls -la \"D:/creative_touch/creatortouch/creator-structure/public/assets/videos/intro.mp4\" && file \"D:/creative_touch/creatortouch/creator-structure/public/assets/videos/intro.mp4\" 2>/dev/null; powershell -Command \"\\(Get-Item 'D:\\\\creative_touch\\\\creatortouch\\\\creator-structure\\\\public\\\\assets\\\\videos\\\\intro.mp4'\\).Length\")",
+      "Bash(curl -s -o /dev/null -w \"HTTP: %{http_code}, Content-Type: %{content_type}, Size: %{size_download}\" http://localhost:3000/assets/videos/intro.mp4)"
     ]
   }
 }

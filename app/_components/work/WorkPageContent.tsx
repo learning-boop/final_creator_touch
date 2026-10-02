@@ -1,8 +1,7 @@
 "use client";
 
-import { useState, useEffect } from "react";
+import { useState } from "react";
 import type { CaseStudy } from "@/app/_data/case-studies";
-import OtpGateModal from "@/app/_components/OtpGateModal";
 
 const MONO = "font-family:'Geist Mono',monospace";
 
@@ -24,44 +23,13 @@ export default function WorkPageContent({
   caseStudies: CaseStudy[];
 }) {
   const [activeFilter, setActiveFilter] = useState("All");
-  const [showOtp, setShowOtp] = useState(false);
-  const [verified, setVerified] = useState(false);
-  const [pendingUrl, setPendingUrl] = useState<string | null>(null);
 
   const categories = ["All", ...Array.from(new Set(caseStudies.map((cs) => cs.category.split(" · ")[0])))];
   const filtered = activeFilter === "All" ? caseStudies : caseStudies.filter((cs) => cs.category.split(" · ")[0] === activeFilter);
 
-  useEffect(() => {
-    if (sessionStorage.getItem("otp_verified") === "true") setVerified(true);
-  }, []);
-
   const handleProjectClick = (e: React.MouseEvent, url: string) => {
-    if (verified) {
-      window.open(url, "_blank", "noopener,noreferrer");
-      e.preventDefault();
-      return;
-    }
     e.preventDefault();
-    setPendingUrl(url);
-    setShowOtp(true);
-  };
-
-  const handleVerified = () => {
-    setVerified(true);
-    setShowOtp(false);
-    if (pendingUrl) {
-      window.open(pendingUrl, "_blank", "noopener,noreferrer");
-      setPendingUrl(null);
-    }
-  };
-
-  const handleClose = () => {
-    setShowOtp(false);
-    if (pendingUrl) {
-      const slug = caseStudies.find((cs) => cs.url === pendingUrl)?.slug;
-      if (slug) window.location.href = `/work/${slug}`;
-      setPendingUrl(null);
-    }
+    window.open(url, "_blank", "noopener,noreferrer");
   };
 
   return (
@@ -138,7 +106,6 @@ export default function WorkPageContent({
         </div>
       </div>
 
-      {showOtp && <OtpGateModal onVerified={handleVerified} onClose={handleClose} />}
     </>
   );
 }
