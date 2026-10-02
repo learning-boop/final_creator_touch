@@ -24,67 +24,43 @@ function ContactForm() {
   const [fields, setFields] = useState({ name: "", phone: "", email: "", needs: [] as string[], message: "" });
   const [status, setStatus] = useState<"idle" | "sending" | "sent" | "error">("idle");
 
-  // OTP state
-  const [otpStep, setOtpStep] = useState<"none" | "sending" | "sent" | "verifying" | "verified">("none");
-  const [otpCode, setOtpCode] = useState("");
-  const [otpError, setOtpError] = useState("");
-  const [otpCooldown, setOtpCooldown] = useState(0);
-
   const toggleNeed = (need: string) => setFields(f => ({
     ...f,
     needs: f.needs.includes(need) ? f.needs.filter(n => n !== need) : [...f.needs, need],
   }));
 
-  const fullPhone = () => `+91${fields.phone.replace(/\s/g, "")}`;
-
-  const requestOtp = async () => {
-    if (!fields.phone.trim()) { setOtpError("Enter your phone number first"); return; }
-    setOtpStep("sending");
-    setOtpError("");
-    try {
-      const res = await fetch("/api/otp/request", {
-        method: "POST",
-        headers: { "Content-Type": "application/json" },
-        body: JSON.stringify({ phone: fullPhone() }),
-      });
-      const data = await res.json();
-      if (!res.ok) { setOtpError(data.error || "Failed to send OTP"); setOtpStep("none"); return; }
-      setOtpStep("sent");
-      setOtpCooldown(60);
-      const timer = setInterval(() => setOtpCooldown(c => { if (c <= 1) { clearInterval(timer); return 0; } return c - 1; }), 1000);
-    } catch { setOtpError("Network error"); setOtpStep("none"); }
-  };
-
-  const verifyOtp = async () => {
-    if (!otpCode.trim()) { setOtpError("Enter the OTP code"); return; }
-    setOtpStep("verifying");
-    setOtpError("");
-    try {
-      const res = await fetch("/api/otp/verify", {
-        method: "POST",
-        headers: { "Content-Type": "application/json" },
-        body: JSON.stringify({ phone: fullPhone(), code: otpCode.trim() }),
-      });
-      const data = await res.json();
-      if (!res.ok) { setOtpError(data.error || "Verification failed"); setOtpStep("sent"); return; }
-      setOtpStep("verified");
-    } catch { setOtpError("Network error"); setOtpStep("sent"); }
-  };
-
-  const handle = (e: React.FormEvent) => {
+  const handle = async (e: React.FormEvent) => {
     e.preventDefault();
-    if (fields.phone.trim() && otpStep !== "verified") {
-      setOtpError("Please verify your phone number first");
-      return;
-    }
     setStatus("sending");
-    fetch("/api/contact", {
-      method: "POST",
-      headers: { "Content-Type": "application/json" },
-      body: JSON.stringify({ ...fields, phone: fields.phone.trim() ? fullPhone() : "" }),
-    })
-      .then(r => r.ok ? setStatus("sent") : setStatus("error"))
-      .catch(() => setStatus("error"));
+    const needsStr = fields.needs.join(", ");
+    const phone = fields.phone.trim() ? `+91${fields.phone.replace(/\s/g, "")}` : "Not provided";
+    try {
+      const emailjs = await import("@emailjs/browser");
+      const { EMAILJS_SERVICE_ID, EMAILJS_TEMPLATE_ID, EMAILJS_PUBLIC_KEY } = await import("@/lib/emailjs");
+      await emailjs.send(EMAILJS_SERVICE_ID, EMAILJS_TEMPLATE_ID, {
+        from_name: fields.name,
+        from_email: fields.email,
+        phone,
+        needs: needsStr || "Not specified",
+        message: fields.message || "No message",
+      }, EMAILJS_PUBLIC_KEY);
+
+      const { sanityClient } = await import("@/lib/sanity");
+      await sanityClient.create({
+        _type: "contactSubmission",
+        name: fields.name.trim(),
+        email: fields.email.trim().toLowerCase(),
+        phone: phone,
+        needs: fields.needs,
+        message: fields.message.trim() || null,
+        submittedAt: new Date().toISOString(),
+      });
+
+      setStatus("sent");
+    } catch (err) {
+      console.error("Contact form error:", err);
+      setStatus("error");
+    }
   };
 
   if (status === "sent") {
@@ -109,37 +85,12 @@ function ContactForm() {
         </div>
         <div className="flex flex-col gap-2">
           <label htmlFor="ct-phone" className={LABEL}>Phone / WhatsApp</label>
-          <div className="flex gap-2">
-            <div className="flex flex-1 items-stretch">
-              <span className="inline-flex items-center px-3.5 bg-ct-fg/6 border border-ct-fg/14 border-r-0 rounded-l-[10px] text-ct-fg/50 text-[14px] tracking-[-0.01em] select-none whitespace-nowrap">+91</span>
-              <input id="ct-phone" name="phone" type="tel" className={`${inputCls} flex-1 !rounded-l-none`}
-                value={fields.phone} onChange={e => { setFields(f => ({ ...f, phone: e.target.value.replace(/[^0-9\s]/g, "") })); if (otpStep === "verified") setOtpStep("none"); }}
-                placeholder="98859 33339" maxLength={12} disabled={otpStep === "verified"} />
-            </div>
-            {otpStep === "verified" ? (
-              <span className="inline-flex items-center gap-1.5 px-4 py-3 rounded-[10px] bg-ct-green/12 text-ct-green text-[13px] font-medium whitespace-nowrap border border-ct-green/20">
-                &#10003; Verified
-              </span>
-            ) : (
-              <button type="button" onClick={requestOtp}
-                disabled={otpStep === "sending" || otpCooldown > 0}
-                className="px-4 py-3 rounded-[10px] bg-ct-fg/8 border border-ct-fg/14 text-ct-fg/70 text-[13px] font-medium cursor-pointer hover:bg-ct-fg/12 transition-colors disabled:opacity-40 disabled:cursor-not-allowed whitespace-nowrap">
-                {otpStep === "sending" ? "Sending\u2026" : otpCooldown > 0 ? `Resend (${otpCooldown}s)` : "Send OTP"}
-              </button>
-            )}
+          <div className="flex items-stretch">
+            <span className="inline-flex items-center px-3.5 bg-ct-fg/6 border border-ct-fg/14 border-r-0 rounded-l-[10px] text-ct-fg/50 text-[14px] tracking-[-0.01em] select-none whitespace-nowrap">+91</span>
+            <input id="ct-phone" name="phone" type="tel" className={`${inputCls} flex-1 !rounded-l-none`}
+              value={fields.phone} onChange={e => setFields(f => ({ ...f, phone: e.target.value.replace(/[^0-9\s]/g, "") }))}
+              placeholder="98859 33339" maxLength={12} />
           </div>
-          {otpStep === "sent" && (
-            <div className="flex gap-2 mt-1">
-              <input type="text" inputMode="numeric" maxLength={6} placeholder="Enter 6-digit OTP"
-                className={`${inputCls} flex-1`} value={otpCode}
-                onChange={e => setOtpCode(e.target.value.replace(/\D/g, "").slice(0, 6))} />
-              <button type="button" onClick={verifyOtp}
-                className="px-4 py-3 rounded-[10px] bg-ct-pink text-ct-bg text-[13px] font-medium cursor-pointer hover:bg-ct-pink/85 transition-colors disabled:opacity-50 whitespace-nowrap">
-                Verify
-              </button>
-            </div>
-          )}
-          {otpError && <span className="text-[12px] text-ct-pink mt-0.5">{otpError}</span>}
         </div>
         <div className="col-span-full flex flex-col gap-2">
           <label htmlFor="ct-email" className={LABEL}>Email</label>

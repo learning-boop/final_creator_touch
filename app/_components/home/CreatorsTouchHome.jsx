@@ -250,16 +250,39 @@ function ContactForm() {
     needs: f.needs.includes(need) ? f.needs.filter(n => n !== need) : [...f.needs, need],
   }));
 
-  const handle = e => {
+  const handle = async e => {
     e.preventDefault();
     setStatus("sending");
-    fetch("https://formspree.io/f/YOUR_FORM_ID", {
-      method: "POST",
-      headers: { "Content-Type": "application/json", Accept: "application/json" },
-      body: JSON.stringify({ ...fields, needs: fields.needs.join(", ") }),
-    })
-      .then(r => r.ok ? setStatus("sent") : setStatus("error"))
-      .catch(() => setStatus("error"));
+    const needsStr = fields.needs.join(", ");
+    try {
+      // 1. Send email via EmailJS
+      const emailjs = await import("@emailjs/browser");
+      const { EMAILJS_SERVICE_ID, EMAILJS_TEMPLATE_ID, EMAILJS_PUBLIC_KEY } = await import("@/lib/emailjs");
+      await emailjs.send(EMAILJS_SERVICE_ID, EMAILJS_TEMPLATE_ID, {
+        from_name: fields.name,
+        from_email: fields.email,
+        phone: fields.phone || "Not provided",
+        needs: needsStr || "Not specified",
+        message: fields.message || "No message",
+      }, EMAILJS_PUBLIC_KEY);
+
+      // 2. Save to Sanity
+      const { sanityClient } = await import("@/lib/sanity");
+      await sanityClient.create({
+        _type: "contactSubmission",
+        name: fields.name.trim(),
+        email: fields.email.trim().toLowerCase(),
+        phone: fields.phone.trim() || null,
+        needs: fields.needs,
+        message: fields.message.trim() || null,
+        submittedAt: new Date().toISOString(),
+      });
+
+      setStatus("sent");
+    } catch (err) {
+      console.error("Contact form error:", err);
+      setStatus("error");
+    }
   };
 
   if (status === "sent") {
@@ -452,9 +475,9 @@ export default function CreatorsTouchHome({ visualReview = false } = {}) {
               <span key={`b${i}`} className="ct-bounce-char" style={{ animationDelay: `${(14 + i) * 22}ms` }}>{ch === " " ? "\u00A0" : ch}</span>
             ))}
           </p>
-          <p className="font-mono m-0 text-[9px] md:text-[11px] tracking-[0.14em] md:tracking-[0.16em] uppercase text-ct-fg/50 text-right leading-[1.5] md:leading-[1.6]">Web · Marketing · AI<br />Est. 2008</p>
+          <p className="font-mono m-0 text-[9px] md:text-[11px] tracking-[0.14em] md:tracking-[0.16em] uppercase text-ct-fg/50 text-right leading-[1.5] md:leading-[1.6]">Website Development<br />E-Commerce Development<br />Digital Marketing<br />AI Development<br />Branding &amp; Identity<br />SEO &amp; Performance<br />Content Production<br />Est. 2008</p>
         </div>
-        <h1 data-hero-title="1" className="mt-4 md:mt-14 text-[clamp(38px,11.5vw,64px)] md:text-[clamp(40px,7.8vw,128px)] font-medium md:font-medium leading-[1.05] tracking-[-0.055em] text-balance will-change-transform [text-shadow:0_2px_20px_rgba(8,9,10,0.7),0_0_60px_rgba(8,9,10,0.5)] md:[text-shadow:none] min-h-[3.2em]">
+        <h1 data-hero-title="1" className="mt-4 md:mt-14 max-w-full md:max-w-[50%] text-[clamp(38px,11.5vw,64px)] md:text-[clamp(40px,7.8vw,128px)] font-medium md:font-medium leading-[1.05] tracking-[-0.055em] text-balance will-change-transform [text-shadow:0_2px_20px_rgba(8,9,10,0.7),0_0_60px_rgba(8,9,10,0.5)] md:[text-shadow:none] min-h-[3.2em]">
           <span data-px-hl="1">{heroText}</span>
           <span className="ct-type-cursor" aria-hidden="true">|</span>
         </h1>

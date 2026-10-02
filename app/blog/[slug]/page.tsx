@@ -1,15 +1,18 @@
 import { notFound } from "next/navigation";
 import type { Metadata } from "next";
-import { prisma } from "@/lib/prisma";
-
-export const dynamic = "force-dynamic";
+import { getPostBySlug, getAllPostSlugs, getAllPublishedPosts } from "@/lib/sanity-queries";
 
 type Props = { params: Promise<{ slug: string }> };
 
+export async function generateStaticParams() {
+  const slugs = await getAllPostSlugs();
+  return slugs.map((slug) => ({ slug }));
+}
+
 export async function generateMetadata({ params }: Props): Promise<Metadata> {
   const { slug } = await params;
-  const post = await prisma.blogPost.findUnique({ where: { slug } });
-  if (!post || !post.published) return {};
+  const post = await getPostBySlug(slug);
+  if (!post) return {};
   return {
     title: `${post.title} — Creators Touch Global`,
     description: post.excerpt,
@@ -20,7 +23,7 @@ export async function generateMetadata({ params }: Props): Promise<Metadata> {
       url: `https://creatorstouchglobal.com/blog/${slug}`,
       type: "article",
       siteName: "Creators Touch Global",
-      images: post.coverImage ? [{ url: `https://creatorstouchglobal.com${post.coverImage}`, alt: post.title }] : [],
+      images: post.coverImage ? [{ url: post.coverImage, alt: post.title }] : [],
     },
     twitter: {
       card: "summary",
@@ -46,28 +49,24 @@ function S(css: string): React.CSSProperties {
   return o as React.CSSProperties;
 }
 
-function formatDate(d: Date | null) {
+function formatDate(d: string | null) {
   if (!d) return "";
-  return d.toLocaleDateString("en-US", { month: "short", year: "numeric" });
+  return new Date(d).toLocaleDateString("en-US", { month: "short", year: "numeric" });
 }
 
 export default async function BlogPostPage({ params }: Props) {
   const { slug } = await params;
-  const post = await prisma.blogPost.findUnique({ where: { slug } });
-  if (!post || !post.published) notFound();
+  const post = await getPostBySlug(slug);
+  if (!post) notFound();
 
   // Find adjacent posts for navigation
-  const allPosts = await prisma.blogPost.findMany({
-    where: { published: true },
-    orderBy: { publishedAt: "desc" },
-    select: { slug: true, title: true },
-  });
-  const idx = allPosts.findIndex((p: { slug: string }) => p.slug === slug);
+  const allPosts = await getAllPublishedPosts();
+  const idx = allPosts.findIndex((p) => p.slug === slug);
   const prev = idx > 0 ? allPosts[idx - 1] : null;
   const next = idx < allPosts.length - 1 ? allPosts[idx + 1] : null;
 
-  // Split body into paragraphs (stored as \n\n separated)
-  const paragraphs = post.body.split("\n\n").filter(Boolean);
+  // Split body into paragraphs
+  const paragraphs = post.body ? post.body.split("\n\n").filter(Boolean) : [];
 
   const articleJsonLd = {
     "@context": "https://schema.org",

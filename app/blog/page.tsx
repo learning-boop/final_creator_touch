@@ -1,7 +1,5 @@
 import type { Metadata } from "next";
-import { prisma } from "@/lib/prisma";
-
-export const dynamic = "force-dynamic";
+import { getAllPublishedPosts } from "@/lib/sanity-queries";
 
 export const metadata: Metadata = {
   title: "Blog — Creators Touch Global",
@@ -40,26 +38,13 @@ function S(css: string): React.CSSProperties {
   return o as React.CSSProperties;
 }
 
-function formatDate(d: Date | null) {
+function formatDate(d: string | null) {
   if (!d) return "";
-  return d.toLocaleDateString("en-US", { month: "short", year: "numeric" });
+  return new Date(d).toLocaleDateString("en-US", { month: "short", year: "numeric" });
 }
 
 export default async function BlogPage() {
-  const posts = await prisma.blogPost.findMany({
-    where: { published: true },
-    orderBy: { publishedAt: "desc" },
-    select: {
-      slug: true,
-      title: true,
-      excerpt: true,
-      category: true,
-      coverImage: true,
-      coverColor: true,
-      readTime: true,
-      publishedAt: true,
-    },
-  });
+  const posts = await getAllPublishedPosts();
 
   return (
     <div style={S("background:#08090A;color:#F4F3F1;font-family:Geist,Arial,sans-serif;min-height:100vh;overflow-x:hidden")}>
